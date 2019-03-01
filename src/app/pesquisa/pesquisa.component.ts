@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+
 
 
 @Component({
@@ -17,9 +20,18 @@ export class PesquisaComponent implements OnInit {
   fifthFormGroup: FormGroup;
 
 
-  constructor(private _formBuilder: FormBuilder) { }
+
+
+  constructor( db: AngularFirestore,  private _formBuilder: FormBuilder) {
+    db.collection('pesquisa').valueChanges().subscribe(
+      data=>(console.log(data))
+    );
+   }
+
 
   ngOnInit() {
+
+
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
     });

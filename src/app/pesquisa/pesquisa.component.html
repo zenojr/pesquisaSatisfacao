@@ -1,4 +1,16 @@
 
+<div>
+<h2>Teste</h2>
+  <ul>
+      <li *ngFor="let item of items | async">
+          <pre>{{ item | json }}</pre>
+      </li>
+  </ul>
+
+  <div>
+      {{ (item | async)?.teste }}
+    </div>
+</div>
 
 <span class="welcome">
     <h3> Pesquisa de satisfação de clientes 2019</h3>
