@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule, MatTableDataSource, MatFormFieldModule, MatInputModule, MatGridListModule,
-MatToolbarModule, MatSelectModule, MatSnackBarModule, MatIconModule } from '@angular/material';
+MatToolbarModule, MatSelectModule, MatSnackBarModule, MatIconModule, MatStepperModule, MatDividerModule } from '@angular/material';
 
 @NgModule({
   declarations: [],
@@ -18,7 +18,9 @@ MatToolbarModule, MatSelectModule, MatSnackBarModule, MatIconModule } from '@ang
   MatSelectModule,
   MatSnackBarModule,
   MatIconModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatStepperModule,
+  MatDividerModule
   ],
   exports: [
   MatTableModule,
@@ -30,7 +32,9 @@ MatToolbarModule, MatSelectModule, MatSnackBarModule, MatIconModule } from '@ang
   MatSelectModule,
   MatSnackBarModule,
   MatIconModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatStepperModule,
+  MatDividerModule
   ]
 })
 export class MaterialModule { }

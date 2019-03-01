@@ -1,3 +1,7 @@
 .toolBar {
   width: 100%;
 }
+
+.logo img {
+  margin-top: 12px;
+}
