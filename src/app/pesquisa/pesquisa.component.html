@@ -1,44 +1,86 @@
 
 
 <span class="welcome">
-    <h3> Bem vindo a nossa pesquisa de satisfação.</h3>
+    <h3> Pesquisa de satisfação de clientes 2019</h3>
 </span>
 
 <mat-divider></mat-divider>
 
-<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+  <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
     {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
   </button> -->
   <mat-vertical-stepper [linear]="isLinear" #stepper>
+    <!-- GRUPO ASPECTOS TECNICOS -->
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Pergunta 01</ng-template>
+        <ng-template matStepLabel>Aspectos técnicos</ng-template>
         <mat-form-field>
-          <input matInput placeholder="descrição pergunta 01" formControlName="firstCtrl" required>
+          <input autofocus matInput placeholder="descrição pergunta 01" formControlName="firstCtrl" required>
         </mat-form-field>
         <div>
           <button mat-button matStepperNext>Próxima</button>
         </div>
       </form>
     </mat-step>
+    <!-- GRUPO ATENDIMENTO REPRESENTANTE -->
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Pergunta 02</ng-template>
+        <ng-template matStepLabel>Atendimento Representante</ng-template>
         <mat-form-field>
-          <input matInput placeholder="descrição da pergunta 02" formControlName="secondCtrl" required>
+          <input autofocus matInput placeholder="descrição da pergunta 02" formControlName="secondCtrl" required>
         </mat-form-field>
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-button matStepperPrevious>Voltar</button>
+          <button mat-button matStepperNext>Próximo</button>
         </div>
       </form>
     </mat-step>
+    <!-- GRUPO IMAGEM DOS PRODUTOS -->
+    <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>Imagem dos Produtos</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="descrição da pergunta 02" formControlName="thirdCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Voltar</button>
+          <button mat-button matStepperNext>Próximo</button>
+        </div>
+      </form>
+    </mat-step>
+    <!-- GRUPO ATENDIMENTO COMERCIAL E MARKETING -->
+    <mat-step [stepControl]="forthFormGroup">
+        <form [formGroup]="forthFormGroup">
+          <ng-template matStepLabel>Atendimento Comercial e Marketing</ng-template>
+          <mat-form-field>
+            <input matInput placeholder="descrição da pergunta 02" formControlName="forthCtrl" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Voltar</button>
+            <button mat-button matStepperNext>Próximo</button>
+          </div>
+        </form>
+    </mat-step>
+    <!-- GRUPO EMBALAGEM E TRANSPORTE -->
+    <mat-step [stepControl]="fifthFormGroup">
+        <form [formGroup]="fifthFormGroup">
+          <ng-template matStepLabel>Embalagem e Transporte</ng-template>
+          <mat-form-field>
+            <input matInput placeholder="descrição da pergunta 02" formControlName="fifthCtrl" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Voltar</button>
+            <button mat-button matStepperNext>Próximo</button>
+          </div>
+        </form>
+    </mat-step>
+
     <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
+      <ng-template matStepLabel>Fim</ng-template>
       You are now done.
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-button matStepperPrevious>Voltar</button>
+        <button mat-button (click)="stepper.reset()">Enviar</button>
       </div>
     </mat-step>
   </mat-vertical-stepper>

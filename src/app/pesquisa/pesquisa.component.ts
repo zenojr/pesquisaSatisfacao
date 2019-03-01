@@ -9,9 +9,13 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class PesquisaComponent implements OnInit {
 
-  isLinear = false;
+  isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  thirdFormGroup: FormGroup;
+  forthFormGroup: FormGroup;
+  fifthFormGroup: FormGroup;
+
 
   constructor(private _formBuilder: FormBuilder) { }
 
@@ -21,6 +25,15 @@ export class PesquisaComponent implements OnInit {
     });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
+    });
+    this.thirdFormGroup = this._formBuilder.group({
+      thirdCtrl: ['', Validators.required]
+    });
+    this.forthFormGroup = this._formBuilder.group({
+      forthCtrl: ['', Validators.required]
+    });
+    this.fifthFormGroup = this._formBuilder.group({
+      fifthCtrl: ['', Validators.required]
     });
   }
 
