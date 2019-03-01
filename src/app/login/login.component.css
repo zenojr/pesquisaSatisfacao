@@ -2,15 +2,17 @@
 .flex-container {
   display: flex;
   justify-content: center;
-  align-items: center;
+
 
 
 }
 
 
 .formLogin {
-
+  margin-top: 10%;
   flex-direction: column;
   height: 300px;
   width: 14rem;
+  align-items: center;
+  display: flex;
 }
