@@ -2,7 +2,7 @@
 <div>
 <h2>Teste</h2>
   <ul>
-      <li *ngFor="let item of items | async">
+      <li *ngFor="let item of item | async">
           <pre>{{ item | json }}</pre>
       </li>
   </ul>
@@ -25,10 +25,30 @@
     <!-- GRUPO ASPECTOS TECNICOS -->
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Aspectos técnicos</ng-template>
-        <mat-form-field>
-          <input autofocus matInput placeholder="descrição pergunta 01" formControlName="firstCtrl" required>
+        <ng-template matStepLabel>1) Aspectos técnicos</ng-template>
+
+        <h3>1.1 - Caracteristicas Técnicas:</h3>
+        <mat-form-field class="pergunta-field">
+            <mat-select placeholder="CORFIO" formControlName="firstCtrl" required  >
+              <mat-option value="otimo">Ótimo</mat-option>
+              <mat-option value="bom">Bom</mat-option>
+              <mat-option value="regular">Regular</mat-option>
+              <mat-option value="ruim">Ruim</mat-option>
+            </mat-select>
         </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="Outros Fabricantes" formControlName="firstCtrl" required  >
+            <mat-option value="otimo">Ótimo</mat-option>
+            <mat-option value="bom">Bom</mat-option>
+            <mat-option value="regular">Regular</mat-option>
+            <mat-option value="ruim">Ruim</mat-option>
+          </mat-select>
+      </mat-form-field>
+
+        <!-- <mat-form-field>
+          <input autofocus matInput placeholder="descrição pergunta 01" formControlName="firstCtrl" required>
+        </mat-form-field> -->
         <div>
           <button mat-button matStepperNext>Próxima</button>
         </div>
@@ -39,7 +59,7 @@
       <form [formGroup]="secondFormGroup">
         <ng-template matStepLabel>Atendimento Representante</ng-template>
         <mat-form-field>
-          <input autofocus matInput placeholder="descrição da pergunta 02" formControlName="secondCtrl" required>
+          <input autofocus matInput placeholder="Primerira pergunta do bloco 2" formControlName="secondCtrl" required>
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Voltar</button>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 
@@ -11,7 +12,6 @@ import { Observable } from 'rxjs';
   styleUrls: ['./pesquisa.component.css']
 })
 export class PesquisaComponent implements OnInit {
-
   isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -19,18 +19,23 @@ export class PesquisaComponent implements OnInit {
   forthFormGroup: FormGroup;
   fifthFormGroup: FormGroup;
 
+  constructor( private db: AngularFirestore,  private _formBuilder: FormBuilder) {
 
-
-
-  constructor( db: AngularFirestore,  private _formBuilder: FormBuilder) {
-    db.collection('pesquisa').valueChanges().subscribe(
-      data=>(console.log(data))
-    );
    }
 
-
   ngOnInit() {
+    this.db
+        .collection('perguntasAspecTec')
+        .valueChanges()
+        .subscribe(data => (console.log(data))
+    );
 
+    let dadoFB = this.db
+        .collection('perguntasAspecTec')
+        .valueChanges()
+        .subscribe(data => data.keys);
+
+      console.log(dadoFB);
 
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]

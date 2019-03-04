@@ -14,6 +14,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
+import { PerguntasComponent } from './perguntas/perguntas.component';
 
 
 
@@ -22,7 +23,8 @@ import { environment } from '../environments/environment';
     AppComponent,
     LoginComponent,
     ToolbarComponent,
-    PesquisaComponent
+    PesquisaComponent,
+    PerguntasComponent
   ],
   imports: [
     MaterialModule,
