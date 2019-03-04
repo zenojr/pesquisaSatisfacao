@@ -1,10 +1,9 @@
+import { AspectosTecnicos } from './aspectosTecnicos.model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-
 
 @Component({
   selector: 'app-pesquisa',
@@ -19,23 +18,38 @@ export class PesquisaComponent implements OnInit {
   forthFormGroup: FormGroup;
   fifthFormGroup: FormGroup;
 
+  perguntas: Observable<AspectosTecnicos[]>;
+
   constructor( private db: AngularFirestore,  private _formBuilder: FormBuilder) {
 
    }
 
   ngOnInit() {
+    // this.db
+    //     .collection('perguntasAspecTec')
+    //     .valueChanges()
+    //     .subscribe(data => (console.log(data))
+    // );
+
     this.db
         .collection('perguntasAspecTec')
-        .valueChanges()
-        .subscribe(data => (console.log(data))
-    );
+        .snapshotChanges()
+        .pipe( map( docArray => {
+                    return docArray.map( doc => {
+                      return {
+                        id: doc.payload.doc.id,
+                        questao1: doc.payload.doc.data(),
+                        questao2: doc.payload.doc.data()
+                      }
+                    })
+                    }
+                )
+              )
+        .subscribe(
+          result => console.log(result)
+        )
 
-    let dadoFB = this.db
-        .collection('perguntasAspecTec')
-        .valueChanges()
-        .subscribe(data => data.keys);
 
-      console.log(dadoFB);
 
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]

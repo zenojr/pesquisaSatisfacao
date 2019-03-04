@@ -1,18 +1,33 @@
 
 .flex-container {
+  padding-top: 10rem;
   display: flex;
   justify-content: center;
+  width: 100%;
 
 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
 }
 
 
-.formLogin {
+mat-form-field {
+  width: 15rem;
+}
+
+
+
+button {
+  width: 80px;
+}
+
+/* .formLogin {
   margin-top: 10%;
   flex-direction: column;
   height: 300px;
   width: 14rem;
   align-items: center;
   display: flex;
-}
+} */
