@@ -1,5 +1,5 @@
 <section>
-  <form class="flex-container" #form="ngForm" (ngSubmit)="onSubmit(form)" >
+  <form class="flex-container" fxLayoutGap="10px" #form="ngForm" (ngSubmit)="onSubmit(form)" >
     <mat-form-field appearance="outline">
       <mat-label>Usuário</mat-label>
       <input matInput ngModel name="usuario" required #userInput="ngModel">
@@ -15,7 +15,8 @@
       <mat-error>Senha precisa ter mais de 4 caracteres</mat-error>
       <mat-icon matSuffix>vpn_key</mat-icon>
     </mat-form-field>
-    <button mat-raised-button type="submit" color="primary" routerLink="pesquisa" >Entrar</button>
+    <!-- <button mat-raised-button type="submit" color="primary" routerLink="pesquisa" >Entrar</button> -->
+    <button [disabled]="form.invalid" mat-raised-button type="submit" color="primary" >Entrar</button>
   </form>
 
 

@@ -1,17 +1,18 @@
 
 .flex-container {
-  padding-top: 10rem;
+  padding-top: 6rem;
   display: flex;
   justify-content: center;
   width: 100%;
 
-
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
 
+form {
+  margin-top: 10px;
+}
 
 mat-form-field {
   width: 15rem;
