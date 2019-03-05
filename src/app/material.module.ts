@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
-import { MatProgressSpinnerModule, MatTableDataSource, MatFormFieldModule, MatInputModule, MatGridListModule,
-MatToolbarModule, MatSelectModule, MatSnackBarModule, MatIconModule, MatStepperModule, MatDividerModule, MatRadioModule } from '@angular/material';
+import { MatProgressSpinnerModule, MatFormFieldModule, MatInputModule, MatGridListModule,
+         MatToolbarModule, MatSelectModule, MatSnackBarModule, MatIconModule, MatStepperModule, MatDividerModule,
+         MatRadioModule, MatSidenavModule } from '@angular/material';
 
 @NgModule({
   declarations: [],
@@ -21,7 +22,8 @@ MatToolbarModule, MatSelectModule, MatSnackBarModule, MatIconModule, MatStepperM
   MatProgressSpinnerModule,
   MatStepperModule,
   MatDividerModule,
-  MatRadioModule
+  MatRadioModule,
+  MatSidenavModule
   ],
   exports: [
   MatTableModule,
@@ -36,7 +38,8 @@ MatToolbarModule, MatSelectModule, MatSnackBarModule, MatIconModule, MatStepperM
   MatProgressSpinnerModule,
   MatStepperModule,
   MatDividerModule,
-  MatRadioModule
+  MatRadioModule,
+  MatSidenavModule
   ]
 })
 export class MaterialModule { }
