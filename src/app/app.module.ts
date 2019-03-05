@@ -15,7 +15,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { PerguntasComponent } from './perguntas/perguntas.component';
-
+import { FlexLayoutModule } from '@angular/flex-layout'
 
 
 @NgModule({
@@ -36,7 +36,8 @@ import { PerguntasComponent } from './perguntas/perguntas.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireStorageModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
