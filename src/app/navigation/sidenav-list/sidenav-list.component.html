@@ -1,0 +1,12 @@
+<mat-nav-list>
+  <span mat-list-item><mat-icon>assignment</mat-icon> Pesquisa CORFIO </span>
+  <a mat-list-item routerLink="" (click)="onClose()"> 
+    <mat-icon>face</mat-icon>Login </a>
+  <a mat-list-item routerLink="pesquisa" (click)="onClose()"><mat-icon>question_answer</mat-icon> Pesquisa </a>
+  <mat-list-item>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>eject</mat-icon>
+      <span class="nav-caption">Logout</span>
+    </button>
+  </mat-list-item>
+</mat-nav-list>

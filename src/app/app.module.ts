@@ -15,7 +15,9 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { PerguntasComponent } from './perguntas/perguntas.component';
-import { FlexLayoutModule } from '@angular/flex-layout'
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { HeaderComponent } from './navigation/header/header.component';
+import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component'
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { FlexLayoutModule } from '@angular/flex-layout'
     LoginComponent,
     ToolbarComponent,
     PesquisaComponent,
-    PerguntasComponent
+    PerguntasComponent,
+    HeaderComponent,
+    SidenavListComponent
   ],
   imports: [
     MaterialModule,

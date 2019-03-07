@@ -7,35 +7,5 @@ mat-sidenav {
   width: 250px;
 }
 
-a {
-  text-decoration: none;
-  color: white;
-}
 
-a:hover,
-a:active {
-  color: lightgrey;
-}
 
-.navigation-items {
-  list-style: none;
-}
-
-/* .toolBar {
-  width: 100%;
-}
-
-.toolBar h5 {
-  float: right;
-} */
-
-.logo img {
-  width: 8rem;
-}
-
-@media only screen and (max-width: 600px) {
-  .logo img {
-    width: 7rem;
-  }
-
-}
