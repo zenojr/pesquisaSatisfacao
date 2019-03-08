@@ -7,8 +7,12 @@
   <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
     <ul fxLayout fxLayoutGap="10px" class="navigation-items" >
       <li></li>
-      <li><a routerLink=""> <mat-icon>face</mat-icon> Login </a></li>
-      <li><a routerLink="pesquisa"> <mat-icon>question_answer</mat-icon> Pesquisa </a></li>
+      <li *ngIf="!isAuth">
+        <a routerLink=""> <mat-icon>face</mat-icon>Login</a>
+      </li>
+      <li *ngIf="!isAuth">
+        <a routerLink="pesquisa"> <mat-icon>question_answer</mat-icon> Pesquisa </a>
+      </li>
     </ul>
 
   </div>

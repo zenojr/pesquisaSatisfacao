@@ -1,3 +1,4 @@
+import { AuthService } from './login/auth.service';
 import { MaterialModule } from './material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -43,7 +44,7 @@ import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.com
     AngularFireAuthModule,
     FlexLayoutModule
   ],
-  providers: [],
+  providers: [ AuthService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

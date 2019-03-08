@@ -1,5 +1,5 @@
 import { AspectosTecnicos } from './aspectosTecnicos.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
@@ -11,6 +11,12 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./pesquisa.component.css']
 })
 export class PesquisaComponent implements OnInit {
+
+
+  progress = 0;
+  timer: number;
+  @Output() perguntasStart = new EventEmitter<void>();
+
   isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -30,6 +36,10 @@ export class PesquisaComponent implements OnInit {
     //     .valueChanges()
     //     .subscribe(data => (console.log(data))
     // );
+
+    this.timer = setInterval(() => {
+      this.progress = this.progress + 5;
+    }, 100);
 
     this.db
         .collection('perguntasAspecTec')
@@ -66,6 +76,11 @@ export class PesquisaComponent implements OnInit {
     this.fifthFormGroup = this._formBuilder.group({
       fifthCtrl: ['', Validators.required]
     });
+  }
+
+  onStart() {
+    this.perguntasStart.emit();
+
   }
 
 }
