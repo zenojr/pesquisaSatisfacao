@@ -15,7 +15,12 @@
       </li>
 
       <li *ngIf="isAuth">
-        <a>Logout</a>
+            <a style="cursor: pointer" >
+                <mat-icon>eject</mat-icon>
+                <span (click)="logOut()" class="nav-caption">Logout</span>
+            </a>
+
+
       </li>
     </ul>
 

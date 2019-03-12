@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 export class AuthService {
   authChange = new Subject<boolean>();
   private user: User;
-
   constructor( private router: Router ){}
 
   registerUser(authData: AuthData) {
@@ -16,7 +15,6 @@ export class AuthService {
       usuario: authData.usuario,
       userID: Math.round(Math.random() * 1000).toString()
     };
-
     this.authChange.next(true);
   }
 
@@ -25,13 +23,13 @@ export class AuthService {
       usuario: authData.usuario,
       userID: Math.round(Math.random() * 1000).toString()
     };
-    this.authChange.next(true);
-    console.log(this.user);
+    this.authSuccess();
   }
 
-  logout() {
+  logOut() {
     this.user = null;
     this.authChange.next(false);
+    this.router.navigate(['/']);
   }
 
   getUser() {
@@ -40,6 +38,12 @@ export class AuthService {
 
   isAuth() {
     return this.user != null;
+  }
+
+  private authSuccess() {
+    this.authChange.next(true);
+    console.log(this.user);
+    this.router.navigate(['/pesquisa']);
   }
 
 }

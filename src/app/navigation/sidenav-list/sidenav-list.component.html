@@ -4,7 +4,7 @@
     <mat-icon>face</mat-icon>Login </a>
   <a *ngIf="isAuth" mat-list-item routerLink="pesquisa" (click)="onClose()"><mat-icon>question_answer</mat-icon> Pesquisa </a>
   <mat-list-item>
-    <button *ngIf="isAuth" mat-icon-button (click)="onClose()">
+    <button *ngIf="isAuth" mat-icon-button (click)="logOut()">
       <mat-icon>eject</mat-icon>
       <span class="nav-caption">Logout</span>
     </button>
