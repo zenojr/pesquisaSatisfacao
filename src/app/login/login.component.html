@@ -1,24 +1,42 @@
 <section>
-  <form class="flex-container" fxLayoutGap="10px" #form="ngForm" (ngSubmit)="onSubmit(form)" >
+  <form [formGroup]="loginForm" class="flex-container" fxLayoutGap="10px" #form="ngForm" (ngSubmit)="onSubmit()" >
     <mat-form-field appearance="outline">
       <mat-label>Usuário</mat-label>
-      <input matInput ngModel name="usuario" required #userInput="ngModel">
-      <mat-error *ngIf="userInput.hasError('required')">Campo usuário não pode ficar vazio</mat-error>
-      <mat-error *ngIf="!userInput.hasError('required')" >Usuário Inválido</mat-error>
+      <input type="text" matInput formControlName="usuario">
+      <mat-error>Usuário Inválido</mat-error>
       <mat-icon matSuffix>person</mat-icon>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Senha</mat-label>
-      <input minlength="4" type="password" matInput ngModel name="senha" required #pwInput="ngModel">
-      <mat-hint align="end"> {{ pwInput.value?.length }} / 4 </mat-hint>
-      <mat-error>Senha precisa ter mais de 4 caracteres</mat-error>
+      <input type="password" matInput formControlName="senha">
+      <mat-error>Senha Inválida</mat-error>
       <mat-icon matSuffix>vpn_key</mat-icon>
     </mat-form-field>
     <!-- <button mat-raised-button type="submit" color="primary" routerLink="pesquisa" >Entrar</button> -->
-    <button [disabled]="form.invalid" mat-raised-button type="submit" color="primary">Entrar</button>
+    <button [disabled]="loginForm.invalid" mat-raised-button type="submit" color="primary">Entrar</button>
   </form>
-
-
 </section>
 
+
+<!-- <section>
+    <form class="flex-container" fxLayoutGap="10px" #form="ngForm" (ngSubmit)="onSubmit(form)" >
+      <mat-form-field appearance="outline">
+        <mat-label>Usuário</mat-label>
+        <input matInput ngModel name="usuario" required #userInput="ngModel">
+        <mat-error *ngIf="userInput.hasError('required')">Campo usuário não pode ficar vazio</mat-error>
+        <mat-error *ngIf="!userInput.hasError('required')" >Usuário Inválido</mat-error>
+        <mat-icon matSuffix>person</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Senha</mat-label>
+        <input minlength="4" type="password" matInput ngModel name="senha" required #pwInput="ngModel">
+        <mat-hint align="end"> {{ pwInput.value?.length }} / 4 </mat-hint>
+        <mat-error>Senha precisa ter mais de 4 caracteres</mat-error>
+        <mat-icon matSuffix>vpn_key</mat-icon>
+      </mat-form-field> -->
+      <!-- <button mat-raised-button type="submit" color="primary" routerLink="pesquisa" >Entrar</button> -->
+      <!-- <button [disabled]="form.invalid" mat-raised-button type="submit" color="primary">Entrar</button>
+    </form>
+  </section> -->

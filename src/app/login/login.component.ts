@@ -15,14 +15,18 @@ export class LoginComponent implements OnInit {
   constructor( private authService: AuthService ) { }
 
   ngOnInit() {
+    this.loginForm = new FormGroup({
+      usuario: new FormControl('', {validators: [Validators.required]}),
+      senha: new FormControl('', {validators: [Validators.required]})
+    });
   }
 
-  onSubmit( form: NgForm ){
+  onSubmit(){
     console.log('take log!!');
-    console.log(form);
+    console.log(this.loginForm);
     this.authService.login({
-      usuario: form.value.usuario,
-      senha: form.value.senha
+      usuario: this.loginForm.value.usuario,
+      senha: this.loginForm.value.senha
     });
   }
 

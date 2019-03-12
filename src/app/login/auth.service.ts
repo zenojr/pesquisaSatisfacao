@@ -1,5 +1,4 @@
 import { Subject } from 'rxjs';
-
 import { AuthData } from './auth.data.model';
 import { User } from './user.model';
 import { Injectable } from '@angular/core';
