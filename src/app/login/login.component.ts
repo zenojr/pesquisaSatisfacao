@@ -10,6 +10,7 @@ import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  loginForm: FormGroup;
 
   constructor( private authService: AuthService ) { }
 
