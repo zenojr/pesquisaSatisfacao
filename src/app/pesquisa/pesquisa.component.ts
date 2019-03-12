@@ -11,8 +11,6 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./pesquisa.component.css']
 })
 export class PesquisaComponent implements OnInit {
-
-
   progress = 0;
   timer: number;
   @Output() perguntasStart = new EventEmitter<void>();

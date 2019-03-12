@@ -15,7 +15,7 @@ export class AuthService {
     this.user = {
       usuario: authData.usuario,
       userID: Math.round(Math.random() * 1000).toString()
-    }
+    };
 
     this.authChange.next(true);
   }
