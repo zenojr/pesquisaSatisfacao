@@ -1,19 +1,4 @@
-<!--
-<div>
-<h2>Teste</h2>
-  <ul>
-      <li *ngFor="let item of item | async">
-          <pre>{{ item | json }}</pre>
-      </li>
-  </ul>
 
-  <div>
-      {{ (item | async)?.teste }}
-    </div>
-</div> -->
-<!-- <section fxLayout="column" fxLayoutAlign="center center">
-    <mat-progress-spinner value="{{ timer }}" mode="determinate"></mat-progress-spinner>
-</section> -->
 
 <span class="welcome">
     <h3> Pesquisa de satisfação de clientes 2019</h3>
@@ -27,25 +12,30 @@
     <!-- GRUPO ASPECTOS TECNICOS -->
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>1) Aspectos técnicos</ng-template>
-        <h3>1.1 - Caracteristicas Técnicas:</h3>
-        <mat-form-field class="pergunta-field">
-            <mat-select placeholder="CORFIO" formControlName="firstCtrl" required>
-              <mat-option value="otimo">Ótimo</mat-option>
-              <mat-option value="bom">Bom</mat-option>
-              <mat-option value="regular">Regular</mat-option>
-              <mat-option value="ruim">Ruim</mat-option>
-            </mat-select>
-        </mat-form-field>
+        <ng-template matStepLabel> Aspectos técnicos</ng-template>
 
-        <mat-form-field>
-          <mat-select placeholder="Outros Fabricantes" formControlName="firstCtrl" required>
-            <mat-option value="otimo">Ótimo</mat-option>
-            <mat-option value="bom">Bom</mat-option>
-            <mat-option value="regular">Regular</mat-option>
-            <mat-option value="ruim">Ruim</mat-option>
-          </mat-select>
-      </mat-form-field>
+        <ul class="listaPerguntas" *ngFor="let item of pesquisa">
+          <li>
+              <h3>{{item.pergunta}}</h3>  
+              <mat-form-field class="pergunta-field">
+                  <mat-select placeholder="CORFIO" formControlName="firstCtrl" required>
+                    <mat-option value="otimo">Ótimo</mat-option>
+                    <mat-option value="bom">Bom</mat-option>
+                    <mat-option value="regular">Regular</mat-option>
+                    <mat-option value="ruim">Ruim</mat-option>
+                  </mat-select>
+              </mat-form-field>
+      
+              <mat-form-field>
+                <mat-select placeholder="Outros Fabricantes" formControlName="firstCtrl" required>
+                  <mat-option value="otimo">Ótimo</mat-option>
+                  <mat-option value="bom">Bom</mat-option>
+                  <mat-option value="regular">Regular</mat-option>
+                  <mat-option value="ruim">Ruim</mat-option>
+                </mat-select>
+            </mat-form-field>
+          </li>
+        </ul>
 
         <!-- <mat-form-field>
           <input autofocus matInput placeholder="descrição pergunta 01" formControlName="firstCtrl" required>

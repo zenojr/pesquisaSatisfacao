@@ -2,9 +2,9 @@
   margin-left: 15px;
 }
 
-/* body {
-  font-family: 'Roboto', sans-serif;
-} */
+.listaPerguntas li {
+  list-style: none;
+}
 
 .pergunta-field {
   padding-right: 10px;

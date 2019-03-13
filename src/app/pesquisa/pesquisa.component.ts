@@ -1,4 +1,5 @@
-import { AspectosTecnicos } from './aspectosTecnicos.model';
+import { Pesquisa } from './pesquisa.model';
+import { PesquisaService } from './pesquisa.service';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
@@ -11,9 +12,8 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./pesquisa.component.css']
 })
 export class PesquisaComponent implements OnInit {
-  progress = 0;
-  timer: number;
   @Output() perguntasStart = new EventEmitter<void>();
+  pesquisa: Pesquisa[] = [];
 
   isLinear = true;
   firstFormGroup: FormGroup;
@@ -22,22 +22,22 @@ export class PesquisaComponent implements OnInit {
   forthFormGroup: FormGroup;
   fifthFormGroup: FormGroup;
 
-  perguntas: Observable<AspectosTecnicos[]>;
-
-  constructor( private db: AngularFirestore,  private _formBuilder: FormBuilder) {
-
-   }
+  constructor(private pesquisaService: PesquisaService,
+              private db: AngularFirestore,
+              private _formBuilder: FormBuilder) {}
 
   ngOnInit() {
+    this.pesquisa = this.pesquisaService.getPesquisa();
+    console.log(this.pesquisa);
     // this.db
     //     .collection('perguntasAspecTec')
     //     .valueChanges()
     //     .subscribe(data => (console.log(data))
     // );
 
-    this.timer = setInterval(() => {
-      this.progress = this.progress + 5;
-    }, 100);
+    // this.timer = setInterval(() => {
+    //   this.progress = this.progress + 5;
+    // }, 100);
 
     this.db
         .collection('perguntasAspecTec')
@@ -55,7 +55,7 @@ export class PesquisaComponent implements OnInit {
               )
         .subscribe(
           result => console.log(result)
-        )
+        );
 
 
 
@@ -76,9 +76,8 @@ export class PesquisaComponent implements OnInit {
     });
   }
 
-  onStart() {
-    this.perguntasStart.emit();
-
-  }
+  // onStart() {
+  //   this.perguntasStart.emit();
+  // }
 
 }

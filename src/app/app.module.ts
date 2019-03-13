@@ -18,6 +18,7 @@ import { environment } from '../environments/environment';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component'
+import { PesquisaService } from './pesquisa/pesquisa.service';
 
 
 @NgModule({
@@ -42,7 +43,7 @@ import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.com
     AngularFireAuthModule,
     FlexLayoutModule
   ],
-  providers: [ AuthService ],
+  providers: [ AuthService, PesquisaService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
