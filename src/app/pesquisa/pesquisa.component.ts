@@ -14,6 +14,7 @@ import { map } from 'rxjs/operators';
 export class PesquisaComponent implements OnInit {
   @Output() perguntasStart = new EventEmitter<void>();
   pesquisa: Pesquisa[] = [];
+  pesquisa2: Observable<any>;
 
   isLinear = true;
   firstFormGroup: FormGroup;
@@ -29,6 +30,13 @@ export class PesquisaComponent implements OnInit {
   ngOnInit() {
     this.pesquisa = this.pesquisaService.getPesquisa();
     console.log(this.pesquisa);
+
+    this.pesquisa2 = this.db
+    .collection('perguntasAspecTec')
+    .valueChanges();
+
+    
+
     // this.db
     //     .collection('perguntasAspecTec')
     //     .valueChanges()
@@ -46,10 +54,9 @@ export class PesquisaComponent implements OnInit {
                     return docArray.map( doc => {
                       return {
                         id: doc.payload.doc.id,
-                        questao1: doc.payload.doc.data(),
-                        questao2: doc.payload.doc.data()
-                      }
-                    })
+                        pergunta: doc.payload.doc.data()
+                      };
+                    });
                     }
                 )
               )
@@ -57,11 +64,12 @@ export class PesquisaComponent implements OnInit {
           result => console.log(result)
         );
 
-
+    
 
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
     });
+
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
@@ -74,6 +82,14 @@ export class PesquisaComponent implements OnInit {
     this.fifthFormGroup = this._formBuilder.group({
       fifthCtrl: ['', Validators.required]
     });
+  }
+
+
+  getId() {
+    for (const i of this.pesquisa) {
+      console.log(i.id);
+      return i.id;
+    }
   }
 
   // onStart() {

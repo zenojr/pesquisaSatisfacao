@@ -14,10 +14,10 @@
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel> Aspectos técnicos</ng-template>
 
-        <ul class="listaPerguntas" *ngFor="let item of pesquisa">
+        <ul class="listaPerguntas" *ngFor="let item of pesquisa2 | async">
           <li>
               <h3>{{item.pergunta}}</h3>  
-              <mat-form-field class="pergunta-field">
+              <mat-form-field class="pergunta-field" required>
                   <mat-select placeholder="CORFIO" formControlName="firstCtrl" required>
                     <mat-option value="otimo">Ótimo</mat-option>
                     <mat-option value="bom">Bom</mat-option>
