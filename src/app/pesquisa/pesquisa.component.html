@@ -13,8 +13,9 @@
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel> Aspectos técnicos</ng-template>
-
+        
         <ul class="listaPerguntas" *ngFor="let item of pesquisa2 | async">
+            <mat-divider></mat-divider>
           <li>
               <h3>{{item.pergunta}}</h3>  
               <mat-form-field class="pergunta-field" required>
