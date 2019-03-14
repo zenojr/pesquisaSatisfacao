@@ -13,8 +13,8 @@ import { map } from 'rxjs/operators';
 })
 export class PesquisaComponent implements OnInit {
   @Output() perguntasStart = new EventEmitter<void>();
-  pesquisa: Pesquisa[] = [];
-  pesquisa2: Observable<any>;
+  // pesquisa: Pesquisa[] = [];
+  pesquisa2: Observable<Pesquisa[]>;
 
   isLinear = true;
   firstFormGroup: FormGroup;
@@ -37,7 +37,7 @@ export class PesquisaComponent implements OnInit {
       return docArray.map(doc => {
         return {
           id: doc.payload.doc.id,
-          ...doc.payload.doc.data()
+          pergunta: doc.payload.doc.data()['pergunta']
         };
       });
     }));
@@ -47,24 +47,23 @@ export class PesquisaComponent implements OnInit {
     // .valueChanges();
 
 
-    this.db
-        .collection('perguntasAspecTec')
-        .snapshotChanges()
-        .pipe( map( docArray => {
-                    return docArray.map( doc => {
-                      return {
-                        id: doc.payload.doc.id,
-                        pergunta: doc.payload.doc.data()
-                      };
-                    });
-                    }
-                )
-              )
-        .subscribe(
-          result => console.log(result)
-        );
+    // this.db
+    //     .collection('perguntasAspecTec')
+    //     .snapshotChanges()
+    //     .pipe( map( docArray => {
+    //                 return docArray.map( doc => {
+    //                   return {
+    //                     id: doc.payload.doc.id,
+    //                     pergunta: doc.payload.doc.data()
+    //                   };
+    //                 });
+    //                 }
+    //             )
+    //           )
+    //     .subscribe(
+    //       result => console.log(result)
+    //     );
 
-    
 
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
@@ -85,12 +84,12 @@ export class PesquisaComponent implements OnInit {
   }
 
 
-  getId() {
-    for (const i of this.pesquisa) {
-      console.log(i.id);
-      return i.id;
-    }
-  }
+  // getId() {
+  //   for (const i of this.pesquisa) {
+  //     console.log(i.id);
+  //     return i.id;
+  //   }
+  // }
 
   // onStart() {
   //   this.perguntasStart.emit();

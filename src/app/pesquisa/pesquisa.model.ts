@@ -1,6 +1,6 @@
 export class Pesquisa {
-    id: number;
+    // id: number;
     pergunta: string;
-    respostaCorfio: string;
-    respostaOutros: string;
+    // respostaCorfio: string;
+    // respostaOutros: string;
 }

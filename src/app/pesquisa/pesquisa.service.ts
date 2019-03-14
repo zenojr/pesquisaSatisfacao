@@ -6,15 +6,15 @@ import { Pesquisa } from './pesquisa.model';
 })
 export class PesquisaService {
 
-  private pesquisa: Pesquisa[] = [
-    { id: 1, pergunta: ' Caracteristícas técnicas: ', respostaCorfio: '', respostaOutros: '' },
-    { id: 2, pergunta: ' Uniformidade das caracteristícas técnicas: ', respostaCorfio: '', respostaOutros: '' },
-    { id: 3, pergunta: ' Desempenho do produto: ', respostaCorfio: '', respostaOutros: '' }
-  ];
+  // private pesquisa: Pesquisa[] = [
+  //   { id: 1, pergunta: ' Caracteristícas técnicas: ', respostaCorfio: '', respostaOutros: '' },
+  //   { id: 2, pergunta: ' Uniformidade das caracteristícas técnicas: ', respostaCorfio: '', respostaOutros: '' },
+  //   { id: 3, pergunta: ' Desempenho do produto: ', respostaCorfio: '', respostaOutros: '' }
+  // ];
 
   constructor() { }
 
-  getPesquisa() {
-    return this.pesquisa.slice();
-  }
+  // getPesquisa() {
+  //   return this.pesquisa.slice();
+  // }
 }
