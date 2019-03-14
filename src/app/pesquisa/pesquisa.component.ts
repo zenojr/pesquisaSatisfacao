@@ -12,9 +12,9 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./pesquisa.component.css']
 })
 export class PesquisaComponent implements OnInit {
-  @Output() perguntasStart = new EventEmitter<void>();
+  // @Output() perguntasStart = new EventEmitter<void>();
   // pesquisa: Pesquisa[] = [];
-  pesquisa2: Observable<Pesquisa[]>;
+  pesquisa: Observable<Pesquisa[]>;
 
   isLinear = true;
   firstFormGroup: FormGroup;
@@ -31,7 +31,7 @@ export class PesquisaComponent implements OnInit {
     // this.pesquisa = this.pesquisaService.getPesquisa();
     // console.log(this.pesquisa);
 
-    this.pesquisa2 = this.db.collection('perguntasAspecTec')
+    this.pesquisa = this.db.collection('perguntasAspecTec')
     .snapshotChanges()
     .pipe(map(docArray => {
       return docArray.map(doc => {
@@ -45,8 +45,6 @@ export class PesquisaComponent implements OnInit {
     // this.pesquisa2 = this.db
     // .collection('perguntasAspecTec')
     // .valueChanges();
-
-
     // this.db
     //     .collection('perguntasAspecTec')
     //     .snapshotChanges()
@@ -64,11 +62,9 @@ export class PesquisaComponent implements OnInit {
     //       result => console.log(result)
     //     );
 
-
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
     });
-
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
