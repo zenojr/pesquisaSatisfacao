@@ -28,6 +28,7 @@ export class PesquisaComponent implements OnInit {
               private _formBuilder: FormBuilder) {}
 
   ngOnInit() {
+    
     // this.pesquisa = this.pesquisaService.getPesquisa();
     // console.log(this.pesquisa);
 
@@ -79,6 +80,11 @@ export class PesquisaComponent implements OnInit {
     });
   }
 
+  resposta() {
+    this.db.collection('respostas').add({
+      pergunta: 'push da resposta!!!!!!'
+    });
+  }
 
   // getId() {
   //   for (const i of this.pesquisa) {

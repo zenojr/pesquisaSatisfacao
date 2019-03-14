@@ -1,4 +1,4 @@
-export class Pesquisa {
+export interface Pesquisa {
     // id: number;
     pergunta: string;
     // respostaCorfio: string;
