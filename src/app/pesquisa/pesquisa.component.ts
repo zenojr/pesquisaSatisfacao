@@ -34,40 +34,43 @@ export class PesquisaComponent implements OnInit {
     this.db
     .collection('perguntasAspecTec')
     .snapshotChanges()
-    .pipe(map(docArray => {
-          return docArray.map(doc => {
-            return {
-              id: doc.payload.doc.id,
-              pergunta: doc.payload.doc.data()
-            };
-          });
-        }
+    .pipe( map( docArray => {
+      return docArray.map( doc => {
+        return {
+          id: doc.payload.doc.id,
+          pergunta: doc.payload.doc.data()
+        };
+      });
+      }
       )
-    ).subscribe(
+      )
+      .subscribe(
       result => console.log(result)
-    );
+      );
 
-    // this.pesquisa2 = this.db
-    // .collection('perguntasAspecTec')
-    // .valueChanges();
+    this.pesquisa2 = this.db
+    .collection('perguntasAspecTec')
+    .valueChanges();
 
-    // this.db
-    //     .collection('perguntasAspecTec')
-    //     .snapshotChanges()
-    //     .pipe( map( docArray => {
-    //                 return docArray.map( doc => {
-    //                   return {
-    //                     id: doc.payload.doc.id,
-    //                     pergunta: doc.payload.doc.data()
-    //                   };
-    //                 });
-    //                 }
-    //             )
-    //           )
-    //     .subscribe(
-    //       result => console.log(result)
-    //     );
 
+    this.db
+        .collection('perguntasAspecTec')
+        .snapshotChanges()
+        .pipe( map( docArray => {
+                    return docArray.map( doc => {
+                      return {
+                        id: doc.payload.doc.id,
+                        pergunta: doc.payload.doc.data()
+                      };
+                    });
+                    }
+                )
+              )
+        .subscribe(
+          result => console.log(result)
+        );
+
+    
 
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
