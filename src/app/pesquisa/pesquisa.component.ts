@@ -28,29 +28,23 @@ export class PesquisaComponent implements OnInit {
               private _formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.pesquisa = this.pesquisaService.getPesquisa();
-    console.log(this.pesquisa);
+    // this.pesquisa = this.pesquisaService.getPesquisa();
+    // console.log(this.pesquisa);
 
-    this.db
-    .collection('perguntasAspecTec')
+    this.pesquisa2 = this.db.collection('perguntasAspecTec')
     .snapshotChanges()
-    .pipe( map( docArray => {
-      return docArray.map( doc => {
+    .pipe(map(docArray => {
+      return docArray.map(doc => {
         return {
           id: doc.payload.doc.id,
-          pergunta: doc.payload.doc.data()
+          ...doc.payload.doc.data()
         };
       });
-      }
-      )
-      )
-      .subscribe(
-      result => console.log(result)
-      );
+    }));
 
-    this.pesquisa2 = this.db
-    .collection('perguntasAspecTec')
-    .valueChanges();
+    // this.pesquisa2 = this.db
+    // .collection('perguntasAspecTec')
+    // .valueChanges();
 
 
     this.db
