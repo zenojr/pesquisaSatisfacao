@@ -31,40 +31,43 @@ export class PesquisaComponent implements OnInit {
     this.pesquisa = this.pesquisaService.getPesquisa();
     console.log(this.pesquisa);
 
-    this.pesquisa2 = this.db
+    this.db
     .collection('perguntasAspecTec')
-    .valueChanges();
+    .snapshotChanges()
+    .pipe(map(docArray => {
+          return docArray.map(doc => {
+            return {
+              id: doc.payload.doc.id,
+              pergunta: doc.payload.doc.data()
+            };
+          });
+        }
+      )
+    ).subscribe(
+      result => console.log(result)
+    );
 
-    
+    // this.pesquisa2 = this.db
+    // .collection('perguntasAspecTec')
+    // .valueChanges();
 
     // this.db
     //     .collection('perguntasAspecTec')
-    //     .valueChanges()
-    //     .subscribe(data => (console.log(data))
-    // );
+    //     .snapshotChanges()
+    //     .pipe( map( docArray => {
+    //                 return docArray.map( doc => {
+    //                   return {
+    //                     id: doc.payload.doc.id,
+    //                     pergunta: doc.payload.doc.data()
+    //                   };
+    //                 });
+    //                 }
+    //             )
+    //           )
+    //     .subscribe(
+    //       result => console.log(result)
+    //     );
 
-    // this.timer = setInterval(() => {
-    //   this.progress = this.progress + 5;
-    // }, 100);
-
-    this.db
-        .collection('perguntasAspecTec')
-        .snapshotChanges()
-        .pipe( map( docArray => {
-                    return docArray.map( doc => {
-                      return {
-                        id: doc.payload.doc.id,
-                        pergunta: doc.payload.doc.data()
-                      };
-                    });
-                    }
-                )
-              )
-        .subscribe(
-          result => console.log(result)
-        );
-
-    
 
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
