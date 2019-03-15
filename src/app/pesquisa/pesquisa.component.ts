@@ -1,7 +1,7 @@
-import { Pesquisa } from './pesquisa.model';
+import { PerguntasAspecTec } from './perguntasAspecTec.model';
 import { PesquisaService } from './pesquisa.service';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, FormControlName } from '@angular/forms';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -14,7 +14,10 @@ import { map } from 'rxjs/operators';
 export class PesquisaComponent implements OnInit {
   // @Output() perguntasStart = new EventEmitter<void>();
   // pesquisa: Pesquisa[] = [];
-  pesquisa: Observable<Pesquisa[]>;
+  postPergunta: FormGroup;
+  idPergunta;
+
+  perguntaAspecTec: Observable<PerguntasAspecTec[]>;
 
   isLinear = true;
   firstFormGroup: FormGroup;
@@ -28,11 +31,17 @@ export class PesquisaComponent implements OnInit {
               private _formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    
-    // this.pesquisa = this.pesquisaService.getPesquisa();
-    // console.log(this.pesquisa);
 
-    this.pesquisa = this.db.collection('perguntasAspecTec')
+    this.firstFormGroup = new FormGroup({
+      firstCtrl: new FormControl('')
+    });
+
+    this.postPergunta = new FormGroup({
+      pergunta: new FormControl('', Validators.required)
+    });
+
+
+    this.perguntaAspecTec = this.db.collection('perguntasAspecTec')
     .snapshotChanges()
     .pipe(map(docArray => {
       return docArray.map(doc => {
@@ -43,25 +52,7 @@ export class PesquisaComponent implements OnInit {
       });
     }));
 
-    // this.pesquisa2 = this.db
-    // .collection('perguntasAspecTec')
-    // .valueChanges();
-    // this.db
-    //     .collection('perguntasAspecTec')
-    //     .snapshotChanges()
-    //     .pipe( map( docArray => {
-    //                 return docArray.map( doc => {
-    //                   return {
-    //                     id: doc.payload.doc.id,
-    //                     pergunta: doc.payload.doc.data()
-    //                   };
-    //                 });
-    //                 }
-    //             )
-    //           )
-    //     .subscribe(
-    //       result => console.log(result)
-    //     );
+    
 
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
@@ -80,21 +71,28 @@ export class PesquisaComponent implements OnInit {
     });
   }
 
-  resposta() {
-    this.db.collection('respostas').add({
-      pergunta: 'push da resposta!!!!!!'
-    });
+  saveRespostaAspecTec() {
+    const resposta = this.firstFormGroup.get('firstCtrl').value;
+    this.pesquisaService.addRespostaAspecTec({resposta});
   }
 
-  // getId() {
-  //   for (const i of this.pesquisa) {
-  //     console.log(i.id);
-  //     return i.id;
-  //   }
-  // }
+  onSubmitAspecTec(form) {
+    let resposta = form;
+    resposta = resposta.value;
+    console.log(resposta);
+    this.pesquisaService.addRespostaAspecTec({resposta});
+  }
 
-  // onStart() {
-  //   this.perguntasStart.emit();
-  // }
+  respostaAspectec() {
+    const resposta = this.firstFormGroup.get('firstCtrl').value;
+    // this.pesquisaService.addRespostaAspecTec({resposta});
+  }
+
+  savePerguntaAspecTec() {
+    const pergunta = this.postPergunta.get('pergunta').value;
+    this.pesquisaService.addPerguntaAspecTec({pergunta});
+  }
+
+
 
 }

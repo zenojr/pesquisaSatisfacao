@@ -3,21 +3,51 @@
 <span class="welcome">
     <h3> Pesquisa de satisfação de clientes 2019</h3>
 </span>
+
+
+
+    <form #f="ngForm" (ngSubmit)="onSubmitAspecTec(f)">
+      <ul *ngFor="let driForm of perguntaAspecTec | async">
+        <h4> {{ driForm.pergunta }} </h4>
+        <div>
+          <!-- <input type="text" name="{{ driForm.pergunta }}" ngModel> -->
+          <select name=" {{ driForm.pergunta }}  CORFIO " ngModel>
+              <option value="otimo">otimo</option>
+              <option value="bom">bom</option>
+              <option value="regular">regular</option>
+              <option value="ruim">ruim</option>
+          </select>
+          <select name=" {{ driForm.pergunta }}  OUTROS " ngModel>
+            <option value="otimo">otimo</option>
+            <option value="bom">bom</option>
+            <option value="regular">regular</option>
+            <option value="ruim">ruim</option>
+        </select>
+        </div>
+      </ul>
+      <button type="submit"> enviar </button>
+    </form>
+
+
+
+
+<form [formGroup]="postPergunta" (ngSubmit)="savePerguntaAspecTec()">
+  <input type="text" placeholder="escreva a pergunta" formControlName="pergunta">
+</form>
+
 <mat-divider></mat-divider>
 
-  <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-  </button> -->
   <mat-vertical-stepper [linear]="isLinear" #stepper>
     <!-- GRUPO ASPECTOS TECNICOS -->
     <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup">
+      <form [formGroup]="firstFormGroup" (ngSubmit)="saveRespostaAspecTec()">
         <ng-template matStepLabel> Aspectos técnicos</ng-template>
         
-        <ul class="listaPerguntas" *ngFor="let item of pesquisa | async">
+        <ul class="listaPerguntas" *ngFor="let item of perguntaAspecTec | async">
             <mat-divider></mat-divider>
           <li>
               <h3>{{item.pergunta}}</h3>  
+              <h4> {{item.id}} </h4>
               <mat-form-field class="pergunta-field" required>
                   <mat-select placeholder="CORFIO" formControlName="firstCtrl" required>
                     <mat-option value="otimo">Ótimo</mat-option>

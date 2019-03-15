@@ -1,6 +1,6 @@
-export interface Pesquisa {
+export interface RespostasAspecTec {
     // id: number;
-    pergunta: string;
+    resposta: string;
     // respostaCorfio: string;
     // respostaOutros: string;
 }
