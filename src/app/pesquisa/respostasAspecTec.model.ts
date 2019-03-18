@@ -1,6 +1,8 @@
 export interface RespostasAspecTec {
     // id: number;
-    resposta: string;
+    resposta?: string;
+    respostaCorfio?: string;
+    respostaOutros?: string;
     // respostaCorfio: string;
     // respostaOutros: string;
 }

@@ -5,12 +5,33 @@
 </span>
 
 
+<form [formGroup]="formReativo" (ngSubmit)="onSubmitRespostaAspecTec()" >
+    <p>form reativo</p>
+    <ul *ngFor="let driForm of perguntaAspecTec | async">
+      <h4> {{ driForm.pergunta }} </h4>
+      <div>
+        <select formControlName="corfio">
+          <option value="otimo">otimo</option>
+          <option value="bom">bom</option>
+          <option value="regular">regular</option>
+          <option value="ruim">ruim</option>
+        </select>
+        <select formControlName="outros">
+          <option value="otimo">otimo</option>
+          <option value="bom">bom</option>
+          <option value="regular">regular</option>
+          <option value="ruim">ruim</option>
+      </select>
+      </div>
+    </ul>
+    <button type="submit"> enviar </button>
+  </form>
+
 
     <form #f="ngForm" (ngSubmit)="onSubmitAspecTec(f)">
       <ul *ngFor="let driForm of perguntaAspecTec | async">
         <h4> {{ driForm.pergunta }} </h4>
         <div>
-          <!-- <input type="text" name="{{ driForm.pergunta }}" ngModel> -->
           <select name=" {{ driForm.pergunta }}  CORFIO " ngModel>
               <option value="otimo">otimo</option>
               <option value="bom">bom</option>

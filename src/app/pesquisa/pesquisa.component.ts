@@ -19,6 +19,8 @@ export class PesquisaComponent implements OnInit {
 
   perguntaAspecTec: Observable<PerguntasAspecTec[]>;
 
+  formReativo: FormGroup;
+
   isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -52,7 +54,12 @@ export class PesquisaComponent implements OnInit {
       });
     }));
 
-    
+    this.formReativo = this._formBuilder.group({
+      corfio: [''],
+      outros: ['']
+    });
+
+    console.log(this.formReativo);
 
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
@@ -74,6 +81,13 @@ export class PesquisaComponent implements OnInit {
   saveRespostaAspecTec() {
     const resposta = this.firstFormGroup.get('firstCtrl').value;
     this.pesquisaService.addRespostaAspecTec({resposta});
+  }
+
+  onSubmitRespostaAspecTec() {
+    const respostaCorfio = this.formReativo.get('{{driForm.pergunta}} corfio').value;
+    const respostaOutros = this.formReativo.get('{{driForm.pergunta}} outros').value;
+    this.pesquisaService.addRespostaAspecTec({respostaCorfio});
+    this.pesquisaService.addRespostaAspecTec({respostaOutros});
   }
 
   onSubmitAspecTec(form) {
