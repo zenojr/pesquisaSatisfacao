@@ -38,36 +38,33 @@
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup" (ngSubmit)="saveRespostaAspecTec()">
         <ng-template matStepLabel> Aspectos técnicos</ng-template>
-    
+        
+        <ul class="listaPerguntas" *ngFor="let item of perguntaAspecTec | async">
             <mat-divider></mat-divider>
-  
+          <li>
+              <h3>{{item.pergunta}}</h3>  
+              <h4> {{item.id}} </h4>
               <mat-form-field class="pergunta-field" required>
-                  <input autofocus matInput placeholder="Primerira pergunta do bloco 2" formControlName="secondCtrl">
-                  <form #f="ngForm" (ngSubmit)="onSubmitAspecTec(f)">
-                    <ul *ngFor="let driForm of perguntaAspecTec | async">
-                      <h4> {{ driForm.pergunta }} </h4>
-                      <div>
-                        <mat-select class="pergunta-field" name=" {{ driForm.pergunta }}  CORFIO " ngModel>
-                            <mat-option value="otimo">otimo</mat-option>
-                            <mat-option value="bom">bom</mat-option>
-                            <mat-option value="regular">regular</mat-option>
-                            <mat-option value="ruim">ruim</mat-option>
-                        </mat-select>
-                        <mat-select class="pergunta-field" name=" {{ driForm.pergunta }}  OUTROS " ngModel>
-                          <mat-option value="otimo">otimo</mat-option>
-                          <mat-option value="bom">bom</mat-option>
-                          <mat-option value="regular">regular</mat-option>
-                          <mat-option value="ruim">ruim</mat-option>
-                      </mat-select>
-                      </div>
-                    </ul>
-                    <button type="submit"> enviar </button>
-                  </form>
-              
+                  <mat-select placeholder="CORFIO" formControlName="firstCtrl" required>
+                    <mat-option value="otimo">Ótimo</mat-option>
+                    <mat-option value="bom">Bom</mat-option>
+                    <mat-option value="regular">Regular</mat-option>
+                    <mat-option value="ruim">Ruim</mat-option>
+                  </mat-select>
               </mat-form-field>
       
-  
-  
+              <mat-form-field>
+                <mat-select placeholder="Outros Fabricantes" formControlName="firstCtrl" required>
+                  <mat-option value="otimo">Ótimo</mat-option>
+                  <mat-option value="bom">Bom</mat-option>
+                  <mat-option value="regular">Regular</mat-option>
+                  <mat-option value="ruim">Ruim</mat-option>
+                </mat-select>
+            </mat-form-field>
+          </li>
+        </ul>
+
+
         <div>
           <button mat-button matStepperNext>Próxima</button>
         </div>
