@@ -8,16 +8,19 @@
 
 .listaPerguntas{
   display: flex;
-  
   width: 100%;  
 }
 
-.mat-form-field-wrapper{
-  margin: 10px;
-}
+@media only screen and (max-width: 600px) {
+  .listaPerguntas{
+    display: inline;
+  } 
+} 
 
-ul {
-  
+
+
+
+ul{
   padding-inline-start: 0px;
 }
 
