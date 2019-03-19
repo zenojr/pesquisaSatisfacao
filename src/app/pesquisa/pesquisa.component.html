@@ -4,9 +4,6 @@
     <h3> Pesquisa de satisfação de clientes 2019</h3>
 </span>
 
-
-
-
   <!-- <form [formGroup]="postPergunta" (ngSubmit)="savePerguntaAspecTec()">
     <input type="text" placeholder="escreva a pergunta" formControlName="pergunta">
   </form>
@@ -33,124 +30,93 @@
     </form> -->
 
 <mat-divider></mat-divider>
+
   <mat-vertical-stepper [linear]="isLinear" #stepper>
-    <!-- GRUPO ASPECTOS TECNICOS -->
     <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup" (ngSubmit)="saveRespostaAspecTec()">
-        <ng-template matStepLabel> Aspectos técnicos</ng-template>
-        
-        <ul class="listaPerguntas" *ngFor="let item of perguntaAspecTec | async">
-            <mat-divider></mat-divider>
-          <li>
-              <h3>{{item.pergunta}}</h3>  
-              <h4> {{item.id}} </h4>
-              <mat-form-field class="pergunta-field" required>
-                  <mat-select placeholder="CORFIO" formControlName="firstCtrl" required>
-                    <mat-option value="otimo">Ótimo</mat-option>
-                    <mat-option value="bom">Bom</mat-option>
-                    <mat-option value="regular">Regular</mat-option>
-                    <mat-option value="ruim">Ruim</mat-option>
-                  </mat-select>
-              </mat-form-field>
-      
-              <mat-form-field>
-                <mat-select placeholder="Outros Fabricantes" formControlName="firstCtrl" required>
-                  <mat-option value="otimo">Ótimo</mat-option>
-                  <mat-option value="bom">Bom</mat-option>
-                  <mat-option value="regular">Regular</mat-option>
-                  <mat-option value="ruim">Ruim</mat-option>
-                </mat-select>
-            </mat-form-field>
-          </li>
-        </ul>
-
-
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Fill out your name</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+          <form #f="ngForm" (ngSubmit)="onSubmitAspecTec(f)">
+              <ul *ngFor="let driForm of perguntaAspecTec | async">
+                <h4> {{ driForm.pergunta }} </h4>
+                <div>
+                  <div>
+                    <h3>CORFIO</h3>
+                    <select name=" {{ driForm.pergunta }}  CORFIO " ngModel>
+                      <option value="otimo">otimo</option>
+                      <option value="bom">bom</option>
+                      <option value="regular">regular</option>
+                      <option value="ruim">ruim</option>
+                    </select>
+                  </div>
+                  <div>
+                    <h3>OUTROS</h3>
+                    <select name=" {{ driForm.pergunta }}  OUTROS " ngModel>
+                      <option value="otimo">otimo</option>
+                      <option value="bom">bom</option>
+                      <option value="regular">regular</option>
+                      <option value="ruim">ruim</option>
+                    </select>
+                  </div>
+                  
+                </div>
+              </ul>
+              <button type="submit"> enviar </button>
+            </form>
+        </mat-form-field>
         <div>
-          <button mat-button matStepperNext>Próxima</button>
+          <button mat-button matStepperNext>Next</button>
         </div>
       </form>
     </mat-step>
-    <!-- GRUPO ATENDIMENTO REPRESENTANTE -->
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Atendimento Representante</ng-template>
+        <ng-template matStepLabel>Representantes</ng-template>
         <mat-form-field>
-          <input autofocus matInput placeholder="Primerira pergunta do bloco 2" formControlName="secondCtrl">
-          <form #f="ngForm" (ngSubmit)="onSubmitAspecTec(f)">
-            <ul *ngFor="let driForm of perguntaAspecTec | async">
-              <h4> {{ driForm.pergunta }} </h4>
-              <div>
-                <mat-select class="pergunta-field" name=" {{ driForm.pergunta }}  CORFIO " ngModel>
-                    <mat-option value="otimo">otimo</mat-option>
-                    <mat-option value="bom">bom</mat-option>
-                    <mat-option value="regular">regular</mat-option>
-                    <mat-option value="ruim">ruim</mat-option>
-                </mat-select>
-                <mat-select class="pergunta-field" name=" {{ driForm.pergunta }}  OUTROS " ngModel>
-                  <mat-option value="otimo">otimo</mat-option>
-                  <mat-option value="bom">bom</mat-option>
-                  <mat-option value="regular">regular</mat-option>
-                  <mat-option value="ruim">ruim</mat-option>
-              </mat-select>
-              </div>
-            </ul>
-            <button type="submit"> enviar </button>
+          <input matInput placeholder="Address" formControlName="secondCtrl" required>
+          <form #f2="ngForm" (ngSubmit)="onSubmitRepresentantes(f2)">
+              <ul *ngFor="let repForm of perguntasRep | async">
+                <h4> {{ repForm.pergunta }} </h4>
+                <div>
+                  <div>
+                    <h3>CORFIO</h3>
+                    <select name=" {{ repForm.pergunta }}  CORFIO " ngModel>
+                      <option value="otimo">otimo</option>
+                      <option value="bom">bom</option>
+                      <option value="regular">regular</option>
+                      <option value="ruim">ruim</option>
+                    </select>
+                  </div>
+                  <div>
+                    <h3>OUTROS</h3>
+                    <select name=" {{ repForm.pergunta }}  OUTROS " ngModel>
+                      <option value="otimo">otimo</option>
+                      <option value="bom">bom</option>
+                      <option value="regular">regular</option>
+                      <option value="ruim">ruim</option>
+                    </select>
+                  </div>
+                  
+                </div>
+              </ul>
+              <button type="submit"> enviar </button>
           </form>
-      
         </mat-form-field>
         <div>
-          <button mat-button matStepperPrevious>Voltar</button>
-          <button mat-button matStepperNext>Próximo</button>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
         </div>
       </form>
     </mat-step>
-    <!-- GRUPO IMAGEM DOS PRODUTOS -->
-    <mat-step [stepControl]="thirdFormGroup">
-      <form [formGroup]="thirdFormGroup">
-        <ng-template matStepLabel>Imagem dos Produtos</ng-template>
-        <mat-form-field>
-          <input matInput placeholder="descrição da pergunta 02" formControlName="thirdCtrl" required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Voltar</button>
-          <button mat-button matStepperNext>Próximo</button>
-        </div>
-      </form>
-    </mat-step>
-    <!-- GRUPO ATENDIMENTO COMERCIAL E MARKETING -->
-    <mat-step [stepControl]="forthFormGroup">
-        <form [formGroup]="forthFormGroup">
-          <ng-template matStepLabel>Atendimento Comercial e Marketing</ng-template>
-          <mat-form-field>
-            <input matInput placeholder="descrição da pergunta 02" formControlName="forthCtrl" required>
-          </mat-form-field>
-          <div>
-            <button mat-button matStepperPrevious>Voltar</button>
-            <button mat-button matStepperNext>Próximo</button>
-          </div>
-        </form>
-    </mat-step>
-    <!-- GRUPO EMBALAGEM E TRANSPORTE -->
-    <mat-step [stepControl]="fifthFormGroup">
-        <form [formGroup]="fifthFormGroup">
-          <ng-template matStepLabel>Embalagem e Transporte</ng-template>
-          <mat-form-field>
-            <input matInput placeholder="descrição da pergunta 02" formControlName="fifthCtrl" required>
-          </mat-form-field>
-          <div>
-            <button mat-button matStepperPrevious>Voltar</button>
-            <button mat-button matStepperNext>Próximo</button>
-          </div>
-        </form>
-    </mat-step>
-
     <mat-step>
-      <ng-template matStepLabel>Fim</ng-template>
+      <ng-template matStepLabel>Done</ng-template>
       You are now done.
       <div>
-        <button mat-button matStepperPrevious>Voltar</button>
-        <button mat-button (click)="onStart()" (click)="stepper.reset()">Enviar</button>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
       </div>
     </mat-step>
   </mat-vertical-stepper>
+  
 

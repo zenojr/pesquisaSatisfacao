@@ -1,4 +1,4 @@
-export interface RespostasAspecTec {
+export interface RespostasRep {
     // id: number;
     resposta?: string;
     respostaCorfio?: string;
