@@ -12,20 +12,23 @@ import { AngularFirestore, AngularFirestoreDocument, DocumentReference } from '@
 })
 export class PesquisaService {
 readonly path = 'perguntasAspecTec';
-readonly pathRespostas = 'respostas';
+
+readonly pathRespostasAspecTec = 'respostasAspecTec';
+readonly pathRespostasRep = 'respostasRep';
+
 
   constructor(private db: AngularFirestore) { }
 
 addPerguntaAspecTec(data: PerguntasAspecTec): Promise<DocumentReference> {
   return this.db.collection<PerguntasAspecTec>(this.path).add(data);
 }
-
+// ENVIA RESPOSTAS
 addRespostaAspecTec(data: RespostasAspecTec): Promise<DocumentReference> {
-  return this.db.collection<RespostasAspecTec>(this.pathRespostas).add(data);
+  return this.db.collection<RespostasAspecTec>(this.pathRespostasAspecTec).add(data);
 }
 
 addRespostaRep(data: RespostasRep): Promise<DocumentReference> {
-  return this.db.collection<RespostasRep>(this.pathRespostas).add(data);
+  return this.db.collection<RespostasRep>(this.pathRespostasRep).add(data);
 }
 
 }

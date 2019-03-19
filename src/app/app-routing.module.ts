@@ -1,3 +1,4 @@
+import { PesquisaReactiveFormComponent } from './pesquisa-reactive-form/pesquisa-reactive-form.component';
 import { AuthGuard } from './login/auth.guard';
 import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
@@ -7,7 +8,9 @@ import { PesquisaComponent } from './pesquisa/pesquisa.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
-  {path: 'pesquisa', component: PesquisaComponent, canActivate: [AuthGuard]}
+  // {path: 'pesquisa', component: PesquisaComponent, canActivate: [AuthGuard]},
+  {path: 'pesquisa', component: PesquisaComponent, canActivate: [AuthGuard]},
+  {path: 'pesquisaReactive', component: PesquisaReactiveFormComponent}
 ];
 
 @NgModule({

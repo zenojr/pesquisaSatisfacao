@@ -31,10 +31,10 @@ export class PesquisaComponent implements OnInit {
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
+      firstCtrl: ['']
     });
     this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
+      secondCtrl: ['']
     });
 
     // END
@@ -78,7 +78,7 @@ export class PesquisaComponent implements OnInit {
     let resposta = form;
     resposta = resposta.value;
     console.log(resposta);
-    this.pesquisaService.addRespostaAspecTec({resposta});
+    this.pesquisaService.addRespostaRep({resposta});
   }
 
   // saveRespostaAspecTec() {
