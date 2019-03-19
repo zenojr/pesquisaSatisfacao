@@ -1,30 +1,6 @@
 <span class="welcome">
     <h3> Pesquisa de satisfação de clientes 2019</h3>
 </span>
-  <!-- <form [formGroup]="postPergunta" (ngSubmit)="savePerguntaAspecTec()">
-    <input type="text" placeholder="escreva a pergunta" formControlName="pergunta">
-  </form>
-
-    <form #f="ngForm" (ngSubmit)="onSubmitAspecTec(f)">
-      <ul *ngFor="let driForm of perguntaAspecTec | async">
-        <h4> {{ driForm.pergunta }} </h4>
-        <div>
-          <select name=" {{ driForm.pergunta }}  CORFIO " ngModel>
-              <option value="otimo">otimo</option>
-              <option value="bom">bom</option>
-              <option value="regular">regular</option>
-              <option value="ruim">ruim</option>
-          </select>
-          <select name=" {{ driForm.pergunta }}  OUTROS " ngModel>
-            <option value="otimo">otimo</option>
-            <option value="bom">bom</option>
-            <option value="regular">regular</option>
-            <option value="ruim">ruim</option>
-        </select>
-        </div>
-      </ul>
-      <button type="submit"> enviar </button>
-    </form> -->
 
 <mat-divider></mat-divider>
   <mat-vertical-stepper [linear]="isLinear" #stepper>
@@ -38,12 +14,13 @@
                 <h4>{{ aspTec.pergunta }}</h4>                
                 <div class="listaPerguntas" >                    
                   <mat-form-field>
-                    <mat-select placeholder="CORFIO" name=" {{ aspTec.pergunta }}  CORFIO " ngModel required>
+                    <mat-select #selectCorfio="ngModel" placeholder="CORFIO" name=" {{ aspTec.pergunta }}  CORFIO " ngModel required>
                       <mat-option value="otimo">otimo</mat-option>
                       <mat-option value="bom">bom</mat-option>
                       <mat-option value="regular">regular</mat-option>
                       <mat-option value="ruim">ruim</mat-option>
                     </mat-select>
+                    <mat-error>Selecione uma opção</mat-error>
                   </mat-form-field>
                   <mat-form-field>
                     <mat-select placeholder="Outros" name=" {{ aspTec.pergunta }}  OUTROS " ngModel required>
@@ -51,13 +28,13 @@
                       <mat-option value="bom">bom</mat-option>
                       <mat-option value="regular">regular</mat-option>
                       <mat-option value="ruim">ruim</mat-option>
-                    </mat-select>                                
+                    </mat-select>
+                    <mat-error>Selecione uma opção</mat-error>
                   </mat-form-field>
                     
                 </div>
               </ul>
-              <!-- <button mat-raised-button type="submit"> Responder </button> -->
-              <button color="primary" mat-raised-button matStepperNext type="submit">Próximo</button>
+              <button [disabled]="formAspecTec.invalid" color="primary" mat-raised-button matStepperNext type="submit">Próximo</button>
             </form>
         </mat-form-field>
         <div>
@@ -65,8 +42,8 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup">
+    <mat-step  [stepControl]="secondFormGroup">
+      <form  [formGroup]="secondFormGroup">
         <ng-template matStepLabel>Representantes</ng-template>
         <mat-form-field>
           <input matInput placeholder="Address" formControlName="secondCtrl" required>
