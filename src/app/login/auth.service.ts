@@ -21,6 +21,8 @@ export class AuthService {
   }
 
   login(authData: AuthData) {
+    authData.usuario = authData.usuario + '@corfio.com';
+    console.log(authData.usuario);
     this.afAuth.auth.signInWithEmailAndPassword(
       authData.usuario,
       authData.senha
