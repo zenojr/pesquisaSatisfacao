@@ -20,6 +20,7 @@ import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.com
 import { PesquisaService } from './pesquisa/pesquisa.service';
 import { PesquisaReactiveFormComponent } from './pesquisa-reactive-form/pesquisa-reactive-form.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

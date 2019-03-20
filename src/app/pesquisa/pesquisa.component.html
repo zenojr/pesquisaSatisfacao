@@ -8,13 +8,13 @@
         <ng-template matStepLabel>Aspectos Técnicos</ng-template>
         <h5>Selecione uma alternativa, de acordo com o seu julgamento</h5>
         <mat-form-field class="pergunta-field">
-          <input class="hideInput" matInput  formControlName="firstCtrl">
+          <input class="hideInput" matInput  formControlName="firstCtrl" value=" {{ teste }} " ngModel>
           <form #formAspecTec="ngForm" (ngSubmit)="onSubmitAspecTec(formAspecTec)">
               <ul *ngFor="let aspTec of perguntaAspecTec | async">
                 <h4>{{ aspTec.pergunta }}</h4>                
                 <div class="listaPerguntas" >                    
                   <mat-form-field>
-                    <mat-select #selectCorfio="ngModel" placeholder="CORFIO" name=" {{ aspTec.pergunta }}  CORFIO " ngModel required>
+                    <mat-select #selectCorfio="ngModel" placeholder="CORFIO" name=" {{ aspTec.pergunta }}  CORFIO {{ aspTec.id }} " ngModel required>
                       <mat-option value="otimo">otimo</mat-option>
                       <mat-option value="bom">bom</mat-option>
                       <mat-option value="regular">regular</mat-option>
@@ -38,8 +38,8 @@
         </mat-form-field>
       </form>
     </mat-step>
-    <mat-step  [stepControl]="secondFormGroup">
-      <form  [formGroup]="secondFormGroup">
+    <mat-step  [stepControl]="formAspecTec">
+      <form [formGroup]="secondFormGroup">
         <ng-template matStepLabel>Atendimento do Representantes</ng-template>
         <h5>Selecione uma alternativa, de acordo com o seu julgamento</h5>
         <mat-form-field class="pergunta-field">

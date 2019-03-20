@@ -3,28 +3,41 @@ import { AuthData } from './auth.data.model';
 import { User } from './user.model';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Injectable()
 export class AuthService {
   authChange = new Subject<boolean>();
   private user: User;
-  constructor( private router: Router ){}
+  constructor( private router: Router, private afAuth: AngularFireAuth) {}
 
   registerUser(authData: AuthData) {
     this.user = {
       usuario: authData.usuario,
-      userID: Math.round(Math.random() * 1000).toString()
+      userID: Math.round(Math.random() * 1000).toString(),
+      password: authData.senha
     };
     this.authChange.next(true);
   }
 
   login(authData: AuthData) {
-    this.user = {
-      usuario: authData.usuario,
-      userID: Math.round(Math.random() * 1000).toString()
-    };
-    this.authSuccess();
+    this.afAuth.auth.signInWithEmailAndPassword(
+      authData.usuario,
+      authData.senha
+    ).then(result => {
+      console.log(result);
+      this.authSuccess();
+    }).catch(error => { console.log(error); });
   }
+
+  // login(authData: AuthData) {
+  //   this.user = {
+  //     usuario: authData.usuario,
+  //     userID: Math.round(Math.random() * 1000).toString(),
+  //     password: authData.senha
+  //   };
+  //   this.authSuccess();
+  // }
 
   logOut() {
     this.user = null;

@@ -1,5 +1,5 @@
 export interface PerguntasAspecTec {
-    // id: number;
+    id: string;
     pergunta: string;
     // respostaCorfio: string;
     // respostaOutros: string;
