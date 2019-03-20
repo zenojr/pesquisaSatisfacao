@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators, FormControl, FormControlName } from
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
+import { PerguntasProd } from './perguntasProd.model';
 
 @Component({
   selector: 'app-pesquisa',
@@ -20,10 +20,12 @@ export class PesquisaComponent implements OnInit {
 
   perguntaAspecTec: Observable<PerguntasAspecTec[]>;
   perguntasRep: Observable<PerguntasRep[]>;
+  perguntasProd: Observable<PerguntasProd[]>;
 
   isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  thirdFormGroup: FormGroup;
 
   constructor(private pesquisaService: PesquisaService,
               private db: AngularFirestore,
@@ -35,6 +37,9 @@ export class PesquisaComponent implements OnInit {
     });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['']
+    });
+    this.thirdFormGroup = this._formBuilder.group({
+      thirdCtrl: ['']
     });
 
     // END
@@ -65,6 +70,17 @@ export class PesquisaComponent implements OnInit {
       });
     }));
 
+    this.perguntasProd = this.db.collection('perguntasProd')
+    .snapshotChanges()
+    .pipe(map(docArray => {
+      return docArray.map(doc => {
+        return {
+          id: doc.payload.doc.id,
+          pergunta: doc.payload.doc.data()['pergunta']
+        };
+      });
+    }));
+
   }
 
   onSubmitAspecTec(form) {
@@ -74,11 +90,18 @@ export class PesquisaComponent implements OnInit {
     this.pesquisaService.addRespostaAspecTec({resposta});
   }
 
-  onSubmitRepresentantes(form) {
+  onSubmitRep(form) {
     let resposta = form;
     resposta = resposta.value;
     console.log(resposta);
     this.pesquisaService.addRespostaRep({resposta});
+  }
+
+  onSubmitProd(form) {
+    let resposta = form;
+    resposta = resposta.value;
+    console.log(resposta);
+    this.pesquisaService.addRespostaProd({resposta});
   }
 
   // saveRespostaAspecTec() {

@@ -7,9 +7,10 @@
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Aspectos Técnicos</ng-template>
+        <h5>Selecione uma alternativa, de acordo com o seu julgamento</h5>
         <mat-form-field class="pergunta-field">
           <input class="hideInput" matInput  formControlName="firstCtrl">
-          <form #formAspecTec="ngForm" (ngSubmit)="onSubmitAspecTec(formAspecTec)" >
+          <form #formAspecTec="ngForm" (ngSubmit)="onSubmitAspecTec(formAspecTec)">
               <ul *ngFor="let aspTec of perguntaAspecTec | async">
                 <h4>{{ aspTec.pergunta }}</h4>                
                 <div class="listaPerguntas" >                    
@@ -31,7 +32,6 @@
                     </mat-select>
                     <mat-error>Selecione uma opção</mat-error>
                   </mat-form-field>
-                    
                 </div>
               </ul>
               <button [disabled]="formAspecTec.invalid" color="primary" mat-raised-button matStepperNext type="submit">Próximo</button>
@@ -41,49 +41,90 @@
     </mat-step>
     <mat-step  [stepControl]="secondFormGroup">
       <form  [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Representantes</ng-template>
-        <mat-form-field>
-          <input matInput placeholder="Address" formControlName="secondCtrl" required>
-          <form #f2="ngForm" (ngSubmit)="onSubmitRepresentantes(f2)">
-              <ul *ngFor="let repForm of perguntasRep | async">
-                <h4> {{ repForm.pergunta }} </h4>
-                <div>
-                  <div>
-                    <h3>CORFIO</h3>
-                    <select name=" {{ repForm.pergunta }}  CORFIO " ngModel>
-                      <option value="otimo">otimo</option>
-                      <option value="bom">bom</option>
-                      <option value="regular">regular</option>
-                      <option value="ruim">ruim</option>
-                    </select>
+        <ng-template matStepLabel>Atendimento do Representantes</ng-template>
+        <h5>Selecione uma alternativa, de acordo com o seu julgamento</h5>
+        <mat-form-field class="pergunta-field">
+            <input class="hideInput" matInput  formControlName="secondCtrl">
+            <form #formRep="ngForm" (ngSubmit)="onSubmitRep(formRep)" >
+                <ul *ngFor="let rep of perguntasRep | async">
+                  <h4>{{ rep.pergunta }}</h4>                
+                  <div class="listaPerguntas" >                    
+                    <mat-form-field>
+                      <mat-select #selectCorfio="ngModel" placeholder="CORFIO" name=" {{ rep.pergunta }}  CORFIO " ngModel required>
+                        <mat-option value="otimo">otimo</mat-option>
+                        <mat-option value="bom">bom</mat-option>
+                        <mat-option value="regular">regular</mat-option>
+                        <mat-option value="ruim">ruim</mat-option>
+                      </mat-select>
+                      <mat-error>Selecione uma opção</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                      <mat-select placeholder="Outros" name=" {{ rep.pergunta }}  OUTROS " ngModel required>
+                        <mat-option value="otimo">otimo</mat-option>
+                        <mat-option value="bom">bom</mat-option>
+                        <mat-option value="regular">regular</mat-option>
+                        <mat-option value="ruim">ruim</mat-option>
+                      </mat-select>
+                      <mat-error>Selecione uma opção</mat-error>
+                    </mat-form-field>
+                      
                   </div>
-                  <div>
-                    <h3>OUTROS</h3>
-                    <select name=" {{ repForm.pergunta }}  OUTROS " ngModel>
-                      <option value="otimo">otimo</option>
-                      <option value="bom">bom</option>
-                      <option value="regular">regular</option>
-                      <option value="ruim">ruim</option>
-                    </select>
-                  </div>
-                  
-                </div>
-              </ul>
-              <button type="submit"> enviar </button>
-          </form>
-        </mat-form-field>
+                </ul>
+                <button [disabled]="formRep.invalid" color="primary" mat-raised-button matStepperNext type="submit">Próximo</button>
+              </form>
+          </mat-form-field>
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-button matStepperPrevious>Voltar</button>
+          <button mat-button matStepperNext>Próximo</button>
         </div>
       </form>
     </mat-step>
+    <mat-step  [stepControl]="thirdFormGroup">
+        <form  [formGroup]="thirdFormGroup">
+          <ng-template matStepLabel>Imagem dos Produtos</ng-template>
+          <h5>Selecione uma alternativa, de acordo com o seu julgamento</h5>
+          <mat-form-field class="pergunta-field">
+              <input class="hideInput" matInput  formControlName="thirdCtrl">
+              <form #formProd="ngForm" (ngSubmit)="onSubmitProd(formProd)" >
+                  <ul *ngFor="let prod of perguntasProd | async">
+                    <h4>{{ prod.pergunta }}</h4>                
+                    <div class="listaPerguntas" >                    
+                      <mat-form-field>
+                        <mat-select #selectCorfio="ngModel" placeholder="CORFIO" name=" {{ prod.pergunta }}  CORFIO " ngModel required>
+                          <mat-option value="otimo">otimo</mat-option>
+                          <mat-option value="bom">bom</mat-option>
+                          <mat-option value="regular">regular</mat-option>
+                          <mat-option value="ruim">ruim</mat-option>
+                        </mat-select>
+                        <mat-error>Selecione uma opção</mat-error>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-select placeholder="Outros" name=" {{ prod.pergunta }}  OUTROS " ngModel required>
+                          <mat-option value="otimo">otimo</mat-option>
+                          <mat-option value="bom">bom</mat-option>
+                          <mat-option value="regular">regular</mat-option>
+                          <mat-option value="ruim">ruim</mat-option>
+                        </mat-select>
+                        <mat-error>Selecione uma opção</mat-error>
+                      </mat-form-field>
+                        
+                    </div>
+                  </ul>
+                  <button [disabled]="formRep.invalid" color="primary" mat-raised-button matStepperNext type="submit">Próximo</button>
+                </form>
+            </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Voltar</button>
+            <button mat-button matStepperNext>Próximo</button>
+          </div>
+        </form>
+      </mat-step>
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
-      You are now done.
+      Fim
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
+        <!-- <button mat-button matStepperPrevious>Voltar</button> -->
+        <button mat-button (click)="stepper.reset()">Finalizar</button>
       </div>
     </mat-step>
   </mat-vertical-stepper>
