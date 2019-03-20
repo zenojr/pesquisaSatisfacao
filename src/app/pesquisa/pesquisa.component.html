@@ -1,7 +1,6 @@
 <span class="welcome">
     <h3> Pesquisa de satisfação de clientes 2019</h3>
 </span>
-
 <mat-divider></mat-divider>
   <mat-vertical-stepper [linear]="isLinear" #stepper>
     <mat-step [stepControl]="firstFormGroup">
@@ -35,7 +34,7 @@
                 </div>
               </ul>
               <button [disabled]="formAspecTec.invalid" color="primary" mat-raised-button matStepperNext type="submit">Próximo</button>
-            </form>
+          </form>
         </mat-form-field>
       </form>
     </mat-step>
@@ -106,11 +105,10 @@
                           <mat-option value="ruim">ruim</mat-option>
                         </mat-select>
                         <mat-error>Selecione uma opção</mat-error>
-                      </mat-form-field>
-                        
+                      </mat-form-field>        
                     </div>
                   </ul>
-                  <button [disabled]="formRep.invalid" color="primary" mat-raised-button matStepperNext type="submit">Próximo</button>
+                  <button [disabled]="formProd.invalid" color="primary" mat-raised-button matStepperNext type="submit">Próximo</button>
                 </form>
             </mat-form-field>
           <div>
@@ -119,12 +117,96 @@
           </div>
         </form>
       </mat-step>
+
+      <mat-step [stepControl]="fourthFormGroup">
+          <form [formGroup]="fourthFormGroup">
+            <ng-template matStepLabel>Atendimento Comercial e Marketing</ng-template>
+            <h5>Selecione uma alternativa, de acordo com o seu julgamento</h5>
+            <mat-form-field class="pergunta-field">
+                <input class="hideInput" matInput  formControlName="fourthCtrl">
+                <form #formComMark="ngForm" (ngSubmit)="onSubmitComMark(formComMark)" >
+                    <ul *ngFor="let comMark of perguntasComMark | async">
+                      <h4>{{ comMark.pergunta }}</h4>                
+                      <div class="listaPerguntas" >                    
+                        <mat-form-field>
+                          <mat-select #selectCorfio="ngModel" placeholder="CORFIO" name=" {{ comMark.pergunta }}  CORFIO " ngModel required>
+                            <mat-option value="otimo">otimo</mat-option>
+                            <mat-option value="bom">bom</mat-option>
+                            <mat-option value="regular">regular</mat-option>
+                            <mat-option value="ruim">ruim</mat-option>
+                          </mat-select>
+                          <mat-error>Selecione uma opção</mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                          <mat-select placeholder="Outros" name=" {{ comMark.pergunta }}  OUTROS " ngModel required>
+                            <mat-option value="otimo">otimo</mat-option>
+                            <mat-option value="bom">bom</mat-option>
+                            <mat-option value="regular">regular</mat-option>
+                            <mat-option value="ruim">ruim</mat-option>
+                          </mat-select>
+                          <mat-error>Selecione uma opção</mat-error>
+                        </mat-form-field>
+                          
+                      </div>
+                    </ul>
+                    <button [disabled]="formComMark.invalid" color="primary" mat-raised-button matStepperNext type="submit">Próximo</button>
+                  </form>
+              </mat-form-field>
+            <div>
+              <button mat-button matStepperPrevious>Voltar</button>
+              <button mat-button matStepperNext>Próximo</button>
+            </div>
+          </form>
+      </mat-step>
+
+      <mat-step [stepControl]="fifthFormGroup">
+          <form [formGroup]="fifthFormGroup">
+            <ng-template matStepLabel>Embalagem e transporte</ng-template>
+            <h5>Selecione uma alternativa, de acordo com o seu julgamento</h5>
+            <mat-form-field class="pergunta-field">
+                <input class="hideInput" matInput  formControlName="fifthCtrl">
+                <form #formEmbTran="ngForm" (ngSubmit)="onSubmitEmbTran(formEmbTran)" >
+                    <ul *ngFor="let embTran of perguntasEmbTran | async">
+                      <h4>{{ embTran.pergunta }}</h4>                
+                      <div class="listaPerguntas" >                    
+                        <mat-form-field>
+                          <mat-select #selectCorfio="ngModel" placeholder="CORFIO" name=" {{ embTran.pergunta }}  CORFIO " ngModel required>
+                            <mat-option value="otimo">otimo</mat-option>
+                            <mat-option value="bom">bom</mat-option>
+                            <mat-option value="regular">regular</mat-option>
+                            <mat-option value="ruim">ruim</mat-option>
+                          </mat-select>
+                          <mat-error>Selecione uma opção</mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                          <mat-select placeholder="Outros" name=" {{ embTran.pergunta }}  OUTROS " ngModel required>
+                            <mat-option value="otimo">otimo</mat-option>
+                            <mat-option value="bom">bom</mat-option>
+                            <mat-option value="regular">regular</mat-option>
+                            <mat-option value="ruim">ruim</mat-option>
+                          </mat-select>
+                          <mat-error>Selecione uma opção</mat-error>
+                        </mat-form-field>
+                          
+                      </div>
+                    </ul>
+                    <button [disabled]="formEmbTran.invalid" color="primary" mat-raised-button matStepperNext type="submit">Próximo</button>
+                  </form>
+              </mat-form-field>
+            <div>
+              <button mat-button matStepperPrevious>Voltar</button>
+              <button mat-button matStepperNext>Próximo</button>
+            </div>
+          </form>
+      </mat-step>
+
+
     <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
+      <ng-template matStepLabel>Finalizar</ng-template>
       Fim
       <div>
         <!-- <button mat-button matStepperPrevious>Voltar</button> -->
-        <button mat-button (click)="stepper.reset()">Finalizar</button>
+        <button mat-button (click)="stepper.reset()">Concluir Pesquisa</button>
       </div>
     </mat-step>
   </mat-vertical-stepper>

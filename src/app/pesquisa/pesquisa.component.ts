@@ -7,6 +7,8 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PerguntasProd } from './perguntasProd.model';
+import { PerguntasComMark } from './perguntasComMark.model';
+import { PerguntasEmbTran } from './perguntasEmbTran.model';
 
 @Component({
   selector: 'app-pesquisa',
@@ -21,11 +23,15 @@ export class PesquisaComponent implements OnInit {
   perguntaAspecTec: Observable<PerguntasAspecTec[]>;
   perguntasRep: Observable<PerguntasRep[]>;
   perguntasProd: Observable<PerguntasProd[]>;
+  perguntasComMark: Observable<PerguntasComMark[]>;
+  perguntasEmbTran: Observable<PerguntasEmbTran[]>;
 
   isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
+  fourthFormGroup: FormGroup;
+  fifthFormGroup: FormGroup;
 
   constructor(private pesquisaService: PesquisaService,
               private db: AngularFirestore,
@@ -40,6 +46,12 @@ export class PesquisaComponent implements OnInit {
     });
     this.thirdFormGroup = this._formBuilder.group({
       thirdCtrl: ['']
+    });
+    this.fourthFormGroup = this._formBuilder.group({
+      fourthCtrl: ['']
+    });
+    this.fifthFormGroup = this._formBuilder.group({
+      fifthCtrl: ['']
     });
 
     // END
@@ -81,6 +93,28 @@ export class PesquisaComponent implements OnInit {
       });
     }));
 
+    this.perguntasComMark = this.db.collection('perguntasComMark')
+    .snapshotChanges()
+    .pipe(map(docArray => {
+      return docArray.map(doc => {
+        return {
+          id: doc.payload.doc.id,
+          pergunta: doc.payload.doc.data()['pergunta']
+        };
+      });
+    }));
+
+    this.perguntasEmbTran = this.db.collection('perguntasEmbTran')
+    .snapshotChanges()
+    .pipe(map(docArray => {
+      return docArray.map(doc => {
+        return {
+          id: doc.payload.doc.id,
+          pergunta: doc.payload.doc.data()['pergunta']
+        };
+      });
+    }));
+
   }
 
   onSubmitAspecTec(form) {
@@ -104,26 +138,19 @@ export class PesquisaComponent implements OnInit {
     this.pesquisaService.addRespostaProd({resposta});
   }
 
-  // saveRespostaAspecTec() {
-  //   const resposta = this.firstFormGroup.get('firstCtrl').value;
-  //   this.pesquisaService.addRespostaAspecTec({resposta});
-  // }
+  onSubmitComMark(form) {
+    let resposta = form;
+    resposta = resposta.value;
+    console.log(resposta);
+    this.pesquisaService.addRespostaComMark({resposta});
+  }
 
-  // onSubmitAtendRep(form) {
-  //   let resposta = form;
-  //   resposta = resposta.value;
-  //   console.log(resposta);
-  //   this.pesquisaService.addRespostaAspecTec({resposta});
-  // }
+  onSubmitEmbTran(form) {
+    let resposta = form;
+    resposta = resposta.value;
+    console.log(resposta);
+    this.pesquisaService.addRespostaEmbTran({resposta});
+  }
 
-  // respostaAspectec() {
-  //   const resposta = this.firstFormGroup.get('firstCtrl').value;
-  //   // this.pesquisaService.addRespostaAspecTec({resposta});
-  // }
-
-  // savePerguntaAspecTec() {
-  //   const pergunta = this.postPergunta.get('pergunta').value;
-  //   this.pesquisaService.addPerguntaAspecTec({pergunta});
-  // }
 
 }
