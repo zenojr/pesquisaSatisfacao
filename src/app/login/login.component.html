@@ -2,7 +2,7 @@
   <form [formGroup]="loginForm" class="flex-container" fxLayoutGap="10px" #form="ngForm" (ngSubmit)="onSubmit()" >
     <mat-form-field appearance="outline">
       <mat-label>Usuário</mat-label>
-      <input type="text" matInput formControlName="usuario">
+      <input autofocus type="text" matInput formControlName="usuario">
       <mat-error>Usuário Inválido</mat-error>
       <mat-icon matSuffix>person</mat-icon>
     </mat-form-field>

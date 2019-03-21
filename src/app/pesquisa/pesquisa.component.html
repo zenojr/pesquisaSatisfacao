@@ -2,7 +2,7 @@
     <h3> Pesquisa de satisfação de clientes 2019</h3>
 </span>
 <mat-divider></mat-divider>
-  <mat-vertical-stepper [linear]="isLinear" #stepper>
+  <mat-vertical-stepper [linear]="isLinear" #stepper labelPosition="top">
     <mat-step [stepControl]="formAspecTec">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Aspectos Técnicos</ng-template>
@@ -50,7 +50,7 @@
                   <h4>{{ rep.pergunta }}</h4>                
                   <div class="listaPerguntas" >                    
                     <mat-form-field>
-                      <mat-select #selectCorfio="ngModel" placeholder="CORFIO" name=" {{ rep.pergunta }}  CORFIO " ngModel required>
+                      <mat-select #selectCorfio="ngModel" placeholder="CORFIO" name="{{ rep.pergunta }} CORFIO" autofocus ngModel required>
                         <mat-option value="otimo">otimo</mat-option>
                         <mat-option value="bom">bom</mat-option>
                         <mat-option value="regular">regular</mat-option>

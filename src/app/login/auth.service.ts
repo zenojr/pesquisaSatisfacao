@@ -8,16 +8,19 @@ import { AngularFireAuth } from 'angularfire2/auth';
 @Injectable()
 export class AuthService {
   authChange = new Subject<boolean>();
-  private user: User;
+  // private user: User;
+
+  private isAuthenticated = false;
+
   constructor( private router: Router, private afAuth: AngularFireAuth) {}
 
   registerUser(authData: AuthData) {
-    this.user = {
-      usuario: authData.usuario,
-      userID: Math.round(Math.random() * 1000).toString(),
-      password: authData.senha
-    };
-    this.authChange.next(true);
+    // this.user = {
+    //   usuario: authData.usuario,
+    //   userID: Math.round(Math.random() * 1000).toString(),
+    //   password: authData.senha
+    // };
+    // this.authChange.next(true);
   }
 
   login(authData: AuthData) {
@@ -42,22 +45,20 @@ export class AuthService {
   // }
 
   logOut() {
-    this.user = null;
+    this.isAuthenticated = false;
     this.authChange.next(false);
     this.router.navigate(['/']);
   }
 
-  getUser() {
-    return { ...this.user };
-  }
+  
 
   isAuth() {
-    return this.user != null;
+    return this.isAuthenticated;
   }
 
   private authSuccess() {
+    this.isAuthenticated = true;
     this.authChange.next(true);
-    console.log(this.user);
     this.router.navigate(['/pesquisa']);
   }
 
