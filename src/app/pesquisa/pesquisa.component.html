@@ -13,8 +13,8 @@
               <ul *ngFor="let aspTec of perguntaAspecTec | async">
                 <h4>{{ aspTec.pergunta }}</h4>                
                 <div class="listaPerguntas" >                    
-                  <mat-form-field>
-                    <mat-select #selectCorfio="ngModel" placeholder="CORFIO" name="{{ aspTec.pergunta }} CORFIO {{ aspTec.id }}" ngModel required>
+                  <mat-form-field >
+                    <mat-select autofocus #selectCorfio="ngModel" placeholder="CORFIO" name="{{ aspTec.pergunta }} CORFIO {{ aspTec.id }}" ngModel required>
                       <mat-option value="otimo">otimo</mat-option>
                       <mat-option value="bom">bom</mat-option>
                       <mat-option value="regular">regular</mat-option>
@@ -33,13 +33,13 @@
                   </mat-form-field>
                 </div>
               </ul>
-              <button [disabled]="formAspecTec.invalid" color="primary" matStepperNext mat-raised-button type="submit">Responder</button>
+               <button  [disabled]="formAspecTec.invalid" color="primary" matStepperNext mat-raised-button type="submit">Responder</button>
           </form>
         </mat-form-field>
         
       </form>
     </mat-step>
-    <mat-step  [stepControl]="formRep">
+    <mat-step id="matstep2"  [stepControl]="formRep">
       <form [formGroup]="secondFormGroup">
         <ng-template matStepLabel>Atendimento do Representantes</ng-template>
         <h5>Selecione uma alternativa, de acordo com o seu julgamento</h5>

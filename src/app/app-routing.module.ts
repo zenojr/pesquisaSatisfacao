@@ -9,8 +9,7 @@ import { PesquisaComponent } from './pesquisa/pesquisa.component';
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'pesquisa', component: PesquisaComponent, canActivate: [AuthGuard]},
-  // {path: 'pesquisa', component: PesquisaComponent},
-  {path: 'pesquisaReactive', component: PesquisaReactiveFormComponent}
+  {path: 'pesquisaReactive', component: PesquisaReactiveFormComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

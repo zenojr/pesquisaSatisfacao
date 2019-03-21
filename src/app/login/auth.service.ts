@@ -32,7 +32,11 @@ export class AuthService {
     ).then(result => {
       console.log(result);
       this.authSuccess();
-    }).catch(error => { console.log(error); });
+    }).catch(error => { console.log(error), alert('Ops: Usuário ou senha inválido'); });
+  }
+
+  getUser() {
+
   }
 
   // login(authData: AuthData) {
@@ -49,8 +53,6 @@ export class AuthService {
     this.authChange.next(false);
     this.router.navigate(['/']);
   }
-
-  
 
   isAuth() {
     return this.isAuthenticated;
