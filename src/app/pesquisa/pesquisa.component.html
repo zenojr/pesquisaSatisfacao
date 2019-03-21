@@ -3,18 +3,18 @@
 </span>
 <mat-divider></mat-divider>
   <mat-vertical-stepper [linear]="isLinear" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
+    <mat-step [stepControl]="formAspecTec">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Aspectos Técnicos</ng-template>
         <h5>Selecione uma alternativa, de acordo com o seu julgamento</h5>
         <mat-form-field class="pergunta-field">
-          <input class="hideInput" matInput  formControlName="firstCtrl" value=" {{ teste }} " ngModel>
+          <input class="hideInput" matInput  formControlName="firstCtrl" value="{{ teste }}">
           <form #formAspecTec="ngForm" (ngSubmit)="onSubmitAspecTec(formAspecTec)">
               <ul *ngFor="let aspTec of perguntaAspecTec | async">
                 <h4>{{ aspTec.pergunta }}</h4>                
                 <div class="listaPerguntas" >                    
                   <mat-form-field>
-                    <mat-select #selectCorfio="ngModel" placeholder="CORFIO" name=" {{ aspTec.pergunta }}  CORFIO {{ aspTec.id }} " ngModel required>
+                    <mat-select #selectCorfio="ngModel" placeholder="CORFIO" name="{{ aspTec.pergunta }} CORFIO {{ aspTec.id }}" ngModel required>
                       <mat-option value="otimo">otimo</mat-option>
                       <mat-option value="bom">bom</mat-option>
                       <mat-option value="regular">regular</mat-option>
@@ -23,7 +23,7 @@
                     <mat-error>Selecione uma opção</mat-error>
                   </mat-form-field>
                   <mat-form-field>
-                    <mat-select placeholder="Outros" name=" {{ aspTec.pergunta }}  OUTROS " ngModel required>
+                    <mat-select placeholder="Outros" name="{{ aspTec.pergunta }}  OUTROS" ngModel required>
                       <mat-option value="otimo">otimo</mat-option>
                       <mat-option value="bom">bom</mat-option>
                       <mat-option value="regular">regular</mat-option>
@@ -33,12 +33,13 @@
                   </mat-form-field>
                 </div>
               </ul>
-              <button [disabled]="formAspecTec.invalid" color="primary" mat-raised-button matStepperNext type="submit">Próximo</button>
+              <button [disabled]="formAspecTec.invalid" color="primary" matStepperNext mat-raised-button type="submit">Responder</button>
           </form>
         </mat-form-field>
+        
       </form>
     </mat-step>
-    <mat-step  [stepControl]="formAspecTec">
+    <mat-step  [stepControl]="formRep">
       <form [formGroup]="secondFormGroup">
         <ng-template matStepLabel>Atendimento do Representantes</ng-template>
         <h5>Selecione uma alternativa, de acordo com o seu julgamento</h5>
@@ -72,13 +73,13 @@
                 <button [disabled]="formRep.invalid" color="primary" mat-raised-button matStepperNext type="submit">Próximo</button>
               </form>
           </mat-form-field>
-        <div>
+        <!-- <div>
           <button mat-button matStepperPrevious>Voltar</button>
           <button mat-button matStepperNext>Próximo</button>
-        </div>
+        </div> -->
       </form>
     </mat-step>
-    <mat-step  [stepControl]="thirdFormGroup">
+    <mat-step  [stepControl]="formProd">
         <form  [formGroup]="thirdFormGroup">
           <ng-template matStepLabel>Imagem dos Produtos</ng-template>
           <h5>Selecione uma alternativa, de acordo com o seu julgamento</h5>
@@ -111,14 +112,14 @@
                   <button [disabled]="formProd.invalid" color="primary" mat-raised-button matStepperNext type="submit">Próximo</button>
                 </form>
             </mat-form-field>
-          <div>
+          <!-- <div>
             <button mat-button matStepperPrevious>Voltar</button>
             <button mat-button matStepperNext>Próximo</button>
-          </div>
+          </div> -->
         </form>
       </mat-step>
 
-      <mat-step [stepControl]="fourthFormGroup">
+      <mat-step [stepControl]="formComMark">
           <form [formGroup]="fourthFormGroup">
             <ng-template matStepLabel>Atendimento Comercial e Marketing</ng-template>
             <h5>Selecione uma alternativa, de acordo com o seu julgamento</h5>
