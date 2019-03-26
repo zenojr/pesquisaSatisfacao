@@ -1,7 +1,7 @@
 import { PerguntasAspecTec } from './perguntasAspecTec.model';
 import { PerguntasRep } from './perguntasRep.model';
 import { PesquisaService } from './pesquisa.service';
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormControlName } from '@angular/forms';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
@@ -19,6 +19,8 @@ export class PesquisaComponent implements OnInit {
 
   postPergunta: FormGroup;
   idPergunta;
+
+  saida: Observable<any>;
 
   perguntaAspecTec: Observable<PerguntasAspecTec[]>;
   perguntasRep: Observable<PerguntasRep[]>;
@@ -115,11 +117,19 @@ export class PesquisaComponent implements OnInit {
       });
     }));
 
+
+
   }
 
   onSubmitAspecTec(form) {
     let resposta = form;
     resposta = resposta.value;
+    console.log(resposta);
+    this.pesquisaService.addRespostaAspecTec({resposta});
+  }
+
+  onChangeAspecTec(event) {
+    const resposta = event.source.value;
     console.log(resposta);
     this.pesquisaService.addRespostaAspecTec({resposta});
   }

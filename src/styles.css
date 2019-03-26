@@ -3,7 +3,7 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 html, body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Muli', sans-serif;
   height: 100%;
 }
 

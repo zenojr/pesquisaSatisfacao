@@ -30,6 +30,10 @@ addPerguntaAspecTec(data: PerguntasAspecTec): Promise<DocumentReference> {
   return this.db.collection<PerguntasAspecTec>(this.path).add(data);
 }
 
+addRespostaIndAspecTec(data: RespostasAspecTec): Promise<DocumentReference> {
+  return this.db.collection<RespostasAspecTec>(this.pathRespostasAspecTec).add(data);
+}
+
 // ENVIA RESPOSTAS
 addRespostaAspecTec(data: RespostasAspecTec): Promise<DocumentReference> {
   return this.db.collection<RespostasAspecTec>(this.pathRespostasAspecTec).add(data);

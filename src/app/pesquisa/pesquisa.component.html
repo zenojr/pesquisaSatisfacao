@@ -1,20 +1,35 @@
 <span class="welcome">
     <h3> Pesquisa de satisfação de clientes 2019</h3>
 </span>
+
+<p>
+  Teste Select
+</p>
+
+<select name="" id="" onChange="onChangeAspecTec()">
+  <option value="valor1">Valor 1</option>
+  <option value="valor2">Valor 2</option>
+  <option value="valor3">Valor 3</option>
+</select>
+
 <mat-divider></mat-divider>
   <mat-vertical-stepper [linear]="isLinear" #stepper labelPosition="top">
-    <mat-step [stepControl]="formAspecTec">
+    <mat-step>
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Aspectos Técnicos</ng-template>
         <h5>Selecione uma alternativa, de acordo com o seu julgamento</h5>
         <mat-form-field class="pergunta-field">
           <input class="hideInput" matInput  formControlName="firstCtrl" value="{{ teste }}">
-          <form #formAspecTec="ngForm" (ngSubmit)="onSubmitAspecTec(formAspecTec)">
+          <form #formAspecTec="ngForm">
               <ul *ngFor="let aspTec of perguntaAspecTec | async">
                 <h4>{{ aspTec.pergunta }}</h4>                
                 <div class="listaPerguntas" >                    
-                  <mat-form-field >
-                    <mat-select autofocus #selectCorfio="ngModel" placeholder="CORFIO" name="{{ aspTec.pergunta }} CORFIO {{ aspTec.id }}" ngModel required>
+                  <mat-form-field  >              
+                    <mat-select (selectionChange)="onChangeAspecTec($event, name)" 
+                                autofocus #selectCorfio="ngModel" 
+                                placeholder="CORFIO" 
+                                name="{{ aspTec.pergunta }} CORFIO {{ aspTec.id }}" 
+                                ngModel required>
                       <mat-option value="otimo">otimo</mat-option>
                       <mat-option value="bom">bom</mat-option>
                       <mat-option value="regular">regular</mat-option>
