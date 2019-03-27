@@ -1,10 +1,22 @@
+<p>OIOOIOIOI</p>
+
+<ul *ngFor="let pergunta of perguntaAspecTec | async">
+  <li> {{ pergunta.pergunta }} </li>
+</ul>
 
 <mat-vertical-stepper [linear]="isLinear" #stepper>
   <mat-step>
     <form [formGroup]="firstFormGroup" (ngSubmit)="save()">
       <ng-template matStepLabel>Primeiro Grupo </ng-template>
+      
       <mat-form-field>
-          <input matInput type="text" placeholder="usuario" formControlName="user">
+          <mat-select placeholder="CORFIO" formControlName="resposta">
+              <mat-option value="otimo">otimo</mat-option>
+              <mat-option value="bom">bom</mat-option>
+              <mat-option value="regular">regular</mat-option>
+              <mat-option value="ruim">ruim</mat-option>
+          </mat-select>
+          <!-- <input matInput type="text" placeholder="usuario" formControlName="user"> -->
       </mat-form-field>
       <mat-form-field>
           <input matInput type="text" placeholder="resposta" formControlName="resposta">
