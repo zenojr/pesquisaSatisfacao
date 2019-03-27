@@ -1,3 +1,4 @@
+import { PesquisaReactiveServiceService } from './pesquisa-reactive-service.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
 
@@ -13,27 +14,23 @@ export class PesquisaReactiveFormComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private pesqReacService: PesquisaReactiveServiceService) { }
 
   ngOnInit() {
     this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required],
-      perguntas: this.formBuilder.array([
-        this.formBuilder.control('')
-      ])
-
+      user: [''],
+      resposta: ['']
     });
     this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required]
+      secondCtrl: ['']
     });
+
   }
 
-  get perguntas() {
-    return this.firstFormGroup.get('perguntas') as FormArray;
-  }
-
-  addPerguntas() {
-    this.perguntas.push(this.formBuilder.control(''));
+  save() {
+    const user = this.firstFormGroup.get('user').value;
+    const resposta = this.firstFormGroup.get('resposta').value;
+    this.pesqReacService.add({user, resposta});
   }
 
 
