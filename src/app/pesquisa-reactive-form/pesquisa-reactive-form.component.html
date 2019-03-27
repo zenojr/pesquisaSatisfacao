@@ -1,14 +1,13 @@
 <p>OIOOIOIOI</p>
 
-<ul *ngFor="let pergunta of perguntaAspecTec | async">
-  <li> {{ pergunta.pergunta }} </li>
-</ul>
+
 
 <mat-vertical-stepper [linear]="isLinear" #stepper>
   <mat-step>
     <form [formGroup]="firstFormGroup" (ngSubmit)="save()">
       <ng-template matStepLabel>Primeiro Grupo </ng-template>
-      
+      <ul *ngFor="let pergunta of perguntaAspecTec | async">
+        <li> {{ pergunta.pergunta }}</li>      
       <mat-form-field>
           <mat-select placeholder="CORFIO" formControlName="resposta">
               <mat-option value="otimo">otimo</mat-option>
@@ -21,6 +20,7 @@
       <mat-form-field>
           <input matInput type="text" placeholder="resposta" formControlName="resposta">
       </mat-form-field>
+      </ul>
       <div>
         <button mat-button matStepperNext>Next</button>
       </div>
