@@ -2,6 +2,8 @@ import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { Respostas } from './respostas.model';
 import * as firebase from 'firebase';
+import { map } from 'rxjs/operators';
+import { PerguntasAspecTec } from '../pesquisa/perguntasAspecTec.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +14,13 @@ export class PesquisaReactiveServiceService {
 
   constructor( private db: AngularFirestore ) { }
 
-  add(data: Respostas): Promise<void> {
+  add(pergunta: string, data: Respostas): Promise<void> {
     // return this.db.collection<Respostas>(this.pathReactive).add({...data});
-    return this.db.collection<Respostas>(this.pathReactive).doc('perguntainserida').set({data})
+    // const id = this.db.createId();
+    // let ask ='';
+    const id = this.db.collection('perguntasAspecTec');
+    console.log(id);
+    return this.db.collection<Respostas>(this.pathReactive).doc(pergunta).set({data});
   }
 
   // setId(data: Respostas): Promise<void> {

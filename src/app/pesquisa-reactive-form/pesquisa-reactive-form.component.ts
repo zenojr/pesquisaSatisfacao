@@ -28,12 +28,12 @@ export class PesquisaReactiveFormComponent implements OnInit {
   perguntasComMark: Observable<PerguntasComMark[]>;
   perguntasEmbTran: Observable<PerguntasEmbTran[]>;
 
-  constructor(private formBuilder: FormBuilder, private pesqReacService: PesquisaReactiveServiceService, private db: AngularFirestore) { }
+  constructor(private formBuilder: FormBuilder, private pesqReactService: PesquisaReactiveServiceService, private db: AngularFirestore) { }
 
   ngOnInit() {
     this.firstFormGroup = this.formBuilder.group({
       user: [''],
-      pergunta: [''],
+      pergunta: this.formBuilder.array(['']),
       respostaCorfio: [''],
       respostaOutros: ['']
     });
@@ -60,7 +60,8 @@ export class PesquisaReactiveFormComponent implements OnInit {
     console.log(pergunta);
     const respostaCorfio = this.firstFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.firstFormGroup.get('respostaOutros').value;
-    this.pesqReacService.add({pergunta, respostaCorfio, respostaOutros});
+
+    this.pesqReactService.add(pergunta, {respostaCorfio, respostaOutros});
   }
 
 
