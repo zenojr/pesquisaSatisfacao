@@ -20,7 +20,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
   isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  perguntaDoForm: any;
+  perguntaDoForm: string;
 
   perguntaAspecTec: Observable<PerguntasAspecTec[]>;
   perguntasRep: Observable<PerguntasRep[]>;
@@ -55,7 +55,6 @@ export class PesquisaReactiveFormComponent implements OnInit {
   }
 
   saveRespAspecTec(perguntaForm) {
-    const user = this.firstFormGroup.get('user').value;
     this.perguntaDoForm = perguntaForm;
     const pergunta = this.perguntaDoForm;
     console.log(pergunta);
@@ -64,9 +63,5 @@ export class PesquisaReactiveFormComponent implements OnInit {
     this.pesqReacService.add({pergunta, respostaCorfio, respostaOutros});
   }
 
-  // getPergunta(pergunta) {
-  //   this.perguntaDoForm = pergunta;
-  //   console.log(this.perguntaDoForm);
-  // }
 
 }

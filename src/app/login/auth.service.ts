@@ -61,7 +61,8 @@ export class AuthService {
   private authSuccess() {
     this.isAuthenticated = true;
     this.authChange.next(true);
-    this.router.navigate(['/pesquisa']);
+    // this.router.navigate(['/pesquisa']);
+    this.router.navigate(['/pesquisaReactive']);
   }
 
 }
