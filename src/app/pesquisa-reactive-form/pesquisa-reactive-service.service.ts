@@ -8,9 +8,9 @@ import * as firebase from 'firebase';
 })
 export class PesquisaReactiveServiceService {
 
-  userFb = firebase.auth().currentUser;
-  userMail = this.userFb.email;
-  user = this.userMail.replace('@corfio.com', '');
+  // userFb = firebase.auth().currentUser;
+  // userMail = this.userFb.email;
+  user = this.getUser();
 
   readonly pathReactive = this.user;
 
@@ -26,9 +26,9 @@ export class PesquisaReactiveServiceService {
 
   getUser() {
     const userFb = firebase.auth().currentUser;
-    const userMail = userFb.email;
-    this.user = userMail.replace('@corfio.com', '');
-    console.log(this.user);
+    let userMail = userFb.email;
+    userMail = userMail.replace('@corfio.com', '');
+    return userMail;
   }
 
 }
