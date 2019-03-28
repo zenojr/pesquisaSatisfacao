@@ -14,8 +14,6 @@ export class PesquisaReactiveServiceService {
 
   readonly pathReactive = this.user;
 
-
-
   constructor( private db: AngularFirestore ) { }
 
   add(data: Respostas): Promise<DocumentReference> {
