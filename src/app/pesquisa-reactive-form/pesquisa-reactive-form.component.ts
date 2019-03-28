@@ -10,7 +10,6 @@ import { PerguntasComMark } from '../pesquisa/perguntasComMark.model';
 import { PerguntasEmbTran } from '../pesquisa/perguntasEmbTran.model';
 import { map } from 'rxjs/operators';
 
-
 @Component({
   selector: 'app-pesquisa-reactive-form',
   templateUrl: './pesquisa-reactive-form.component.html',
@@ -21,6 +20,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
   isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  perguntaDoForm: any;
 
   perguntaAspecTec: Observable<PerguntasAspecTec[]>;
   perguntasRep: Observable<PerguntasRep[]>;
@@ -33,7 +33,9 @@ export class PesquisaReactiveFormComponent implements OnInit {
   ngOnInit() {
     this.firstFormGroup = this.formBuilder.group({
       user: [''],
-      resposta: ['']
+      pergunta: [''],
+      respostaCorfio: [''],
+      respostaOutros: ['']
     });
     this.secondFormGroup = this.formBuilder.group({
       secondCtrl: ['']
@@ -52,11 +54,19 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
   }
 
-  save() {
+  saveRespAspecTec(perguntaForm) {
     const user = this.firstFormGroup.get('user').value;
-    const resposta = this.firstFormGroup.get('resposta').value;
-    this.pesqReacService.add({user, resposta});
+    this.perguntaDoForm = perguntaForm;
+    const pergunta = this.perguntaDoForm;
+    console.log(pergunta);
+    const respostaCorfio = this.firstFormGroup.get('respostaCorfio').value;
+    const respostaOutros = this.firstFormGroup.get('respostaOutros').value;
+    this.pesqReacService.add({pergunta, respostaCorfio, respostaOutros});
   }
 
+  // getPergunta(pergunta) {
+  //   this.perguntaDoForm = pergunta;
+  //   console.log(this.perguntaDoForm);
+  // }
 
 }
