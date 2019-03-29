@@ -1,3 +1,4 @@
+import { RespImgProd } from './respImgProd.model';
 import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { RespAspecTec } from './respAspTec.model';
@@ -21,6 +22,10 @@ export class PesquisaReactiveServiceService {
 
   addRespRep(pergunta: string, data: RespRep): Promise<void> {
     return this.db.collection<RespRep>(this.pathUser).doc(pergunta).set({data});
+  }
+
+  addRespImgProd(pergunta: string, data: RespImgProd): Promise<void> {
+    return this.db.collection<RespImgProd>(this.pathUser).doc(pergunta).set({data});
   }
 
   // update(id: string, data: Partial<Respostas>): Promise<void> {

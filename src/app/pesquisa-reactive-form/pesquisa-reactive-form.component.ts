@@ -17,16 +17,18 @@ import { map } from 'rxjs/operators';
 })
 export class PesquisaReactiveFormComponent implements OnInit {
 
-  isLinear = true;
+  isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  thirdFormGroup: FormGroup;
 
-  perguntaAspTec: string;
-  perguntaRep: string;
+  perguntaFormAspTec: string;
+  perguntaFormRep: string;
+  perguntaFormImgProd: string;
 
   perguntaAspecTec: Observable<PerguntasAspecTec[]>;
   perguntasRep: Observable<PerguntasRep[]>;
-  perguntasProd: Observable<PerguntasProd[]>;
+  perguntasImgProd: Observable<PerguntasProd[]>;
   perguntasComMark: Observable<PerguntasComMark[]>;
   perguntasEmbTran: Observable<PerguntasEmbTran[]>;
 
@@ -41,6 +43,11 @@ export class PesquisaReactiveFormComponent implements OnInit {
       respostaOutros: ['']
     });
     this.secondFormGroup = this.formBuilder.group({
+      pergunta: [''],
+      respostaCorfio: [''],
+      respostaOutros: ['']
+    });
+    this.thirdFormGroup = this.formBuilder.group({
       pergunta: [''],
       respostaCorfio: [''],
       respostaOutros: ['']
@@ -68,11 +75,22 @@ export class PesquisaReactiveFormComponent implements OnInit {
       });
     }));
 
+    this.perguntasImgProd = this.db.collection('perguntasProd')
+    .snapshotChanges()
+    .pipe(map(docArray => {
+      return docArray.map(doc => {
+        return {
+          id: doc.payload.doc.id,
+          pergunta: doc.payload.doc.data()['pergunta']
+        };
+      });
+    }));
+
   }
 
   saveRespAspecTec(perguntaForm) {
-    this.perguntaAspTec = perguntaForm;
-    const pergunta = this.perguntaAspTec;
+    this.perguntaFormAspTec = perguntaForm;
+    const pergunta = this.perguntaFormAspTec;
     console.log(pergunta);
     const respostaCorfio = this.firstFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.firstFormGroup.get('respostaOutros').value;
@@ -80,12 +98,21 @@ export class PesquisaReactiveFormComponent implements OnInit {
   }
 
   saveRespRep(perguntaForm) {
-    this.perguntaRep = perguntaForm;
-    const pergunta = this.perguntaRep;
+    this.perguntaFormRep = perguntaForm;
+    const pergunta = this.perguntaFormRep;
     console.log(pergunta);
     const respostaCorfio = this.secondFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.secondFormGroup.get('respostaOutros').value;
     this.pesqReactService.addRespRep(pergunta, {respostaCorfio, respostaOutros});
+  }
+
+  saveRespImgProd(perguntaForm) {
+    this.perguntaFormImgProd = perguntaForm;
+    const pergunta = this.perguntaFormImgProd;
+    console.log(pergunta);
+    const respostaCorfio = this.thirdFormGroup.get('respostaCorfio').value;
+    const respostaOutros = this.thirdFormGroup.get('respostaOutros').value;
+    this.pesqReactService.addRespImgProd(pergunta, {respostaCorfio, respostaOutros});
   }
 
 

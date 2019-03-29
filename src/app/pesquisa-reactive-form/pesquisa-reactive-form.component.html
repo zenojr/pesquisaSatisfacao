@@ -57,6 +57,34 @@
         </form>
   </mat-step>
   <mat-step>
+      <h4>Assinale a alternativa, de acordo com seu julgamento</h4>
+      <form [formGroup]="thirdFormGroup">
+          <ng-template matStepLabel>Imagem dos Produtos</ng-template>
+          <ul *ngFor="let item of perguntasImgProd | async">
+            <li> {{ item.pergunta }}</li>
+            <mat-form-field>
+              <mat-select placeholder="CORFIO" formControlName="respostaCorfio" (selectionChange)="saveRespImgProd(item.pergunta)" >
+                  <mat-option value="otimo">otimo</mat-option>
+                  <mat-option value="bom">bom</mat-option>
+                  <mat-option value="regular">regular</mat-option>
+                  <mat-option value="ruim">ruim</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-select placeholder="OUTROS" formControlName="respostaOutros" (selectionChange)="saveRespImgProd(item.pergunta)" >
+                  <mat-option value="otimo">otimo</mat-option>
+                  <mat-option value="bom">bom</mat-option>
+                  <mat-option value="regular">regular</mat-option>
+                  <mat-option value="ruim">ruim</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ul>
+          <div>
+            <button mat-button matStepperNext>Próximo</button>
+          </div>
+        </form>
+  </mat-step>
+  <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     You are now done.
     <div>
