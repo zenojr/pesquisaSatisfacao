@@ -10,13 +10,13 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { PesquisaComponent } from './pesquisa/pesquisa.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HeaderComponent } from './navigation/header/header.component';
-import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component'
+import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { PesquisaService } from './pesquisa/pesquisa.service';
 import { PesquisaReactiveFormComponent } from './pesquisa-reactive-form/pesquisa-reactive-form.component';
 
@@ -44,7 +44,7 @@ import { PesquisaReactiveFormComponent } from './pesquisa-reactive-form/pesquisa
     AngularFireAuthModule,
     FlexLayoutModule
   ],
-  providers: [ AuthService, PesquisaService ],
+  providers: [ AuthService, PesquisaService, { provide: FirestoreSettingsToken, useValue: {} } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
