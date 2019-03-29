@@ -29,14 +29,32 @@
     </form>
   </mat-step>
   <mat-step>
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out your address</ng-template>
-      
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
+      <h4>Assinale a alternativa, de acordo com seu julgamento</h4>
+      <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Representantes</ng-template>
+          <ul *ngFor="let item of perguntasRep | async">
+            <li> {{ item.pergunta }}</li>
+            <mat-form-field>
+              <mat-select placeholder="CORFIO" formControlName="respostaCorfio" (selectionChange)="saveRespRep(item.pergunta)" >
+                  <mat-option value="otimo">otimo</mat-option>
+                  <mat-option value="bom">bom</mat-option>
+                  <mat-option value="regular">regular</mat-option>
+                  <mat-option value="ruim">ruim</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-select placeholder="OUTROS" formControlName="respostaOutros" (selectionChange)="saveRespRep(item.pergunta)" >
+                  <mat-option value="otimo">otimo</mat-option>
+                  <mat-option value="bom">bom</mat-option>
+                  <mat-option value="regular">regular</mat-option>
+                  <mat-option value="ruim">ruim</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ul>
+          <div>
+            <button mat-button matStepperNext>Próximo</button>
+          </div>
+        </form>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>

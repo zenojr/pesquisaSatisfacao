@@ -20,7 +20,9 @@ export class PesquisaReactiveFormComponent implements OnInit {
   isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  perguntaDoForm: string;
+
+  perguntaAspTec: string;
+  perguntaRep: string;
 
   perguntaAspecTec: Observable<PerguntasAspecTec[]>;
   perguntasRep: Observable<PerguntasRep[]>;
@@ -34,12 +36,14 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
   ngOnInit() {
     this.firstFormGroup = this.formBuilder.group({
-      pergunta: this.formBuilder.array(['']),
+      pergunta: [''],
       respostaCorfio: [''],
       respostaOutros: ['']
     });
     this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['']
+      pergunta: [''],
+      respostaCorfio: [''],
+      respostaOutros: ['']
     });
 
     this.perguntaAspecTec = this.db.collection('perguntasAspecTec')
@@ -53,15 +57,35 @@ export class PesquisaReactiveFormComponent implements OnInit {
       });
     }));
 
+    this.perguntasRep = this.db.collection('perguntasRep')
+    .snapshotChanges()
+    .pipe(map(docArray => {
+      return docArray.map(doc => {
+        return {
+          id: doc.payload.doc.id,
+          pergunta: doc.payload.doc.data()['pergunta']
+        };
+      });
+    }));
+
   }
 
   saveRespAspecTec(perguntaForm) {
-    this.perguntaDoForm = perguntaForm;
-    const pergunta = this.perguntaDoForm;
+    this.perguntaAspTec = perguntaForm;
+    const pergunta = this.perguntaAspTec;
     console.log(pergunta);
     const respostaCorfio = this.firstFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.firstFormGroup.get('respostaOutros').value;
     this.pesqReactService.addRespAspTec(pergunta, {respostaCorfio, respostaOutros});
+  }
+
+  saveRespRep(perguntaForm) {
+    this.perguntaRep = perguntaForm;
+    const pergunta = this.perguntaRep;
+    console.log(pergunta);
+    const respostaCorfio = this.secondFormGroup.get('respostaCorfio').value;
+    const respostaOutros = this.secondFormGroup.get('respostaOutros').value;
+    this.pesqReactService.addRespRep(pergunta, {respostaCorfio, respostaOutros});
   }
 
 

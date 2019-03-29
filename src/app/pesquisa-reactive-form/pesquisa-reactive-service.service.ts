@@ -4,18 +4,23 @@ import { RespAspecTec } from './respAspTec.model';
 import * as firebase from 'firebase';
 import { map } from 'rxjs/operators';
 import { PerguntasAspecTec } from '../pesquisa/perguntasAspecTec.model';
+import { RespRep } from './respRep.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PesquisaReactiveServiceService {
   readonly user = this.getUser();
-  readonly pathReactive = this.user;
+  readonly pathUser = this.user;
 
   constructor( private db: AngularFirestore ) { }
 
   addRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
-    return this.db.collection<RespAspecTec>(this.pathReactive).doc(pergunta).set({data});
+    return this.db.collection<RespAspecTec>(this.pathUser).doc(pergunta).set({data});
+  }
+
+  addRespRep(pergunta: string, data: RespRep): Promise<void> {
+    return this.db.collection<RespRep>(this.pathUser).doc(pergunta).set({data});
   }
 
   // update(id: string, data: Partial<Respostas>): Promise<void> {
