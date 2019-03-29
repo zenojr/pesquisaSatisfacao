@@ -39,15 +39,6 @@ export class AuthService {
 
   }
 
-  // login(authData: AuthData) {
-  //   this.user = {
-  //     usuario: authData.usuario,
-  //     userID: Math.round(Math.random() * 1000).toString(),
-  //     password: authData.senha
-  //   };
-  //   this.authSuccess();
-  // }
-
   logOut() {
     this.isAuthenticated = false;
     this.authChange.next(false);
@@ -61,8 +52,8 @@ export class AuthService {
   private authSuccess() {
     this.isAuthenticated = true;
     this.authChange.next(true);
-    // this.router.navigate(['/pesquisa']);
-    this.router.navigate(['/pesquisaReactive']);
+    this.router.navigate(['/pesquisa']);
+    // this.router.navigate(['/pesquisaReactive']);
   }
 
 }

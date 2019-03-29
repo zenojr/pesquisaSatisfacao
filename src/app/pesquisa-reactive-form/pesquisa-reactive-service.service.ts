@@ -1,6 +1,6 @@
 import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
-import { Respostas } from './respostas.model';
+import { RespAspecTec } from './respAspTec.model';
 import * as firebase from 'firebase';
 import { map } from 'rxjs/operators';
 import { PerguntasAspecTec } from '../pesquisa/perguntasAspecTec.model';
@@ -14,27 +14,12 @@ export class PesquisaReactiveServiceService {
 
   constructor( private db: AngularFirestore ) { }
 
-  add(pergunta: string, data: Respostas): Promise<void> {
-    // return this.db.collection<Respostas>(this.pathReactive).add({...data});
-    // const id = this.db.createId();
-    // let ask ='';
-    const id = this.db.collection('perguntasAspecTec');
-    console.log(id);
-    return this.db.collection<Respostas>(this.pathReactive).doc(pergunta).set({data});
+  addRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
+    return this.db.collection<RespAspecTec>(this.pathReactive).doc(pergunta).set({data});
   }
 
-  // setId(data: Respostas): Promise<void> {
-  //   return this.db.collection<Respostas>(this.pathReactive).doc('perguntainserida').set({data})
-  // }
-  
-
-
-  update(id: string, data: Partial<Respostas>): Promise<void> {
-    return this.db.doc<Respostas>(`${this.pathReactive}/${id}`).update(data);
-  }
-
-  // set(id: string, data: Respostas): Promise<DocumentReference> {
-  //   return this.db.doc<Respostas>(`${this.pathReactive}/${id}`).set(data);
+  // update(id: string, data: Partial<Respostas>): Promise<void> {
+  //   return this.db.doc<Respostas>(`${this.pathReactive}/${id}`).update(data);
   // }
 
   getUser() {
