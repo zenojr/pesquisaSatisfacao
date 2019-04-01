@@ -1,8 +1,16 @@
+
 <section>
+  
   <form [formGroup]="loginForm" class="flex-container" fxLayoutGap="10px" #form="ngForm" (ngSubmit)="onSubmit()" >
     <mat-form-field appearance="outline">
       <mat-label>Usuário</mat-label>
-      <input autofocus type="text" matInput formControlName="usuario">
+      <input id="userInput" (click)="touchForm();" 
+       type="text" matInput formControlName="usuario" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of options" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
       <mat-error>Usuário Inválido</mat-error>
       <mat-icon matSuffix>person</mat-icon>
     </mat-form-field>

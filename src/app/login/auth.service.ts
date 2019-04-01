@@ -39,6 +39,13 @@ export class AuthService {
 
   }
 
+  getUrl() {
+    let url = document.URL;
+    url = url.slice(32);
+    console.log(url);
+    return url;
+  }
+
   logOut() {
     this.isAuthenticated = false;
     this.authChange.next(false);

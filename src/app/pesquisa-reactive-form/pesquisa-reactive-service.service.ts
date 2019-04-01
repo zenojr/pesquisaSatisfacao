@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material';
 import { RespImgProd } from './respImgProd.model';
 import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
@@ -14,7 +15,16 @@ export class PesquisaReactiveServiceService {
   readonly user = this.getUser();
   readonly pathUser = this.user;
 
-  constructor( private db: AngularFirestore ) { }
+  constructor( private db: AngularFirestore,
+               private snackBar: MatSnackBar ) { }
+
+  openSnackBar() {
+    let user = this.getUser();
+    user = this.user.charAt(0).toUpperCase() + user.slice(1);
+    this.snackBar.open('Bem Vindo ' + user, '[x]Fechar', {
+      duration: 10000
+    });
+  }
 
   addRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
     return this.db.collection<RespAspecTec>(this.pathUser).doc(pergunta).set({data});

@@ -1,6 +1,7 @@
+
 import { AngularFirestore } from '@angular/fire/firestore';
 import { PesquisaReactiveServiceService } from './pesquisa-reactive-service.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { PerguntasAspecTec } from '../pesquisa/perguntasAspecTec.model';
@@ -8,6 +9,8 @@ import { PerguntasRep } from '../pesquisa/perguntasRep.model';
 import { PerguntasProd } from '../pesquisa/perguntasProd.model';
 import { PerguntasComMark } from '../pesquisa/perguntasComMark.model';
 import { PerguntasEmbTran } from '../pesquisa/perguntasEmbTran.model';
+
+
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -41,6 +44,10 @@ export class PesquisaReactiveFormComponent implements OnInit {
               private db: AngularFirestore) { }
 
   ngOnInit() {
+
+
+    this.pesqReactService.openSnackBar();
+
     this.firstFormGroup = this.formBuilder.group({
       pergunta: [''],
       respostaCorfio: [''],
@@ -123,7 +130,8 @@ export class PesquisaReactiveFormComponent implements OnInit {
       });
     }));
 
-  }
+
+  } // END ONINIT
 
   saveRespAspecTec(perguntaForm) {
     this.perguntaFormAspTec = perguntaForm;
