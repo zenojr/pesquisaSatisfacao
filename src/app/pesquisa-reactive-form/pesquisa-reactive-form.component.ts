@@ -22,11 +22,13 @@ export class PesquisaReactiveFormComponent implements OnInit {
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
   fourthFormGroup: FormGroup;
+  fifthFormGroup: FormGroup;
 
   perguntaFormAspTec: string;
   perguntaFormRep: string;
   perguntaFormImgProd: string;
   perguntaFormComMark: string;
+  perguntaFormEmbTran: string;
 
   perguntaAspecTec: Observable<PerguntasAspecTec[]>;
   perguntasRep: Observable<PerguntasRep[]>;
@@ -55,6 +57,12 @@ export class PesquisaReactiveFormComponent implements OnInit {
       respostaOutros: ['']
     });
     this.fourthFormGroup = this.formBuilder.group({
+      pergunta: [''],
+      respostaCorfio: [''],
+      respostaOutros: ['']
+    });
+
+    this.fifthFormGroup = this.formBuilder.group({
       pergunta: [''],
       respostaCorfio: [''],
       respostaOutros: ['']
@@ -104,6 +112,17 @@ export class PesquisaReactiveFormComponent implements OnInit {
       });
     }));
 
+    this.perguntasEmbTran = this.db.collection('perguntasEmbTran')
+    .snapshotChanges()
+    .pipe(map(docArray => {
+      return docArray.map(doc => {
+        return {
+          id: doc.payload.doc.id,
+          pergunta: doc.payload.doc.data()['pergunta']
+        };
+      });
+    }));
+
   }
 
   saveRespAspecTec(perguntaForm) {
@@ -142,5 +161,13 @@ export class PesquisaReactiveFormComponent implements OnInit {
     this.pesqReactService.addRespComMark(pergunta, {respostaCorfio, respostaOutros});
   }
 
+  saveRespEmbTran(perguntaForm) {
+    this.perguntaFormEmbTran = perguntaForm;
+    const pergunta = this.perguntaFormEmbTran;
+    console.log(pergunta);
+    const respostaCorfio = this.fifthFormGroup.get('respostaCorfio').value;
+    const respostaOutros = this.fifthFormGroup.get('respostaOutros').value;
+    this.pesqReactService.addRespEmbTran(pergunta, {respostaCorfio, respostaOutros});
+  }
 
 }

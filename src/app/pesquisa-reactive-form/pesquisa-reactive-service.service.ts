@@ -5,6 +5,7 @@ import { RespAspecTec } from './respAspTec.model';
 import * as firebase from 'firebase';
 import { RespRep } from './respRep.model';
 import { RespComMark } from './respComMark.model';
+import { RespEmbTran } from './respEmbtran.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,9 +32,9 @@ export class PesquisaReactiveServiceService {
     return this.db.collection<RespComMark>(this.pathUser).doc(pergunta).set({data});
   }
 
-  // update(id: string, data: Partial<Respostas>): Promise<void> {
-  //   return this.db.doc<Respostas>(`${this.pathReactive}/${id}`).update(data);
-  // }
+  addRespEmbTran(pergunta: string, data: RespEmbTran): Promise<void> {
+    return this.db.collection<RespEmbTran>(this.pathUser).doc(pergunta).set({data});
+  }
 
   getUser() {
     const userFb = firebase.auth().currentUser;
