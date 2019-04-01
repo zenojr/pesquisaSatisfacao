@@ -93,7 +93,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
       });
     }));
 
-    this.perguntasComMark = this.db.collection('perguntasProd')
+    this.perguntasComMark = this.db.collection('perguntasComMark')
     .snapshotChanges()
     .pipe(map(docArray => {
       return docArray.map(doc => {
