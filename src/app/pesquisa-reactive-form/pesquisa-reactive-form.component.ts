@@ -21,10 +21,12 @@ export class PesquisaReactiveFormComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
+  fourthFormGroup: FormGroup;
 
   perguntaFormAspTec: string;
   perguntaFormRep: string;
   perguntaFormImgProd: string;
+  perguntaFormComMark: string;
 
   perguntaAspecTec: Observable<PerguntasAspecTec[]>;
   perguntasRep: Observable<PerguntasRep[]>;
@@ -48,6 +50,11 @@ export class PesquisaReactiveFormComponent implements OnInit {
       respostaOutros: ['']
     });
     this.thirdFormGroup = this.formBuilder.group({
+      pergunta: [''],
+      respostaCorfio: [''],
+      respostaOutros: ['']
+    });
+    this.fourthFormGroup = this.formBuilder.group({
       pergunta: [''],
       respostaCorfio: [''],
       respostaOutros: ['']
@@ -86,6 +93,17 @@ export class PesquisaReactiveFormComponent implements OnInit {
       });
     }));
 
+    this.perguntasComMark = this.db.collection('perguntasProd')
+    .snapshotChanges()
+    .pipe(map(docArray => {
+      return docArray.map(doc => {
+        return {
+          id: doc.payload.doc.id,
+          pergunta: doc.payload.doc.data()['pergunta']
+        };
+      });
+    }));
+
   }
 
   saveRespAspecTec(perguntaForm) {
@@ -113,6 +131,15 @@ export class PesquisaReactiveFormComponent implements OnInit {
     const respostaCorfio = this.thirdFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.thirdFormGroup.get('respostaOutros').value;
     this.pesqReactService.addRespImgProd(pergunta, {respostaCorfio, respostaOutros});
+  }
+
+  saveRespComMark(perguntaForm) {
+    this.perguntaFormComMark = perguntaForm;
+    const pergunta = this.perguntaFormComMark;
+    console.log(pergunta);
+    const respostaCorfio = this.fourthFormGroup.get('respostaCorfio').value;
+    const respostaOutros = this.fourthFormGroup.get('respostaOutros').value;
+    this.pesqReactService.addRespComMark(pergunta, {respostaCorfio, respostaOutros});
   }
 
 

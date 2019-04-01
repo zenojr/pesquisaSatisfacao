@@ -3,9 +3,8 @@ import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { RespAspecTec } from './respAspTec.model';
 import * as firebase from 'firebase';
-import { map } from 'rxjs/operators';
-import { PerguntasAspecTec } from '../pesquisa/perguntasAspecTec.model';
 import { RespRep } from './respRep.model';
+import { RespComMark } from './respComMark.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +25,10 @@ export class PesquisaReactiveServiceService {
 
   addRespImgProd(pergunta: string, data: RespImgProd): Promise<void> {
     return this.db.collection<RespImgProd>(this.pathUser).doc(pergunta).set({data});
+  }
+
+  addRespComMark(pergunta: string, data: RespComMark): Promise<void> {
+    return this.db.collection<RespComMark>(this.pathUser).doc(pergunta).set({data});
   }
 
   // update(id: string, data: Partial<Respostas>): Promise<void> {

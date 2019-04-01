@@ -30,32 +30,34 @@
   </mat-step>
   <mat-step>
       <h4>Assinale a alternativa, de acordo com seu julgamento</h4>
-      <form [formGroup]="secondFormGroup">
-          <ng-template matStepLabel>Representantes</ng-template>
-          <ul *ngFor="let item of perguntasRep | async">
-            <li> {{ item.pergunta }}</li>
-            <mat-form-field>
-              <mat-select placeholder="CORFIO" formControlName="respostaCorfio" (selectionChange)="saveRespRep(item.pergunta)" >
-                  <mat-option value="otimo">otimo</mat-option>
-                  <mat-option value="bom">bom</mat-option>
-                  <mat-option value="regular">regular</mat-option>
-                  <mat-option value="ruim">ruim</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-select placeholder="OUTROS" formControlName="respostaOutros" (selectionChange)="saveRespRep(item.pergunta)" >
-                  <mat-option value="otimo">otimo</mat-option>
-                  <mat-option value="bom">bom</mat-option>
-                  <mat-option value="regular">regular</mat-option>
-                  <mat-option value="ruim">ruim</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </ul>
-          <div>
-            <button mat-button matStepperPrevious>Voltar</button>
-            <button mat-button matStepperNext>Próximo</button>
-          </div>
-        </form>
+      <div>
+          <form [formGroup]="secondFormGroup">
+              <ng-template matStepLabel>Atendimento do Representante</ng-template>
+              <ul *ngFor="let item of perguntasRep | async">
+                <li> {{ item.pergunta }}</li>
+                <mat-form-field>
+                  <mat-select placeholder="CORFIO" formControlName="respostaCorfio" (selectionChange)="saveRespRep(item.pergunta)" >
+                      <mat-option value="otimo">otimo</mat-option>
+                      <mat-option value="bom">bom</mat-option>
+                      <mat-option value="regular">regular</mat-option>
+                      <mat-option value="ruim">ruim</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-select placeholder="OUTROS" formControlName="respostaOutros" (selectionChange)="saveRespRep(item.pergunta)" >
+                      <mat-option value="otimo">otimo</mat-option>
+                      <mat-option value="bom">bom</mat-option>
+                      <mat-option value="regular">regular</mat-option>
+                      <mat-option value="ruim">ruim</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </ul>
+              <div>
+                <button mat-button matStepperPrevious>Voltar</button>
+                <button mat-button matStepperNext>Próximo</button>
+              </div>
+            </form>
+      </div>
   </mat-step>
   <mat-step>
       <h4>Assinale a alternativa, de acordo com seu julgamento</h4>
@@ -73,6 +75,35 @@
             </mat-form-field>
             <mat-form-field>
               <mat-select placeholder="OUTROS" formControlName="respostaOutros" (selectionChange)="saveRespImgProd(item.pergunta)" >
+                  <mat-option value="otimo">otimo</mat-option>
+                  <mat-option value="bom">bom</mat-option>
+                  <mat-option value="regular">regular</mat-option>
+                  <mat-option value="ruim">ruim</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ul>
+          <div>
+              <button mat-button matStepperPrevious>Voltar</button>
+              <button mat-button matStepperNext>Próximo</button>
+          </div>
+        </form>
+  </mat-step>
+  <mat-step>
+      <h4>Assinale a alternativa, de acordo com seu julgamento</h4>
+      <form [formGroup]="fourthFormGroup">
+          <ng-template matStepLabel>Atendimento Comercial e Marketing</ng-template>
+          <ul *ngFor="let item of perguntasComMark | async">
+            <li> {{ item.pergunta }}</li>
+            <mat-form-field>
+              <mat-select placeholder="CORFIO" formControlName="respostaCorfio" (selectionChange)="saveRespComMark(item.pergunta)" >
+                  <mat-option value="otimo">otimo</mat-option>
+                  <mat-option value="bom">bom</mat-option>
+                  <mat-option value="regular">regular</mat-option>
+                  <mat-option value="ruim">ruim</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-select placeholder="OUTROS" formControlName="respostaOutros" (selectionChange)="saveRespComMark(item.pergunta)" >
                   <mat-option value="otimo">otimo</mat-option>
                   <mat-option value="bom">bom</mat-option>
                   <mat-option value="regular">regular</mat-option>
