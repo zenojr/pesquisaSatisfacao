@@ -9,8 +9,6 @@ import { PerguntasRep } from '../pesquisa/perguntasRep.model';
 import { PerguntasProd } from '../pesquisa/perguntasProd.model';
 import { PerguntasComMark } from '../pesquisa/perguntasComMark.model';
 import { PerguntasEmbTran } from '../pesquisa/perguntasEmbTran.model';
-
-
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -19,6 +17,8 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./pesquisa-reactive-form.component.css']
 })
 export class PesquisaReactiveFormComponent implements OnInit {
+
+  selected = 'option2';
 
   isLinear = false;
   firstFormGroup: FormGroup;

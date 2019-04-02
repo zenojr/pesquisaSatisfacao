@@ -41,6 +41,8 @@ export class AuthService {
 
   getUrl() {
     let url = document.URL;
+    // use 45 for firebase and 32 for local test
+    // url = url.slice(45);
     url = url.slice(32);
     console.log(url);
     return url;
