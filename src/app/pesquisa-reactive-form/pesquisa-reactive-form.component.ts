@@ -46,7 +46,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
   ngOnInit() {
 
 
-    this.pesqReactService.openSnackBar();
+    this.pesqReactService.openSnackBarUser();
 
     this.firstFormGroup = this.formBuilder.group({
       pergunta: [''],

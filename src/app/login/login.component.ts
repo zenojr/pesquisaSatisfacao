@@ -8,8 +8,9 @@ import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  valueForm;
+  valueForm = null;
   options: string[];
+  touched = false;
   constructor( private authService: AuthService ) { }
   ngOnInit() {
     this.valueForm = this.authService.getUrl();
@@ -18,10 +19,10 @@ export class LoginComponent implements OnInit {
       usuario: new FormControl('', {validators: [Validators.required]}),
       senha: new FormControl('', {validators: [Validators.required]})
     });
+    this.touchForm();
   }
   onSubmit() {
     // console.log(this.loginForm);
-    
     this.authService.login({
       usuario: this.loginForm.value.usuario,
       senha: this.loginForm.value.senha
@@ -29,7 +30,15 @@ export class LoginComponent implements OnInit {
   }
 
   touchForm() {
+    let tamUrl = this.authService.getUrl();
+    console.log(tamUrl.length);
+    if ( tamUrl.length > 0 ) {
+      this.touched = true;
+    }
+    console.log(this.touched);
     console.log(this.options);
+    return this.touched;
+
   }
 
   getUserFromUrl() {

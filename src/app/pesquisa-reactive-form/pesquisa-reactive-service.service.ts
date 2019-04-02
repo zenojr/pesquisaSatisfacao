@@ -7,6 +7,8 @@ import * as firebase from 'firebase';
 import { RespRep } from './respRep.model';
 import { RespComMark } from './respComMark.model';
 import { RespEmbTran } from './respEmbtran.model';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,7 @@ export class PesquisaReactiveServiceService {
   constructor( private db: AngularFirestore,
                private snackBar: MatSnackBar ) { }
 
-  openSnackBar() {
+  openSnackBarUser() {
     let user = this.getUser();
     user = this.user.charAt(0).toUpperCase() + user.slice(1);
     this.snackBar.open('Bem Vindo ' + user, '[x]Fechar', {
@@ -28,6 +30,20 @@ export class PesquisaReactiveServiceService {
 
   addRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
     return this.db.collection<RespAspecTec>(this.pathUser).doc(pergunta).set({data});
+  }
+
+
+  getRespostas() {
+    return this.db.collection('perguntasAspecTec')
+    .snapshotChanges()
+    .pipe(map(docArray => {
+      return docArray.map(doc => {
+        return {
+          id: doc.payload.doc.id,
+          pergunta: doc.payload.doc.data()['pergunta']
+        };
+      });
+    }));
   }
 
   addRespRep(pergunta: string, data: RespRep): Promise<void> {
