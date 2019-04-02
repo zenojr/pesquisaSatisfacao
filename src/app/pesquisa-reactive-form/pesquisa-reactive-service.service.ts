@@ -28,6 +28,12 @@ export class PesquisaReactiveServiceService {
     });
   }
 
+  openSnackBarSaved(pergunta) {
+    this.snackBar.open('Resposta para ' + pergunta + ' salva com sucesso!', '[x]Fechar', {
+      duration: 1500
+    });
+  }
+
   addRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
     return this.db.collection<RespAspecTec>(this.pathUser).doc(pergunta).set({data});
   }

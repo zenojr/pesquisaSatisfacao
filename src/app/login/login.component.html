@@ -13,7 +13,6 @@
                 
                     {{option}}
                 
-                
               </mat-option>
             </div>
           </mat-autocomplete>
@@ -23,12 +22,12 @@
       <mat-icon matSuffix>person</mat-icon>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <!-- <mat-form-field appearance="outline">
       <mat-label>Senha</mat-label>
       <input type="password" matInput formControlName="senha">
       <mat-error>Senha Inválida</mat-error>
       <mat-icon matSuffix>vpn_key</mat-icon>
-    </mat-form-field>
+    </mat-form-field> -->
     <!-- <button mat-raised-button type="submit" color="primary" routerLink="pesquisa" >Entrar</button> -->
     <button [disabled]="loginForm.invalid" mat-raised-button type="submit" color="primary">Entrar</button>
   </form>

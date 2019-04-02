@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     this.getUserFromUrl();
     this.loginForm = new FormGroup({
       usuario: new FormControl('', {validators: [Validators.required]}),
-      senha: new FormControl('', {validators: [Validators.required]})
+      senha: new FormControl('')
     });
     this.touchForm();
   }

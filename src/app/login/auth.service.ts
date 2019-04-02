@@ -1,6 +1,5 @@
 import { Subject } from 'rxjs';
 import { AuthData } from './auth.data.model';
-import { User } from './user.model';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -8,23 +7,13 @@ import { AngularFireAuth } from 'angularfire2/auth';
 @Injectable()
 export class AuthService {
   authChange = new Subject<boolean>();
-  // private user: User;
-
   private isAuthenticated = false;
 
   constructor( private router: Router, private afAuth: AngularFireAuth) {}
 
-  registerUser(authData: AuthData) {
-    // this.user = {
-    //   usuario: authData.usuario,
-    //   userID: Math.round(Math.random() * 1000).toString(),
-    //   password: authData.senha
-    // };
-    // this.authChange.next(true);
-  }
-
   login(authData: AuthData) {
     authData.usuario = authData.usuario + '@corfio.com';
+    authData.senha = '123456';
     console.log(authData.usuario);
     this.afAuth.auth.signInWithEmailAndPassword(
       authData.usuario,
@@ -33,10 +22,6 @@ export class AuthService {
       console.log(result);
       this.authSuccess();
     }).catch(error => { console.log(error), alert('Ops: Usuário ou senha inválido'); });
-  }
-
-  getUser() {
-
   }
 
   getUrl() {
@@ -62,7 +47,6 @@ export class AuthService {
     this.isAuthenticated = true;
     this.authChange.next(true);
     this.router.navigate(['/pesquisa']);
-    // this.router.navigate(['/pesquisaReactive']);
   }
 
 }
