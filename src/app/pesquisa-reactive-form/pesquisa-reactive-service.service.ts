@@ -3,7 +3,8 @@ import { RespImgProd } from './respImgProd.model';
 import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { RespAspecTec } from './respAspTec.model';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
+
 import { RespRep } from './respRep.model';
 import { RespComMark } from './respComMark.model';
 import { RespEmbTran } from './respEmbtran.model';
@@ -29,7 +30,7 @@ export class PesquisaReactiveServiceService {
   }
 
   openSnackBarSaved(pergunta) {
-    this.snackBar.open('Resposta para ' + pergunta + ' salva com sucesso!', '[x]Fechar', {
+    this.snackBar.open('Resposta salva com sucesso!', '[x]Fechar', {
       duration: 1500
     });
   }
@@ -39,17 +40,9 @@ export class PesquisaReactiveServiceService {
   }
 
 
-  getRespostas() {
-    return this.db.collection('perguntasAspecTec')
-    .snapshotChanges()
-    .pipe(map(docArray => {
-      return docArray.map(doc => {
-        return {
-          id: doc.payload.doc.id,
-          pergunta: doc.payload.doc.data()['pergunta']
-        };
-      });
-    }));
+  getClienteCNPJ() {
+    const cliente = this.db.collection('clientesCNPJ').valueChanges();
+    console.log(cliente);
   }
 
   addRespRep(pergunta: string, data: RespRep): Promise<void> {
@@ -74,5 +67,7 @@ export class PesquisaReactiveServiceService {
     userMail = userMail.replace('@corfio.com', '');
     return userMail;
   }
+
+
 
 }

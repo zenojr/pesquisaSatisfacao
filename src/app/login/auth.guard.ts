@@ -8,7 +8,6 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (this.authService.isAuth()) {
-      console.log(route);
       return true;
     } else {
       this.router.navigate(['/']);

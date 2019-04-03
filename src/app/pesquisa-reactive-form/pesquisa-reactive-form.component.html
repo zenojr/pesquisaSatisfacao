@@ -1,4 +1,9 @@
-
+ 
+<div>
+  <ul *ngFor="let item of clientes | async">
+    <li> {{ item.nome }} </li>
+  </ul>
+</div>
 
 <mat-vertical-stepper [linear]="isLinear" #stepper>
   <mat-step>

@@ -1,7 +1,8 @@
+import { ClientesCNPJ } from './clientesCNPJ.model';
 
 import { AngularFirestore } from '@angular/fire/firestore';
 import { PesquisaReactiveServiceService } from './pesquisa-reactive-service.service';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { PerguntasAspecTec } from '../pesquisa/perguntasAspecTec.model';
@@ -37,12 +38,14 @@ export class PesquisaReactiveFormComponent implements OnInit {
   perguntasComMark: Observable<PerguntasComMark[]>;
   perguntasEmbTran: Observable<PerguntasEmbTran[]>;
 
+
+  clientes: Observable<ClientesCNPJ[]>;
+
   constructor(private formBuilder: FormBuilder,
               private pesqReactService: PesquisaReactiveServiceService,
               private db: AngularFirestore) { }
 
   ngOnInit() {
-
 
     this.pesqReactService.openSnackBarUser();
 
@@ -66,12 +69,13 @@ export class PesquisaReactiveFormComponent implements OnInit {
       respostaCorfio: [''],
       respostaOutros: ['']
     });
-
     this.fifthFormGroup = this.formBuilder.group({
       pergunta: [''],
       respostaCorfio: [''],
       respostaOutros: ['']
     });
+
+   this.clientesCNPJ();
 
     this.perguntaAspecTec = this.db.collection('perguntasAspecTec')
     .snapshotChanges()
@@ -130,6 +134,22 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
 
   } // END ONINIT
+
+  clientesCNPJ() {
+    this.clientes = this.db.collection('clientesCNPJ')
+    .snapshotChanges()
+    .pipe(map(docArray => {
+      return docArray.map(doc => {
+        return {
+          nome: doc.payload.doc.data()['nome'],
+          cnpj: doc.payload.doc.data()['cnpj']
+        };
+      });
+    }));
+    this.clientes.forEach(element => {
+      console.log(element);
+    });
+  }
 
   saveRespAspecTec(perguntaForm) {
     this.perguntaFormAspTec = perguntaForm;

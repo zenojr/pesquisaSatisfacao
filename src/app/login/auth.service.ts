@@ -14,14 +14,12 @@ export class AuthService {
   login(authData: AuthData) {
     authData.usuario = authData.usuario + '@corfio.com';
     authData.senha = '123456';
-    console.log(authData.usuario);
     this.afAuth.auth.signInWithEmailAndPassword(
       authData.usuario,
       authData.senha
     ).then(result => {
-      console.log(result);
       this.authSuccess();
-    }).catch(error => { console.log(error), alert('Ops: Usuário ou senha inválido'); });
+    }).catch(error => { console.log(error), alert('Ops: CNPJ inválido'); });
   }
 
   getUrl() {

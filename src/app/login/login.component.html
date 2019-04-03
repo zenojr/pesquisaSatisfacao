@@ -1,24 +1,24 @@
 
+<div>
+  <ul *ngFor="let item of clientes | async">
+    <li> {{ item.nome }} </li>
+  </ul>
+</div>
 <section>
   
   <form [formGroup]="loginForm" class="flex-container" fxLayoutGap="10px" #form="ngForm" (ngSubmit)="onSubmit()" >
     <mat-form-field appearance="outline">
-      <mat-label>Usuário</mat-label>
+      <mat-label>CNPJ</mat-label>
       <input id="userInput"  
-       type="text" matInput formControlName="usuario" [matAutocomplete]="auto">
-       
+       type="text" matInput formControlName="usuario" [matAutocomplete]="auto">       
           <mat-autocomplete #auto="matAutocomplete">
               <div *ngIf="touched">
               <mat-option *ngFor="let option of options" [value]="option">
-                
-                    {{option}}
-                
+                {{option}}
               </mat-option>
             </div>
-          </mat-autocomplete>
-       
-      
-      <mat-error>Usuário Inválido</mat-error>
+          </mat-autocomplete>      
+      <mat-error>CNPJ Inválido</mat-error>
       <mat-icon matSuffix>person</mat-icon>
     </mat-form-field>
 
