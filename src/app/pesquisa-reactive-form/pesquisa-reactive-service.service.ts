@@ -39,7 +39,6 @@ export class PesquisaReactiveServiceService {
     return this.db.collection<RespAspecTec>(this.pathUser).doc(pergunta).set({data});
   }
 
-
   getClienteCNPJ() {
     const cliente = this.db.collection('clientesCNPJ').valueChanges();
     console.log(cliente);

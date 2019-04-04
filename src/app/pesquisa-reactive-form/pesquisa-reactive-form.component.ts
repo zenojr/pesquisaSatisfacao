@@ -19,6 +19,8 @@ import { map } from 'rxjs/operators';
 })
 export class PesquisaReactiveFormComponent implements OnInit {
 
+  listadeCNPJ: Observable<any>;
+
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -41,13 +43,15 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
   clientes: Observable<ClientesCNPJ[]>;
 
+  user = this.pesqReactService.getUser();
+
   constructor(private formBuilder: FormBuilder,
               private pesqReactService: PesquisaReactiveServiceService,
               private db: AngularFirestore) { }
 
   ngOnInit() {
 
-    this.pesqReactService.openSnackBarUser();
+    // this.pesqReactService.openSnackBarUser();
 
     this.firstFormGroup = this.formBuilder.group({
       pergunta: [''],
@@ -133,7 +137,15 @@ export class PesquisaReactiveFormComponent implements OnInit {
     }));
 
 
+    this.getCNPJ();
+
   } // END ONINIT
+
+  getCNPJ() {
+    this.listadeCNPJ = this.db.collection('clientesCNPJ')
+                              .valueChanges();
+    console.log(this.listadeCNPJ);
+  }
 
   clientesCNPJ() {
     this.clientes = this.db.collection('clientesCNPJ')

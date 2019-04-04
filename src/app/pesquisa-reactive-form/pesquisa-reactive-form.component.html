@@ -1,7 +1,7 @@
  
 <div>
   <ul *ngFor="let item of clientes | async">
-    <li> {{ item.nome }} </li>
+    <h3 *ngIf="item.cnpj === user" >Seja bem vindo, você está respondendo a pesquisa em nome de {{ item.nome }} </h3>
   </ul>
 </div>
 
