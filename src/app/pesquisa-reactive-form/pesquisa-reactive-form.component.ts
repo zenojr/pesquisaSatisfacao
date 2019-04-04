@@ -138,6 +138,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
 
     this.getCNPJ();
+    this.pesqReactService.getRespostas();
 
   } // END ONINIT
 
@@ -176,6 +177,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
     this.pesqReactService.addRespAspTec(pergunta, {respostaCorfio, respostaOutros});
     this.pesqReactService.openSnackBarSaved(pergunta);
   }
+
 
   saveRespRep(perguntaForm) {
     this.perguntaFormRep = perguntaForm;

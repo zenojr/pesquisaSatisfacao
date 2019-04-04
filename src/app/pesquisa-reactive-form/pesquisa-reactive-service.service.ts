@@ -30,18 +30,25 @@ export class PesquisaReactiveServiceService {
   }
 
   openSnackBarSaved(pergunta) {
+    // if i want to show the question on save, just add a property 'pergunto' to snackbar
     this.snackBar.open('Resposta salva com sucesso!', '[x]Fechar', {
       duration: 1500
     });
   }
 
-  addRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
-    return this.db.collection<RespAspecTec>(this.pathUser).doc(pergunta).set({data});
-  }
-
   getClienteCNPJ() {
     const cliente = this.db.collection('clientesCNPJ').valueChanges();
     console.log(cliente);
+  }
+
+  getRespostas() {
+    const userRespostas = this.user;
+    console.log('ahoy!');
+    console.log(userRespostas);
+  }
+
+  addRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
+    return this.db.collection<RespAspecTec>(this.pathUser).doc(pergunta).set({data});
   }
 
   addRespRep(pergunta: string, data: RespRep): Promise<void> {

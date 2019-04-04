@@ -24,6 +24,10 @@ button {
   width: 80px;
 }
 
+.welcome {
+  color:  #00AEC7;
+}
+
 /* .formLogin {
   margin-top: 10%;
   flex-direction: column;
