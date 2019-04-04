@@ -68,6 +68,9 @@ export class PesquisaReactiveFormComponent implements OnInit {
       });
     }));
 
+    this.respostasFB.forEach(element => {
+      console.log('elemento' +  element );
+    });
 
     this.firstFormGroup = this.formBuilder.group({
       pergunta: [''],
@@ -190,6 +193,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
     console.log(pergunta);
     const respostaCorfio = this.firstFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.firstFormGroup.get('respostaOutros').value;
+    
     this.pesqReactService.addRespAspTec(pergunta, {pergunta, respostaCorfio, respostaOutros});
     this.pesqReactService.openSnackBarSaved(pergunta);
   }
