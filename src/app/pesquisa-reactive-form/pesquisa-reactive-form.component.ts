@@ -11,6 +11,7 @@ import { PerguntasProd } from '../pesquisa/perguntasProd.model';
 import { PerguntasComMark } from '../pesquisa/perguntasComMark.model';
 import { PerguntasEmbTran } from '../pesquisa/perguntasEmbTran.model';
 import { map } from 'rxjs/operators';
+import { ConsultaResp } from './consultaResp.model';
 
 @Component({
   selector: 'app-pesquisa-reactive-form',
@@ -43,6 +44,8 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
   clientes: Observable<ClientesCNPJ[]>;
 
+  respostasFB: Observable<ConsultaResp[]>;
+
   user = this.pesqReactService.getUser();
 
   constructor(private formBuilder: FormBuilder,
@@ -52,6 +55,19 @@ export class PesquisaReactiveFormComponent implements OnInit {
   ngOnInit() {
 
     // this.pesqReactService.openSnackBarUser();
+
+    this.respostasFB =  this.db.collection(this.user)
+    .snapshotChanges()
+    .pipe(map(respArray => {
+      return respArray.map(doc => {
+        return {
+          pergunta: doc.payload.doc.data()['pergunta'],
+          respostaCorfio: doc.payload.doc.data()['respostaCorfio'],
+          respostaOutros: doc.payload.doc.data()['respostaOutros'],
+        };
+      });
+    }));
+
 
     this.firstFormGroup = this.formBuilder.group({
       pergunta: [''],
@@ -174,7 +190,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
     console.log(pergunta);
     const respostaCorfio = this.firstFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.firstFormGroup.get('respostaOutros').value;
-    this.pesqReactService.addRespAspTec(pergunta, {respostaCorfio, respostaOutros});
+    this.pesqReactService.addRespAspTec(pergunta, {pergunta, respostaCorfio, respostaOutros});
     this.pesqReactService.openSnackBarSaved(pergunta);
   }
 

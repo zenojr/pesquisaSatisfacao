@@ -10,7 +10,7 @@
     <h4>Assinale a alternativa, de acordo com seu julgamento</h4>
     <form required [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Aspéctos técnicos</ng-template>
-      <ul *ngFor="let item of perguntaAspecTec | async">
+      <ul *ngFor="let item of perguntaAspecTec | async" >
         <li> {{ item.pergunta }}</li>
         <mat-form-field>
           <mat-select placeholder="CORFIO" formControlName="respostaCorfio" value="" (selectionChange)="saveRespAspecTec(item.pergunta)">

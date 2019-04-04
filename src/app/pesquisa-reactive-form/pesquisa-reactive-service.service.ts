@@ -10,6 +10,7 @@ import { RespComMark } from './respComMark.model';
 import { RespEmbTran } from './respEmbtran.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ConsultaResp } from './consultaResp.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,8 @@ import { map } from 'rxjs/operators';
 export class PesquisaReactiveServiceService {
   readonly user = this.getUser();
   readonly pathUser = this.user;
+  consultaResp: Observable<ConsultaResp[]>;
+
 
   constructor( private db: AngularFirestore,
                private snackBar: MatSnackBar ) { }
@@ -42,9 +45,19 @@ export class PesquisaReactiveServiceService {
   }
 
   getRespostas() {
-    const userRespostas = this.user;
     console.log('ahoy!');
-    console.log(userRespostas);
+    this.consultaResp =  this.db.collection(this.user)
+    .snapshotChanges()
+    .pipe(map(respArray => {
+      return respArray.map(doc => {
+        return {
+          pergunta: doc.payload.doc.data()['pergunta'],
+          respostaCorfio: doc.payload.doc.data()['respostaCorfio'],
+          respostaOutros: doc.payload.doc.data()['respostaOutros'],
+        };
+      });
+    }));
+    console.log(this.consultaResp);
   }
 
   addRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
