@@ -4,16 +4,16 @@
     <h3 *ngIf="item.cnpj === user" >Seja bem vindo, você está respondendo a pesquisa em nome de {{ item.nome }} </h3>
   </ul>
 </div>
-
+<span #controlScroll></span>
 <mat-vertical-stepper [linear]="isLinear" #stepper>
-  <mat-step>
+  <mat-step >
     <h4>Assinale a alternativa, de acordo com seu julgamento</h4>
-    <form [formGroup]="firstFormGroup">
+    <form required [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Aspéctos técnicos</ng-template>
       <ul *ngFor="let item of perguntaAspecTec | async">
         <li> {{ item.pergunta }}</li>
         <mat-form-field>
-          <mat-select  placeholder="CORFIO" formControlName="respostaCorfio" (selectionChange)="saveRespAspecTec(item.pergunta)">
+          <mat-select placeholder="CORFIO" formControlName="respostaCorfio" (selectionChange)="saveRespAspecTec(item.pergunta)">
               <mat-option value="otimo">ótimo</mat-option>
               <mat-option value="bom">bom</mat-option>
               <mat-option value="regular">regular</mat-option>
@@ -30,7 +30,7 @@
         </mat-form-field>
       </ul>
       <div>
-        <button mat-button matStepperNext>Próximo</button>
+        <button (click)="scroll(controlScroll)" mat-button matStepperNext>Próximo</button>
       </div>
     </form>
   </mat-step>
@@ -60,11 +60,12 @@
               </ul>
               <div>
                 <button mat-button matStepperPrevious>Voltar</button>
-                <button mat-button matStepperNext>Próximo</button>
+                <button (click)="scroll(controlScroll)" mat-button matStepperNext>Próximo</button>
               </div>
             </form>
       </div>
   </mat-step>
+  
   <mat-step>
       <h4>Assinale a alternativa, de acordo com seu julgamento</h4>
       <form [formGroup]="thirdFormGroup">
@@ -88,14 +89,15 @@
               </mat-select>
             </mat-form-field>
           </ul>
-          <div>
+          <div >
               <button mat-button matStepperPrevious>Voltar</button>
-              <button mat-button matStepperNext>Próximo</button>
+              <button (click)="scroll(controlScroll)" mat-button matStepperNext>Próximo</button>
           </div>
         </form>
   </mat-step>
+  
   <mat-step>
-      <h4>Assinale a alternativa, de acordo com seu julgamento</h4>
+      <h4 >Assinale a alternativa, de acordo com seu julgamento</h4>
       <form [formGroup]="fourthFormGroup">
           <ng-template matStepLabel>Atendimento Comercial e Marketing</ng-template>
           <ul *ngFor="let item of perguntasComMark | async">
@@ -119,7 +121,7 @@
           </ul>
           <div>
               <button mat-button matStepperPrevious>Voltar</button>
-              <button mat-button matStepperNext>Próximo</button>
+              <button (click)="scroll(controlScroll)" mat-button matStepperNext>Próximo</button>
           </div>
         </form>
   </mat-step>
@@ -147,17 +149,17 @@
             </mat-form-field>
           </ul>
           <div>
-              <button mat-button matStepperPrevious>Voltar</button>
-              <button mat-button matStepperNext>Próximo</button>
+              <button  mat-button matStepperPrevious>Voltar</button>
+              <button (click)="scroll(controlScroll)" mat-button matStepperNext>Próximo</button>
           </div>
         </form>
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    You are now done.
+    <ng-template matStepLabel>Fim</ng-template>
+    Clique em finalizar para concluir a pesquisa.
     <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-button matStepperPrevious>Voltar</button>
+      <button mat-button (click)="stepper.reset()">Finalizar</button>
     </div>
   </mat-step>
 </mat-vertical-stepper>

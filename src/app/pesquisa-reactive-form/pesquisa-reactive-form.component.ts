@@ -141,6 +141,10 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
   } // END ONINIT
 
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
+  }
+
   getCNPJ() {
     this.listadeCNPJ = this.db.collection('clientesCNPJ')
                               .valueChanges();
