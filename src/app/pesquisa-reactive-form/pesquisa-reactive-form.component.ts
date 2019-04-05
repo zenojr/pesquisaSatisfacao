@@ -1,5 +1,4 @@
 import { ClientesCNPJ } from './clientesCNPJ.model';
-
 import { AngularFirestore } from '@angular/fire/firestore';
 import { PesquisaReactiveServiceService } from './pesquisa-reactive-service.service';
 import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
@@ -20,8 +19,6 @@ import { ConsultaResp } from './consultaResp.model';
 })
 export class PesquisaReactiveFormComponent implements OnInit {
 
-  listadeCNPJ: Observable<any>;
-
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -41,9 +38,8 @@ export class PesquisaReactiveFormComponent implements OnInit {
   perguntasComMark: Observable<PerguntasComMark[]>;
   perguntasEmbTran: Observable<PerguntasEmbTran[]>;
 
-
+  listadeCNPJ: Observable<any>;
   clientes: Observable<ClientesCNPJ[]>;
-
   respostasFB: Observable<ConsultaResp[]>;
 
   user = this.pesqReactService.getUser();
@@ -55,22 +51,9 @@ export class PesquisaReactiveFormComponent implements OnInit {
   ngOnInit() {
 
     // this.pesqReactService.openSnackBarUser();
-
-    this.respostasFB =  this.db.collection(this.user)
-    .snapshotChanges()
-    .pipe(map(respArray => {
-      return respArray.map(doc => {
-        return {
-          pergunta: doc.payload.doc.data()['pergunta'],
-          respostaCorfio: doc.payload.doc.data()['respostaCorfio'],
-          respostaOutros: doc.payload.doc.data()['respostaOutros'],
-        };
-      });
-    }));
-
-    this.respostasFB.forEach(element => {
-      console.log('elemento' +  element );
-    });
+    // this.getCNPJ();
+    this.pesqReactService.getRespostas();
+    this.clientesCNPJ();
 
     this.firstFormGroup = this.formBuilder.group({
       pergunta: [''],
@@ -97,8 +80,6 @@ export class PesquisaReactiveFormComponent implements OnInit {
       respostaCorfio: [''],
       respostaOutros: ['']
     });
-
-   this.clientesCNPJ();
 
     this.perguntaAspecTec = this.db.collection('perguntasAspecTec')
     .snapshotChanges()
@@ -155,21 +136,18 @@ export class PesquisaReactiveFormComponent implements OnInit {
       });
     }));
 
-
-    this.getCNPJ();
-    this.pesqReactService.getRespostas();
-
   } // END ONINIT
+
 
   scroll(el: HTMLElement) {
     el.scrollIntoView();
   }
 
-  getCNPJ() {
-    this.listadeCNPJ = this.db.collection('clientesCNPJ')
-                              .valueChanges();
-    console.log(this.listadeCNPJ);
-  }
+  // getCNPJ() {
+  //   this.listadeCNPJ = this.db.collection('clientesCNPJ')
+  //                             .valueChanges();
+  //   console.log(this.listadeCNPJ);
+  // }
 
   clientesCNPJ() {
     this.clientes = this.db.collection('clientesCNPJ')
@@ -182,9 +160,6 @@ export class PesquisaReactiveFormComponent implements OnInit {
         };
       });
     }));
-    this.clientes.forEach(element => {
-      console.log(element);
-    });
   }
 
   saveRespAspecTec(perguntaForm) {
@@ -193,7 +168,6 @@ export class PesquisaReactiveFormComponent implements OnInit {
     console.log(pergunta);
     const respostaCorfio = this.firstFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.firstFormGroup.get('respostaOutros').value;
-    
     this.pesqReactService.addRespAspTec(pergunta, {pergunta, respostaCorfio, respostaOutros});
     this.pesqReactService.openSnackBarSaved(pergunta);
   }

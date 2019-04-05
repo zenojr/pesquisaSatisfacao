@@ -4,7 +4,6 @@ import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { RespAspecTec } from './respAspTec.model';
 import * as firebase from 'firebase/app';
-
 import { RespRep } from './respRep.model';
 import { RespComMark } from './respComMark.model';
 import { RespEmbTran } from './respEmbtran.model';
@@ -19,7 +18,6 @@ export class PesquisaReactiveServiceService {
   readonly user = this.getUser();
   readonly pathUser = this.user;
   consultaResp: Observable<ConsultaResp[]>;
-
 
   constructor( private db: AngularFirestore,
                private snackBar: MatSnackBar ) { }
@@ -46,18 +44,20 @@ export class PesquisaReactiveServiceService {
 
   getRespostas() {
     console.log('ahoy!');
-    this.consultaResp =  this.db.collection(this.user)
+    // this.consultaResp =  
+    const result = this.db.collection(this.user)
     .snapshotChanges()
-    .pipe(map(respArray => {
-      return respArray.map(doc => {
+    .pipe(map(docArray => {
+      return docArray.map(doc => {
         return {
-          pergunta: doc.payload.doc.data()['pergunta'],
-          respostaCorfio: doc.payload.doc.data()['respostaCorfio'],
-          respostaOutros: doc.payload.doc.data()['respostaOutros'],
+          id: doc.payload.doc.id,
+          ...doc.payload.doc.data()
         };
       });
-    }));
-    console.log(this.consultaResp);
+    }))
+    .subscribe( from => {
+      console.log(from);
+    } )
   }
 
   addRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
