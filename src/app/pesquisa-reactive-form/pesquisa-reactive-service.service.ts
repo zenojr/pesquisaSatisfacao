@@ -57,7 +57,7 @@ export class PesquisaReactiveServiceService {
     }))
     .subscribe( from => {
       console.log(from);
-    } )
+    });
   }
 
   addRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
