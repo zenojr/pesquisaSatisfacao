@@ -19,6 +19,7 @@ import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { PesquisaService } from './pesquisa/pesquisa.service';
 import { PesquisaReactiveFormComponent } from './pesquisa-reactive-form/pesquisa-reactive-form.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { PesquisaReactiveFormComponent } from './pesquisa-reactive-form/pesquisa
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAuthModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [ AuthService, PesquisaService, { provide: FirestoreSettingsToken, useValue: {} } ],
   bootstrap: [AppComponent]
