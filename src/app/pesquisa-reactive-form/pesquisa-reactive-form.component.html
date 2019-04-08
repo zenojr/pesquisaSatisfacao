@@ -39,6 +39,25 @@
       <div>
           <form [formGroup]="secondFormGroup">
               <ng-template matStepLabel>Atendimento do Representante</ng-template>
+              <ul>
+                  <mat-form-field>
+                      <p>Frequência de visitas do representante necessária?</p>
+                      <mat-select placeholder="" formControlName="respFreq">
+                          <mat-option value="sim">SIM</mat-option>
+                          <mat-option value="nao">NÃO</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                  <br>
+                  <mat-form-field>
+                      <p>Como avalia?</p>
+                      <mat-select placeholder="" formControlName="respFreqAval">
+                          <mat-option value="otimo">ótimo</mat-option>
+                          <mat-option value="bom">bom</mat-option>
+                          <mat-option value="regular">regular</mat-option>
+                          <mat-option value="ruim">ruim</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+              </ul>
               <ul *ngFor="let item of perguntasRep | async">
                 <li> {{ item.pergunta }}</li>
                 <mat-form-field>
@@ -58,6 +77,7 @@
                   </mat-select>
                 </mat-form-field>
               </ul>
+              
               <div>
                 <button mat-button matStepperPrevious>Voltar</button>
                 <button (click)="scroll(controlScroll)" mat-button matStepperNext>Próximo</button>
