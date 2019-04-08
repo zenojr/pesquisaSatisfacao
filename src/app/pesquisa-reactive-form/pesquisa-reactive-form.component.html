@@ -4,6 +4,8 @@
     <h3 *ngIf="item.cnpj === user" >Seja bem vindo, você está respondendo a pesquisa em nome de {{ item.nome }} </h3>
   </ul>
 </div>
+<mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+
 <span #controlScroll></span>
 <mat-vertical-stepper [linear]="isLinear" #stepper>
   <mat-step >
@@ -13,7 +15,8 @@
       <ul *ngFor="let item of perguntaAspecTec | async" >
         <li> {{ item.pergunta }}</li>
         <mat-form-field>
-          <mat-select placeholder="CORFIO" formControlName="respostaCorfio" (selectionChange)="saveRespAspecTec(item.pergunta)">
+          <mat-select placeholder="CORFIO" formControlName="respostaCorfio" 
+                      (selectionChange)="saveRespAspecTec(item.pergunta)">
               <mat-option value="otimo">ótimo</mat-option>
               <mat-option value="bom">bom</mat-option>
               <mat-option value="regular">regular</mat-option>
@@ -175,9 +178,16 @@
         </form>
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel>Fim</ng-template>
-    Clique em finalizar para concluir a pesquisa.
+    <ng-template matStepLabel>Resumo das Respostas</ng-template>
+    Confira o resumo de suas respostas e finalize a pesquisa
     <div>
+        <div>
+            <ul *ngFor="let resp of getRetornoResp">
+              <li> <strong>Pergunta: {{ resp.id }}</strong></li>
+              <li>Corfio: {{ resp.data['respostaCorfio'] }}</li>
+              <li>Outros: {{ resp.data['respostaOutros'] }}</li>
+            </ul>
+          </div>
       <button mat-button matStepperPrevious>Voltar</button>
       <button mat-button (click)="stepper.reset()">Finalizar</button>
     </div>

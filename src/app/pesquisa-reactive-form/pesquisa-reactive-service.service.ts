@@ -1,7 +1,7 @@
 import { MatSnackBar } from '@angular/material';
 import { RespImgProd } from './respImgProd.model';
 import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
-import { Injectable } from '@angular/core';
+import { Injectable, Output } from '@angular/core';
 import { RespAspecTec } from './respAspTec.model';
 import * as firebase from 'firebase/app';
 import { RespRep } from './respRep.model';
@@ -18,6 +18,7 @@ export class PesquisaReactiveServiceService {
   readonly user = this.getUser();
   readonly pathUser = this.user;
   consultaResp: Observable<ConsultaResp[]>;
+  
 
   constructor( private db: AngularFirestore,
                private snackBar: MatSnackBar ) { }
@@ -42,29 +43,15 @@ export class PesquisaReactiveServiceService {
     console.log(cliente);
   }
 
-  getRespostas() {
-    console.log('ahoy!');
-    // this.consultaResp =  
-    const result = this.db.collection(this.user)
-    .snapshotChanges()
-    .pipe(map(docArray => {
-      return docArray.map(doc => {
-        return {
-          id: doc.payload.doc.id,
-          ...doc.payload.doc.data()
-        };
-      });
-    }))
-    .subscribe( from => {
-      console.log(from);
-    });
-  }
-
   addRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
     return this.db.collection<RespAspecTec>(this.pathUser).doc(pergunta).set({data});
   }
 
   addRespRep(pergunta: string, data: RespRep): Promise<void> {
+    return this.db.collection<RespRep>(this.pathUser).doc(pergunta).set({data});
+  }
+
+  addRespRepFreq(pergunta: string, data: RespRep): Promise<void> {
     return this.db.collection<RespRep>(this.pathUser).doc(pergunta).set({data});
   }
 
@@ -86,7 +73,6 @@ export class PesquisaReactiveServiceService {
     userMail = userMail.replace('@corfio.com', '');
     return userMail;
   }
-
 
 
 }

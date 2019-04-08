@@ -45,16 +45,19 @@ export class PesquisaReactiveFormComponent implements OnInit {
   respostasFB: Observable<ConsultaResp[]>;
 
   user = this.pesqReactService.getUser();
+  getRetornoResp: any;
+  contaRespostas = 0;
 
   constructor(private formBuilder: FormBuilder,
               private pesqReactService: PesquisaReactiveServiceService,
               private db: AngularFirestore) { }
 
   ngOnInit() {
-
+    this.getRespostas();
+    console.log(this.getRetornoResp);
     // this.pesqReactService.openSnackBarUser();
     // this.getCNPJ();
-    this.pesqReactService.getRespostas();
+    
     this.clientesCNPJ();
 
     this.firstFormGroup = this.formBuilder.group({
@@ -139,6 +142,8 @@ export class PesquisaReactiveFormComponent implements OnInit {
         };
       });
     }));
+
+    this.contaResp();
 
   } // END ONINIT
 
@@ -229,6 +234,33 @@ export class PesquisaReactiveFormComponent implements OnInit {
     const respostaOutros = this.fifthFormGroup.get('respostaOutros').value;
     this.pesqReactService.addRespEmbTran(pergunta, {respostaCorfio, respostaOutros});
     this.pesqReactService.openSnackBarSaved(pergunta);
+  }
+
+  getRespostas() {
+    console.log('ahoy!');
+    const result = this.db.collection(this.user)
+    .snapshotChanges()
+    .pipe(map(docArray => {
+      return docArray.map(doc => {
+        return {
+          id: doc.payload.doc.id,
+          ...doc.payload.doc.data()
+        };
+      });
+    }))
+    .subscribe( from => {
+      this.getRetornoResp = from;
+      console.log(this.getRetornoResp);
+      return this.getRetornoResp;
+    });
+  }
+
+  contaResp() {
+    const result = this.db.collection(this.user).valueChanges()
+    .subscribe( data => { data.forEach(element => {
+      this.contaRespostas++;
+      console.log(this.contaRespostas);
+    }); } );
   }
 
 }

@@ -20,6 +20,8 @@ import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.com
 import { PesquisaService } from './pesquisa/pesquisa.service';
 import { PesquisaReactiveFormComponent } from './pesquisa-reactive-form/pesquisa-reactive-form.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+import { RelatoriosComponent } from './gerencial/relatorios/relatorios.component';
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     PesquisaComponent,
     HeaderComponent,
     SidenavListComponent,
-    PesquisaReactiveFormComponent
+    PesquisaReactiveFormComponent,
+    RelatoriosComponent
   ],
   imports: [
     MaterialModule,
@@ -44,7 +47,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     AngularFireStorageModule,
     AngularFireAuthModule,
     FlexLayoutModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    Ng2GoogleChartsModule
   ],
   providers: [ AuthService, PesquisaService, { provide: FirestoreSettingsToken, useValue: {} } ],
   bootstrap: [AppComponent]
