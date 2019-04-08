@@ -41,15 +41,15 @@
               <ng-template matStepLabel>Atendimento do Representante</ng-template>
               <ul>
                   <mat-form-field>
-                      <p>Frequência de visitas do representante necessária?</p>
-                      <mat-select placeholder="" formControlName="respFreq">
+                      <p  #perguntaFreq >Frequência de visitas do representante atende a necessidade?</p>
+                      <mat-select placeholder="" formControlName="respFreq" (selectionChange)="respFreqRep(perguntaFreq)">
                           <mat-option value="sim">SIM</mat-option>
                           <mat-option value="nao">NÃO</mat-option>
                       </mat-select>
                   </mat-form-field>
                   <br>
-                  <mat-form-field>
-                      <p>Como avalia?</p>
+                  <mat-form-field *ngIf="controlRepFreq === true ">
+                      <p>Como você avalia a qualidade das visitas?</p>
                       <mat-select placeholder="" formControlName="respFreqAval">
                           <mat-option value="otimo">ótimo</mat-option>
                           <mat-option value="bom">bom</mat-option>

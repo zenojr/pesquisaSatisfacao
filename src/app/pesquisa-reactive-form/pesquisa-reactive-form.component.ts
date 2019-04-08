@@ -39,6 +39,8 @@ export class PesquisaReactiveFormComponent implements OnInit {
   perguntasEmbTran: Observable<PerguntasEmbTran[]>;
 
   listadeCNPJ: Observable<any>;
+  respostarep: Observable<any>;
+  controlRepFreq = false;
   clientes: Observable<ClientesCNPJ[]>;
   respostasFB: Observable<ConsultaResp[]>;
 
@@ -63,7 +65,9 @@ export class PesquisaReactiveFormComponent implements OnInit {
     this.secondFormGroup = this.formBuilder.group({
       pergunta: [''],
       respostaCorfio: [''],
-      respostaOutros: ['']
+      respostaOutros: [''],
+      respFreq: [''],
+      respFreqAval: ['']
     });
     this.thirdFormGroup = this.formBuilder.group({
       pergunta: [''],
@@ -181,6 +185,20 @@ export class PesquisaReactiveFormComponent implements OnInit {
     const respostaOutros = this.secondFormGroup.get('respostaOutros').value;
     this.pesqReactService.addRespRep(pergunta, {respostaCorfio, respostaOutros});
     this.pesqReactService.openSnackBarSaved(pergunta);
+  }
+
+  respFreqRep(perguntaForm) {
+    const pergunta  = perguntaForm;
+    console.log(pergunta);
+    if (this.secondFormGroup.get('respFreq').value === 'sim') {
+      this.controlRepFreq = true;
+      this.respostarep = this.secondFormGroup.get('respFreq').value;
+    } else {
+      this.controlRepFreq = false;
+      this.respostarep = this.secondFormGroup.get('respFreq').value;
+    }
+    console.log(this.respostarep);
+    console.log(this.controlRepFreq);
   }
 
   saveRespImgProd(perguntaForm) {
