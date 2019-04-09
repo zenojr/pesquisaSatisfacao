@@ -4,8 +4,8 @@
     <h3 *ngIf="item.cnpj === user" >Seja bem vindo, você está respondendo a pesquisa em nome de {{ item.nome }} </h3>
   </ul>
 </div>
-<mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-
+<mat-progress-bar mode="determinate" value="{{vlrQuestao * contaRespostas}}"></mat-progress-bar>
+<span> {{ vlrQuestao }} {{ contaRespostas }} </span>
 <span #controlScroll></span>
 <mat-vertical-stepper [linear]="isLinear" #stepper>
   <mat-step >

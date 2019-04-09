@@ -47,12 +47,14 @@ export class PesquisaReactiveFormComponent implements OnInit {
   user = this.pesqReactService.getUser();
   getRetornoResp: any;
   contaRespostas = 0;
+  vlrQuestao = 0;
 
   constructor(private formBuilder: FormBuilder,
               private pesqReactService: PesquisaReactiveServiceService,
               private db: AngularFirestore) { }
 
   ngOnInit() {
+
     this.getRespostas();
     console.log(this.getRetornoResp);
     // this.pesqReactService.openSnackBarUser();
@@ -144,19 +146,12 @@ export class PesquisaReactiveFormComponent implements OnInit {
     }));
 
     this.contaResp();
-
+    this.converteResp();
   } // END ONINIT
-
 
   scroll(el: HTMLElement) {
     el.scrollIntoView();
   }
-
-  // getCNPJ() {
-  //   this.listadeCNPJ = this.db.collection('clientesCNPJ')
-  //                             .valueChanges();
-  //   console.log(this.listadeCNPJ);
-  // }
 
   clientesCNPJ() {
     this.clientes = this.db.collection('clientesCNPJ')
@@ -260,7 +255,16 @@ export class PesquisaReactiveFormComponent implements OnInit {
     .subscribe( data => { data.forEach(element => {
       this.contaRespostas++;
       console.log(this.contaRespostas);
-    }); } );
+      return this.contaRespostas;
+    }); });
+    console.log(result);
+  }
+
+  converteResp() {
+    const total = 22;
+    this.vlrQuestao = 100 / total;
+    console.log(this.vlrQuestao);
+    return this.vlrQuestao;
   }
 
 }
