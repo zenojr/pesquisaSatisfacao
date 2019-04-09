@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces';
+import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 @Component({
@@ -9,22 +11,29 @@ import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces
 })
 export class RelatoriosComponent implements OnInit {
 
+  items: Observable<any[]>;
+  teste = [ 12, 14, 22, 33 ];
+
+  allData = [];
+
   public pieChart: GoogleChartInterface = {
     chartType: 'PieChart',
     dataTable: [
       ['Task', 'Hours per Day'],
-      ['Work',     11],
-      ['Eat',      2],
-      ['Commute',  2],
-      ['Watch TV', 2]
+      ['Work',     this.teste],
+      ['Eat',      this.teste[1]],
+      ['Commute',  this.teste[2]],
+      ['Watch TV', this.teste[3]]
     ],
     // opt_firstRowIsData: true,
     options: {'title': 'A pergunta'}
   };
 
-  constructor() { }
+  constructor(private db: AngularFirestore) {
+   }
 
   ngOnInit() {
+    
   }
 
 }

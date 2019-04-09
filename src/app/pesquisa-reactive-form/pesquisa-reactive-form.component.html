@@ -5,7 +5,7 @@
   </ul>
 </div>
 <mat-progress-bar mode="determinate" value="{{vlrQuestao * contaRespostas}}"></mat-progress-bar>
-<span> {{ vlrQuestao }} {{ contaRespostas }} </span>
+<span> {{ vlrQuestao }} {{ contaRespostas }} {{ realCount | json }} </span>
 <span #controlScroll></span>
 <mat-vertical-stepper [linear]="isLinear" #stepper>
   <mat-step >
