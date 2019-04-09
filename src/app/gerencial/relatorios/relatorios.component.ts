@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces';
 import { Observable } from 'rxjs';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
+export interface Item { name: string; }
 
 @Component({
   selector: 'app-relatorios',
@@ -11,8 +12,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class RelatoriosComponent implements OnInit {
 
-  items: Observable<any[]>;
-  teste = [ 12, 14, 22, 33 ];
+  private itemDoc: AngularFirestoreDocument<Item>;
+  item: Observable<Item>;
 
   allData = [];
 
@@ -20,10 +21,10 @@ export class RelatoriosComponent implements OnInit {
     chartType: 'PieChart',
     dataTable: [
       ['Task', 'Hours per Day'],
-      ['Work',     this.teste],
-      ['Eat',      this.teste[1]],
-      ['Commute',  this.teste[2]],
-      ['Watch TV', this.teste[3]]
+      ['Work',     11],
+      ['Eat',      2],
+      ['Commute',  2],
+      ['Watch TV', 2]
     ],
     // opt_firstRowIsData: true,
     options: {'title': 'A pergunta'}
@@ -33,7 +34,11 @@ export class RelatoriosComponent implements OnInit {
    }
 
   ngOnInit() {
-    
+    this.itemDoc = this.db.doc<Item>('clientesCNPJ/nome');
+    this.item = this.itemDoc.valueChanges();
+
+    console.log( this.itemDoc );
+    console.log( this.item );
   }
 
 }
