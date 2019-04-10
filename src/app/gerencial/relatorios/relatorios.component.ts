@@ -3,6 +3,7 @@ import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces
 import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
+
 export interface Item { name: string; }
 
 @Component({
@@ -12,33 +13,51 @@ export interface Item { name: string; }
 })
 export class RelatoriosComponent implements OnInit {
 
-  private itemDoc: AngularFirestoreDocument<Item>;
-  item: Observable<Item>;
+  dataCorfio = [
+    40,
+    25,
+    20,
+    15,
+  ];
 
-  allData = [];
+  dataOutros = [
+    20,
+    35,
+    20,
+    15,
+  ];
 
-  public pieChart: GoogleChartInterface = {
+  public desempenhoProdCORFIO: GoogleChartInterface = {
     chartType: 'PieChart',
     dataTable: [
       ['Task', 'Hours per Day'],
-      ['Work',     11],
-      ['Eat',      2],
-      ['Commute',  2],
-      ['Watch TV', 2]
+      ['Ótimo',   this.dataCorfio[0]],
+      ['Bom',     this.dataCorfio[1]],
+      ['Regular', this.dataCorfio[2]],
+      ['Ruim',    this.dataCorfio[3]]
     ],
     // opt_firstRowIsData: true,
-    options: {'title': 'A pergunta'}
+    options: {'title': 'Desempenho do produto: CORFIO'}
+  };
+
+  public desempenhoProdOUTROS: GoogleChartInterface = {
+    chartType: 'PieChart',
+    dataTable: [
+      ['Aval', 'respostas'],
+      ['Ótimo',   this.dataOutros[0]],
+      ['Bom',     this.dataOutros[1]],
+      ['Regular', this.dataOutros[2]],
+      ['Ruim',    this.dataOutros[3]]
+    ],
+    // opt_firstRowIsData: true,
+    options: {'title': 'Desempenho do produto: Outros'}
   };
 
   constructor(private db: AngularFirestore) {
    }
 
   ngOnInit() {
-    this.itemDoc = this.db.doc<Item>('clientesCNPJ/nome');
-    this.item = this.itemDoc.valueChanges();
-
-    console.log( this.itemDoc );
-    console.log( this.item );
+    
   }
 
 }
