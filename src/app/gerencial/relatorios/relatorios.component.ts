@@ -57,7 +57,13 @@ export class RelatoriosComponent implements OnInit {
    }
 
   ngOnInit() {
-    
+    this.get();
+  }
+
+  get() {
+    let data;
+    this.db.collection('78').valueChanges().subscribe(dados => data = dados);
+    console.log(data);
   }
 
 }
