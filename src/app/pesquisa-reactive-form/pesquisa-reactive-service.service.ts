@@ -44,27 +44,27 @@ export class PesquisaReactiveServiceService {
   }
 
   addRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
-    return this.db.collection<RespAspecTec>('respostasAspecTec').doc(this.pathUser).set({data});
+    return this.db.collection<RespAspecTec>(this.pathUser).doc(pergunta).set(data);
   }
 
   addRespRep(pergunta: string, data: RespRep): Promise<void> {
-    return this.db.collection<RespRep>(this.pathUser).doc(pergunta).set({data});
+    return this.db.collection<RespRep>(this.pathUser).doc(pergunta).set(data);
   }
 
   addRespRepFreq(pergunta: string, data: RespRep): Promise<void> {
-    return this.db.collection<RespRep>(this.pathUser).doc(pergunta).set({data});
+    return this.db.collection<RespRep>(this.pathUser).doc(pergunta).set(data);
   }
 
   addRespImgProd(pergunta: string, data: RespImgProd): Promise<void> {
-    return this.db.collection<RespImgProd>(this.pathUser).doc(pergunta).set({data});
+    return this.db.collection<RespImgProd>(this.pathUser).doc(pergunta).set(data);
   }
 
   addRespComMark(pergunta: string, data: RespComMark): Promise<void> {
-    return this.db.collection<RespComMark>(this.pathUser).doc(pergunta).set({data});
+    return this.db.collection<RespComMark>(this.pathUser).doc(pergunta).set(data);
   }
 
   addRespEmbTran(pergunta: string, data: RespEmbTran): Promise<void> {
-    return this.db.collection<RespEmbTran>(this.pathUser).doc(pergunta).set({data});
+    return this.db.collection<RespEmbTran>(this.pathUser).doc(pergunta).set(data);
   }
 
   getUser() {

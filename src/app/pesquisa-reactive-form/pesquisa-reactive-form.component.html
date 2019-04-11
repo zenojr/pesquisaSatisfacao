@@ -181,13 +181,13 @@
     <ng-template matStepLabel>Resumo das Respostas</ng-template>
     Confira o resumo de suas respostas e finalize a pesquisa
     <div>
-        <div>
+        <!-- <div>
             <ul *ngFor="let resp of getRetornoResp">
               <li> <strong>Pergunta: {{ resp.id }}</strong></li>
               <li>Corfio: {{ resp.data['respostaCorfio'] }}</li>
               <li>Outros: {{ resp.data['respostaOutros'] }}</li>
             </ul>
-          </div>
+          </div> -->
       <button mat-button matStepperPrevious>Voltar</button>
       <button mat-button (click)="stepper.reset()">Finalizar</button>
     </div>
