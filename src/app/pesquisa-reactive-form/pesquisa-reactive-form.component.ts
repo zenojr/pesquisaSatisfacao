@@ -183,7 +183,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
     console.log(pergunta);
     const respostaCorfio = this.secondFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.secondFormGroup.get('respostaOutros').value;
-    this.pesqReactService.addRespRep(pergunta, {respostaCorfio, respostaOutros});
+    this.pesqReactService.addRespRep(pergunta, {pergunta, respostaCorfio, respostaOutros});
     this.pesqReactService.openSnackBarSaved(pergunta);
   }
 
@@ -207,7 +207,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
     console.log(pergunta);
     const respostaCorfio = this.thirdFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.thirdFormGroup.get('respostaOutros').value;
-    this.pesqReactService.addRespImgProd(pergunta, {respostaCorfio, respostaOutros});
+    this.pesqReactService.addRespImgProd(pergunta, {pergunta, respostaCorfio, respostaOutros});
     this.pesqReactService.openSnackBarSaved(pergunta);
   }
 
@@ -217,7 +217,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
     console.log(pergunta);
     const respostaCorfio = this.fourthFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.fourthFormGroup.get('respostaOutros').value;
-    this.pesqReactService.addRespComMark(pergunta, {respostaCorfio, respostaOutros});
+    this.pesqReactService.addRespComMark(pergunta, {pergunta, respostaCorfio, respostaOutros});
     this.pesqReactService.openSnackBarSaved(pergunta);
   }
 
@@ -227,7 +227,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
     console.log(pergunta);
     const respostaCorfio = this.fifthFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.fifthFormGroup.get('respostaOutros').value;
-    this.pesqReactService.addRespEmbTran(pergunta, {respostaCorfio, respostaOutros});
+    this.pesqReactService.addRespEmbTran(pergunta, {pergunta, respostaCorfio, respostaOutros});
     this.pesqReactService.openSnackBarSaved(pergunta);
   }
 

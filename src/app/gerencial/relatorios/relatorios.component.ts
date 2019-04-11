@@ -62,7 +62,7 @@ export class RelatoriosComponent implements OnInit {
 
   get() {
     let data;
-    this.db.collection('78').valueChanges().subscribe(dados => data = dados);
+    this.db.collection('78').valueChanges().subscribe(dados => console.log(dados));
     console.log(data);
   }
 
