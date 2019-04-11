@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces';
 import { Observable } from 'rxjs';
@@ -61,8 +62,17 @@ export class RelatoriosComponent implements OnInit {
   }
 
   get() {
-    let data;
+    let data:  ;
     this.db.collection('78').valueChanges().subscribe(dados => console.log(dados));
+    this.db.collection('78').snapshotChanges()
+    .pipe(map(docArray => {
+      return docArray.map(doc => {
+        return {
+          id: doc.payload.doc.id;
+
+        }
+      })
+    } ));
     console.log(data);
   }
 
