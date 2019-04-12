@@ -2,10 +2,18 @@ import { map } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces';
 import { Observable } from 'rxjs';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 
-export interface Item { name: string; }
+// export interface Item { name: string; }
+export interface Respostas {
+  id?: string;
+  pergunta?: string;
+  respostaCorfio?: string;
+  respostaOutros?: string;
+}
+
+
 
 @Component({
   selector: 'app-relatorios',
@@ -13,6 +21,8 @@ export interface Item { name: string; }
   styleUrls: ['./relatorios.component.css']
 })
 export class RelatoriosComponent implements OnInit {
+
+  respostas: Observable<Respostas[]>;
 
   dataCorfio = [
     40,
@@ -31,7 +41,7 @@ export class RelatoriosComponent implements OnInit {
   public desempenhoProdCORFIO: GoogleChartInterface = {
     chartType: 'PieChart',
     dataTable: [
-      ['Task', 'Hours per Day'],
+      ['Task',    'Hours per Day'],
       ['Ótimo',   this.dataCorfio[0]],
       ['Bom',     this.dataCorfio[1]],
       ['Regular', this.dataCorfio[2]],
@@ -44,7 +54,7 @@ export class RelatoriosComponent implements OnInit {
   public desempenhoProdOUTROS: GoogleChartInterface = {
     chartType: 'PieChart',
     dataTable: [
-      ['Aval', 'respostas'],
+      ['Aval',    'respostas'],
       ['Ótimo',   this.dataOutros[0]],
       ['Bom',     this.dataOutros[1]],
       ['Regular', this.dataOutros[2]],
@@ -55,25 +65,28 @@ export class RelatoriosComponent implements OnInit {
   };
 
   constructor(private db: AngularFirestore) {
+
    }
 
+
   ngOnInit() {
-    this.get();
+    this.getRespostas();
   }
 
-  get() {
-    let data:  ; 
-    this.db.collection('78').valueChanges().subscribe(dados => console.log(dados));
-    this.db.collection('78').snapshotChanges()
+  
+
+  getRespostas() {
+    return this.respostas = this.db.collection('78')
+    .snapshotChanges()
     .pipe(map(docArray => {
       return docArray.map(doc => {
         return {
-          id: doc.payload.doc.id;
-
-        }
-      })
-    } ));
-    console.log(data);
+          id: doc.payload.doc.id,
+          respostaCorfio: doc.payload.doc.data()['respostaCorfio'],
+          respostaOutros: doc.payload.doc.data()['respostaOutros']
+        };
+      });
+    }));
   }
 
 }
