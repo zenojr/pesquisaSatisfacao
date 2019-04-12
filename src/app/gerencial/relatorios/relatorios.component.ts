@@ -70,13 +70,13 @@ export class RelatoriosComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getRespostas();
+    this.getRespostasUser();
+    this.manipulaData();
   }
 
-  
 
-  getRespostas() {
-    return this.respostas = this.db.collection('78')
+  getRespostasUser() {
+    this.respostas = this.db.collection('78')
     .snapshotChanges()
     .pipe(map(docArray => {
       return docArray.map(doc => {
@@ -87,6 +87,22 @@ export class RelatoriosComponent implements OnInit {
         };
       });
     }));
+  }
+
+  // manipulaData(data: Respostas): Observable<Respostas[]> {
+  manipulaData( ) {
+    let data: Respostas;
+    if (data.pergunta === 'Assistência técnica') {
+      if (data.respostaCorfio === 'otimo') {
+        let contaOtimo;
+        contaOtimo++;
+        console.log(contaOtimo);
+      }
+    }
+  }
+
+  showData() {
+
   }
 
 }

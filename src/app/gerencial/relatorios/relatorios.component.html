@@ -1,7 +1,7 @@
 <div>
   <ul *ngFor="let item of respostas | async">
     <li>{{item.id}}</li>
-    <li> Corfio {{item.respostaCorfio}}</li>
+    <li *ngIf="item.respostaCorfio" > Corfio {{item.respostaCorfio}}</li>
     <li> Outros {{item.respostaOutros}}</li>
   </ul>
 </div>
