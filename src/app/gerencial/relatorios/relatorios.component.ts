@@ -65,12 +65,12 @@ export class RelatoriosComponent implements OnInit {
   };
 
   constructor(private db: AngularFirestore) {
-
+    this.getRespostasUser();
    }
 
 
   ngOnInit() {
-    this.getRespostasUser();
+    
     this.manipulaData();
   }
 
