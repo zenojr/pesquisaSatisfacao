@@ -10,9 +10,23 @@
 <div>
   <ul *ngFor="let item of respostasUser | async">
     <li> Pergunta: {{ item.pergunta }} </li>
-    <li> Corfio {{item.respostaCorfio}}</li>
+    <li #respostaview> Corfio {{item.respostaCorfio}}</li>
     <li> Outros {{item.respostaOutros}}</li>
   </ul>
 </div>
+
+ <div style="display: inline-box">
+  <canvas baseChart
+          [data]="doughnutChartData"
+          [labels]="doughnutChartLabels"
+          [chartType]="doughnutChartType">
+  </canvas>
+  <canvas baseChart
+          [data]="doughnutChartData"
+          [labels]="doughnutChartLabels"
+          [chartType]="doughnutChartType">
+  </canvas>
+</div>
+
 
 

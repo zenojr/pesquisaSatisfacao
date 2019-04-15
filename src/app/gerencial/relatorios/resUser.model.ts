@@ -1,4 +1,4 @@
-export interface RespostasUser {
+export interface RespostaUser {
     id?: string;
     pergunta?: string;
     respostaCorfio?: string;
