@@ -8,9 +8,9 @@
  -->
 
 <div>
-  <ul *ngFor="let item of data | async">
-    <li>{{item.id}}</li>
-    <li *ngIf="item.respostaCorfio" > Corfio {{item.respostaCorfio}}</li>
+  <ul *ngFor="let item of respostasUser | async">
+    <li> Pergunta: {{ item.pergunta }} </li>
+    <li> Corfio {{item.respostaCorfio}}</li>
     <li> Outros {{item.respostaOutros}}</li>
   </ul>
 </div>

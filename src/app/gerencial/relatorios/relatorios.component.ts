@@ -3,16 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces';
 import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
-
+import { RespostasUser } from './resUser.model';
+import { RelServiceService } from './rel-service.service';
 
 // export interface Item { name: string; }
-export interface Respostas {
-  id?: string;
-  pergunta?: string;
-  respostaCorfio?: string;
-  respostaOutros?: string;
-}
-
 
 
 @Component({
@@ -22,14 +16,9 @@ export interface Respostas {
 })
 export class RelatoriosComponent implements OnInit {
 
-  respostas: Observable<Respostas[]>;
+  respostasUser: Observable<RespostasUser[]>;
 
-  dataCorfio = [
-    40,
-    25,
-    20,
-    15,
-  ];
+  dataCorfio = [];
 
   dataOutros = [
     20,
@@ -64,45 +53,15 @@ export class RelatoriosComponent implements OnInit {
     options: {'title': 'Desempenho do produto: Outros'}
   };
 
-  constructor(private db: AngularFirestore) {
-    this.getRespostasUser();
-   }
-
+  constructor(private db: AngularFirestore, private relService: RelServiceService) {}
 
   ngOnInit() {
-    
-    this.manipulaData();
-  }
+    // this.relService.listUserRes()
+    // .subscribe(dados => this.respostasUser = dados);
 
-
-  getRespostasUser() {
-    this.respostas = this.db.collection('78')
-    .snapshotChanges()
-    .pipe(map(docArray => {
-      return docArray.map(doc => {
-        return {
-          id: doc.payload.doc.id,
-          respostaCorfio: doc.payload.doc.data()['respostaCorfio'],
-          respostaOutros: doc.payload.doc.data()['respostaOutros']
-        };
-      });
-    }));
-  }
-
-  // manipulaData(data: Respostas): Observable<Respostas[]> {
-  manipulaData( ) {
-    let data: Respostas;
-    if (data.pergunta === 'Assistência técnica') {
-      if (data.respostaCorfio === 'otimo') {
-        let contaOtimo;
-        contaOtimo++;
-        console.log(contaOtimo);
-      }
-    }
-  }
-
-  showData() {
+    this.respostasUser = this.relService.listUserRes();
 
   }
+
 
 }
