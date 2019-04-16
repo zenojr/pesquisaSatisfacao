@@ -43,7 +43,7 @@ import { ChartsModule } from 'ng2-charts';
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule.enablePersistence(), // para pwa gravar off line e sincronizar quando a rede voltar
+    AngularFirestoreModule.enablePersistence(), // para pwa gravar offline e sincronizar quando a rede voltar
     AngularFireStorageModule,
     AngularFireAuthModule,
     FlexLayoutModule,
