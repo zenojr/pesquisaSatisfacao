@@ -1,0 +1,64 @@
+<mat-card>
+    <h4>Perguntas Cadastradas</h4>
+</mat-card>
+<mat-divider></mat-divider>
+
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h5>Aspectos Técnicos</h5>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ul *ngFor="let item of perguntaAspecTec | async">
+        <li> {{ item.pergunta }} </li>
+    </ul>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h5>Atendimento Representante</h5>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ul *ngFor="let item of perguntaRep | async">
+      <li> {{ item.pergunta }} </li>
+    </ul>      
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h5>Imagem dos Produtos</h5>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ul *ngFor="let item of perguntaProd | async">
+      <li> {{ item.pergunta }} </li>
+    </ul>      
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h5>Atendimento Comercial</h5>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ul *ngFor="let item of perguntaComMark | async">
+      <li> {{ item.pergunta }} </li>
+    </ul>      
+  </mat-expansion-panel>
+
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h5>Transporte</h5>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ul *ngFor="let item of perguntaEmbTran | async">
+      <li> {{ item.pergunta }} </li>
+    </ul>      
+  </mat-expansion-panel>
+
+</mat-accordion>
+  
