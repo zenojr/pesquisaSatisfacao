@@ -11,7 +11,12 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <ul *ngFor="let item of perguntaAspecTec | async">
-        <li> {{ item.pergunta }} </li>
+      <li>
+        <input type="text" placeholder="{{item.pergunta}}"> 
+        <button mat-icon-button (click)="editPergunta(item.pergunta)">
+          <mat-icon >edit</mat-icon>
+        </button> 
+      </li>
     </ul>
   </mat-expansion-panel>
 
@@ -44,7 +49,9 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <ul *ngFor="let item of perguntaComMark | async">
-      <li> {{ item.pergunta }} </li>
+      <li> 
+        <span> {{ item.pergunta }} </span>
+      </li>
     </ul>      
   </mat-expansion-panel>
 

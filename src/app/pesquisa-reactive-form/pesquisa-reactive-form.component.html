@@ -1,4 +1,11 @@
-
+<div class="container">
+    <div class="teste">
+      <ul *ngFor="let item of getRetornoResp  ">
+        <li> Pergunta: {{ item.id }} </li>
+        <li> Resposta Corfio: {{ item.respostaCorfio }} </li>
+        <li> Resposta Outros: {{ item.respostaOutros }} </li>
+      </ul>    
+    </div>
 <div>
   <ul *ngFor="let item of clientes | async">
     <h3 *ngIf="item.cnpj === user" >Seja bem vindo, você está respondendo a pesquisa em nome de {{ item.nome }} </h3>
@@ -7,6 +14,7 @@
 <mat-progress-bar mode="determinate" value="{{vlrQuestao * contaRespostas}}"></mat-progress-bar>
 <span> {{ vlrQuestao }} {{ contaRespostas }} {{ realCount | json }} </span>
 <span #controlScroll></span>
+
 <mat-vertical-stepper [linear]="isLinear" #stepper>
   <mat-step >
     <h4>Assinale a alternativa, de acordo com seu julgamento</h4>
@@ -16,7 +24,7 @@
         <li> {{ item.pergunta }}</li>
         <mat-form-field>
           <mat-select placeholder="CORFIO" formControlName="respostaCorfio" 
-                      (selectionChange)="saveRespAspecTec(item.pergunta)">
+                      (selectionChange)="saveRespAspecTec(item.pergunta)" >
               <mat-option value="otimo">ótimo</mat-option>
               <mat-option value="bom">bom</mat-option>
               <mat-option value="regular">regular</mat-option>
@@ -181,16 +189,17 @@
     <ng-template matStepLabel>Resumo das Respostas</ng-template>
     Confira o resumo de suas respostas e finalize a pesquisa
     <div>
-        <!-- <div>
-            <ul *ngFor="let resp of getRetornoResp">
-              <li> <strong>Pergunta: {{ resp.id }}</strong></li>
-              <li>Corfio: {{ resp.data['respostaCorfio'] }}</li>
-              <li>Outros: {{ resp.data['respostaOutros'] }}</li>
-            </ul>
-          </div> -->
+        <div>
+          <ul *ngFor="let item of getRetornoResp  ">
+            <li> Pergunta: {{ item.id }} </li>
+            <li> Resposta Corfio: {{ item.respostaCorfio }} </li>
+            <li> Resposta Outros: {{ item.respostaOutros }} </li>
+          </ul>    
+        </div>
       <button mat-button matStepperPrevious>Voltar</button>
       <button mat-button (click)="stepper.reset()">Finalizar</button>
     </div>
   </mat-step>
 </mat-vertical-stepper>
 
+</div>

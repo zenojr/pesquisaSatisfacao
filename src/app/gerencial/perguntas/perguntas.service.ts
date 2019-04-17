@@ -11,8 +11,8 @@ export class PerguntasService {
 
   constructor( private db: AngularFirestore ) { }
 
-  getPerguntas() {
-    return this.db.collection('');
+  editPergAspTec(pergunta: string, data: PerguntasAspecTec): Promise<void> {
+    return this.db.collection<PerguntasAspecTec>('perguntasAspecTec').doc(pergunta).set(data);
   }
 
 }

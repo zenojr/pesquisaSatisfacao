@@ -232,7 +232,6 @@ export class PesquisaReactiveFormComponent implements OnInit {
   }
 
   getRespostas() {
-    console.log('ahoy!');
     const result = this.db.collection(this.user)
     .snapshotChanges()
     .pipe(map(docArray => {
