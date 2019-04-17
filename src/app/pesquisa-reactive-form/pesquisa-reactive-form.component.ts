@@ -26,6 +26,8 @@ export class PesquisaReactiveFormComponent implements OnInit {
   fourthFormGroup: FormGroup;
   fifthFormGroup: FormGroup;
 
+  myVar = 'coisa';
+
   perguntaFormAspTec: string;
   perguntaFormRep: string;
   perguntaFormImgProd: string;
@@ -282,6 +284,15 @@ export class PesquisaReactiveFormComponent implements OnInit {
     this.vlrQuestao = 100 / total;
     console.log(this.vlrQuestao);
     return this.vlrQuestao;
+  }
+
+  setSelect(pergunta) {
+    let data = pergunta;
+    console.log(this.user);
+    let perguntaCollectionFB: any;
+    perguntaCollectionFB = this.db.collection(this.user);
+    console.log( {perguntaCollectionFB} );
+    return data;
   }
 
 }

@@ -23,9 +23,9 @@
       <ul *ngFor="let item of perguntaAspecTec | async" >
         <li> {{ item.pergunta }}</li>
         <mat-form-field>
-          <mat-select placeholder="CORFIO" formControlName="respostaCorfio" 
+          <mat-select placeholder="{{ setSelect(item.pergunta) }}" formControlName="respostaCorfio" 
                       (selectionChange)="saveRespAspecTec(item.pergunta)" >
-              <mat-option value="otimo">ótimo</mat-option>
+              <mat-option [value]="otimo">ótimo</mat-option>
               <mat-option value="bom">bom</mat-option>
               <mat-option value="regular">regular</mat-option>
               <mat-option value="ruim">ruim</mat-option>
