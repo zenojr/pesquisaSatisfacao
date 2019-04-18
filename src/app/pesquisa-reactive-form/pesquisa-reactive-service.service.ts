@@ -75,4 +75,8 @@ export class PesquisaReactiveServiceService {
   }
 
 
+  getCollectionUser () {
+    return this.db.collection(this.user);
+  }
+
 }

@@ -1,205 +1,216 @@
 <div class="container">
-    <div class="teste">
-      <ul *ngFor="let item of getRetornoResp  ">
-        <li> Pergunta: {{ item.id }} </li>
-        <li> Resposta Corfio: {{ item.respostaCorfio }} </li>
-        <li> Resposta Outros: {{ item.respostaOutros }} </li>
-      </ul>    
-    </div>
-<div>
-  <ul *ngFor="let item of clientes | async">
-    <h3 *ngIf="item.cnpj === user" >Seja bem vindo, você está respondendo a pesquisa em nome de {{ item.nome }} </h3>
-  </ul>
-</div>
-<mat-progress-bar mode="determinate" value="{{vlrQuestao * contaRespostas}}"></mat-progress-bar>
-<span> {{ vlrQuestao }} {{ contaRespostas }} {{ realCount | json }} </span>
-<span #controlScroll></span>
+  <div class="teste">
+    <ul *ngFor="let item of respostasUser | async ">
+      <li> Pergunta: {{ item.pergunta }} </li>
+      <li> Resposta Corfio: {{ item.respostaCorfio }} </li>
+      <li> Resposta Outros: {{ item.respostaOutros }} </li>
+    </ul>
+  </div>
 
-<mat-vertical-stepper [linear]="isLinear" #stepper>
-  <mat-step >
-    <h4>Assinale a alternativa, de acordo com seu julgamento</h4>
-    <form required [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Aspéctos técnicos</ng-template>
-      <ul *ngFor="let item of perguntaAspecTec | async" >
-        <li> {{ item.pergunta }}</li>
-        <mat-form-field>
-          <mat-select placeholder="{{ setSelect(item.pergunta) }}" formControlName="respostaCorfio" 
-                      (selectionChange)="saveRespAspecTec(item.pergunta)" >
-              <mat-option [value]="otimo">ótimo</mat-option>
-              <mat-option value="bom">bom</mat-option>
-              <mat-option value="regular">regular</mat-option>
-              <mat-option value="ruim">ruim</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-select placeholder="OUTROS" formControlName="respostaOutros" (selectionChange)="saveRespAspecTec(item.pergunta)" >
+  <div>
+    <ul *ngFor="let item of clientes | async">
+      <h3 *ngIf="item.cnpj === user">Seja bem vindo, você está respondendo a pesquisa em nome de {{ item.nome }} </h3>
+    </ul>
+  </div>
+  <mat-progress-bar mode="determinate" value="{{vlrQuestao * contaRespostas}}"></mat-progress-bar>
+  <span> {{ vlrQuestao }} {{ contaRespostas }} {{ realCount | json }} </span>
+  <span #controlScroll></span>
+
+
+  <mat-vertical-stepper [linear]="isLinear" #stepper>
+    <mat-step>
+      <h4>Assinale a alternativa, de acordo com seu julgamento</h4>
+      <form required [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Aspéctos técnicos</ng-template>
+        <ul *ngFor="let item of perguntaAspecTec | async">
+          <li> {{ item.pergunta }}</li>
+          <mat-form-field>
+            <mat-select placeholder="{{ setSelect(item.pergunta) }}" formControlName="respostaCorfio"
+              (selectionChange)="saveRespAspecTec(item.pergunta)">
               <mat-option value="otimo">ótimo</mat-option>
               <mat-option value="bom">bom</mat-option>
               <mat-option value="regular">regular</mat-option>
               <mat-option value="ruim">ruim</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </ul>
-      <div>
-        <button (click)="scroll(controlScroll)" mat-button matStepperNext>Próximo</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="OUTROS" formControlName="respostaOutros"
+              (selectionChange)="saveRespAspecTec(item.pergunta)">
+              <mat-option value="otimo">ótimo</mat-option>
+              <mat-option value="bom">bom</mat-option>
+              <mat-option value="regular">regular</mat-option>
+              <mat-option value="ruim">ruim</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ul>
+        <div>
+          <button (click)="scroll(controlScroll)" mat-button matStepperNext>Próximo</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
       <h4>Assinale a alternativa, de acordo com seu julgamento</h4>
       <div>
-          <form [formGroup]="secondFormGroup">
-              <ng-template matStepLabel>Atendimento do Representante</ng-template>
-              <ul>
-                  <mat-form-field>
-                      <p  #perguntaFreq >Frequência de visitas do representante atende a necessidade?</p>
-                      <mat-select placeholder="" formControlName="respFreq" (selectionChange)="respFreqRep(perguntaFreq)">
-                          <mat-option value="sim">SIM</mat-option>
-                          <mat-option value="nao">NÃO</mat-option>
-                      </mat-select>
-                  </mat-form-field>
-                  <br>
-                  <mat-form-field *ngIf="controlRepFreq === true ">
-                      <p>Como você avalia a qualidade das visitas?</p>
-                      <mat-select placeholder="" formControlName="respFreqAval">
-                          <mat-option value="otimo">ótimo</mat-option>
-                          <mat-option value="bom">bom</mat-option>
-                          <mat-option value="regular">regular</mat-option>
-                          <mat-option value="ruim">ruim</mat-option>
-                      </mat-select>
-                  </mat-form-field>
-              </ul>
-              <ul *ngFor="let item of perguntasRep | async">
-                <li> {{ item.pergunta }}</li>
-                <mat-form-field>
-                  <mat-select placeholder="CORFIO" formControlName="respostaCorfio" (selectionChange)="saveRespRep(item.pergunta)" >
-                      <mat-option value="otimo">ótimo</mat-option>
-                      <mat-option value="bom">bom</mat-option>
-                      <mat-option value="regular">regular</mat-option>
-                      <mat-option value="ruim">ruim</mat-option>
-                  </mat-select>
-                </mat-form-field>
-                <mat-form-field>
-                  <mat-select placeholder="OUTROS" formControlName="respostaOutros" (selectionChange)="saveRespRep(item.pergunta)" >
-                      <mat-option value="otimo">ótimo</mat-option>
-                      <mat-option value="bom">bom</mat-option>
-                      <mat-option value="regular">regular</mat-option>
-                      <mat-option value="ruim">ruim</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </ul>
-              
-              <div>
-                <button mat-button matStepperPrevious>Voltar</button>
-                <button (click)="scroll(controlScroll)" mat-button matStepperNext>Próximo</button>
-              </div>
-            </form>
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Atendimento do Representante</ng-template>
+          <ul>
+            <mat-form-field>
+              <p #perguntaFreq>Frequência de visitas do representante atende a necessidade?</p>
+              <mat-select placeholder="" formControlName="respFreq" (selectionChange)="respFreqRep(perguntaFreq)">
+                <mat-option value="sim">SIM</mat-option>
+                <mat-option value="nao">NÃO</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field *ngIf="controlRepFreq === true ">
+              <p>Como você avalia a qualidade das visitas?</p>
+              <mat-select placeholder="" formControlName="respFreqAval">
+                <mat-option value="otimo">ótimo</mat-option>
+                <mat-option value="bom">bom</mat-option>
+                <mat-option value="regular">regular</mat-option>
+                <mat-option value="ruim">ruim</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ul>
+          <ul *ngFor="let item of perguntasRep | async">
+            <li> {{ item.pergunta }}</li>
+            <mat-form-field>
+              <mat-select placeholder="CORFIO" formControlName="respostaCorfio"
+                (selectionChange)="saveRespRep(item.pergunta)">
+                <mat-option value="otimo">ótimo</mat-option>
+                <mat-option value="bom">bom</mat-option>
+                <mat-option value="regular">regular</mat-option>
+                <mat-option value="ruim">ruim</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-select placeholder="OUTROS" formControlName="respostaOutros"
+                (selectionChange)="saveRespRep(item.pergunta)">
+                <mat-option value="otimo">ótimo</mat-option>
+                <mat-option value="bom">bom</mat-option>
+                <mat-option value="regular">regular</mat-option>
+                <mat-option value="ruim">ruim</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ul>
+
+          <div>
+            <button mat-button matStepperPrevious>Voltar</button>
+            <button (click)="scroll(controlScroll)" mat-button matStepperNext>Próximo</button>
+          </div>
+        </form>
       </div>
-  </mat-step>
-  
-  <mat-step>
+    </mat-step>
+
+    <mat-step>
       <h4>Assinale a alternativa, de acordo com seu julgamento</h4>
       <form [formGroup]="thirdFormGroup">
-          <ng-template matStepLabel>Imagem dos Produtos</ng-template>
-          <ul *ngFor="let item of perguntasImgProd | async">
-            <li> {{ item.pergunta }}</li>
-            <mat-form-field>
-              <mat-select placeholder="CORFIO" formControlName="respostaCorfio" (selectionChange)="saveRespImgProd(item.pergunta)" >
-                  <mat-option value="otimo">ótimo</mat-option>
-                  <mat-option value="bom">bom</mat-option>
-                  <mat-option value="regular">regular</mat-option>
-                  <mat-option value="ruim">ruim</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-select placeholder="OUTROS" formControlName="respostaOutros" (selectionChange)="saveRespImgProd(item.pergunta)" >
-                  <mat-option value="otimo">ótimo</mat-option>
-                  <mat-option value="bom">bom</mat-option>
-                  <mat-option value="regular">regular</mat-option>
-                  <mat-option value="ruim">ruim</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </ul>
-          <div >
-              <button mat-button matStepperPrevious>Voltar</button>
-              <button (click)="scroll(controlScroll)" mat-button matStepperNext>Próximo</button>
-          </div>
-        </form>
-  </mat-step>
-  
-  <mat-step>
-      <h4 >Assinale a alternativa, de acordo com seu julgamento</h4>
+        <ng-template matStepLabel>Imagem dos Produtos</ng-template>
+        <ul *ngFor="let item of perguntasImgProd | async">
+          <li> {{ item.pergunta }}</li>
+          <mat-form-field>
+            <mat-select placeholder="CORFIO" formControlName="respostaCorfio"
+              (selectionChange)="saveRespImgProd(item.pergunta)">
+              <mat-option value="otimo">ótimo</mat-option>
+              <mat-option value="bom">bom</mat-option>
+              <mat-option value="regular">regular</mat-option>
+              <mat-option value="ruim">ruim</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="OUTROS" formControlName="respostaOutros"
+              (selectionChange)="saveRespImgProd(item.pergunta)">
+              <mat-option value="otimo">ótimo</mat-option>
+              <mat-option value="bom">bom</mat-option>
+              <mat-option value="regular">regular</mat-option>
+              <mat-option value="ruim">ruim</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ul>
+        <div>
+          <button mat-button matStepperPrevious>Voltar</button>
+          <button (click)="scroll(controlScroll)" mat-button matStepperNext>Próximo</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <h4>Assinale a alternativa, de acordo com seu julgamento</h4>
       <form [formGroup]="fourthFormGroup">
-          <ng-template matStepLabel>Atendimento Comercial e Marketing</ng-template>
-          <ul *ngFor="let item of perguntasComMark | async">
-            <li> {{ item.pergunta }}</li>
-            <mat-form-field>
-              <mat-select placeholder="CORFIO" formControlName="respostaCorfio" (selectionChange)="saveRespComMark(item.pergunta)" >
-                  <mat-option value="otimo">ótimo</mat-option>
-                  <mat-option value="bom">bom</mat-option>
-                  <mat-option value="regular">regular</mat-option>
-                  <mat-option value="ruim">ruim</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-select placeholder="OUTROS" formControlName="respostaOutros" (selectionChange)="saveRespComMark(item.pergunta)" >
-                  <mat-option value="otimo">ótimo</mat-option>
-                  <mat-option value="bom">bom</mat-option>
-                  <mat-option value="regular">regular</mat-option>
-                  <mat-option value="ruim">ruim</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </ul>
-          <div>
-              <button mat-button matStepperPrevious>Voltar</button>
-              <button (click)="scroll(controlScroll)" mat-button matStepperNext>Próximo</button>
-          </div>
-        </form>
-  </mat-step>
-  <mat-step>
+        <ng-template matStepLabel>Atendimento Comercial e Marketing</ng-template>
+        <ul *ngFor="let item of perguntasComMark | async">
+          <li> {{ item.pergunta }}</li>
+          <mat-form-field>
+            <mat-select placeholder="CORFIO" formControlName="respostaCorfio"
+              (selectionChange)="saveRespComMark(item.pergunta)">
+              <mat-option value="otimo">ótimo</mat-option>
+              <mat-option value="bom">bom</mat-option>
+              <mat-option value="regular">regular</mat-option>
+              <mat-option value="ruim">ruim</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="OUTROS" formControlName="respostaOutros"
+              (selectionChange)="saveRespComMark(item.pergunta)">
+              <mat-option value="otimo">ótimo</mat-option>
+              <mat-option value="bom">bom</mat-option>
+              <mat-option value="regular">regular</mat-option>
+              <mat-option value="ruim">ruim</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ul>
+        <div>
+          <button mat-button matStepperPrevious>Voltar</button>
+          <button (click)="scroll(controlScroll)" mat-button matStepperNext>Próximo</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
       <h4>Assinale a alternativa, de acordo com seu julgamento</h4>
       <form [formGroup]="fifthFormGroup">
-          <ng-template matStepLabel>Embalagem e Transporte</ng-template>
-          <ul *ngFor="let item of perguntasEmbTran | async">
-            <li> {{ item.pergunta }}</li>
-            <mat-form-field>
-              <mat-select placeholder="CORFIO" formControlName="respostaCorfio" (selectionChange)="saveRespEmbTran(item.pergunta)" >
-                  <mat-option value="otimo">ótimo</mat-option>
-                  <mat-option value="bom">bom</mat-option>
-                  <mat-option value="regular">regular</mat-option>
-                  <mat-option value="ruim">ruim</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-select placeholder="OUTROS" formControlName="respostaOutros" (selectionChange)="saveRespEmbTran(item.pergunta)" >
-                  <mat-option value="otimo">ótimo</mat-option>
-                  <mat-option value="bom">bom</mat-option>
-                  <mat-option value="regular">regular</mat-option>
-                  <mat-option value="ruim">ruim</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </ul>
-          <div>
-              <button  mat-button matStepperPrevious>Voltar</button>
-              <button (click)="scroll(controlScroll)" mat-button matStepperNext>Próximo</button>
-          </div>
-        </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Resumo das Respostas</ng-template>
-    Confira o resumo de suas respostas e finalize a pesquisa
-    <div>
+        <ng-template matStepLabel>Embalagem e Transporte</ng-template>
+        <ul *ngFor="let item of perguntasEmbTran | async">
+          <li> {{ item.pergunta }}</li>
+          <mat-form-field>
+            <mat-select placeholder="CORFIO" formControlName="respostaCorfio"
+              (selectionChange)="saveRespEmbTran(item.pergunta)">
+              <mat-option value="otimo">ótimo</mat-option>
+              <mat-option value="bom">bom</mat-option>
+              <mat-option value="regular">regular</mat-option>
+              <mat-option value="ruim">ruim</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="OUTROS" formControlName="respostaOutros"
+              (selectionChange)="saveRespEmbTran(item.pergunta)">
+              <mat-option value="otimo">ótimo</mat-option>
+              <mat-option value="bom">bom</mat-option>
+              <mat-option value="regular">regular</mat-option>
+              <mat-option value="ruim">ruim</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ul>
+        <div>
+          <button mat-button matStepperPrevious>Voltar</button>
+          <button (click)="scroll(controlScroll)" mat-button matStepperNext>Próximo</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Resumo das Respostas</ng-template>
+      Confira o resumo de suas respostas e finalize a pesquisa
+      <div>
         <div>
           <ul *ngFor="let item of getRetornoResp  ">
             <li> Pergunta: {{ item.id }} </li>
             <li> Resposta Corfio: {{ item.respostaCorfio }} </li>
             <li> Resposta Outros: {{ item.respostaOutros }} </li>
-          </ul>    
+          </ul>
         </div>
-      <button mat-button matStepperPrevious>Voltar</button>
-      <button mat-button (click)="stepper.reset()">Finalizar</button>
-    </div>
-  </mat-step>
-</mat-vertical-stepper>
+        <button mat-button matStepperPrevious>Voltar</button>
+        <button mat-button (click)="stepper.reset()">Finalizar</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
 
 </div>

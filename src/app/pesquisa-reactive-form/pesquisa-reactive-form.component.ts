@@ -1,5 +1,5 @@
 import { ClientesCNPJ } from './clientesCNPJ.model';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { PesquisaReactiveServiceService } from './pesquisa-reactive-service.service';
 import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
@@ -11,6 +11,7 @@ import { PerguntasComMark } from '../pesquisa/perguntasComMark.model';
 import { PerguntasEmbTran } from '../pesquisa/perguntasEmbTran.model';
 import { map } from 'rxjs/operators';
 import { ConsultaResp } from './consultaResp.model';
+import { RespostaUser } from '../gerencial/relatorios/resUser.model';
 
 @Component({
   selector: 'app-pesquisa-reactive-form',
@@ -25,8 +26,6 @@ export class PesquisaReactiveFormComponent implements OnInit {
   thirdFormGroup: FormGroup;
   fourthFormGroup: FormGroup;
   fifthFormGroup: FormGroup;
-
-  myVar = 'coisa';
 
   perguntaFormAspTec: string;
   perguntaFormRep: string;
@@ -53,16 +52,18 @@ export class PesquisaReactiveFormComponent implements OnInit {
   realCount: any;
   constructor(private formBuilder: FormBuilder,
               private pesqReactService: PesquisaReactiveServiceService,
-              private db: AngularFirestore) { }
+              private db: AngularFirestore
+              ) { }
 
   ngOnInit() {
 
     this.getRespostas();
+    this.contaResp();
+    this.converteResp();
+    this.clientesCNPJ();
     console.log(this.getRetornoResp);
     // this.pesqReactService.openSnackBarUser();
     // this.getCNPJ();
-
-    this.clientesCNPJ();
 
     this.firstFormGroup = this.formBuilder.group({
       pergunta: [''],
@@ -147,8 +148,6 @@ export class PesquisaReactiveFormComponent implements OnInit {
       });
     }));
 
-    this.contaResp();
-    this.converteResp();
   } // END ONINIT
 
   scroll(el: HTMLElement) {
@@ -256,7 +255,8 @@ export class PesquisaReactiveFormComponent implements OnInit {
     //   size = snap.size // will return the collection size
     //   console.log(size)
 
-    const result = this.db.collection(this.user).valueChanges()
+    const result = this.db.collection(this.user)
+    .valueChanges()
     .subscribe( data => { data.forEach(element => {
       this.contaRespostas++;
       console.log(this.contaRespostas);
@@ -264,19 +264,19 @@ export class PesquisaReactiveFormComponent implements OnInit {
     }); });
     console.log(result);
 
-    const resultNovo = this.db.collection(this.user)
-    .snapshotChanges()
-    .pipe(map(docArray => {
-      return docArray.map(doc => {
-        return {
-          count: docArray.length
-        };
-      });
-    }))
-    .subscribe( from => {
-      console.log(from);
-      this.realCount = from;
-    });
+    // const resultNovo = this.db.collection(this.user)
+    // .snapshotChanges()
+    // .pipe(map(docArray => {
+    //   return docArray.map(doc => {
+    //     return {
+    //       count: docArray.length
+    //     };
+    //   });
+    // }))
+    // .subscribe( from => {
+    //   console.log(from);
+    //   this.realCount = from;
+    // });
   }
 
   converteResp() {
@@ -287,12 +287,9 @@ export class PesquisaReactiveFormComponent implements OnInit {
   }
 
   setSelect(pergunta) {
-    let data = pergunta;
-    console.log(this.user);
-    let perguntaCollectionFB: any;
-    perguntaCollectionFB = this.db.collection(this.user);
-    console.log( {perguntaCollectionFB} );
-    return data;
+
   }
+
+
 
 }
