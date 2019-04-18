@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection 
 import { PesquisaReactiveServiceService } from './pesquisa-reactive-service.service';
 import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { PerguntasAspecTec } from '../pesquisa/perguntasAspecTec.model';
 import { PerguntasRep } from '../pesquisa/perguntasRep.model';
 import { PerguntasProd } from '../pesquisa/perguntasProd.model';
@@ -56,12 +56,17 @@ export class PesquisaReactiveFormComponent implements OnInit {
               ) { }
 
   ngOnInit() {
+    let respostas: any;
+    this.db.collection(this.user)
+    .valueChanges()
+    .subscribe( data => respostas = data );
+    console.log(respostas);
 
     this.getRespostas();
     this.contaResp();
     this.converteResp();
     this.clientesCNPJ();
-    console.log(this.getRetornoResp);
+
     // this.pesqReactService.openSnackBarUser();
     // this.getCNPJ();
 
@@ -288,8 +293,14 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
   setSelect(pergunta) {
 
+    this.db.doc(this.user + '/' + pergunta).valueChanges().subscribe(
+      doc => {
+        if ( pergunta === doc['pergunta'] ) {
+          console.log(doc['respostaCorfio']);
+          
+        }
+      }
+    );
   }
-
-
 
 }
