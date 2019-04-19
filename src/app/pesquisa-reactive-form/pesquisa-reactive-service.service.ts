@@ -47,6 +47,10 @@ export class PesquisaReactiveServiceService {
     return this.db.collection<RespAspecTec>(this.pathUser).doc(pergunta).set(data);
   }
 
+  addRespGeral(pergunta: string, data: RespAspecTec): Promise<void> {
+    return this.db.collection('respostasGeral').doc(pergunta).set(data);
+  }
+
   addRespRep(pergunta: string, data: RespRep): Promise<void> {
     return this.db.collection<RespRep>(this.pathUser).doc(pergunta).set(data);
   }

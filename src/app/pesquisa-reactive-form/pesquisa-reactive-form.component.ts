@@ -13,12 +13,30 @@ import { map } from 'rxjs/operators';
 import { ConsultaResp } from './consultaResp.model';
 import { RespostaUser } from '../gerencial/relatorios/resUser.model';
 
+
+export interface Respostas {
+  pergunta?: string;
+  respostaCorfio?: string;
+  respostaOutros?: string;
+}
+
+export interface OptionsCorfio {
+  otimo?: string;
+  bom?: string;
+  regular?: string;
+  ruim?: string;
+}
+
+
 @Component({
   selector: 'app-pesquisa-reactive-form',
   templateUrl: './pesquisa-reactive-form.component.html',
   styleUrls: ['./pesquisa-reactive-form.component.css']
 })
 export class PesquisaReactiveFormComponent implements OnInit {
+
+  respostas: Observable<Respostas[]>;
+  optionsCorfio: Observable<OptionsCorfio[]>;
 
   isLinear = false;
   firstFormGroup: FormGroup;
@@ -45,6 +63,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
   clientes: Observable<ClientesCNPJ[]>;
   respostasFB: Observable<ConsultaResp[]>;
 
+  
   user = this.pesqReactService.getUser();
   getRetornoResp: any;
   contaRespostas = 0;
@@ -56,11 +75,6 @@ export class PesquisaReactiveFormComponent implements OnInit {
               ) { }
 
   ngOnInit() {
-    let respostas: any;
-    this.db.collection(this.user)
-    .valueChanges()
-    .subscribe( data => respostas = data );
-    console.log(respostas);
 
     this.getRespostas();
     this.contaResp();
@@ -176,9 +190,11 @@ export class PesquisaReactiveFormComponent implements OnInit {
     this.perguntaFormAspTec = perguntaForm;
     const pergunta = this.perguntaFormAspTec;
     console.log(pergunta);
+    const user = this.user;
     const respostaCorfio = this.firstFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.firstFormGroup.get('respostaOutros').value;
     this.pesqReactService.addRespAspTec(pergunta, {pergunta, respostaCorfio, respostaOutros});
+    this.pesqReactService.addRespGeral(user, { pergunta, respostaCorfio, respostaOutros});
     this.pesqReactService.openSnackBarSaved(pergunta);
   }
 
@@ -292,15 +308,17 @@ export class PesquisaReactiveFormComponent implements OnInit {
   }
 
   setSelect(pergunta) {
-
     this.db.doc(this.user + '/' + pergunta).valueChanges().subscribe(
-      doc => {
-        if ( pergunta === doc['pergunta'] ) {
-          console.log(doc['respostaCorfio']);
-          
+        doc => {
+          if ( pergunta === doc['pergunta'] ) {
+            console.log(doc['respostaCorfio']);
+            this.respostas = doc['respostaCorfio'];
+          }
         }
-      }
-    );
+      );
+
+
+   
   }
 
 }
