@@ -189,14 +189,19 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
   saveRespAspecTec(perguntaForm) {
     this.perguntaFormAspTec = perguntaForm;
-    const pergunta = this.perguntaFormAspTec;
+    let pergunta = this.perguntaFormAspTec;
     console.log(pergunta);
     const user = this.user;
-    const respostaCorfio = this.firstFormGroup.get('respostaCorfio').value;
-    const respostaOutros = this.firstFormGroup.get('respostaOutros').value;
+    let respostaCorfio = this.firstFormGroup.get('respostaCorfio').value;
+    let respostaOutros = this.firstFormGroup.get('respostaOutros').value;
     this.pesqReactService.addRespAspTec(pergunta, {pergunta, respostaCorfio, respostaOutros});
-    this.pesqReactService.addRespGeral(user, { pergunta, respostaCorfio, respostaOutros});
+    // this.pesqReactService.addRespGeral(user, { pergunta, respostaCorfio, respostaOutros});
     this.pesqReactService.openSnackBarSaved(pergunta);
+    respostaCorfio = '';
+    respostaOutros = '';
+    pergunta = '';
+    this.perguntaFormAspTec = '';
+
   }
 
 
@@ -309,6 +314,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
   }
 
   setSelect(pergunta: any, obs: Respostas) {
+    // alert('run!');
     this.db.doc(this.user + '/' + pergunta).valueChanges().subscribe(
       doc => {
         if (pergunta === doc['pergunta']) {

@@ -1,6 +1,7 @@
 
 form ul {
     list-style: none;
+    padding: 0;
 }
 
 .teste {
@@ -10,4 +11,14 @@ form ul {
     right: 0px;
     width: 230px;
     scroll-behavior: auto;
+}
+
+#respostasView li{
+    display: inline-block;
+    
+    
+}
+
+#respostasView ul{
+    padding: 0;
 }
