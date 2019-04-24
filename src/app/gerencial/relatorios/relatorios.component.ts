@@ -13,6 +13,8 @@ import { RelServiceService } from './rel-service.service';
 })
 export class RelatoriosComponent implements OnInit {
 
+  hoversection: HTMLElement;
+
   respostaCollection: AngularFirestoreCollection<RespostaUser>;
   respostasUser: Observable<RespostaUser[]>;
 
@@ -26,6 +28,10 @@ export class RelatoriosComponent implements OnInit {
 
   ngOnInit() {
 
+    this.hoversection = document.getElementById('hover');
+
+    this.hoversection.addEventListener('mousemove', this.onMouseMove);
+
     this.respostaCollection = this.db.collection('78', ref => {
       return ref.where( 'pergunta', '==' , 'Assistência técnica' );
     });
@@ -37,6 +43,9 @@ export class RelatoriosComponent implements OnInit {
 
   }
 
+  onMouseMove(ev: MouseEvent) {
+    console.log(ev);
+  }
 
   // teste32() {
   //   this.respostasUser = this.relService.listUserRes();
@@ -45,5 +54,7 @@ export class RelatoriosComponent implements OnInit {
   //   } );
 
   // }
+
+
 
 }

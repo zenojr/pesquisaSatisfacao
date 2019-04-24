@@ -9,7 +9,7 @@ import { PerguntasRep } from '../pesquisa/perguntasRep.model';
 import { PerguntasProd } from '../pesquisa/perguntasProd.model';
 import { PerguntasComMark } from '../pesquisa/perguntasComMark.model';
 import { PerguntasEmbTran } from '../pesquisa/perguntasEmbTran.model';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { ConsultaResp } from './consultaResp.model';
 import { RespostaUser } from '../gerencial/relatorios/resUser.model';
 
@@ -38,6 +38,8 @@ export class PesquisaReactiveFormComponent implements OnInit {
   respostas: Observable<Respostas[]>;
   optionsCorfio: Observable<OptionsCorfio[]>;
 
+  respostaCorfio: any;
+
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -63,7 +65,6 @@ export class PesquisaReactiveFormComponent implements OnInit {
   clientes: Observable<ClientesCNPJ[]>;
   respostasFB: Observable<ConsultaResp[]>;
 
-  
   user = this.pesqReactService.getUser();
   getRetornoResp: any;
   contaRespostas = 0;
@@ -307,18 +308,44 @@ export class PesquisaReactiveFormComponent implements OnInit {
     return this.vlrQuestao;
   }
 
-  setSelect(pergunta) {
+  setSelect(pergunta: any, obs: Respostas) {
     this.db.doc(this.user + '/' + pergunta).valueChanges().subscribe(
-        doc => {
-          if ( pergunta === doc['pergunta'] ) {
-            console.log(doc['respostaCorfio']);
-            this.respostas = doc['respostaCorfio'];
-          }
+      doc => {
+        if (pergunta === doc['pergunta']) {
+          console.log(doc['pergunta']);
+          const respCorfio = doc['respostaCorfio'];
+          const respOutros = doc['respostaOutros'];
+          console.log(respCorfio);
+          console.log(respOutros);
+          this.respostaCorfio = respCorfio;
+        } else {
+          console.log('não existe a pergunta');
+          this.respostaCorfio = null;
         }
-      );
 
-
-   
+      }
+    );
   }
+
+  setSelect2(pergunta: any, obs: Respostas) {
+    const size$ = new Subject<string>();
+    const queryObservable = size$.pipe(
+    switchMap(size =>
+      this.db.collection(this.user, ref => ref.where('pergunta', '==', pergunta)).valueChanges()
+    ));
+    console.log(queryObservable);
+
+  }
+
+  // setSelect2(pergunta: any, obs: Respostas) {
+  //   this.db.doc( this.user + '/' + pergunta).get().subscribe(
+  //     doc => {
+  //       if ( pergunta === doc['pergunta']) {
+  //         console.log( doc['pergunta']);
+  //         console.log( doc['respostaCorfio']);
+  //       }
+  //     }
+  //   )
+  // }
 
 }
