@@ -70,6 +70,10 @@ export class PesquisaReactiveFormComponent implements OnInit {
   contaRespostas = 0;
   vlrQuestao = 0;
   realCount: any;
+
+  perguntaAssTec = 'Assistência Técnica';
+  perguntaAtendComFab = 'Atendimento do setor comercial na fábrica';
+
   constructor(private formBuilder: FormBuilder,
               private pesqReactService: PesquisaReactiveServiceService,
               private db: AngularFirestore
@@ -194,16 +198,25 @@ export class PesquisaReactiveFormComponent implements OnInit {
     const user = this.user;
     let respostaCorfio = this.firstFormGroup.get('respostaCorfio').value;
     let respostaOutros = this.firstFormGroup.get('respostaOutros').value;
+
     this.pesqReactService.addRespAspTec(pergunta, {pergunta, respostaCorfio, respostaOutros});
     // this.pesqReactService.addRespGeral(user, { pergunta, respostaCorfio, respostaOutros});
     this.pesqReactService.openSnackBarSaved(pergunta);
-    respostaCorfio = '';
-    respostaOutros = '';
-    pergunta = '';
-    this.perguntaFormAspTec = '';
+
+    // respostaCorfio = '';
+    // respostaOutros = '';
+    // pergunta = '';
+    // this.perguntaFormAspTec = '';
 
   }
 
+  resetForm() {
+    // return this.firstFormGroup.reset();
+    // return this.firstFormGroup.get('respostaOutros').value('');
+    this.firstFormGroup.get('respostaCorfio').setValue('');
+    this.firstFormGroup.get('respostaOutros').setValue('');
+    
+  }
 
   saveRespRep(perguntaForm) {
     this.perguntaFormRep = perguntaForm;

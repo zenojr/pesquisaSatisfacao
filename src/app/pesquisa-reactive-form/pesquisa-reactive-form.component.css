@@ -15,7 +15,9 @@ form ul {
 
 #respostasView li{
     display: inline-block;
-    
+    background-color: #B6F197;
+    padding: 3px;
+    border-radius: 3px;
     
 }
 

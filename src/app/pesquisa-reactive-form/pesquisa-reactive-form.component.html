@@ -1,57 +1,52 @@
 <div class="container">
-  <div class="teste">
-    <ul *ngFor="let item of respostasUser | async ">
-      <li> Pergunta: {{ item.pergunta }} </li>
-      <li> Resposta Corfio: {{ item.respostaCorfio }} </li>
-      <li> Resposta Outros: {{ item.respostaOutros }} </li>
-    </ul>
-  </div>
-
   <div>
     <ul *ngFor="let item of clientes | async">
       <h3 *ngIf="item.cnpj === user">Seja bem vindo, você está respondendo a pesquisa em nome de {{ item.nome }} </h3>
     </ul>
   </div>
   <mat-progress-bar mode="determinate" value="{{vlrQuestao * contaRespostas}}"></mat-progress-bar>
-  <span> {{ vlrQuestao }} {{ contaRespostas }} {{ realCount | json }} </span>
+  <!-- <span> {{ vlrQuestao }} {{ contaRespostas }} {{ realCount | json }} </span> -->
   <span #controlScroll></span>
 
 
   <mat-vertical-stepper [linear]="isLinear" #stepper>
     <mat-step>
-      <h4>Assinale a alternativa, de acordo com seu julgamento</h4>
+      <h5>Assinale a alternativa, de acordo com seu julgamento</h5>
       <form required [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Aspéctos técnicos</ng-template>
         <ul *ngFor="let item of perguntaAspecTec | async">
-          <li> {{ item.pergunta }}</li>
-          <div>
-              <ul id="respostasView" *ngFor="let respostas of getRetornoResp  ">
-                <div id="" *ngIf=" item.pergunta === respostas.id ">
-                    <li><b>Suas respostas: &nbsp;</b></li>
-                    <li>Corfio: <i>{{ respostas.respostaCorfio }} &nbsp;</i></li>
-                    
-                    <li>/ Outros: <i>{{ respostas.respostaOutros }}</i></li>
-
-                </div>
-              </ul>
-          </div>
+          <li>  {{ item.pergunta }}</li>
           <mat-form-field>
-            <mat-select placeholder="CORFIO" formControlName="respostaCorfio" (selectionChange)="saveRespAspecTec(item.pergunta)">
+            <mat-select (click)="resetForm()" placeholder="CORFIO" formControlName="respostaCorfio" 
+            (selectionChange)="saveRespAspecTec(item.pergunta)">
               <mat-option value="ótimo">ótimo</mat-option>
               <mat-option value="bom">bom</mat-option>
               <mat-option value="regular">regular</mat-option>
               <mat-option value="ruim">ruim</mat-option>
+              <mat-option *ngIf="perguntasNaoUso === item.pergunta" value="naouso">não uso</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field>
-            <mat-select placeholder="OUTROS" formControlName="respostaOutros"
+            <mat-select  placeholder="OUTROS" formControlName="respostaOutros"
               (selectionChange)="saveRespAspecTec(item.pergunta)">
               <mat-option value="otimo">ótimo</mat-option>
               <mat-option value="bom">bom</mat-option>
               <mat-option value="regular">regular</mat-option>
               <mat-option value="ruim">ruim</mat-option>
+              <mat-option *ngIf="perguntaAssTec === item.pergunta" value="naouso">não uso</mat-option>
             </mat-select>
           </mat-form-field>
+          <div>
+            <ul id="respostasView" *ngFor="let respostas of getRetornoResp  ">
+              <div id="" *ngIf=" item.pergunta === respostas.id ">
+                  <li><b>Respostas: &nbsp;</b></li>
+                  <li>Corfio: <i>{{ respostas.respostaCorfio }} &nbsp;</i></li>
+                  <li>Outros: <i>{{ respostas.respostaOutros }}</i></li>
+              </div>
+            </ul>
+          </div>
+          <span> &nbsp; </span>
+          <mat-divider></mat-divider>
         </ul>
         <div>
           <button (click)="scroll(controlScroll)" mat-button matStepperNext>Próximo</button>
@@ -157,6 +152,7 @@
               <mat-option value="bom">bom</mat-option>
               <mat-option value="regular">regular</mat-option>
               <mat-option value="ruim">ruim</mat-option>
+              <mat-option *ngIf="perguntaAtendComFab === item.pergunta" value="naouso">Não necessita visita</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field>
@@ -166,6 +162,7 @@
               <mat-option value="bom">bom</mat-option>
               <mat-option value="regular">regular</mat-option>
               <mat-option value="ruim">ruim</mat-option>
+              <mat-option *ngIf="perguntaAtendComFab === item.pergunta" value="naouso">Não necessita visita</mat-option>
             </mat-select>
           </mat-form-field>
         </ul>
