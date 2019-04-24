@@ -71,8 +71,8 @@ export class PesquisaReactiveFormComponent implements OnInit {
   vlrQuestao = 0;
   realCount: any;
 
-  perguntaAssTec = 'Assistência Técnica';
-  perguntaAtendComFab = 'Atendimento do setor comercial na fábrica';
+  perguntaEspAssTec = 'Assistência Técnica';
+  perguntaEspAtendComFab = 'Atendimento do setor comercial na fábrica';
 
   constructor(private formBuilder: FormBuilder,
               private pesqReactService: PesquisaReactiveServiceService,
@@ -193,11 +193,11 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
   saveRespAspecTec(perguntaForm) {
     this.perguntaFormAspTec = perguntaForm;
-    let pergunta = this.perguntaFormAspTec;
+    const pergunta = this.perguntaFormAspTec;
     console.log(pergunta);
     const user = this.user;
-    let respostaCorfio = this.firstFormGroup.get('respostaCorfio').value;
-    let respostaOutros = this.firstFormGroup.get('respostaOutros').value;
+    const respostaCorfio = this.firstFormGroup.get('respostaCorfio').value;
+    const respostaOutros = this.firstFormGroup.get('respostaOutros').value;
 
     this.pesqReactService.addRespAspTec(pergunta, {pergunta, respostaCorfio, respostaOutros});
     // this.pesqReactService.addRespGeral(user, { pergunta, respostaCorfio, respostaOutros});
@@ -210,11 +210,12 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
   }
 
-  resetForm() {
-    // return this.firstFormGroup.reset();
+  resetForms() {
+    return this.firstFormGroup.reset(), this.secondFormGroup.reset(),
+           this.thirdFormGroup.reset(), this.fourthFormGroup.reset();
     // return this.firstFormGroup.get('respostaOutros').value('');
-    this.firstFormGroup.get('respostaCorfio').setValue('');
-    this.firstFormGroup.get('respostaOutros').setValue('');
+    // this.firstFormGroup.get('respostaCorfio').setValue('');
+    // this.firstFormGroup.get('respostaOutros').setValue('');
     
   }
 
