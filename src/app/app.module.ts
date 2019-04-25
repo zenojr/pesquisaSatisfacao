@@ -25,8 +25,6 @@ import { RelatoriosComponent } from './gerencial/relatorios/relatorios.component
 import { ChartsModule } from 'ng2-charts';
 import { PerguntasComponent } from './gerencial/perguntas/perguntas.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +49,7 @@ import { PerguntasComponent } from './gerencial/perguntas/perguntas.component';
     AngularFireStorageModule,
     AngularFireAuthModule,
     FlexLayoutModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-config.json', { enabled: environment.production }),
     Ng2GoogleChartsModule,
     ChartsModule
   ],
