@@ -49,7 +49,7 @@ import { PerguntasComponent } from './gerencial/perguntas/perguntas.component';
     AngularFireStorageModule,
     AngularFireAuthModule,
     FlexLayoutModule,
-    ServiceWorkerModule.register('ngsw-config.json', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     Ng2GoogleChartsModule,
     ChartsModule
   ],

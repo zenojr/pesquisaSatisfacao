@@ -1,7 +1,7 @@
 {
-  "name": "Pesquisa de satisfacao CORFIO",
-  "short_name": "Pesquisa CORFIO",
-  "theme_color": "#10069F",
+  "name": "pesquisaSatisfacao",
+  "short_name": "pesquisaSatisfacao",
+  "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",
