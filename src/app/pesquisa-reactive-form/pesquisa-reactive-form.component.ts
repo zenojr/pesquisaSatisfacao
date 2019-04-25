@@ -73,6 +73,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
   perguntaEspAssTec = 'Assistência Técnica';
   perguntaEspAtendComFab = 'Atendimento do setor comercial na fábrica';
+  perguntaEspRep = 'Freqüência de visitas do representante atende a necessidade ?';
 
   constructor(private formBuilder: FormBuilder,
               private pesqReactService: PesquisaReactiveServiceService,

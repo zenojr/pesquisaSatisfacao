@@ -58,7 +58,7 @@
       <div>
         <form [formGroup]="secondFormGroup">
           <ng-template matStepLabel>Atendimento do Representante</ng-template>
-          <ul>
+          <!-- <ul>
             <mat-form-field>
               <p #perguntaFreq>Frequência de visitas do representante atende a necessidade?</p>
               <mat-select placeholder="" formControlName="respFreq" (selectionChange)="respFreqRep(perguntaFreq)">
@@ -76,25 +76,31 @@
                 <mat-option value="ruim">ruim</mat-option>
               </mat-select>
             </mat-form-field>
-          </ul>
+          </ul> -->
           <ul *ngFor="let item of perguntasRep | async">
             <li> {{ item.pergunta }}</li>
             <mat-form-field>
               <mat-select (click)="resetForms()" placeholder="CORFIO" formControlName="respostaCorfio"
                 (selectionChange)="saveRespRep(item.pergunta)">
-                <mat-option value="otimo">ótimo</mat-option>
-                <mat-option value="bom">bom</mat-option>
-                <mat-option value="regular">regular</mat-option>
-                <mat-option value="ruim">ruim</mat-option>
+                <mat-option *ngIf="perguntaEspRep != item.pergunta" value="otimo">ótimo</mat-option>
+                <mat-option *ngIf="perguntaEspRep != item.pergunta" value="bom">bom</mat-option>
+                <mat-option *ngIf="perguntaEspRep != item.pergunta" value="regular">regular</mat-option>
+                <mat-option *ngIf="perguntaEspRep != item.pergunta" value="ruim">ruim</mat-option>
+                <mat-option *ngIf="perguntaEspRep === item.pergunta" value="sim">sim</mat-option>
+                <mat-option *ngIf="perguntaEspRep === item.pergunta" value="nao">não</mat-option>
+                <mat-option *ngIf="perguntaEspRep === item.pergunta" value="não necessita">não necessita visita</mat-option>
               </mat-select>
             </mat-form-field>
             <mat-form-field>
               <mat-select placeholder="OUTROS" formControlName="respostaOutros"
                 (selectionChange)="saveRespRep(item.pergunta)">
-                <mat-option value="otimo">ótimo</mat-option>
-                <mat-option value="bom">bom</mat-option>
-                <mat-option value="regular">regular</mat-option>
-                <mat-option value="ruim">ruim</mat-option>
+                <mat-option *ngIf="perguntaEspRep != item.pergunta" value="otimo">ótimo</mat-option>
+                <mat-option *ngIf="perguntaEspRep != item.pergunta" value="bom">bom</mat-option>
+                <mat-option *ngIf="perguntaEspRep != item.pergunta" value="regular">regular</mat-option>
+                <mat-option *ngIf="perguntaEspRep != item.pergunta" value="ruim">ruim</mat-option>
+                <mat-option *ngIf="perguntaEspRep === item.pergunta" value="sim">sim</mat-option>
+                <mat-option *ngIf="perguntaEspRep === item.pergunta" value="nao">não</mat-option>
+                <mat-option *ngIf="perguntaEspRep === item.pergunta" value="não necessita">não necessita visita</mat-option>
               </mat-select>
             </mat-form-field>
             <div>
@@ -174,7 +180,7 @@
               <mat-option value="bom">bom</mat-option>
               <mat-option value="regular">regular</mat-option>
               <mat-option value="ruim">ruim</mat-option>
-              <!-- <mat-option *ngIf="perguntaEspAtendComFab === item.pergunta" value="naouso">Não necessita visita</mat-option> -->
+              <mat-option *ngIf="perguntaEspAtendComFab === item.pergunta" value="não utilizo">Não utilizo</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field>
@@ -184,7 +190,7 @@
               <mat-option value="bom">bom</mat-option>
               <mat-option value="regular">regular</mat-option>
               <mat-option value="ruim">ruim</mat-option>
-              <!-- <mat-option *ngIf="perguntaAtendComFab === item.pergunta" value="naouso">Não necessita visita</mat-option> -->
+              <mat-option *ngIf="perguntaAtendComFab === item.pergunta" value="não utilizo">Não utilizo</mat-option>
             </mat-select>
           </mat-form-field>
           <div>
