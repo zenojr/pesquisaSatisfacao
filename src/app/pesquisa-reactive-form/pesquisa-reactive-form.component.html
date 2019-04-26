@@ -1,4 +1,8 @@
-<div class="container">
+<div class="container" *ngIf="fim === true">
+  <p>Você já respondeu nossa pesquisa, Muito obrigado</p>
+</div>
+
+<div class="container" *ngIf="fim === false" >
   <div>
     <ul *ngFor="let item of clientes | async">
       <h3 *ngIf="item.cnpj === user">Seja bem vindo, você está respondendo a pesquisa em nome de {{ item.nome }} </h3>
@@ -297,7 +301,7 @@
         </div>
         <p *ngIf="fim === true" >Sua pesquisa foi concluida com sucesso, obrigado!</p>
         <button mat-button matStepperPrevious>Voltar</button>
-        <button mat-button (click)="theEnd()">Finalizar</button>
+        <button mat-button (click)="theEnd() ; saveRespFinais('fim')">Finalizar</button>
       </div>
     </mat-step>
   </mat-vertical-stepper>

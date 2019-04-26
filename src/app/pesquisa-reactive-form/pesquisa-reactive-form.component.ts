@@ -1,3 +1,4 @@
+import { AuthService } from './../login/auth.service';
 import { ClientesCNPJ } from './clientesCNPJ.model';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { PesquisaReactiveServiceService } from './pesquisa-reactive-service.service';
@@ -15,10 +16,12 @@ import { RespostaUser } from '../gerencial/relatorios/resUser.model';
 import { PerguntasFinais } from '../pesquisa/perguntasFinais.model';
 
 
+
 export interface Respostas {
   pergunta?: string;
   respostaCorfio?: string;
   respostaOutros?: string;
+
 }
 
 export interface OptionsCorfio {
@@ -83,7 +86,8 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private pesqReactService: PesquisaReactiveServiceService,
-              private db: AngularFirestore
+              private db: AngularFirestore,
+              private authService: AuthService
               ) { }
 
   ngOnInit() {
@@ -196,6 +200,14 @@ export class PesquisaReactiveFormComponent implements OnInit {
       });
     }));
 
+    this.db.doc(this.user + '/' + 'fim').valueChanges().subscribe(
+      doc => {
+        if ( doc['fim'] === true ) {
+          this.fim = true;
+        }
+      }
+    );
+
   } // END ONINIT
 
   scroll(el: HTMLElement) {
@@ -288,12 +300,13 @@ export class PesquisaReactiveFormComponent implements OnInit {
   saveRespFinais(perguntaForm) {
     this.perguntaFormFim = perguntaForm;
     const pergunta = this.perguntaFormFim;
+    const fim = this.fim;
     console.log(pergunta);
     console.log(this.sixthFormGroup.get('observacao').value);
     const resposta = this.sixthFormGroup.get('respostaMotivo').value;
     const observacao = this.sixthFormGroup.get('observacao').value;
     console.log(observacao);
-    this.pesqReactService.addRespFinais(pergunta, {resposta, observacao});
+    this.pesqReactService.addRespFinais(pergunta, {resposta, observacao, fim});
     this.pesqReactService.openSnackBarSaved(pergunta);
   }
 
@@ -303,10 +316,8 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
   theEnd() {
     this.fim = true;
-    this.db.collection(this.user).add(this.fim);
-    this.db.collection(this.user).doc('finalizado').set(this.fim);
-    alert( 'Pesquisa concluida com sucesso, muito obrigado' );
-    
+    alert( 'Pesquisa concluida com sucesso, muito obrigado!' );
+    this.authService.logOut();
   }
 
   getRespostas() {

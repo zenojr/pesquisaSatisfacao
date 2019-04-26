@@ -34,19 +34,6 @@ export class LoginComponent implements OnInit {
 
   }
 
- 
-
-
-  // this.perguntaAspecTec = this.db.collection('perguntasAspecTec')
-  //   .snapshotChanges()
-  //   .pipe(map(docArray => {
-  //     return docArray.map(doc => {
-  //       return {
-  //         id: doc.payload.doc.id,
-  //         pergunta: doc.payload.doc.data()['pergunta']
-  //       };
-  //     });
-  //   }));
 
   onSubmit() {
     // console.log(this.loginForm);
