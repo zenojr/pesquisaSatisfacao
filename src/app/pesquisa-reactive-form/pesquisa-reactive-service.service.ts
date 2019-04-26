@@ -10,6 +10,7 @@ import { RespEmbTran } from './respEmbtran.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ConsultaResp } from './consultaResp.model';
+import { RespostasFinais } from '../pesquisa/respostasFinais.model';
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +50,7 @@ export class PesquisaReactiveServiceService {
 
   limpaRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
     return this.db.collection<RespAspecTec>(this.pathUser).doc(pergunta).set(data);
-    
+
   }
 
   addRespGeral(pergunta: string, data: RespAspecTec): Promise<void> {
@@ -74,6 +75,10 @@ export class PesquisaReactiveServiceService {
 
   addRespEmbTran(pergunta: string, data: RespEmbTran): Promise<void> {
     return this.db.collection<RespEmbTran>(this.pathUser).doc(pergunta).set(data);
+  }
+
+  addRespFinais(pergunta: string, data: RespostasFinais): Promise<void> {
+    return this.db.collection<RespostasFinais>(this.pathUser).doc(pergunta).set(data);
   }
 
   getUser() {

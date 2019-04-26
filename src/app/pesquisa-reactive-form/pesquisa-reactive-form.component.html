@@ -29,7 +29,7 @@
           <mat-form-field>
             <mat-select  placeholder="OUTROS" formControlName="respostaOutros"
                          (selectionChange)="saveRespAspecTec(item.pergunta)">
-              <mat-option value="otimo">ótimo</mat-option>
+              <mat-option value="ótimo">ótimo</mat-option>
               <mat-option value="bom">bom</mat-option>
               <mat-option value="regular">regular</mat-option>
               <mat-option value="ruim">ruim</mat-option>
@@ -63,7 +63,7 @@
             <mat-form-field>
               <mat-select (click)="resetForms()" placeholder="CORFIO" formControlName="respostaCorfio"
                 (selectionChange)="saveRespRep(item.pergunta)">
-                <mat-option *ngIf="perguntaEspRep != item.pergunta" value="otimo">ótimo</mat-option>
+                <mat-option *ngIf="perguntaEspRep != item.pergunta" value="ótimo">ótimo</mat-option>
                 <mat-option *ngIf="perguntaEspRep != item.pergunta" value="bom">bom</mat-option>
                 <mat-option *ngIf="perguntaEspRep != item.pergunta" value="regular">regular</mat-option>
                 <mat-option *ngIf="perguntaEspRep != item.pergunta" value="ruim">ruim</mat-option>
@@ -75,7 +75,7 @@
             <mat-form-field>
               <mat-select placeholder="OUTROS" formControlName="respostaOutros"
                 (selectionChange)="saveRespRep(item.pergunta)">
-                <mat-option *ngIf="perguntaEspRep != item.pergunta" value="otimo">ótimo</mat-option>
+                <mat-option *ngIf="perguntaEspRep != item.pergunta" value="ótimo">ótimo</mat-option>
                 <mat-option *ngIf="perguntaEspRep != item.pergunta" value="bom">bom</mat-option>
                 <mat-option *ngIf="perguntaEspRep != item.pergunta" value="regular">regular</mat-option>
                 <mat-option *ngIf="perguntaEspRep != item.pergunta" value="ruim">ruim</mat-option>
@@ -114,7 +114,7 @@
           <mat-form-field>
             <mat-select (click)="resetForms()" placeholder="CORFIO" formControlName="respostaCorfio"
               (selectionChange)="saveRespImgProd(item.pergunta)">
-              <mat-option value="otimo">ótimo</mat-option>
+              <mat-option value="ótimo">ótimo</mat-option>
               <mat-option value="bom">bom</mat-option>
               <mat-option value="regular">regular</mat-option>
               <mat-option value="ruim">ruim</mat-option>
@@ -123,7 +123,7 @@
           <mat-form-field>
             <mat-select placeholder="OUTROS" formControlName="respostaOutros"
               (selectionChange)="saveRespImgProd(item.pergunta)">
-              <mat-option value="otimo">ótimo</mat-option>
+              <mat-option value="ótimo">ótimo</mat-option>
               <mat-option value="bom">bom</mat-option>
               <mat-option value="regular">regular</mat-option>
               <mat-option value="ruim">ruim</mat-option>
@@ -157,7 +157,7 @@
           <mat-form-field>
             <mat-select (click)="resetForms()" placeholder="CORFIO" formControlName="respostaCorfio"
               (selectionChange)="saveRespComMark(item.pergunta)">
-              <mat-option value="otimo">ótimo</mat-option>
+              <mat-option value="ótimo">ótimo</mat-option>
               <mat-option value="bom">bom</mat-option>
               <mat-option value="regular">regular</mat-option>
               <mat-option value="ruim">ruim</mat-option>
@@ -167,11 +167,11 @@
           <mat-form-field>
             <mat-select placeholder="OUTROS" formControlName="respostaOutros"
               (selectionChange)="saveRespComMark(item.pergunta)">
-              <mat-option value="otimo">ótimo</mat-option>
+              <mat-option value="ótimo">ótimo</mat-option>
               <mat-option value="bom">bom</mat-option>
               <mat-option value="regular">regular</mat-option>
               <mat-option value="ruim">ruim</mat-option>
-              <mat-option *ngIf="perguntaAtendComFab === item.pergunta" value="não utilizo">Não utilizo</mat-option>
+              <mat-option *ngIf="perguntaEspAtendComFab === item.pergunta" value="não utilizo">Não utilizo</mat-option>
             </mat-select>
           </mat-form-field>
           <div>
@@ -201,7 +201,7 @@
           <mat-form-field>
             <mat-select (click)="resetForms()" placeholder="CORFIO" formControlName="respostaCorfio"
               (selectionChange)="saveRespEmbTran(item.pergunta)">
-              <mat-option value="otimo">ótimo</mat-option>
+              <mat-option value="ótimo">ótimo</mat-option>
               <mat-option value="bom">bom</mat-option>
               <mat-option value="regular">regular</mat-option>
               <mat-option value="ruim">ruim</mat-option>
@@ -210,7 +210,7 @@
           <mat-form-field>
             <mat-select placeholder="OUTROS" formControlName="respostaOutros"
               (selectionChange)="saveRespEmbTran(item.pergunta)">
-              <mat-option value="otimo">ótimo</mat-option>
+              <mat-option value="ótimo">ótimo</mat-option>
               <mat-option value="bom">bom</mat-option>
               <mat-option value="regular">regular</mat-option>
               <mat-option value="ruim">ruim</mat-option>
@@ -235,6 +235,56 @@
       </form>
     </mat-step>
     <mat-step>
+        <h4>Complete sua pesquisa</h4>
+        <form [formGroup]="sixthFormGroup">
+          <ng-template matStepLabel>Considerações finais</ng-template>
+          <div>
+            <ul *ngFor="let item of perguntasFinais | async">
+              {{ item.pergunta }}
+            <mat-form-field>
+              <mat-select placeholder="Sua resposta" formControlName="respostaMotivo"
+                          (selectionChange)="saveRespFinais(item.pergunta)">
+                <mat-option value="Atendimento do representante">Atendimento do representante</mat-option>
+                <mat-option value="Qualidade técnica do produto">Qualidade técnica do produto</mat-option>
+                <mat-option value="Aceitação do produto no mercado">Aceitação do produto no mercado</mat-option>
+                <mat-option value="Prazo de entrega">Prazo de entrega</mat-option>
+                <mat-option value="Preço">Preço</mat-option>
+                <mat-option value="Atendimento da fábrica">Atendimento da fábrica</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <br>
+            
+            <br>
+            <span #sugestao>Outras sugestões, observações e ou reclamações:</span>
+            <br>
+            <mat-form-field class="sugestoes">
+                <textarea id="observacao" matInput formControlName="observacao" maxlength="256" 
+                #message placeholder="Deixe aqui sua mensagem"></textarea>
+                <button mat-button *ngIf="message" matSuffix mat-icon-button aria-label="Clear" (click)="limpaObs()">
+                  <mat-icon>close</mat-icon>
+                </button>
+                <mat-hint align="end">{{message.value.length}} / 256</mat-hint>    
+            </mat-form-field> 
+            <br>
+            <br>
+            <button *ngIf="message.value.length != 0" 
+                    type="button" 
+                    mat-button 
+                    (click)="saveRespFinais(item.pergunta)" 
+                    color="primary">Salvar Mensagem
+            </button>    
+    
+          </ul>
+          </div>
+          
+          <span></span>
+          <div>
+            <button mat-button matStepperPrevious>Voltar</button>
+            <button (click)="scroll(controlScroll)" mat-button matStepperNext>Próximo</button>
+          </div>
+        </form>
+      </mat-step>
+    <mat-step>
       <ng-template matStepLabel>Resumo das Respostas</ng-template>
       Confira o resumo de suas respostas e finalize a pesquisa
       <div>
@@ -245,10 +295,10 @@
             <li> Resposta Outros: {{ item.respostaOutros }} </li>
           </ul>
         </div>
+        <p *ngIf="fim === true" >Sua pesquisa foi concluida com sucesso, obrigado!</p>
         <button mat-button matStepperPrevious>Voltar</button>
-        <button mat-button (click)="stepper.reset()">Finalizar</button>
+        <button mat-button (click)="theEnd()">Finalizar</button>
       </div>
     </mat-step>
   </mat-vertical-stepper>
-
 </div>

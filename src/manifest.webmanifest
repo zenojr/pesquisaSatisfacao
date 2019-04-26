@@ -1,8 +1,8 @@
 {
-  "name": "pesquisaSatisfacao",
-  "short_name": "pesquisaSatisfacao",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "Pesquisa de satisfação 2019",
+  "short_name": "Corfio Pesquisa",
+  "theme_color": "#10069f",
+  "background_color": "#10069f",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",

@@ -12,6 +12,7 @@ import { PerguntasEmbTran } from '../pesquisa/perguntasEmbTran.model';
 import { map, switchMap } from 'rxjs/operators';
 import { ConsultaResp } from './consultaResp.model';
 import { RespostaUser } from '../gerencial/relatorios/resUser.model';
+import { PerguntasFinais } from '../pesquisa/perguntasFinais.model';
 
 
 export interface Respostas {
@@ -39,6 +40,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
   optionsCorfio: Observable<OptionsCorfio[]>;
 
   respostaCorfio: any;
+  fim = false;
 
   isLinear = false;
   firstFormGroup: FormGroup;
@@ -46,18 +48,22 @@ export class PesquisaReactiveFormComponent implements OnInit {
   thirdFormGroup: FormGroup;
   fourthFormGroup: FormGroup;
   fifthFormGroup: FormGroup;
+  sixthFormGroup: FormGroup;
 
   perguntaFormAspTec: string;
   perguntaFormRep: string;
   perguntaFormImgProd: string;
   perguntaFormComMark: string;
   perguntaFormEmbTran: string;
+  perguntaFormFim: string;
 
   perguntaAspecTec: Observable<PerguntasAspecTec[]>;
   perguntasRep: Observable<PerguntasRep[]>;
   perguntasImgProd: Observable<PerguntasProd[]>;
   perguntasComMark: Observable<PerguntasComMark[]>;
   perguntasEmbTran: Observable<PerguntasEmbTran[]>;
+  perguntasFinais: Observable<PerguntasFinais[]>;
+
 
   listadeCNPJ: Observable<any>;
   respostarep: Observable<any>;
@@ -118,6 +124,12 @@ export class PesquisaReactiveFormComponent implements OnInit {
       respostaOutros: ['']
     });
 
+    this.sixthFormGroup = this.formBuilder.group({
+      pergunta: [''],
+      respostaMotivo: [''],
+      observacao: ['']
+    });
+
     this.perguntaAspecTec = this.db.collection('perguntasAspecTec')
     .snapshotChanges()
     .pipe(map(docArray => {
@@ -173,6 +185,17 @@ export class PesquisaReactiveFormComponent implements OnInit {
       });
     }));
 
+    this.perguntasFinais = this.db.collection('perguntasFinais')
+    .snapshotChanges()
+    .pipe(map(docArray => {
+      return docArray.map(doc => {
+        return {
+          id: doc.payload.doc.id,
+          pergunta: doc.payload.doc.data()['pergunta']
+        };
+      });
+    }));
+
   } // END ONINIT
 
   scroll(el: HTMLElement) {
@@ -199,25 +222,13 @@ export class PesquisaReactiveFormComponent implements OnInit {
     const user = this.user;
     const respostaCorfio = this.firstFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.firstFormGroup.get('respostaOutros').value;
-
     this.pesqReactService.addRespAspTec(pergunta, {pergunta, respostaCorfio, respostaOutros});
-    // this.pesqReactService.addRespGeral(user, { pergunta, respostaCorfio, respostaOutros});
     this.pesqReactService.openSnackBarSaved(pergunta);
-
-    // respostaCorfio = '';
-    // respostaOutros = '';
-    // pergunta = '';
-    // this.perguntaFormAspTec = '';
-
   }
 
   resetForms() {
     return this.firstFormGroup.reset(), this.secondFormGroup.reset(),
            this.thirdFormGroup.reset(), this.fourthFormGroup.reset();
-    // return this.firstFormGroup.get('respostaOutros').value('');
-    // this.firstFormGroup.get('respostaCorfio').setValue('');
-    // this.firstFormGroup.get('respostaOutros').setValue('');
-    
   }
 
   saveRespRep(perguntaForm) {
@@ -272,6 +283,30 @@ export class PesquisaReactiveFormComponent implements OnInit {
     const respostaOutros = this.fifthFormGroup.get('respostaOutros').value;
     this.pesqReactService.addRespEmbTran(pergunta, {pergunta, respostaCorfio, respostaOutros});
     this.pesqReactService.openSnackBarSaved(pergunta);
+  }
+
+  saveRespFinais(perguntaForm) {
+    this.perguntaFormFim = perguntaForm;
+    const pergunta = this.perguntaFormFim;
+    console.log(pergunta);
+    console.log(this.sixthFormGroup.get('observacao').value);
+    const resposta = this.sixthFormGroup.get('respostaMotivo').value;
+    const observacao = this.sixthFormGroup.get('observacao').value;
+    console.log(observacao);
+    this.pesqReactService.addRespFinais(pergunta, {resposta, observacao});
+    this.pesqReactService.openSnackBarSaved(pergunta);
+  }
+
+  limpaObs() {
+    return this.sixthFormGroup.get('observacao').setValue('');
+  }
+
+  theEnd() {
+    this.fim = true;
+    this.db.collection(this.user).add(this.fim);
+    this.db.collection(this.user).doc('finalizado').set(this.fim);
+    alert( 'Pesquisa concluida com sucesso, muito obrigado' );
+    
   }
 
   getRespostas() {
@@ -358,15 +393,5 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
   }
 
-  // setSelect2(pergunta: any, obs: Respostas) {
-  //   this.db.doc( this.user + '/' + pergunta).get().subscribe(
-  //     doc => {
-  //       if ( pergunta === doc['pergunta']) {
-  //         console.log( doc['pergunta']);
-  //         console.log( doc['respostaCorfio']);
-  //       }
-  //     }
-  //   )
-  // }
 
 }
