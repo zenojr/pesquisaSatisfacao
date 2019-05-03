@@ -52,10 +52,6 @@ export class PerguntasComponent implements OnInit {
   }
 
   createUsers() {
-
-    // const email = 'zeno@corfio.com';
-    // const password = '123456';
-
     const createUsers = [
    ];
 
