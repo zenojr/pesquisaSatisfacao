@@ -6,6 +6,9 @@ import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/fire
 import { PerguntasAspecTec } from 'src/app/pesquisa/perguntasAspecTec.model';
 import { Observable } from 'rxjs';
 import { PerguntasComMark } from 'src/app/pesquisa/perguntasComMark.model';
+import { AngularFireAuth } from 'angularfire2/auth';
+
+
 
 @Component({
   selector: 'app-perguntas',
@@ -24,9 +27,11 @@ export class PerguntasComponent implements OnInit {
   private perguntasRepCollection: AngularFirestoreCollection<PerguntasRep>;
   perguntaRep: Observable<PerguntasRep[]>;
 
+  
+
   editable = false;
 
-  constructor( private db: AngularFirestore ) {
+  constructor( private db: AngularFirestore,  private afAuth: AngularFireAuth ) {
     this.perguntasAspecTecCollection = db.collection<PerguntasAspecTec>('perguntasAspecTec');
     this.perguntaAspecTec = this.perguntasAspecTecCollection.valueChanges();
     this.perguntasComMarkCollection = db.collection<PerguntasComMark>('perguntasComMark');
@@ -48,18 +53,27 @@ export class PerguntasComponent implements OnInit {
     return this.db.collection<PerguntasAspecTec>('perguntasAspectTec');
   }
 
-  // addRespEmbTran(pergunta: string, data: RespEmbTran): Promise<void> {
-  //   return this.db.collection<RespEmbTran>(this.pathUser).doc(pergunta).set(data);
-  // }
+  createUsers() {
 
-  // saveRespAspecTec(perguntaForm) {
-  //   this.perguntaFormAspTec = perguntaForm;
-  //   const pergunta = this.perguntaFormAspTec;
-  //   console.log(pergunta);
-  //   const respostaCorfio = this.firstFormGroup.get('respostaCorfio').value;
-  //   const respostaOutros = this.firstFormGroup.get('respostaOutros').value;
-  //   this.pesqReactService.addRespAspTec(pergunta, {pergunta, respostaCorfio, respostaOutros});
-  //   this.pesqReactService.openSnackBarSaved(pergunta);
-  // }
+    alert('Ops, isso é apenas para Devs!')
+    // const email = 'zeno@corfio.com';
+    // const password = '123456';
+
+    
+
+    // createUsers.forEach(element => {
+    //   console.log(element) ;
+    //   const email = element.email;
+    //   const emailBase = element.email;
+    //   const cnpj = emailBase.replace('@corfio.com', '');
+    //   const nome = element.name;
+    //   // this.afAuth.auth.createUserWithEmailAndPassword( element.email, element.password );
+    //   this.db.collection('clientesCNPJ').doc(email).set({nome, cnpj});
+
+    // });
+
+  }
 
 }
+
+
