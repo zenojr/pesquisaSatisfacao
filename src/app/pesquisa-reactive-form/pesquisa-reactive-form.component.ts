@@ -45,6 +45,8 @@ export class PesquisaReactiveFormComponent implements OnInit {
   respostaCorfio: any;
   fim = false;
 
+  contadorResp: any;
+
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -94,7 +96,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
     this.getRespostas();
     this.contaResp();
-    this.converteResp();
+    // this.converteResp();
     this.clientesCNPJ();
 
     // this.pesqReactService.openSnackBarUser();
@@ -238,6 +240,8 @@ export class PesquisaReactiveFormComponent implements OnInit {
     this.pesqReactService.openSnackBarSaved(pergunta);
   }
 
+
+
   resetForms() {
     return this.firstFormGroup.reset(), this.secondFormGroup.reset(),
            this.thirdFormGroup.reset(), this.fourthFormGroup.reset();
@@ -345,12 +349,11 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
     const result = this.db.collection(this.user)
     .valueChanges()
-    .subscribe( data => { data.forEach(element => {
-      this.contaRespostas++;
-      console.log(this.contaRespostas);
-      return this.contaRespostas;
-    }); });
-    console.log(result);
+    .subscribe( data => { console.log(data.length);
+    this.contaRespostas = data.length;
+    return this.contaRespostas;
+  });
+    // console.log(result);
 
     // const resultNovo = this.db.collection(this.user)
     // .snapshotChanges()
@@ -368,7 +371,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
   }
 
   converteResp() {
-    const total = 22;
+    const total = 27;
     this.vlrQuestao = 100 / total;
     console.log(this.vlrQuestao);
     return this.vlrQuestao;

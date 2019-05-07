@@ -19,7 +19,6 @@ export class PesquisaReactiveServiceService {
   readonly user = this.getUser();
   readonly pathUser = this.user;
   consultaResp: Observable<ConsultaResp[]>;
-  
 
   constructor( private db: AngularFirestore,
                private snackBar: MatSnackBar ) { }
@@ -47,6 +46,7 @@ export class PesquisaReactiveServiceService {
   addRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
     return this.db.collection<RespAspecTec>(this.pathUser).doc(pergunta).set(data);
   }
+
 
   limpaRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
     return this.db.collection<RespAspecTec>(this.pathUser).doc(pergunta).set(data);

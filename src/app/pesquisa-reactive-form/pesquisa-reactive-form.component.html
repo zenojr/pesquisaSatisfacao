@@ -1,5 +1,10 @@
-<div class="container" *ngIf="fim === true">
-  <p>Você já respondeu nossa pesquisa, Muito obrigado</p>
+<div class="progressBar">
+    <h3 class="bar" > {{ contaRespostas / 0.27 | number: '1.0-0'  }}% concluído  </h3>
+    <mat-progress-bar class="bar" mode="determinate" value="{{contaRespostas / 0.27 }}"></mat-progress-bar>
+</div>
+
+<div class="answerEnd" *ngIf="fim === true">
+    <h3>Suas respostas foram registradas com sucesso.<br> Obrigado por sua participação.</h3>
 </div>
 
 <div class="container" *ngIf="fim === false" >
@@ -8,7 +13,9 @@
       <h3 *ngIf="item.cnpj === user">Seja bem vindo, você está respondendo a pesquisa em nome de {{ item.nome }} </h3>
     </ul>
   </div>
-  <mat-progress-bar mode="determinate" value="{{vlrQuestao * contaRespostas}}"></mat-progress-bar>
+
+  
+  
   <!-- <span> {{ vlrQuestao }} {{ contaRespostas }} {{ realCount | json }} </span> -->
   <span #controlScroll></span>
 
