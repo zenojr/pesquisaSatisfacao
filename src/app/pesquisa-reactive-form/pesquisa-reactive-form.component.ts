@@ -237,7 +237,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
     const respostaCorfio = this.firstFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.firstFormGroup.get('respostaOutros').value;
     this.pesqReactService.addRespAspTec(pergunta, {pergunta, respostaCorfio, respostaOutros});
-    this.pesqReactService.openSnackBarSaved(pergunta);
+    // this.pesqReactService.openSnackBarSaved(pergunta);
   }
 
 
@@ -254,7 +254,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
     const respostaCorfio = this.secondFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.secondFormGroup.get('respostaOutros').value;
     this.pesqReactService.addRespRep(pergunta, {pergunta, respostaCorfio, respostaOutros});
-    this.pesqReactService.openSnackBarSaved(pergunta);
+    // this.pesqReactService.openSnackBarSaved(pergunta);
   }
 
   respFreqRep(perguntaForm) {
@@ -278,7 +278,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
     const respostaCorfio = this.thirdFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.thirdFormGroup.get('respostaOutros').value;
     this.pesqReactService.addRespImgProd(pergunta, {pergunta, respostaCorfio, respostaOutros});
-    this.pesqReactService.openSnackBarSaved(pergunta);
+    // this.pesqReactService.openSnackBarSaved(pergunta);
   }
 
   saveRespComMark(perguntaForm) {
@@ -288,7 +288,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
     const respostaCorfio = this.fourthFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.fourthFormGroup.get('respostaOutros').value;
     this.pesqReactService.addRespComMark(pergunta, {pergunta, respostaCorfio, respostaOutros});
-    this.pesqReactService.openSnackBarSaved(pergunta);
+    // this.pesqReactService.openSnackBarSaved(pergunta);
   }
 
   saveRespEmbTran(perguntaForm) {
@@ -298,7 +298,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
     const respostaCorfio = this.fifthFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.fifthFormGroup.get('respostaOutros').value;
     this.pesqReactService.addRespEmbTran(pergunta, {pergunta, respostaCorfio, respostaOutros});
-    this.pesqReactService.openSnackBarSaved(pergunta);
+    // this.pesqReactService.openSnackBarSaved(pergunta);
   }
 
   saveRespFinais(perguntaForm) {
@@ -311,7 +311,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
     const observacao = this.sixthFormGroup.get('observacao').value;
     console.log(observacao);
     this.pesqReactService.addRespFinais(pergunta, {resposta, observacao, fim});
-    this.pesqReactService.openSnackBarSaved(pergunta);
+    // this.pesqReactService.openSnackBarSaved(pergunta);
   }
 
   limpaObs() {
