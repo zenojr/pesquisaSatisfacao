@@ -1,7 +1,4 @@
-
-
 <section>
-  
   <form [formGroup]="loginForm" class="flex-container" fxLayoutGap="10px" #form="ngForm" (ngSubmit)="onSubmit()" >
       <h3 class="welcome">Olá, Informe seu CNPJ para começar</h3>
       <h5 class="welcome" >Apenas numeros</h5>
@@ -20,39 +17,6 @@
       <mat-error>CNPJ Inválido</mat-error>
       <mat-icon matSuffix>person</mat-icon>
     </mat-form-field>
-
-    
-    
-    <!-- <mat-form-field appearance="outline">
-      <mat-label>Senha</mat-label>
-      <input type="password" matInput formControlName="senha">
-      <mat-error>Senha Inválida</mat-error>
-      <mat-icon matSuffix>vpn_key</mat-icon>
-    </mat-form-field> -->
-    <!-- <button mat-raised-button type="submit" color="primary" routerLink="pesquisa" >Entrar</button> -->
     <button [disabled]="loginForm.invalid" mat-raised-button type="submit" color="primary">Entrar</button>
   </form>
 </section>
-
-
-<!-- <section>
-    <form class="flex-container" fxLayoutGap="10px" #form="ngForm" (ngSubmit)="onSubmit(form)" >
-      <mat-form-field appearance="outline">
-        <mat-label>Usuário</mat-label>
-        <input matInput ngModel name="usuario" required #userInput="ngModel">
-        <mat-error *ngIf="userInput.hasError('required')">Campo usuário não pode ficar vazio</mat-error>
-        <mat-error *ngIf="!userInput.hasError('required')" >Usuário Inválido</mat-error>
-        <mat-icon matSuffix>person</mat-icon>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Senha</mat-label>
-        <input minlength="4" type="password" matInput ngModel name="senha" required #pwInput="ngModel">
-        <mat-hint align="end"> {{ pwInput.value?.length }} / 4 </mat-hint>
-        <mat-error>Senha precisa ter mais de 4 caracteres</mat-error>
-        <mat-icon matSuffix>vpn_key</mat-icon>
-      </mat-form-field> -->
-      <!-- <button mat-raised-button type="submit" color="primary" routerLink="pesquisa" >Entrar</button> -->
-      <!-- <button [disabled]="form.invalid" mat-raised-button type="submit" color="primary">Entrar</button>
-    </form>
-  </section> -->

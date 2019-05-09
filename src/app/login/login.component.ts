@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { ClientesCNPJ } from '../pesquisa-reactive-form/clientesCNPJ.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,25 +17,20 @@ export class LoginComponent implements OnInit {
   valueForm = null;
   options: string[];
   touched = false;
-  constructor( private authService: AuthService, private db: AngularFirestore ) { }
+  constructor( private authService: AuthService) { }
 
   ngOnInit() {
-
-
     this.valueForm = this.authService.getUrl();
     this.getUserFromUrl();
     this.loginForm = new FormGroup({
       usuario: new FormControl('', {validators: [Validators.required]}),
       senha: new FormControl('')
-
     });
     this.touchForm();
-
   }
 
 
   onSubmit() {
-    // console.log(this.loginForm);
     this.authService.login({
       usuario: this.loginForm.value.usuario,
       senha: this.loginForm.value.senha

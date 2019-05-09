@@ -319,7 +319,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
   }
 
   theEnd() {
-    if ( this.contaRespostas === 26 )  {
+    if ( this.contaRespostas >= 26 )  {
       this.fim = true;
       alert( 'Pesquisa concluida com sucesso, muito obrigado!' );
       this.authService.logOut();
