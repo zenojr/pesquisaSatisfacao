@@ -319,7 +319,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
   }
 
   theEnd() {
-    if ( this.contaRespostas === 27 ) {
+    if ( this.contaRespostas === 26 )  {
       this.fim = true;
       alert( 'Pesquisa concluida com sucesso, muito obrigado!' );
       this.authService.logOut();
@@ -375,7 +375,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
   }
 
   converteResp() {
-    const total = 27;
+    const total = 26;
     this.vlrQuestao = 100 / total;
     console.log(this.vlrQuestao);
     return this.vlrQuestao;
