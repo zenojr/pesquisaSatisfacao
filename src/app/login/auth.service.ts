@@ -25,7 +25,7 @@ export class AuthService {
   getUrl() {
     let url = document.URL;
     // use 45 for firebase and 32 for local test and 37 to pesquisa.corfio.com.br
-    // url = url.slice(45);
+    //  url = url.slice(45);
     // url = url.slice(32);
     url = url.slice(37);
     console.log(url);

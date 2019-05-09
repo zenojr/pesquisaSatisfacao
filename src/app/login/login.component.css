@@ -18,6 +18,8 @@ mat-form-field {
   width: 15rem;
 }
 
+
+
 button {
   width: 80px;
 }
@@ -25,3 +27,12 @@ button {
 .welcome {
   color:  #75787B;
 }
+
+/* .formLogin {
+  margin-top: 10%;
+  flex-direction: column;
+  height: 300px;
+  width: 14rem;
+  align-items: center;
+  display: flex;
+} */

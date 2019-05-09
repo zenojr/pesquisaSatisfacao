@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ClientesCNPJ } from '../pesquisa-reactive-form/clientesCNPJ.model';
-
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 @Component({
@@ -18,19 +18,25 @@ export class LoginComponent implements OnInit {
   valueForm = null;
   options: string[];
   touched = false;
-  constructor( private authService: AuthService ) { }
+  constructor( private authService: AuthService, private db: AngularFirestore ) { }
 
   ngOnInit() {
+
+
     this.valueForm = this.authService.getUrl();
     this.getUserFromUrl();
-    this.touchForm();
     this.loginForm = new FormGroup({
       usuario: new FormControl('', {validators: [Validators.required]}),
       senha: new FormControl('')
+
     });
+    this.touchForm();
+
   }
 
+
   onSubmit() {
+    // console.log(this.loginForm);
     this.authService.login({
       usuario: this.loginForm.value.usuario,
       senha: this.loginForm.value.senha
@@ -43,7 +49,10 @@ export class LoginComponent implements OnInit {
     if ( tamUrl.length > 0 ) {
       this.touched = true;
     }
+    console.log(this.touched);
+    console.log(this.options);
     return this.touched;
+
   }
 
   getUserFromUrl() {
