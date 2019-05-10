@@ -315,7 +315,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
     if ( this.contaRespostas >= 26 )  {
       this.fim = true;
       alert( 'Pesquisa concluida com sucesso, muito obrigado!' );
-      this.authService.logOut();
+
     } else {
       alert( 'Sua pesquisa ainda não foi concluida, por favor responda todas as perguntas.' );
     }

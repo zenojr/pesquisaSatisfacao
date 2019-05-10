@@ -1,10 +1,20 @@
 
+
 <div class="progressBar">
     <h3 class="bar" *ngIf="contaRespostas != 27" > {{ contaRespostas / 0.26 | number: '1.0-0'  }}% concluído  </h3>
     <mat-progress-bar class="bar" mode="determinate" value="{{contaRespostas / 0.26 }}"></mat-progress-bar>
 </div>
 <div class="answerEnd" *ngIf="fim === true">
-    <h3>Suas respostas foram registradas com sucesso.<br> Obrigado por sua participação.</h3>
+    <h3>Suas respostas foram registradas com sucesso.</h3>
+    <div class="corfiozinho">
+        <img class="corfiozinhoImg" src="../../assets/Corfiozinho.png" alt="">
+    </div>
+    <div class="finishMsg">
+        
+        <br>
+        <h3>Obrigado por sua participação.</h3>
+    </div>
+    
 </div>
 <div class="container" *ngIf="fim === false" >
   <div class="welcome" >
