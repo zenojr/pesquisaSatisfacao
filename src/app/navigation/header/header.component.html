@@ -2,7 +2,7 @@
   <div fxHide.sm fxHide.md fxHide.lg>
     <button mat-icon-button (click)="onToggleSidenav()"> <mat-icon>menu</mat-icon> </button>
   </div>
-  <span class="logo"> <a href="#"> <img src="../../assets/AF_Marca_Corfio_RGB_neg.svg" alt=""> </a></span>
+  <span class="logo"> <img src="../../assets/AF_Marca_Corfio_RGB_neg.svg" alt="Corfio"> </span>
   <span fxHide.xs> <mat-icon>assignment</mat-icon> Pesquisa de Satisfação</span>
   <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
     <ul fxLayout fxLayoutGap="10px" class="navigation-items" >
@@ -15,12 +15,10 @@
       </li>
 
       <li *ngIf="isAuth">
-            <a style="cursor: pointer" >
-                <mat-icon>eject</mat-icon>
-                <span (click)="logOut()" class="nav-caption">Logout</span>
-            </a>
-
-
+        <a style="cursor: pointer" >
+            <mat-icon>eject</mat-icon>
+            <span (click)="logOut()" class="nav-caption">Logout</span>
+        </a>
       </li>
     </ul>
 

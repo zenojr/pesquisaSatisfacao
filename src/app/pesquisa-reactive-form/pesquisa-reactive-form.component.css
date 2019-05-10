@@ -1,11 +1,10 @@
 
-form ul {
+ul {
     list-style: none;
     padding: 0;
 }
 
 .progressBar {
-  /* margin-top: 30rem;  */
   position: fixed;
   bottom: 1px; 
   z-index: 1;
@@ -21,14 +20,9 @@ form ul {
   
 }
 
-
 .bar{  
-  
-  
   background-color:	rgba(116, 116, 116, 0.3);
 }
-
-
 
 .sugestoes {
     min-width: 150px;
@@ -58,4 +52,8 @@ form ul {
   margin-top: 20%;
   margin-left: 10%;
   margin-right: 10%;
+}
+
+.welcome {
+  text-align: center;
 }

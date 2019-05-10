@@ -12,12 +12,13 @@ a {
   }
   
   .logo img {
-    width: 8rem;
+    width: 8em;
+    margin: auto;
   }
   
   @media only screen and (max-width: 600px) {
     .logo img {
-      width: 7rem;
+      width: 7em;
     }
   
   }

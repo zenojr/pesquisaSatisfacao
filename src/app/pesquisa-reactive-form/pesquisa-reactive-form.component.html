@@ -1,25 +1,19 @@
 
 <div class="progressBar">
-    <h3 class="bar" *ngIf="contaRespostas > 27" > {{ contaRespostas / 0.26 | number: '1.0-0'  }}% concluído  </h3>
+    <h3 class="bar" *ngIf="contaRespostas != 27" > {{ contaRespostas / 0.26 | number: '1.0-0'  }}% concluído  </h3>
     <mat-progress-bar class="bar" mode="determinate" value="{{contaRespostas / 0.26 }}"></mat-progress-bar>
 </div>
-
 <div class="answerEnd" *ngIf="fim === true">
     <h3>Suas respostas foram registradas com sucesso.<br> Obrigado por sua participação.</h3>
 </div>
-
 <div class="container" *ngIf="fim === false" >
-  <div>
+  <div class="welcome" >
     <ul *ngFor="let item of clientes | async">
       <h3 *ngIf="item.cnpj === user">Seja bem vindo, você está respondendo a pesquisa em nome de {{ item.nome }} </h3>
     </ul>
   </div>
 
-  
-  
-  <!-- <span> {{ vlrQuestao }} {{ contaRespostas }} {{ realCount | json }} </span> -->
   <span #controlScroll></span>
-
 
   <mat-vertical-stepper [linear]="isLinear" #stepper>
     <mat-step>
@@ -301,10 +295,20 @@
       Confira o resumo de suas respostas e finalize a pesquisa
       <div>
         <div>
-          <ul *ngFor="let item of getRetornoResp  ">
-            <li> Pergunta: {{ item.id }} </li>
-            <li> Resposta Corfio: {{ item.respostaCorfio }} </li>
-            <li> Resposta Outros: {{ item.respostaOutros }} </li>
+          <ul *ngFor="let item of getRetornoResp">
+            <div *ngIf=" item.id != 'Qual o principal motivo (o mais importante) que o leva a comprar de outro fabricante?' && item.id != 'fim' ">
+                <li > <b> Pergunta: </b> {{ item.id }} </li>
+                <li> Resposta Corfio: {{ item.respostaCorfio }} </li>
+                <li> Resposta Outros: {{ item.respostaOutros }} </li>
+            </div>
+            <div *ngIf=" item.id === 'Qual o principal motivo (o mais importante) que o leva a comprar de outro fabricante?'">
+                <li > <b> Pergunta: </b> {{ item.id }} </li>
+                <li> Resposta: {{ item.resposta }} </li>
+            </div>
+            <div *ngIf=" item.id === 'fim'">
+                <li > <b> Observação: </b> {{ item.observacao }} </li>
+            </div>
+            
           </ul>
         </div>
         <p *ngIf="fim === true" >Sua pesquisa foi concluida com sucesso, obrigado!</p>
