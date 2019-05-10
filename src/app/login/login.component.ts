@@ -2,7 +2,6 @@ import { AuthService } from './auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { ClientesCNPJ } from '../pesquisa-reactive-form/clientesCNPJ.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
@@ -12,7 +11,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class LoginComponent implements OnInit {
 
-  clientes: Observable<ClientesCNPJ[]>;
   loginForm: FormGroup;
   valueForm = null;
   options: string[];

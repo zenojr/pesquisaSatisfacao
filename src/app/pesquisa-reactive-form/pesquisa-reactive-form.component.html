@@ -8,9 +8,9 @@
 </div>
 <div class="container" *ngIf="fim === false" >
   <div class="welcome" >
-    <ul *ngFor="let item of clientes | async">
-      <h3 *ngIf="item.cnpj === user">Seja bem vindo, você está respondendo a pesquisa em nome de {{ item.nome }} </h3>
-    </ul>
+    
+      <h3>Seja bem vindo, você está respondendo a pesquisa em nome de {{ cliente }} </h3>
+    
   </div>
 
   <span #controlScroll></span>

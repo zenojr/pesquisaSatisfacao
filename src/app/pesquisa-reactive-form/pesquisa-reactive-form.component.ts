@@ -1,5 +1,4 @@
 import { AuthService } from './../login/auth.service';
-import { ClientesCNPJ } from './clientesCNPJ.model';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { PesquisaReactiveServiceService } from './pesquisa-reactive-service.service';
 import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
@@ -73,7 +72,8 @@ export class PesquisaReactiveFormComponent implements OnInit {
   listadeCNPJ: Observable<any>;
   respostarep: Observable<any>;
   controlRepFreq = false;
-  clientes: Observable<ClientesCNPJ[]>;
+
+  cliente: any;
   respostasFB: Observable<ConsultaResp[]>;
 
   user = this.pesqReactService.getUser();
@@ -94,15 +94,9 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
   ngOnInit() {
 
-
-
     this.getRespostas();
     this.contaResp();
-    // this.converteResp();
     this.clientesCNPJ();
-
-    // this.pesqReactService.openSnackBarUser();
-    // this.getCNPJ();
 
     this.firstFormGroup = this.formBuilder.group({
       pergunta: [''],
@@ -149,6 +143,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
         };
       });
     }));
+
 
     this.perguntasRep = this.db.collection('perguntasRep')
     .snapshotChanges()
@@ -215,21 +210,16 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
   } // END ONINIT
 
-  scroll(el: HTMLElement) {
-    el.scrollIntoView();
+  clientesCNPJ() {
+
+    this.db.doc( 'clientesCNPJ' + '/' + this.user + '@corfio.com').valueChanges().subscribe(
+      doc => this.cliente = doc['nome']
+    );
+
   }
 
-  clientesCNPJ() {
-    this.clientes = this.db.collection('clientesCNPJ')
-    .snapshotChanges()
-    .pipe(map(docArray => {
-      return docArray.map(doc => {
-        return {
-          nome: doc.payload.doc.data()['nome'],
-          cnpj: doc.payload.doc.data()['cnpj']
-        };
-      });
-    }));
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
   }
 
   saveRespAspecTec(perguntaForm) {
@@ -366,7 +356,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
     // const resultNovo = this.db.collection(this.user)
     // .snapshotChanges()
     // .pipe(map(docArray => {
-    //   return docArray.map(doc => {
+    //   return docArray.map(doc => 
     //     return {
     //       count: docArray.length
     //     };
