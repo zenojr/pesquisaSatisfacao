@@ -3,13 +3,14 @@ import { AuthData } from './auth.data.model';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class AuthService {
   authChange = new Subject<boolean>();
   private isAuthenticated = false;
 
-  constructor( private router: Router, private afAuth: AngularFireAuth) {}
+  constructor( private router: Router, private afAuth: AngularFireAuth, private snackBar: MatSnackBar) {}
 
   login(authData: AuthData) {
     authData.usuario = authData.usuario + '@corfio.com';
@@ -19,7 +20,18 @@ export class AuthService {
       authData.senha
     ).then(result => {
       this.authSuccess();
-    }).catch(error => { console.log(error), alert('Ops: CNPJ inválido'); });
+    }).catch(error => { console.log(error);
+      if ( error.code === 'auth/network-request-failed' ) {
+        this.snackBar.open('Erro: Conexão com internet nula ou limitada.', '[x]Fechar', {
+          duration: 10000
+        });
+      } if (error.code === 'auth/user-not-found' ) {
+        this.snackBar.open('Erro: CNPJ Inválido ou não cadastrado', '[x]Fechar', {
+          duration: 5000
+        });
+      console.log( 'Cod erro: ' + error );
+      }
+      });
   }
 
   getUrl() {

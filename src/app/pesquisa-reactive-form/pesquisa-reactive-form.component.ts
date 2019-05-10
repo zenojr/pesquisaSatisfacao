@@ -94,6 +94,8 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
   ngOnInit() {
 
+
+
     this.getRespostas();
     this.contaResp();
     // this.converteResp();
@@ -135,6 +137,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
       respostaMotivo: [''],
       observacao: ['']
     });
+
 
     this.perguntaAspecTec = this.db.collection('perguntasAspecTec')
     .snapshotChanges()
@@ -329,6 +332,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
   }
 
   getRespostas() {
+
     const result = this.db.collection(this.user)
     .snapshotChanges()
     .pipe(map(docArray => {
