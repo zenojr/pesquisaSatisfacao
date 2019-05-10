@@ -1,8 +1,6 @@
 import { AuthService } from './auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-login',

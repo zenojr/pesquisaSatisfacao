@@ -6,8 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
-import { PesquisaComponent } from './pesquisa/pesquisa.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
@@ -17,25 +15,20 @@ import { environment } from '../environments/environment';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
-import { PesquisaService } from './pesquisa/pesquisa.service';
 import { PesquisaReactiveFormComponent } from './pesquisa-reactive-form/pesquisa-reactive-form.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { RelatoriosComponent } from './gerencial/relatorios/relatorios.component';
 import { ChartsModule } from 'ng2-charts';
-import { PerguntasComponent } from './gerencial/perguntas/perguntas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ToolbarComponent,
-    PesquisaComponent,
     HeaderComponent,
     SidenavListComponent,
     PesquisaReactiveFormComponent,
-    RelatoriosComponent,
-    PerguntasComponent
+    RelatoriosComponent
   ],
   imports: [
     MaterialModule,
@@ -53,7 +46,7 @@ import { PerguntasComponent } from './gerencial/perguntas/perguntas.component';
     Ng2GoogleChartsModule,
     ChartsModule
   ],
-  providers: [ AuthService, PesquisaService, { provide: FirestoreSettingsToken, useValue: {} } ],
+  providers: [ AuthService, { provide: FirestoreSettingsToken, useValue: {} } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

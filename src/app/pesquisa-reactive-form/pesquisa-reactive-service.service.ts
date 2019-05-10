@@ -93,4 +93,5 @@ export class PesquisaReactiveServiceService {
     return this.db.collection(this.user);
   }
 
+
 }

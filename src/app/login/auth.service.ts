@@ -60,4 +60,22 @@ export class AuthService {
     this.router.navigate(['/pesquisa']);
   }
 
+  createUsers() {
+    const createUsers = [
+   ];
+
+    createUsers.forEach(element => {
+      console.log(element) ;
+      const email = element.email;
+      const password = '123456';
+      const emailCNPJ = element.email;
+      const cnpj = emailCNPJ.replace('@corfio.com', '');
+      const nome = element.name;
+      this.afAuth.auth.createUserWithEmailAndPassword( email, password ).catch(console.error);
+      // this.db.collection('clientesCNPJ').doc(email).set({nome, cnpj});
+
+    });
+
+  }
+
 }
