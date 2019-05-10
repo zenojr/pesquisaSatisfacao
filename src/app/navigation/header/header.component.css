@@ -12,6 +12,7 @@ a {
   }
   
   .logo img {
+    padding-top: 10px;
     width: 8em;
     margin: auto;
   }
