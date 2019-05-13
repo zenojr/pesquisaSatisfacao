@@ -45,6 +45,7 @@ export class PesquisaReactiveServiceService {
 
   addRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
     return this.db.collection<RespAspecTec>(this.pathUser).doc(pergunta).set(data);
+    // return this.db.collection<RespAspecTec>('respostasClientes').doc(this.user).set(data);
   }
 
 
