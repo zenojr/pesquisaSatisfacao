@@ -14,13 +14,10 @@ import { ConsultaResp } from './consultaResp.model';
 import { RespostaUser } from '../gerencial/relatorios/resUser.model';
 import { PerguntasFinais } from '../pesquisa/perguntasFinais.model';
 
-
-
 export interface Respostas {
   pergunta?: string;
   respostaCorfio?: string;
   respostaOutros?: string;
-
 }
 
 export interface OptionsCorfio {
@@ -210,9 +207,10 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
   } // END ONINIT
 
+
   clientesCNPJ() {
 
-    this.db.doc( 'clientesCNPJ' + '/' + this.user + '@corfio.com').valueChanges().subscribe(
+    this.db.doc( 'clientesCNPJv2' + '/' + this.user + '@corfio.com').valueChanges().subscribe(
       doc => this.cliente = doc['nome']
     );
 
@@ -405,5 +403,30 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
   }
 
+
+  createUsersCracken() {
+    const createUsers = [
+
+
+   ];
+
+    createUsers.forEach(element => {
+      console.log(element) ;
+      // const email = element.email;
+      // const password = '123456';
+      // const emailCNPJ = element.email;
+      let userCNPJ = element.cnpj + '@corfio.com';
+    
+      // const cnpj = emailCNPJ.replace('@corfio.com', '');
+      // const nome = element.nome;
+      // let nome = element.nome;
+      let nome = element.nomeFant;
+      let cnpj = element.cnpj;
+      let email = element.email;
+      console.log( nome, cnpj, email, userCNPJ );
+      // this.afAuth.auth.createUserWithEmailAndPassword( email, password ).catch(console.error);
+      this.db.collection('clientesCNPJv2').doc(userCNPJ).set({nome, cnpj, email}).catch(console.error);
+    });
+  }
 
 }

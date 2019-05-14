@@ -58,11 +58,19 @@ ul {
   text-align: center;
 }
 
-.corfiozinho img {
+.corfiologo {
+  width: 30%;
+  background-color: #10069F;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.corfiologo img {
   
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 30%;
+  width: 90%;
   
 }
