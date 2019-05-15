@@ -7,9 +7,9 @@
 </div>
 <div class="answerEnd" *ngIf="fim === true">
     <h3>Suas respostas foram registradas com sucesso.</h3>
-    <div class="corfiologo">
+    <!-- <div class="corfiologo">
         <img class="corfioLogoImg" src="../../assets/AF_Marca_Corfio_RGB_neg.svg" alt="">
-    </div>
+    </div> -->
     <div class="finishMsg">
         
         <br>
@@ -256,7 +256,7 @@
         <form [formGroup]="sixthFormGroup">
           <ng-template matStepLabel>Considerações finais</ng-template>
           <div>
-            <ul *ngFor="let item of perguntasFinais | async">
+          <ul *ngFor="let item of perguntasFinais | async">
               {{ item.pergunta }}
             <mat-form-field>
               <mat-select placeholder="Sua resposta" formControlName="respostaMotivo"

@@ -214,6 +214,10 @@ export class PesquisaReactiveFormComponent implements OnInit {
       doc => this.cliente = doc['nome']
     );
 
+    console.log(
+      this.db.collection('respostasClientes', ref => ref.where( 'Cordialidade (gentileza) apresentada pelo representante', '==', 'otimo' ))
+    );
+
   }
 
   scroll(el: HTMLElement) {
@@ -320,6 +324,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
   }
 
   getRespostas() {
+    // this.db.collection<RespAspecTec>('respostasClientes').doc(this.user).set(data);
 
     const result = this.db.collection(this.user)
     .snapshotChanges()

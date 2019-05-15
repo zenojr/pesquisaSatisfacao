@@ -44,8 +44,8 @@ export class PesquisaReactiveServiceService {
   }
 
   addRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
+    this.db.collection<RespAspecTec>('respostasClientes').doc(this.user).collection(pergunta).doc('resposta').set(data);
     return this.db.collection<RespAspecTec>(this.pathUser).doc(pergunta).set(data);
-    // return this.db.collection<RespAspecTec>('respostasClientes').doc(this.user).set(data);
   }
 
 
@@ -54,11 +54,10 @@ export class PesquisaReactiveServiceService {
 
   }
 
-  addRespGeral(pergunta: string, data: RespAspecTec): Promise<void> {
-    return this.db.collection('respostasGeral').doc(pergunta).set(data);
-  }
+
 
   addRespRep(pergunta: string, data: RespRep): Promise<void> {
+    this.db.collection<RespRep>('respostasClientes').doc(this.user).collection(pergunta).doc('resposta').set(data);
     return this.db.collection<RespRep>(this.pathUser).doc(pergunta).set(data);
   }
 
