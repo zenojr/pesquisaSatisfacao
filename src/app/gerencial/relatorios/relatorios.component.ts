@@ -13,16 +13,14 @@ import { RelServiceService } from './rel-service.service';
 })
 export class RelatoriosComponent implements OnInit {
 
-  hoversection: HTMLElement;
-
-  respostaCollection: AngularFirestoreCollection<RespostaUser>;
-  respostasUser: Observable<RespostaUser[]>;
-
   public retorno = [];
-  otimo = 40;
+  otimo = 0;
+  bom = 0;
+  regular = 0;
+  ruim = 0;
 
   public doughnutChartLabels = ['Ótimo', 'Bom', 'Regular', 'Ruim'];
-  public doughnutChartData = [this.otimo, 10, 10, 10];
+  public doughnutChartData = [1, 1, 1, 1];
   public doughnutChartType = 'doughnut';
 
   constructor(private db: AngularFirestore, private relService: RelServiceService) {}
@@ -31,24 +29,30 @@ export class RelatoriosComponent implements OnInit {
 
     // const teste = this.db.collection('Assistência Técnica', ref => ref.where('respostaCorfio', '==', 'ótimo'));
     // console.log(teste);
+    this.contaRespotas();
+
+
+
+  }
+
+
+  contaRespotas() {
+    this.db.collection('Assistência Técnica',
+    ref => ref.where( 'respostaCorfio', '==', 'ótimo' )).valueChanges().subscribe(doc => doc.forEach( el => {
+      console.log('how');
+      this.otimo++;
+      this.doughnutChartData = [ this.otimo, 2, 1, 1 ];
+      console.log(this.otimo);
+    } )   );
 
     this.db.collection('Assistência Técnica',
-    ref => ref.where( 'respostaCorfio', '==', 'ótimo' )).valueChanges().subscribe(doc => count(doc));
-
-
+    ref => ref.where( 'respostaCorfio', '==', 'não uso' )).valueChanges().subscribe(doc => doc.forEach( el => {
+      console.log('how');
+      this.bom++;
+      this.doughnutChartData = [ this.otimo, this.bom, 1, 1 ];
+      console.log(this.bom);
+    } )   );
   }
-
-  onMouseMove(ev: MouseEvent) {
-    console.log(ev);
-  }
-
-  // teste32() {
-  //   this.respostasUser = this.relService.listUserRes();
-  //   this.respostasUser.subscribe( data => {
-  //     this.retorno.push(data);
-  //   } );
-
-  // }
 
 
 
