@@ -1,10 +1,6 @@
-.piechart text {
-   margin: 150px;
+.assTec {
+   display: flex;
+   flex-wrap: wrap;
 }
 
 
-#hover{
-   border: 1px solid black;
-   width: 200px;
-   height: 200px;
-}

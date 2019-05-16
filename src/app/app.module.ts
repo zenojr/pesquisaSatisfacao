@@ -21,6 +21,7 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { RelatoriosComponent } from './gerencial/relatorios/relatorios.component';
 import { ChartsModule } from 'ng2-charts';
 
+
 @NgModule({
   declarations: [
     AppComponent,

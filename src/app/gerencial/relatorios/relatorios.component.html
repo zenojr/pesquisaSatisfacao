@@ -1,19 +1,21 @@
 
 <div>
-  <ul *ngFor="let item of respostasUser | async">
-    <li> Pergunta: {{ item.pergunta }} </li>
-    <li #respostaview> Corfio {{item.respostaCorfio}}</li>
-    <li> Outros {{item.respostaOutros}}</li>
-  </ul>
+    <p>Assistencia técnica</p>
+    <div class="assTec">
+        <div>
+            <div style="display: block">
+              <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [plugins]="barChartPlugins"
+                [legend]="barChartLegend"
+                [chartType]="barChartType">
+              </canvas>
+            </div>
+   </div>
 </div>
 
- <div style="display: inline-box">
-  <canvas baseChart
-          [data]="doughnutChartData"
-          [labels]="doughnutChartLabels"
-          [chartType]="doughnutChartType">
-  </canvas>
-</div>
 
 
 
