@@ -214,9 +214,12 @@ export class PesquisaReactiveFormComponent implements OnInit {
       doc => this.cliente = doc['nome']
     );
 
-    console.log(
-      this.db.collection('respostasClientes', ref => ref.where( 'Cordialidade (gentileza) apresentada pelo representante', '==', 'otimo' ))
-    );
+    const teste = this.db.collection('Assistência Técnica', ref => ref.where('respostaCorfio', '==', 'ótimo'));
+    console.log(teste);
+
+    this.db.collection('Assistência Técnica',
+    ref => ref.where( 'respostaCorfio', '==', 'ótimo' )).valueChanges().subscribe(doc => console.log(doc));
+
 
   }
 
@@ -325,7 +328,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
   getRespostas() {
     // this.db.collection<RespAspecTec>('respostasClientes').doc(this.user).set(data);
-
+    
     const result = this.db.collection(this.user)
     .snapshotChanges()
     .pipe(map(docArray => {

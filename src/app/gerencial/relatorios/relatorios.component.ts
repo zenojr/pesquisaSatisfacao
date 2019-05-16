@@ -1,4 +1,4 @@
-import { map } from 'rxjs/operators';
+import { map, count } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
@@ -19,27 +19,22 @@ export class RelatoriosComponent implements OnInit {
   respostasUser: Observable<RespostaUser[]>;
 
   public retorno = [];
+  otimo = 40;
 
   public doughnutChartLabels = ['Ótimo', 'Bom', 'Regular', 'Ruim'];
-  public doughnutChartData = [120, 150, 180, 90];
+  public doughnutChartData = [this.otimo, 10, 10, 10];
   public doughnutChartType = 'doughnut';
 
   constructor(private db: AngularFirestore, private relService: RelServiceService) {}
 
   ngOnInit() {
 
-    this.hoversection = document.getElementById('hover');
+    // const teste = this.db.collection('Assistência Técnica', ref => ref.where('respostaCorfio', '==', 'ótimo'));
+    // console.log(teste);
 
-    this.hoversection.addEventListener('mousemove', this.onMouseMove);
+    this.db.collection('Assistência Técnica',
+    ref => ref.where( 'respostaCorfio', '==', 'ótimo' )).valueChanges().subscribe(doc => count(doc));
 
-    this.respostaCollection = this.db.collection('78', ref => {
-      return ref.where( 'pergunta', '==' , 'Assistência técnica' );
-    });
-    this.respostasUser = this.respostaCollection.valueChanges();
-    // this.relService.listUserRes()
-    // .subscribe(dados => this.respostasUser = dados);
-    // this.respostasUser = this.relService.listUserRes();
-    // this.teste32();
 
   }
 

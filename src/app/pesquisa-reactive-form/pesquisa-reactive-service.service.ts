@@ -44,41 +44,37 @@ export class PesquisaReactiveServiceService {
   }
 
   addRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
-    this.db.collection<RespAspecTec>('respostasClientes').doc(this.user).collection(pergunta).doc('resposta').set(data);
+    this.db.collection<RespAspecTec>(pergunta).doc(this.user).set(data);
     return this.db.collection<RespAspecTec>(this.pathUser).doc(pergunta).set(data);
   }
-
-
-  limpaRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
-    return this.db.collection<RespAspecTec>(this.pathUser).doc(pergunta).set(data);
-
-  }
-
-
 
   addRespRep(pergunta: string, data: RespRep): Promise<void> {
-    this.db.collection<RespRep>('respostasClientes').doc(this.user).collection(pergunta).doc('resposta').set(data);
-    return this.db.collection<RespRep>(this.pathUser).doc(pergunta).set(data);
-  }
-
-  addRespRepFreq(pergunta: string, data: RespRep): Promise<void> {
+    this.db.collection<RespRep>(pergunta).doc(this.user).set(data);
     return this.db.collection<RespRep>(this.pathUser).doc(pergunta).set(data);
   }
 
   addRespImgProd(pergunta: string, data: RespImgProd): Promise<void> {
+    this.db.collection<RespImgProd>(pergunta).doc(this.user).set(data);
     return this.db.collection<RespImgProd>(this.pathUser).doc(pergunta).set(data);
   }
 
   addRespComMark(pergunta: string, data: RespComMark): Promise<void> {
+    this.db.collection<RespComMark>(pergunta).doc(this.user).set(data);
     return this.db.collection<RespComMark>(this.pathUser).doc(pergunta).set(data);
   }
 
   addRespEmbTran(pergunta: string, data: RespEmbTran): Promise<void> {
+    this.db.collection<RespEmbTran>(pergunta).doc(this.user).set(data);
     return this.db.collection<RespEmbTran>(this.pathUser).doc(pergunta).set(data);
   }
 
   addRespFinais(pergunta: string, data: RespostasFinais): Promise<void> {
+    this.db.collection<RespostasFinais>(pergunta).doc(this.user).set(data);
     return this.db.collection<RespostasFinais>(this.pathUser).doc(pergunta).set(data);
+  }
+
+  limpaRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
+    return this.db.collection<RespAspecTec>(this.pathUser).doc(pergunta).set(data);
   }
 
   getUser() {
