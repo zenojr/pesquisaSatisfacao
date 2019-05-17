@@ -37,7 +37,7 @@ export class RelatoriosComponent implements OnInit {
   public barChartLabels: Label[] = ['Ótimo', 'Bom', 'Regular', 'Ruim'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
-  
+
 
   public barChartData: ChartDataSets[] = [
     { data: [65, 59, 80, 81], label: 'Resposta Corfio' },
@@ -60,25 +60,32 @@ export class RelatoriosComponent implements OnInit {
 
     this.db.collection('Assistência Técnica',
     ref => ref.where( 'respostaCorfio', '==', 'bom' )).valueChanges().subscribe(doc => doc.forEach( el => {
-      this.bom++;
-      console.log(this.bom);
+    this.bom++
+    console.log(this.bom);
+    this.barChartData = [
+      { data: [this.otimo, this.bom, this.bom, this.ruim], label: 'Resposta Corfio' },
+      { data: [this.otimo, this.bom, this.bom, this.ruim], label: 'Resposta Outros' }
+    ];
     } ) );
 
     this.db.collection('Assistência Técnica',
-    ref => ref.where( 'respostaCorfio', '==', 'bom' )).valueChanges().subscribe(doc => doc.forEach( el => {
-      this.regular++;
-      console.log(this.regular);
+    ref => ref.where( 'respostaCorfio', '==', 'regular' )).valueChanges().subscribe(doc => doc.forEach( el => {
+    this.regular++;
+    console.log('regular ' + this.regular);
+    this.barChartData = [
+      { data: [this.otimo, this.bom, this.regular, this.ruim], label: 'Resposta Corfio' },
+      { data: [this.otimo, this.bom, this.regular, this.ruim], label: 'Resposta Outros' }
+    ];
     } ) );
-    
+
     this.db.collection('Assistência Técnica',
     ref => ref.where( 'respostaCorfio', '==', 'ruim' )).valueChanges().subscribe(doc => doc.forEach( el => {
-      this.ruim++;
-      // this.doughnutChartData = [this.otimo, this.bom, this.regular, this.ruim];
-      console.log(this.ruim);
-      this.barChartData = [
-        { data: [this.otimo, this.bom, this.regular, this.ruim], label: 'Resposta Corfio' },
-        { data: [this.otimo, this.bom, this.regular, this.ruim], label: 'Resposta Outros' }
-      ];
+    this.ruim++;
+    console.log('ruim ' + this.regular);
+    this.barChartData = [
+      { data: [this.otimo, this.bom, this.regular, this.ruim], label: 'Resposta Corfio' },
+      { data: [this.otimo, this.bom, this.regular, this.ruim], label: 'Resposta Outros' }
+    ];
     } ) );
 
   }
