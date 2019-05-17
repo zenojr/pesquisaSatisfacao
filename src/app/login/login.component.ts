@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
     this.touchForm();
   }
 
-
   onSubmit() {
     this.authService.login({
       usuario: this.loginForm.value.usuario,
@@ -35,12 +34,9 @@ export class LoginComponent implements OnInit {
 
   touchForm() {
     const tamUrl = this.authService.getUrl();
-    console.log(tamUrl.length);
     if ( tamUrl.length > 0 ) {
       this.touched = true;
     }
-    console.log(this.touched);
-    console.log(this.options);
     return this.touched;
 
   }
@@ -49,7 +45,4 @@ export class LoginComponent implements OnInit {
     this.options = [this.valueForm];
     return this.options;
   }
-
-  
-
 }

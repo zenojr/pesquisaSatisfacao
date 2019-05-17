@@ -1,14 +1,13 @@
 import { MatSnackBar } from '@angular/material';
 import { RespImgProd } from './respImgProd.model';
-import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
-import { Injectable, Output } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Injectable } from '@angular/core';
 import { RespAspecTec } from './respAspTec.model';
 import * as firebase from 'firebase/app';
 import { RespRep } from './respRep.model';
 import { RespComMark } from './respComMark.model';
 import { RespEmbTran } from './respEmbtran.model';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { ConsultaResp } from './consultaResp.model';
 import { RespostasFinais } from '../pesquisa/respostasFinais.model';
 
@@ -23,24 +22,12 @@ export class PesquisaReactiveServiceService {
   constructor( private db: AngularFirestore,
                private snackBar: MatSnackBar ) { }
 
-  openSnackBarUser() {
-    let user = this.getUser();
-    user = this.user.charAt(0).toUpperCase() + user.slice(1);
-    this.snackBar.open('Bem Vindo ' + user, '[x]Fechar', {
-      duration: 10000
-    });
-  }
 
   openSnackBarSaved(pergunta) {
     // if i want to show the question on save, just add a property 'pergunto' to snackbar
     this.snackBar.open('Resposta salva com sucesso!', '[x]Fechar', {
       duration: 1500
     });
-  }
-
-  getClienteCNPJ() {
-    const cliente = this.db.collection('clientesCNPJ').valueChanges();
-    console.log(cliente);
   }
 
   addRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
@@ -83,11 +70,5 @@ export class PesquisaReactiveServiceService {
     userMail = userMail.replace('@corfio.com', '');
     return userMail;
   }
-
-
-  getCollectionUser () {
-    return this.db.collection(this.user);
-  }
-
 
 }
