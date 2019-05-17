@@ -55,27 +55,19 @@ export class RelatoriosComponent implements OnInit {
     this.db.collection('Assistência Técnica',
     ref => ref.where( 'respostaCorfio', '==', 'ótimo' )).valueChanges().subscribe(doc => doc.forEach( el => {
     this.otimo++;
-    console.log(this.otimo);
+    console.log('ótimo' + this.otimo);
     } ) );
 
     this.db.collection('Assistência Técnica',
     ref => ref.where( 'respostaCorfio', '==', 'bom' )).valueChanges().subscribe(doc => doc.forEach( el => {
-    this.bom++
-    console.log(this.bom);
-    this.barChartData = [
-      { data: [this.otimo, this.bom, this.bom, this.ruim], label: 'Resposta Corfio' },
-      { data: [this.otimo, this.bom, this.bom, this.ruim], label: 'Resposta Outros' }
-    ];
+    this.bom++;
+    console.log('bom' + this.bom);
     } ) );
 
     this.db.collection('Assistência Técnica',
     ref => ref.where( 'respostaCorfio', '==', 'regular' )).valueChanges().subscribe(doc => doc.forEach( el => {
     this.regular++;
     console.log('regular ' + this.regular);
-    this.barChartData = [
-      { data: [this.otimo, this.bom, this.regular, this.ruim], label: 'Resposta Corfio' },
-      { data: [this.otimo, this.bom, this.regular, this.ruim], label: 'Resposta Outros' }
-    ];
     } ) );
 
     this.db.collection('Assistência Técnica',

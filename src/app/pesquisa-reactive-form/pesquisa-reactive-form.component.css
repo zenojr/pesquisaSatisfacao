@@ -24,6 +24,10 @@ ul {
   background-color:	rgba(116, 116, 116, 0.3);
 }
 
+mat-form-field {
+  padding-left: 5px;
+}
+
 .sugestoes {
     min-width: 150px;
     max-width: 500px;

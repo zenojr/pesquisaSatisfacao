@@ -214,13 +214,6 @@ export class PesquisaReactiveFormComponent implements OnInit {
       doc => this.cliente = doc['nome']
     );
 
-    const teste = this.db.collection('Assistência Técnica', ref => ref.where('respostaCorfio', '==', 'ótimo'));
-    console.log(teste);
-
-    this.db.collection('Assistência Técnica',
-    ref => ref.where( 'respostaCorfio', '==', 'ótimo' )).valueChanges().subscribe(doc => console.log(doc));
-
-
   }
 
   scroll(el: HTMLElement) {
@@ -415,7 +408,6 @@ export class PesquisaReactiveFormComponent implements OnInit {
   createUsersCracken() {
     const createUsers = [
 
-
    ];
 
     createUsers.forEach(element => {
@@ -428,12 +420,14 @@ export class PesquisaReactiveFormComponent implements OnInit {
       // const cnpj = emailCNPJ.replace('@corfio.com', '');
       // const nome = element.nome;
       // let nome = element.nome;
-      let nome = element.nomeFant;
+      let nome = element.nome;
       let cnpj = element.cnpj;
       let email = element.email;
-      console.log( nome, cnpj, email, userCNPJ );
+      let representante = element.representante;
+      let estado = element.estado;
+      console.log( nome, cnpj, email, representante, estado );
       // this.afAuth.auth.createUserWithEmailAndPassword( email, password ).catch(console.error);
-      this.db.collection('clientesCNPJv2').doc(userCNPJ).set({nome, cnpj, email}).catch(console.error);
+      this.db.collection('clientesCNPJv2').doc(userCNPJ).set({nome, cnpj, email, representante, estado}).catch(console.error);
     });
   }
 
