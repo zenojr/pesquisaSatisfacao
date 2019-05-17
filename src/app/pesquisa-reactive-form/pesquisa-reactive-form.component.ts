@@ -209,87 +209,60 @@ export class PesquisaReactiveFormComponent implements OnInit {
     el.scrollIntoView();
   }
 
-  saveRespAspecTec(perguntaForm) {
-    this.perguntaFormAspTec = perguntaForm;
-    const pergunta = this.perguntaFormAspTec;
-    const respostaCorfio = this.firstFormGroup.get('respostaCorfio').value;
-    const respostaOutros = this.firstFormGroup.get('respostaOutros').value;
-    this.pesqReactService.addRespAspTec(pergunta, {pergunta, respostaCorfio, respostaOutros});
-    // this.pesqReactService.openSnackBarSaved(pergunta);
-  }
-
-
 
   resetForms() {
     return this.firstFormGroup.reset(), this.secondFormGroup.reset(),
            this.thirdFormGroup.reset(), this.fourthFormGroup.reset();
   }
 
+  saveRespAspecTec(perguntaForm) {
+    this.perguntaFormAspTec = perguntaForm;
+    const pergunta = this.perguntaFormAspTec;
+    const respostaCorfio = this.firstFormGroup.get('respostaCorfio').value;
+    const respostaOutros = this.firstFormGroup.get('respostaOutros').value;
+    this.pesqReactService.addRespAspTec(pergunta, {pergunta, respostaCorfio, respostaOutros});
+  }
+
   saveRespRep(perguntaForm) {
     this.perguntaFormRep = perguntaForm;
     const pergunta = this.perguntaFormRep;
-    console.log(pergunta);
     const respostaCorfio = this.secondFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.secondFormGroup.get('respostaOutros').value;
     this.pesqReactService.addRespRep(pergunta, {pergunta, respostaCorfio, respostaOutros});
-    // this.pesqReactService.openSnackBarSaved(pergunta);
-  }
-
-  respFreqRep(perguntaForm) {
-    const pergunta  = perguntaForm;
-    console.log(pergunta);
-    if (this.secondFormGroup.get('respFreq').value === 'sim') {
-      this.controlRepFreq = true;
-      this.respostarep = this.secondFormGroup.get('respFreq').value;
-    } else {
-      this.controlRepFreq = false;
-      this.respostarep = this.secondFormGroup.get('respFreq').value;
-    }
-    console.log(this.respostarep);
-    console.log(this.controlRepFreq);
   }
 
   saveRespImgProd(perguntaForm) {
     this.perguntaFormImgProd = perguntaForm;
     const pergunta = this.perguntaFormImgProd;
-    console.log(pergunta);
     const respostaCorfio = this.thirdFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.thirdFormGroup.get('respostaOutros').value;
     this.pesqReactService.addRespImgProd(pergunta, {pergunta, respostaCorfio, respostaOutros});
-    // this.pesqReactService.openSnackBarSaved(pergunta);
   }
 
   saveRespComMark(perguntaForm) {
     this.perguntaFormComMark = perguntaForm;
     const pergunta = this.perguntaFormComMark;
-    console.log(pergunta);
     const respostaCorfio = this.fourthFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.fourthFormGroup.get('respostaOutros').value;
     this.pesqReactService.addRespComMark(pergunta, {pergunta, respostaCorfio, respostaOutros});
-    // this.pesqReactService.openSnackBarSaved(pergunta);
   }
 
   saveRespEmbTran(perguntaForm) {
     this.perguntaFormEmbTran = perguntaForm;
     const pergunta = this.perguntaFormEmbTran;
-    console.log(pergunta);
     const respostaCorfio = this.fifthFormGroup.get('respostaCorfio').value;
     const respostaOutros = this.fifthFormGroup.get('respostaOutros').value;
     this.pesqReactService.addRespEmbTran(pergunta, {pergunta, respostaCorfio, respostaOutros});
-    // this.pesqReactService.openSnackBarSaved(pergunta);
   }
 
   saveRespFinais(perguntaForm) {
     this.perguntaFormFim = perguntaForm;
     const pergunta = this.perguntaFormFim;
     const fim = this.fim;
-    console.log(pergunta);
-    console.log(this.sixthFormGroup.get('observacao').value);
     const resposta = this.sixthFormGroup.get('respostaMotivo').value;
     const observacao = this.sixthFormGroup.get('observacao').value;
-    console.log(observacao);
     this.pesqReactService.addRespFinais(pergunta, {resposta, observacao, fim});
-    // this.pesqReactService.openSnackBarSaved(pergunta);
+    this.pesqReactService.openSnackBarSaved(pergunta);
   }
 
   limpaObs() {
@@ -307,7 +280,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
   }
 
   getRespostas() {
-    const result = this.db.collection(this.user)
+    this.db.collection(this.user)
     .snapshotChanges()
     .pipe(map(docArray => {
       return docArray.map(doc => {
@@ -325,11 +298,9 @@ export class PesquisaReactiveFormComponent implements OnInit {
   }
 
   contaResp() {
-    const result = this.db.collection(this.user)
+    this.db.collection(this.user)
     .valueChanges()
-    .subscribe( data => { console.log(data.length);
-    this.contaRespostas = data.length;
-    return this.contaRespostas;
+    .subscribe( data => { return this.contaRespostas = data.length;
   });
   }
 
@@ -340,32 +311,22 @@ export class PesquisaReactiveFormComponent implements OnInit {
     return this.vlrQuestao;
   }
 
-
-
   createUsersCracken() {
-    const createUsers = [
+  const createUsers = [
 
-   ];
-
-    createUsers.forEach(element => {
-      console.log(element) ;
-      // const email = element.email;
-      // const password = '123456';
-      // const emailCNPJ = element.email;
-      let userCNPJ = element.cnpj + '@corfio.com';
-    
-      // const cnpj = emailCNPJ.replace('@corfio.com', '');
-      // const nome = element.nome;
-      // let nome = element.nome;
-      let nome = element.nome;
-      let cnpj = element.cnpj;
-      let email = element.email;
-      let representante = element.representante;
-      let estado = element.estado;
-      console.log( nome, cnpj, email, representante, estado );
-      // this.afAuth.auth.createUserWithEmailAndPassword( email, password ).catch(console.error);
-      this.db.collection('clientesCNPJv2').doc(userCNPJ).set({nome, cnpj, email, representante, estado}).catch(console.error);
-    });
+  ];
+  createUsers.forEach(element => {
+    console.log(element) ;
+    const userCNPJ = element.cnpj + '@corfio.com';
+    const nome = element.nome;
+    const cnpj = element.cnpj;
+    const email = element.email;
+    const representante = element.representante;
+    const estado = element.estado;
+    console.log( nome, cnpj, email, representante, estado );
+    // this.afAuth.auth.createUserWithEmailAndPassword( email, password ).catch(console.error);
+    this.db.collection('clientesCNPJv2').doc(userCNPJ).set({nome, cnpj, email, representante, estado}).catch(console.error);
+  });
   }
 
 }
