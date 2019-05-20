@@ -76,6 +76,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
   perguntaEspAssTec = 'Assistência Técnica';
   perguntaEspAtendComFab = 'Atendimento do setor comercial na fábrica';
   perguntaEspRep = 'Freqüência de visitas do representante atende a necessidade ?';
+  perguntaProduto = 'Quais produtos que sua empresa nos compra:';
 
   constructor(private formBuilder: FormBuilder,
               private pesqReactService: PesquisaReactiveServiceService,
@@ -198,6 +199,12 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
   } // END ONINIT
 
+  resetForms() {
+    console.log('reset');
+    return this.firstFormGroup.reset(), this.secondFormGroup.reset(),
+           this.thirdFormGroup.reset(), this.fourthFormGroup.reset();
+  }
+
 
   clientesCNPJ() {
     this.db.doc( 'clientesCNPJv2' + '/' + this.user + '@corfio.com').valueChanges().subscribe(
@@ -207,12 +214,6 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
   scroll(el: HTMLElement) {
     el.scrollIntoView();
-  }
-
-
-  resetForms() {
-    return this.firstFormGroup.reset(), this.secondFormGroup.reset(),
-           this.thirdFormGroup.reset(), this.fourthFormGroup.reset();
   }
 
   saveRespAspecTec(perguntaForm) {
@@ -270,7 +271,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
   }
 
   theEnd() {
-    if ( this.contaRespostas >= 26 )  {
+    if ( this.contaRespostas >= 27 )  {
       this.fim = true;
       alert( 'Pesquisa concluida com sucesso, muito obrigado!' );
 
@@ -305,7 +306,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
   }
 
   converteResp() {
-    const total = 26;
+    const total = 27;
     this.vlrQuestao = 100 / total;
     console.log(this.vlrQuestao);
     return this.vlrQuestao;
