@@ -48,6 +48,8 @@ export class RelatoriosComponent implements OnInit {
 
   ngOnInit() {
     this.contaRespotas();
+
+
   }
 
 
