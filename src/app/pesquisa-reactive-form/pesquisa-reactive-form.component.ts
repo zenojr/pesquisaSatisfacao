@@ -230,9 +230,9 @@ export class PesquisaReactiveFormComponent implements OnInit {
 
   saveRespComMark(perguntaForm) {
     this.perguntaFormComMark = perguntaForm;
-    const pergunta = this.perguntaFormComMark;
-    const respostaCorfio = this.fourthFormGroup.get('respostaCorfio').value;
-    const respostaOutros = this.fourthFormGroup.get('respostaOutros').value;
+    let pergunta = this.perguntaFormComMark;
+    let respostaCorfio = this.fourthFormGroup.get('respostaCorfio').value;
+    let respostaOutros = this.fourthFormGroup.get('respostaOutros').value;
     this.pesqReactService.addRespComMark(pergunta, {pergunta, respostaCorfio, respostaOutros});
   }
 
@@ -280,8 +280,6 @@ export class PesquisaReactiveFormComponent implements OnInit {
     }))
     .subscribe( from => {
       this.getRetornoResp = from;
-      console.log( 'contando do getresp' + from.length );
-      console.log(this.getRetornoResp);
       this.contaRespostas = from.length;
       return this.getRetornoResp;
     });
