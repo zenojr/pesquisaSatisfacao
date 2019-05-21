@@ -1,5 +1,3 @@
-<!-- <button (click)="createUsersCracken()" >Cracken</button> -->
-
 
 <div class="progressBar">
     <h3 class="bar" *ngIf="contaRespostas != 28" > {{ contaRespostas / 0.27 | number: '1.0-0'  }}% concluído  </h3>
@@ -7,13 +5,8 @@
 </div>
 <div class="answerEnd" *ngIf="fim === true">
     <h3>Suas respostas foram registradas com sucesso.</h3>
-    <!-- <div class="corfiologo">
-        <img class="corfioLogoImg" src="../../assets/AF_Marca_Corfio_RGB_neg.svg" alt="">
-    </div> -->
     <div class="finishMsg">
-        
-        <br>
-        <h3>Obrigado por sua participação.</h3>
+      <h3>Obrigado por sua participação.</h3>
     </div>
     
 </div>
