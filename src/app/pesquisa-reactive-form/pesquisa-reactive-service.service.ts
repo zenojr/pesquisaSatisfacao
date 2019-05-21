@@ -7,8 +7,6 @@ import * as firebase from 'firebase/app';
 import { RespRep } from './respRep.model';
 import { RespComMark } from './respComMark.model';
 import { RespEmbTran } from './respEmbtran.model';
-import { Observable } from 'rxjs';
-import { ConsultaResp } from './consultaResp.model';
 import { RespostasFinais } from '../pesquisa/respostasFinais.model';
 
 @Injectable({
@@ -17,14 +15,12 @@ import { RespostasFinais } from '../pesquisa/respostasFinais.model';
 export class PesquisaReactiveServiceService {
   readonly user = this.getUser();
   readonly pathUser = this.user;
-  consultaResp: Observable<ConsultaResp[]>;
 
   constructor( private db: AngularFirestore,
                private snackBar: MatSnackBar ) { }
 
 
   openSnackBarSaved(pergunta) {
-    // if i want to show the question on save, just add a property 'pergunto' to snackbar
     this.snackBar.open('Resposta salva com sucesso!', '[x]Fechar', {
       duration: 1500
     });
@@ -60,9 +56,6 @@ export class PesquisaReactiveServiceService {
     return this.db.collection<RespostasFinais>(this.pathUser).doc(pergunta).set(data);
   }
 
-  limpaRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
-    return this.db.collection<RespAspecTec>(this.pathUser).doc(pergunta).set(data);
-  }
 
   getUser() {
     const userFb = firebase.auth().currentUser;

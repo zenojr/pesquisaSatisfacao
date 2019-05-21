@@ -9,7 +9,6 @@ import { PerguntasProd } from '../pesquisa/perguntasProd.model';
 import { PerguntasComMark } from '../pesquisa/perguntasComMark.model';
 import { PerguntasEmbTran } from '../pesquisa/perguntasEmbTran.model';
 import { map } from 'rxjs/operators';
-import { ConsultaResp } from './consultaResp.model';
 import { PerguntasFinais } from '../pesquisa/perguntasFinais.model';
 
 export interface Respostas {
@@ -33,10 +32,8 @@ export interface OptionsCorfio {
 export class PesquisaReactiveFormComponent implements OnInit {
 
   respostas: Observable<Respostas[]>;
-  optionsCorfio: Observable<OptionsCorfio[]>;
   respostaCorfio: any;
   fim = false;
-  contadorResp: any;
   isLinear = false;
 
   firstFormGroup: FormGroup;
@@ -60,17 +57,10 @@ export class PesquisaReactiveFormComponent implements OnInit {
   perguntasEmbTran: Observable<PerguntasEmbTran[]>;
   perguntasFinais: Observable<PerguntasFinais[]>;
 
-  listadeCNPJ: Observable<any>;
-  respostarep: Observable<any>;
-  controlRepFreq = false;
-
   cliente: any;
-  respostasFB: Observable<ConsultaResp[]>;
-
   user = this.pesqReactService.getUser();
   getRetornoResp: any;
   contaRespostas = 0;
-  vlrQuestao = 0;
   realCount: any;
 
   perguntaEspAssTec = 'Assistência Técnica';
@@ -86,7 +76,6 @@ export class PesquisaReactiveFormComponent implements OnInit {
   ngOnInit() {
 
     this.getRespostas();
-    this.contaResp();
     this.clientesCNPJ();
 
     this.firstFormGroup = this.formBuilder.group({
@@ -274,7 +263,6 @@ export class PesquisaReactiveFormComponent implements OnInit {
     if ( this.contaRespostas >= 27 )  {
       this.fim = true;
       alert( 'Pesquisa concluida com sucesso, muito obrigado!' );
-
     } else {
       alert( 'Sua pesquisa ainda não foi concluida, por favor responda todas as perguntas.' );
     }
@@ -293,41 +281,13 @@ export class PesquisaReactiveFormComponent implements OnInit {
     }))
     .subscribe( from => {
       this.getRetornoResp = from;
+      console.log( 'contando do getresp' + from.length );
       console.log(this.getRetornoResp);
+      this.contaRespostas = from.length;
       return this.getRetornoResp;
     });
   }
 
-  contaResp() {
-    this.db.collection(this.user)
-    .valueChanges()
-    .subscribe( data => { return this.contaRespostas = data.length;
-  });
-  }
 
-  converteResp() {
-    const total = 27;
-    this.vlrQuestao = 100 / total;
-    console.log(this.vlrQuestao);
-    return this.vlrQuestao;
-  }
-
-  createUsersCracken() {
-  const createUsers = [
-
-  ];
-  createUsers.forEach(element => {
-    console.log(element) ;
-    const userCNPJ = element.cnpj + '@corfio.com';
-    const nome = element.nome;
-    const cnpj = element.cnpj;
-    const email = element.email;
-    const representante = element.representante;
-    const estado = element.estado;
-    console.log( nome, cnpj, email, representante, estado );
-    // this.afAuth.auth.createUserWithEmailAndPassword( email, password ).catch(console.error);
-    this.db.collection('clientesCNPJv2').doc(userCNPJ).set({nome, cnpj, email, representante, estado}).catch(console.error);
-  });
-  }
 
 }
