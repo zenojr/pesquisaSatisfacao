@@ -189,7 +189,6 @@ export class PesquisaReactiveFormComponent implements OnInit {
   } // END ONINIT
 
   resetForms() {
-    console.log('reset');
     return this.firstFormGroup.reset(), this.secondFormGroup.reset(),
            this.thirdFormGroup.reset(), this.fourthFormGroup.reset();
   }
@@ -287,7 +286,5 @@ export class PesquisaReactiveFormComponent implements OnInit {
       return this.getRetornoResp;
     });
   }
-
-
 
 }

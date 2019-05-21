@@ -56,7 +56,6 @@ export class PesquisaReactiveServiceService {
     return this.db.collection<RespostasFinais>(this.pathUser).doc(pergunta).set(data);
   }
 
-
   getUser() {
     const userFb = firebase.auth().currentUser;
     let userMail = userFb.email;
