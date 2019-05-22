@@ -246,10 +246,9 @@ export class PesquisaReactiveFormComponent implements OnInit {
   saveRespFinais(perguntaForm) {
     this.perguntaFormFim = perguntaForm;
     let pergunta = this.perguntaFormFim;
-    let fim = this.fim;
     let resposta = this.sixthFormGroup.get('respostaMotivo').value;
     let observacao = this.sixthFormGroup.get('observacao').value;
-    this.pesqReactService.addRespFinais(pergunta, {resposta, observacao, fim});
+    this.pesqReactService.addRespFinais(pergunta, {resposta, observacao});
     this.pesqReactService.openSnackBarSaved(pergunta);
   }
 
@@ -257,9 +256,11 @@ export class PesquisaReactiveFormComponent implements OnInit {
     return this.sixthFormGroup.get('observacao').setValue('');
   }
 
-  theEnd() {
+  theEnd(fimStatus) {
     if ( this.contaRespostas >= 27 )  {
       this.fim = true;
+      let fim = this.fim;
+      this.db.collection(this.user).doc('fim').set({fim});
       alert( 'Pesquisa concluida com sucesso, muito obrigado!' );
     } else {
       alert( 'Sua pesquisa ainda não foi concluida, por favor responda todas as perguntas.' );
