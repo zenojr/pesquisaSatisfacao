@@ -49,6 +49,7 @@ export class AuthService {
     this.isAuthenticated = false;
     this.authChange.next(false);
     this.router.navigate(['/']);
+
   }
 
   isAuth() {

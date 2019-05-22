@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 
 export class RelServiceService {
   constructor( private db: AngularFirestore ) { }
-  
+
   clientesResp: Observable<any>;
 
   // listUserRes() {

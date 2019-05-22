@@ -122,7 +122,6 @@ export class PesquisaReactiveFormComponent implements OnInit {
       });
     }));
 
-
     this.perguntasRep = this.db.collection('perguntasRep')
     .snapshotChanges()
     .pipe(map(docArray => {
@@ -209,7 +208,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
     let pergunta = this.perguntaFormAspTec;
     let respostaCorfio = this.firstFormGroup.get('respostaCorfio').value;
     let respostaOutros = this.firstFormGroup.get('respostaOutros').value;
-    this.pesqReactService.addRespAspTec(pergunta, {pergunta, respostaCorfio, respostaOutros});
+    this.pesqReactService.addRespAspTec(pergunta, {respostaCorfio, respostaOutros});
   }
 
   saveRespRep(perguntaForm) {
@@ -217,7 +216,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
     let pergunta = this.perguntaFormRep;
     let respostaCorfio = this.secondFormGroup.get('respostaCorfio').value;
     let respostaOutros = this.secondFormGroup.get('respostaOutros').value;
-    this.pesqReactService.addRespRep(pergunta, {pergunta, respostaCorfio, respostaOutros});
+    this.pesqReactService.addRespRep(pergunta, {respostaCorfio, respostaOutros});
   }
 
   saveRespImgProd(perguntaForm) {
@@ -225,7 +224,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
     let pergunta = this.perguntaFormImgProd;
     let respostaCorfio = this.thirdFormGroup.get('respostaCorfio').value;
     let respostaOutros = this.thirdFormGroup.get('respostaOutros').value;
-    this.pesqReactService.addRespImgProd(pergunta, {pergunta, respostaCorfio, respostaOutros});
+    this.pesqReactService.addRespImgProd(pergunta, {respostaCorfio, respostaOutros});
   }
 
   saveRespComMark(perguntaForm) {
@@ -233,7 +232,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
     let pergunta = this.perguntaFormComMark;
     let respostaCorfio = this.fourthFormGroup.get('respostaCorfio').value;
     let respostaOutros = this.fourthFormGroup.get('respostaOutros').value;
-    this.pesqReactService.addRespComMark(pergunta, {pergunta, respostaCorfio, respostaOutros});
+    this.pesqReactService.addRespComMark(pergunta, {respostaCorfio, respostaOutros});
   }
 
   saveRespEmbTran(perguntaForm) {
@@ -241,7 +240,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
     let pergunta = this.perguntaFormEmbTran;
     let respostaCorfio = this.fifthFormGroup.get('respostaCorfio').value;
     let respostaOutros = this.fifthFormGroup.get('respostaOutros').value;
-    this.pesqReactService.addRespEmbTran(pergunta, {pergunta, respostaCorfio, respostaOutros});
+    this.pesqReactService.addRespEmbTran(pergunta, {respostaCorfio, respostaOutros});
   }
 
   saveRespFinais(perguntaForm) {

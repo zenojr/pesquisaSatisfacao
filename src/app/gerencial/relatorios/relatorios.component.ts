@@ -47,7 +47,7 @@ export class RelatoriosComponent implements OnInit {
   constructor(private db: AngularFirestore, private relService: RelServiceService) {}
 
   ngOnInit() {
-    this.contaRespotas();
+    // this.contaRespotas();
 
 
   }
