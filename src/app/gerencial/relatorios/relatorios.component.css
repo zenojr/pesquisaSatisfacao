@@ -1,6 +1,17 @@
 .graficoBarra {
    display: flex;
    flex-wrap: wrap;
+   justify-content: space-between;
+   
+}
+
+mat-card {
+   margin-top: 10px;
+   width: 320px;
+}
+
+.categoria-title {
+   text-align: center
 }
 
 

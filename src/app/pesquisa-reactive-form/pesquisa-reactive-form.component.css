@@ -1,4 +1,13 @@
 
+.container { 
+  
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-direction: column;  
+  align-items: center;
+}
+
 ul {
     list-style: none;
     padding: 0;
@@ -21,7 +30,7 @@ ul {
 }
 
 .bar{  
-  background-color:	rgba(116, 116, 116, 0.3);
+  background-color:	rgba(116, 116, 116, 0.9);
 }
 
 mat-form-field {

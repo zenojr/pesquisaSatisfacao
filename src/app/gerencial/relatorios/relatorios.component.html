@@ -1,33 +1,70 @@
-<div class="graficoBarra">
-<div >
-    <p>Assistencia técnica</p>
-  <div>
-      <div style="display: block">
-        <canvas baseChart
-          [datasets]="barChartDataAsstec"
-          [labels]="barChartLabels"
-          [options]="barChartOptions"                
-          [legend]="barChartLegend"
-          [chartType]="barChartType">
-        </canvas>
+<h3 class="categoria-title" >ASPÉCTOS TÉCNICOS</h3>
+<div class="graficoBarra">  
+<mat-card>
+    <div>
+        <p> Funcionalidade da embalagem dos produtos em rolos </p>
+      <div>
+          <div style="display: block">
+            <canvas baseChart
+              [datasets]="barChartFuncRolos"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"                
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+            </canvas>
+          </div>
       </div>
-  </div>
-</div>
-
-<div >
-    <p>Aceitação dos produtos no mercado</p>
-  <div>
-      <div style="display: block">
-        <canvas baseChart
-          [datasets]="barChartAceitProd"
-          [labels]="barChartLabels"
-          [options]="barChartOptions"                
-          [legend]="barChartLegend"
-          [chartType]="barChartType">
-        </canvas>
+    </div>
+</mat-card>
+<mat-card>
+    <div>
+        <p>Funcionalidade da embalagem dos produtos em bobinas</p>
+      <div>
+          <div style="display: block">
+            <canvas baseChart
+              [datasets]="barChartFuncBobinas"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"                
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+            </canvas>
+          </div>
       </div>
-  </div>
-</div>
-    
-</div>
+    </div>  
+</mat-card>
+<mat-card>
+    <div>
+        <p>Uniformidades das características técnicas</p>
+      <div>
+          <div style="display: block">
+            <canvas baseChart
+              [datasets]="barChartUnifTec"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"                
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+            </canvas>
+          </div>
+      </div>
+    </div>  
+</mat-card>
+<mat-card>
+    <div>
+        <p>Desempenho do produto</p>
+      <div>
+          <div style="display: block">
+            <canvas baseChart
+              [datasets]="barChartFuncBobinas"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"                
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+            </canvas>
+          </div>
+      </div>
+    </div>  
+</mat-card>
+</div>  
+<br>
+<mat-divider></mat-divider>
 

@@ -32,11 +32,15 @@ export class RelatoriosComponent implements OnInit {
   public barChartLegend = true;
 
 
-  public barChartDataAsstec: ChartDataSets[] = [
+  public barChartFuncRolos: ChartDataSets[] = [
     { data: [10, 10, 10, 10], label: 'Resposta Corfio' },
     { data: [10, 10, 10, 10], label: 'Resposta Outros' }
   ];
-  public barChartAceitProd: ChartDataSets[] = [
+  public barChartFuncBobinas: ChartDataSets[] = [
+    { data: [10, 10, 10, 10], label: 'Resposta Corfio' },
+    { data: [10, 10, 10, 10], label: 'Resposta Outros' }
+  ];
+  public barChartUnifTec: ChartDataSets[] = [
     { data: [10, 10, 10, 10], label: 'Resposta Corfio' },
     { data: [10, 10, 10, 10], label: 'Resposta Outros' }
   ];
@@ -45,11 +49,12 @@ export class RelatoriosComponent implements OnInit {
 
 
   ngOnInit() {
-    this.respostasAssTec();
-    this.respostasAceitProd();
+    this.respostasFuncRolos();
+    this.respostasFuncBobinas();
+    this.respostasUnifTec();
   }
 
-  respostasAssTec() {
+  respostasUnifTec() {
     let otimoCorfio = 0;
     let otimoOutros = 0;
     let bomCorfio = 0;
@@ -59,34 +64,75 @@ export class RelatoriosComponent implements OnInit {
     let ruimCorfio = 0;
     let ruimOutros = 0;
 
-    this.db.collection('Assistência Técnica', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
+    this.db.collection('Uniformidades das características técnicas', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
     .valueChanges().subscribe(doc => otimoCorfio = doc.length );
-    this.db.collection('Assistência Técnica',ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
+    this.db.collection('Uniformidades das características técnicas',ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
     .valueChanges().subscribe(doc => otimoOutros = doc.length );
 
-    this.db.collection('Assistência Técnica', ref => ref.where( 'respostaCorfio', '==', 'bom' ))
+    this.db.collection('Uniformidades das características técnicas', ref => ref.where( 'respostaCorfio', '==', 'bom' ))
     .valueChanges().subscribe(doc => bomCorfio = doc.length);
-    this.db.collection('Assistência Técnica', ref => ref.where( 'respostaOutros', '==', 'bom' ))
+    this.db.collection('Uniformidades das características técnicas', ref => ref.where( 'respostaOutros', '==', 'bom' ))
     .valueChanges().subscribe(doc => bomOutros = doc.length);
 
-    this.db.collection('Assistência Técnica', ref => ref.where( 'respostaCorfio', '==', 'regular' ))
+    this.db.collection('Uniformidades das características técnicas', ref => ref.where( 'respostaCorfio', '==', 'regular' ))
     .valueChanges().subscribe(doc => regularCorfio = doc.length);
-    this.db.collection('Assistência Técnica', ref => ref.where( 'respostaOutros', '==', 'regular' ))
+    this.db.collection('Uniformidades das características técnicas', ref => ref.where( 'respostaOutros', '==', 'regular' ))
     .valueChanges().subscribe(doc => regularOutros = doc.length);
 
-    this.db.collection('Assistência Técnica', ref => ref.where( 'respostaCorfio', '==', 'ruim' ))
+    this.db.collection('Uniformidades das características técnicas', ref => ref.where( 'respostaCorfio', '==', 'ruim' ))
     .valueChanges().subscribe(doc => ruimCorfio = doc.length);
-    this.db.collection('Assistência Técnica', ref => ref.where( 'respostaOutros', '==', 'ruim' ))
-    .valueChanges().subscribe(doc => {ruimOutros = doc.length;
-      this.barChartDataAsstec = [
+    this.db.collection('Uniformidades das características técnicas', ref => ref.where( 'respostaOutros', '==', 'ruim' ))
+    .valueChanges().subscribe(doc => ruimOutros = doc.length);
+
+    setTimeout(() => {
+      this.barChartUnifTec = [
         { data: [otimoCorfio, bomCorfio, regularCorfio, ruimCorfio], label: 'Resposta Corfio' },
         { data: [otimoOutros, bomOutros, regularOutros, ruimOutros], label: 'Resposta Outros' }
       ];
-    });
+    }, 2000);
 
   }
 
-  respostasAceitProd() {
+  respostasFuncRolos() {
+    let otimoCorfio = 0;
+    let otimoOutros = 0;
+    let bomCorfio = 0;
+    let bomOutros = 0;
+    let regularCorfio = 0;
+    let regularOutros = 0;
+    let ruimCorfio = 0;
+    let ruimOutros = 0;
+
+    this.db.collection('Funcionalidade da embalagem dos produtos em rolos', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
+    .valueChanges().subscribe(doc => otimoCorfio = doc.length );
+    this.db.collection('Funcionalidade da embalagem dos produtos em rolos',ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
+    .valueChanges().subscribe(doc => otimoOutros = doc.length );
+
+    this.db.collection('Funcionalidade da embalagem dos produtos em rolos', ref => ref.where( 'respostaCorfio', '==', 'bom' ))
+    .valueChanges().subscribe(doc => bomCorfio = doc.length);
+    this.db.collection('Funcionalidade da embalagem dos produtos em rolos', ref => ref.where( 'respostaOutros', '==', 'bom' ))
+    .valueChanges().subscribe(doc => bomOutros = doc.length);
+
+    this.db.collection('Funcionalidade da embalagem dos produtos em rolos', ref => ref.where( 'respostaCorfio', '==', 'regular' ))
+    .valueChanges().subscribe(doc => regularCorfio = doc.length);
+    this.db.collection('Funcionalidade da embalagem dos produtos em rolos', ref => ref.where( 'respostaOutros', '==', 'regular' ))
+    .valueChanges().subscribe(doc => regularOutros = doc.length);
+
+    this.db.collection('Funcionalidade da embalagem dos produtos em rolos', ref => ref.where( 'respostaCorfio', '==', 'ruim' ))
+    .valueChanges().subscribe(doc => ruimCorfio = doc.length);
+    this.db.collection('Funcionalidade da embalagem dos produtos em rolos', ref => ref.where( 'respostaOutros', '==', 'ruim' ))
+    .valueChanges().subscribe(doc => ruimOutros = doc.length);
+
+    setTimeout(() => {
+      this.barChartFuncRolos = [
+        { data: [otimoCorfio, bomCorfio, regularCorfio, ruimCorfio], label: 'Resposta Corfio' },
+        { data: [otimoOutros, bomOutros, regularOutros, ruimOutros], label: 'Resposta Outros' }
+      ];
+    }, 2000);
+
+  }
+
+  respostasFuncBobinas() {
 
     let otimoCorfio = 0;
     let otimoOutros = 0;
@@ -97,30 +143,37 @@ export class RelatoriosComponent implements OnInit {
     let ruimCorfio = 0;
     let ruimOutros = 0;
 
-    this.db.collection('Aceitação dos produtos no mercado', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
+    this.db.collection('Funcionalidade da embalagem dos produtos em bobinas', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
     .valueChanges().subscribe(doc => otimoCorfio = doc.length );
-    this.db.collection('Aceitação dos produtos no mercado',ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
+    this.db.collection('Funcionalidade da embalagem dos produtos em bobinas',ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
     .valueChanges().subscribe(doc => otimoOutros = doc.length );
 
-    this.db.collection('Aceitação dos produtos no mercado', ref => ref.where( 'respostaCorfio', '==', 'bom' ))
+    this.db.collection('Funcionalidade da embalagem dos produtos em bobinas', ref => ref.where( 'respostaCorfio', '==', 'bom' ))
     .valueChanges().subscribe(doc => bomCorfio = doc.length);
-    this.db.collection('Aceitação dos produtos no mercado', ref => ref.where( 'respostaOutros', '==', 'bom' ))
+    this.db.collection('Funcionalidade da embalagem dos produtos em bobinas', ref => ref.where( 'respostaOutros', '==', 'bom' ))
     .valueChanges().subscribe(doc => bomOutros = doc.length);
 
-    this.db.collection('Aceitação dos produtos no mercado', ref => ref.where( 'respostaCorfio', '==', 'regular' ))
+    this.db.collection('Funcionalidade da embalagem dos produtos em bobinas', ref => ref.where( 'respostaCorfio', '==', 'regular' ))
     .valueChanges().subscribe(doc => regularCorfio = doc.length);
-    this.db.collection('Aceitação dos produtos no mercado', ref => ref.where( 'respostaOutros', '==', 'regular' ))
+    this.db.collection('Funcionalidade da embalagem dos produtos em bobinas', ref => ref.where( 'respostaOutros', '==', 'regular' ))
     .valueChanges().subscribe(doc => regularOutros = doc.length);
 
-    this.db.collection('Aceitação dos produtos no mercado', ref => ref.where( 'respostaCorfio', '==', 'ruim' ))
+    this.db.collection('Funcionalidade da embalagem dos produtos em bobinas', ref => ref.where( 'respostaCorfio', '==', 'ruim' ))
     .valueChanges().subscribe(doc => ruimCorfio = doc.length);
-    this.db.collection('Aceitação dos produtos no mercado', ref => ref.where( 'respostaOutros', '==', 'ruim' ))
-    .valueChanges().subscribe(doc => {ruimOutros = doc.length;
-      this.barChartAceitProd = [
+    this.db.collection('Funcionalidade da embalagem dos produtos em bobinas', ref => ref.where( 'respostaOutros', '==', 'ruim' ))
+    .valueChanges().subscribe(doc => ruimOutros = doc.length);
+    this.db.collection('Funcionalidade da embalagem dos produtos em bobinas', ref => ref.where( 'respostaOutros', '==', 'ruim' ))
+    .valueChanges().subscribe(doc => ruimOutros = doc.length);
+
+    setTimeout(() => {
+      this.barChartFuncBobinas = [
         { data: [otimoCorfio, bomCorfio, regularCorfio, ruimCorfio], label: 'Resposta Corfio' },
         { data: [otimoOutros, bomOutros, regularOutros, ruimOutros], label: 'Resposta Outros' }
       ];
-    });
+    }, 1000);
+
+
+
   }
 
 
