@@ -1,23 +1,33 @@
-<!-- 
-<div>
+<div class="graficoBarra">
+<div >
     <p>Assistencia técnica</p>
-    <div class="assTec">
-        <div>
-            <div style="display: block">
-              <canvas baseChart
-                [datasets]="barChartData"
-                [labels]="barChartLabels"
-                [options]="barChartOptions"
-                [plugins]="barChartPlugins"
-                [legend]="barChartLegend"
-                [chartType]="barChartType">
-              </canvas>
-            </div>
-   </div>
+  <div>
+      <div style="display: block">
+        <canvas baseChart
+          [datasets]="barChartDataAsstec"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"                
+          [legend]="barChartLegend"
+          [chartType]="barChartType">
+        </canvas>
+      </div>
+  </div>
 </div>
 
+<div >
+    <p>Aceitação dos produtos no mercado</p>
+  <div>
+      <div style="display: block">
+        <canvas baseChart
+          [datasets]="barChartAceitProd"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"                
+          [legend]="barChartLegend"
+          [chartType]="barChartType">
+        </canvas>
+      </div>
+  </div>
+</div>
+    
+</div>
 
-
-
-
- -->

@@ -257,7 +257,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
   }
 
   theEnd(fimStatus) {
-    if ( this.contaRespostas >= 27 )  {
+    if (this.contaRespostas >= 27)  {
       this.fim = true;
       let fim = this.fim;
       this.db.collection(this.user).doc('fim').set({fim});

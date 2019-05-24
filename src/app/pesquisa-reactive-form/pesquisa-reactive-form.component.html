@@ -27,7 +27,7 @@
         <ul *ngFor="let item of perguntaAspecTec | async">
           <li>  {{ item.pergunta }}</li>
           <mat-form-field>
-            <mat-select (click)="resetForms()" placeholder="CORFIO" formControlName="respostaCorfio" 
+            <mat-select tabindex="-1" (click)="resetForms()" placeholder="CORFIO" formControlName="respostaCorfio" 
                         (selectionChange)="saveRespAspecTec(item.pergunta)">
               <mat-option *ngIf="item.pergunta != perguntaProduto"  value="ótimo">ótimo</mat-option>
               <mat-option *ngIf="item.pergunta != perguntaProduto"  value="bom">bom</mat-option>
@@ -41,7 +41,7 @@
           </mat-form-field>
           
           <mat-form-field *ngIf="item.pergunta != perguntaProduto">
-            <mat-select  placeholder="OUTROS" formControlName="respostaOutros"
+            <mat-select tabindex="-1" placeholder="OUTROS" formControlName="respostaOutros"
                          (selectionChange)="saveRespAspecTec(item.pergunta)">
               <mat-option value="ótimo">ótimo</mat-option>
               <mat-option value="bom">bom</mat-option>
@@ -55,7 +55,7 @@
               <div id="" *ngIf=" item.pergunta === respostas.id ">
                   <li><b>Respostas: &nbsp;</b></li>
                   <li>Corfio: <i>{{ respostas.respostaCorfio }} &nbsp;</i></li>
-                  <li>Outros: <i>{{ respostas.respostaOutros }}</i></li>
+                  <li *ngIf="item.pergunta != perguntaProduto"  >Outros: <i>{{ respostas.respostaOutros }}</i></li>
               </div>
               
             </ul>
@@ -64,7 +64,7 @@
           <mat-divider></mat-divider>
         </ul>
         <div>
-          <button (click)="scroll(controlScroll); loadPerguntasRep() " mat-button matStepperNext>Próximo</button>
+          <button (click)="scroll(controlScroll)" mat-button matStepperNext>Próximo</button>
         </div>
       </form>
     </mat-step>
@@ -76,7 +76,7 @@
           <ul *ngFor="let item of perguntasRep | async ; ">
             <li> {{ item.pergunta }}</li>
             <mat-form-field>
-              <mat-select (click)="resetForms()" placeholder="CORFIO" formControlName="respostaCorfio"
+              <mat-select tabindex="-1"(click)="resetForms()" placeholder="CORFIO" formControlName="respostaCorfio"
                 (selectionChange)="saveRespRep(item.pergunta)">
                 <mat-option *ngIf="perguntaEspRep != item.pergunta" value="ótimo">ótimo</mat-option>
                 <mat-option *ngIf="perguntaEspRep != item.pergunta" value="bom">bom</mat-option>
@@ -88,7 +88,7 @@
               </mat-select>
             </mat-form-field>
             <mat-form-field>
-              <mat-select placeholder="OUTROS" formControlName="respostaOutros"
+              <mat-select tabindex="-1"placeholder="OUTROS" formControlName="respostaOutros"
                 (selectionChange)="saveRespRep(item.pergunta)">
                 <mat-option *ngIf="perguntaEspRep != item.pergunta" value="ótimo">ótimo</mat-option>
                 <mat-option *ngIf="perguntaEspRep != item.pergunta" value="bom">bom</mat-option>
@@ -127,7 +127,7 @@
         <ul *ngFor="let item of perguntasImgProd | async">
           <li> {{ item.pergunta }}</li>
           <mat-form-field>
-            <mat-select (click)="resetForms()" placeholder="CORFIO" formControlName="respostaCorfio"
+            <mat-select tabindex="-1"(click)="resetForms()" placeholder="CORFIO" formControlName="respostaCorfio"
               (selectionChange)="saveRespImgProd(item.pergunta)">
               <mat-option value="ótimo">ótimo</mat-option>
               <mat-option value="bom">bom</mat-option>
@@ -136,7 +136,7 @@
             </mat-select>
           </mat-form-field>
           <mat-form-field>
-            <mat-select placeholder="OUTROS" formControlName="respostaOutros"
+            <mat-select tabindex="-1"placeholder="OUTROS" formControlName="respostaOutros"
               (selectionChange)="saveRespImgProd(item.pergunta)">
               <mat-option value="ótimo">ótimo</mat-option>
               <mat-option value="bom">bom</mat-option>
@@ -170,7 +170,7 @@
         <ul *ngFor="let item of perguntasComMark | async">
           <li> {{ item.pergunta }}</li>
           <mat-form-field>
-            <mat-select (click)="resetForms()" placeholder="CORFIO" formControlName="respostaCorfio"
+            <mat-select tabindex="-1"(click)="resetForms()" placeholder="CORFIO" formControlName="respostaCorfio"
               (selectionChange)="saveRespComMark(item.pergunta)">
               <mat-option value="ótimo">ótimo</mat-option>
               <mat-option value="bom">bom</mat-option>
@@ -180,7 +180,7 @@
             </mat-select>
           </mat-form-field>
           <mat-form-field>
-            <mat-select placeholder="OUTROS" formControlName="respostaOutros"
+            <mat-select tabindex="-1"placeholder="OUTROS" formControlName="respostaOutros"
               (selectionChange)="saveRespComMark(item.pergunta)">
               <mat-option value="ótimo">ótimo</mat-option>
               <mat-option value="bom">bom</mat-option>
@@ -214,7 +214,7 @@
         <ul *ngFor="let item of perguntasEmbTran | async">
           <li> {{ item.pergunta }}</li>
           <mat-form-field>
-            <mat-select (click)="resetForms()" placeholder="CORFIO" formControlName="respostaCorfio"
+            <mat-select tabindex="-1"(click)="resetForms()" placeholder="CORFIO" formControlName="respostaCorfio"
               (selectionChange)="saveRespEmbTran(item.pergunta)">
               <mat-option value="ótimo">ótimo</mat-option>
               <mat-option value="bom">bom</mat-option>
@@ -223,7 +223,7 @@
             </mat-select>
           </mat-form-field>
           <mat-form-field>
-            <mat-select placeholder="OUTROS" formControlName="respostaOutros"
+            <mat-select tabindex="-1"placeholder="OUTROS" formControlName="respostaOutros"
               (selectionChange)="saveRespEmbTran(item.pergunta)">
               <mat-option value="ótimo">ótimo</mat-option>
               <mat-option value="bom">bom</mat-option>
@@ -257,7 +257,7 @@
           <ul *ngFor="let item of perguntasFinais | async">
               {{ item.pergunta }}
             <mat-form-field>
-              <mat-select placeholder="Sua resposta" formControlName="respostaMotivo"
+              <mat-select tabindex="-1"placeholder="Sua resposta" formControlName="respostaMotivo"
                           (selectionChange)="saveRespFinais(item.pergunta)">
                 <mat-option value="Atendimento do representante">Atendimento do representante</mat-option>
                 <mat-option value="Qualidade técnica do produto">Qualidade técnica do produto</mat-option>

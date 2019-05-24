@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { RespostaUser } from './resUser.model';
-import { RelServiceService } from './rel-service.service';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 
@@ -16,12 +15,6 @@ import { Label } from 'ng2-charts';
 })
 export class RelatoriosComponent implements OnInit {
 
-  public retorno = [];
-  otimo = 0;
-  bom = 0;
-  regular = 0;
-  ruim = 0;
-  naoUso = 0;
 
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -39,49 +32,95 @@ export class RelatoriosComponent implements OnInit {
   public barChartLegend = true;
 
 
-  public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81], label: 'Resposta Corfio' },
-    { data: [28, 48, 40, 19], label: 'Resposta Outros' }
+  public barChartDataAsstec: ChartDataSets[] = [
+    { data: [10, 10, 10, 10], label: 'Resposta Corfio' },
+    { data: [10, 10, 10, 10], label: 'Resposta Outros' }
+  ];
+  public barChartAceitProd: ChartDataSets[] = [
+    { data: [10, 10, 10, 10], label: 'Resposta Corfio' },
+    { data: [10, 10, 10, 10], label: 'Resposta Outros' }
   ];
 
-  constructor(private db: AngularFirestore, private relService: RelServiceService) {}
+  constructor(private db: AngularFirestore) {}
+
 
   ngOnInit() {
-    // this.contaRespotas();
+    this.respostasAssTec();
+    this.respostasAceitProd();
+  }
 
+  respostasAssTec() {
+    let otimoCorfio = 0;
+    let otimoOutros = 0;
+    let bomCorfio = 0;
+    let bomOutros = 0;
+    let regularCorfio = 0;
+    let regularOutros = 0;
+    let ruimCorfio = 0;
+    let ruimOutros = 0;
+
+    this.db.collection('Assistência Técnica', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
+    .valueChanges().subscribe(doc => otimoCorfio = doc.length );
+    this.db.collection('Assistência Técnica',ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
+    .valueChanges().subscribe(doc => otimoOutros = doc.length );
+
+    this.db.collection('Assistência Técnica', ref => ref.where( 'respostaCorfio', '==', 'bom' ))
+    .valueChanges().subscribe(doc => bomCorfio = doc.length);
+    this.db.collection('Assistência Técnica', ref => ref.where( 'respostaOutros', '==', 'bom' ))
+    .valueChanges().subscribe(doc => bomOutros = doc.length);
+
+    this.db.collection('Assistência Técnica', ref => ref.where( 'respostaCorfio', '==', 'regular' ))
+    .valueChanges().subscribe(doc => regularCorfio = doc.length);
+    this.db.collection('Assistência Técnica', ref => ref.where( 'respostaOutros', '==', 'regular' ))
+    .valueChanges().subscribe(doc => regularOutros = doc.length);
+
+    this.db.collection('Assistência Técnica', ref => ref.where( 'respostaCorfio', '==', 'ruim' ))
+    .valueChanges().subscribe(doc => ruimCorfio = doc.length);
+    this.db.collection('Assistência Técnica', ref => ref.where( 'respostaOutros', '==', 'ruim' ))
+    .valueChanges().subscribe(doc => {ruimOutros = doc.length;
+      this.barChartDataAsstec = [
+        { data: [otimoCorfio, bomCorfio, regularCorfio, ruimCorfio], label: 'Resposta Corfio' },
+        { data: [otimoOutros, bomOutros, regularOutros, ruimOutros], label: 'Resposta Outros' }
+      ];
+    });
 
   }
 
+  respostasAceitProd() {
 
-  contaRespotas() {
-    this.db.collection('Assistência Técnica',
-    ref => ref.where( 'respostaCorfio', '==', 'ótimo' )).valueChanges().subscribe(doc => doc.forEach( el => {
-    this.otimo++;
-    console.log('ótimo' + this.otimo);
-    } ) );
+    let otimoCorfio = 0;
+    let otimoOutros = 0;
+    let bomCorfio = 0;
+    let bomOutros = 0;
+    let regularCorfio = 0;
+    let regularOutros = 0;
+    let ruimCorfio = 0;
+    let ruimOutros = 0;
 
-    this.db.collection('Assistência Técnica',
-    ref => ref.where( 'respostaCorfio', '==', 'bom' )).valueChanges().subscribe(doc => doc.forEach( el => {
-    this.bom++;
-    console.log('bom' + this.bom);
-    } ) );
+    this.db.collection('Aceitação dos produtos no mercado', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
+    .valueChanges().subscribe(doc => otimoCorfio = doc.length );
+    this.db.collection('Aceitação dos produtos no mercado',ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
+    .valueChanges().subscribe(doc => otimoOutros = doc.length );
 
-    this.db.collection('Assistência Técnica',
-    ref => ref.where( 'respostaCorfio', '==', 'regular' )).valueChanges().subscribe(doc => doc.forEach( el => {
-    this.regular++;
-    console.log('regular ' + this.regular);
-    } ) );
+    this.db.collection('Aceitação dos produtos no mercado', ref => ref.where( 'respostaCorfio', '==', 'bom' ))
+    .valueChanges().subscribe(doc => bomCorfio = doc.length);
+    this.db.collection('Aceitação dos produtos no mercado', ref => ref.where( 'respostaOutros', '==', 'bom' ))
+    .valueChanges().subscribe(doc => bomOutros = doc.length);
 
-    this.db.collection('Assistência Técnica',
-    ref => ref.where( 'respostaCorfio', '==', 'ruim' )).valueChanges().subscribe(doc => doc.forEach( el => {
-    this.ruim++;
-    console.log('ruim ' + this.regular);
-    this.barChartData = [
-      { data: [this.otimo, this.bom, this.regular, this.ruim], label: 'Resposta Corfio' },
-      { data: [this.otimo, this.bom, this.regular, this.ruim], label: 'Resposta Outros' }
-    ];
-    } ) );
+    this.db.collection('Aceitação dos produtos no mercado', ref => ref.where( 'respostaCorfio', '==', 'regular' ))
+    .valueChanges().subscribe(doc => regularCorfio = doc.length);
+    this.db.collection('Aceitação dos produtos no mercado', ref => ref.where( 'respostaOutros', '==', 'regular' ))
+    .valueChanges().subscribe(doc => regularOutros = doc.length);
 
+    this.db.collection('Aceitação dos produtos no mercado', ref => ref.where( 'respostaCorfio', '==', 'ruim' ))
+    .valueChanges().subscribe(doc => ruimCorfio = doc.length);
+    this.db.collection('Aceitação dos produtos no mercado', ref => ref.where( 'respostaOutros', '==', 'ruim' ))
+    .valueChanges().subscribe(doc => {ruimOutros = doc.length;
+      this.barChartAceitProd = [
+        { data: [otimoCorfio, bomCorfio, regularCorfio, ruimCorfio], label: 'Resposta Corfio' },
+        { data: [otimoOutros, bomOutros, regularOutros, ruimOutros], label: 'Resposta Outros' }
+      ];
+    });
   }
 
 
