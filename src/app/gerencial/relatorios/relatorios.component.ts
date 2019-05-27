@@ -49,9 +49,7 @@ export class RelatoriosComponent implements OnInit {
 
 
   ngOnInit() {
-    this.respostasFuncRolos();
-    this.respostasFuncBobinas();
-    this.respostasUnifTec();
+
   }
 
   respostasUnifTec() {

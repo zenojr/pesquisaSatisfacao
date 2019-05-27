@@ -23,6 +23,7 @@ ul {
 .progressBar h3{
   margin-top: 0px;
   margin-bottom: 0px;
+  padding-bottom: 5px;
   height: 20px;
   color: rgb(0, 0, 0);
   text-align: center;
