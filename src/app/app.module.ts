@@ -44,7 +44,6 @@ import { ChartsModule } from 'ng2-charts';
     AngularFireAuthModule,
     FlexLayoutModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    Ng2GoogleChartsModule,
     ChartsModule
   ],
   providers: [ AuthService, { provide: FirestoreSettingsToken, useValue: {} } ],

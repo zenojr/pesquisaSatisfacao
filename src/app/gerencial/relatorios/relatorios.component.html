@@ -3,6 +3,7 @@
 <mat-card>
     <div>
         <p> Funcionalidade da embalagem dos produtos em rolos </p>
+        <p> Total de respostas: {{ countRespostasFuncRolos }} </p>
       <div>
           <div style="display: block">
             <canvas baseChart
@@ -35,6 +36,7 @@
 <mat-card>
     <div>
         <p>Uniformidades das características técnicas</p>
+        <p>Total de respostas: {{ countRespostasUnifTec }}</p>
       <div>
           <div style="display: block">
             <canvas baseChart
@@ -50,11 +52,12 @@
 </mat-card>
 <mat-card>
     <div>
-        <p>Desempenho do produto</p>
+        <p>Desempenho do produto </p>
+        <p>Total de respostas: {{ countRespostasDesemProd }}</p>
       <div>
           <div style="display: block">
             <canvas baseChart
-              [datasets]="barChartFuncBobinas"
+              [datasets]="barChartDesemProd"
               [labels]="barChartLabels"
               [options]="barChartOptions"                
               [legend]="barChartLegend"
