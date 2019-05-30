@@ -31,6 +31,10 @@ export class RelatoriosComponent implements OnInit {
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
 
+  public barChartFuncBob: ChartDataSets[] = [
+    { data: [0, 0, 0, 0], label: 'Resposta Corfio' },
+    { data: [0, 0, 0, 0], label: 'Resposta Outros' }
+  ];
 
   public barChartFuncRolos: ChartDataSets[] = [
     { data: [0, 0, 0, 0], label: 'Resposta Corfio' },
@@ -50,10 +54,17 @@ export class RelatoriosComponent implements OnInit {
     { data: [0, 0, 0, 0], label: 'Resposta Outros' }
   ];
 
+  public barChartIdentProdRolo: ChartDataSets[] = [
+    { data: [0, 0, 0, 0], label: 'Resposta Corfio' },
+    { data: [0, 0, 0, 0], label: 'Resposta Outros' }
+  ];
 
   countRespostasUnifTec: any;
   countRespostasDesemProd: any;
   countRespostasFuncRolos: any;
+  countRespostasFuncBobinas: any;
+  countRespostasProdRolo: any;
+  countRespostasProdBob: any;
 
   constructor(private db: AngularFirestore) {}
 
@@ -63,6 +74,100 @@ export class RelatoriosComponent implements OnInit {
     this.respostasUnifTec();
     this.respostasFuncBobinas();
     this.respostasDesemProd();
+    this.respostasProdRolo();
+    this.respostasProdBob();
+  }
+
+  respostasProdBob() {
+    let otimoCorfio = 0;
+    let otimoOutros = 0;
+    let bomCorfio = 0;
+    let bomOutros = 0;
+    let regularCorfio = 0;
+    let regularOutros = 0;
+    let ruimCorfio = 0;
+    let ruimOutros = 0;
+
+    this.db.collection('Identificação (etiqueta) dos produtos em bobinas', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
+    .valueChanges().subscribe(doc => otimoCorfio = doc.length );
+    this.db.collection('Identificação (etiqueta) dos produtos em bobinas',ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
+    .valueChanges().subscribe(doc => otimoOutros = doc.length );
+
+    this.db.collection('Identificação (etiqueta) dos produtos em bobinas', ref => ref.where( 'respostaCorfio', '==', 'bom' ))
+    .valueChanges().subscribe(doc => bomCorfio = doc.length);
+    this.db.collection('Identificação (etiqueta) dos produtos em bobinas', ref => ref.where( 'respostaOutros', '==', 'bom' ))
+    .valueChanges().subscribe(doc => bomOutros = doc.length);
+
+    this.db.collection('Identificação (etiqueta) dos produtos em bobinas', ref => ref.where( 'respostaCorfio', '==', 'regular' ))
+    .valueChanges().subscribe(doc => regularCorfio = doc.length);
+    this.db.collection('Identificação (etiqueta) dos produtos em bobinas', ref => ref.where( 'respostaOutros', '==', 'regular' ))
+    .valueChanges().subscribe(doc => regularOutros = doc.length);
+
+    this.db.collection('Identificação (etiqueta) dos produtos em bobinas', ref => ref.where( 'respostaCorfio', '==', 'ruim' ))
+    .valueChanges().subscribe(doc => ruimCorfio = doc.length);
+    this.db.collection('Identificação (etiqueta) dos produtos em bobinas', ref => ref.where( 'respostaOutros', '==', 'ruim' ))
+    .valueChanges().subscribe(doc => ruimOutros = doc.length);
+
+    setTimeout(() => {
+      this.barChartFuncBob = [
+        { data: [otimoCorfio, bomCorfio, regularCorfio, ruimCorfio], label: 'Resposta Corfio' },
+        { data: [otimoOutros, bomOutros, regularOutros, ruimOutros], label: 'Resposta Outros' }
+      ];
+    }, 6000);
+
+    this.db.collection('Identificação (etiqueta) dos produtos em bobinas',
+    ref => ref.orderBy( 'respostaCorfio', 'asc' ))
+    .valueChanges().subscribe(doc => {
+      this.countRespostasProdBob = doc.length;
+      console.log(this.countRespostasProdBob);
+    } );
+
+  }
+
+  respostasProdRolo() {
+    let otimoCorfio = 0;
+    let otimoOutros = 0;
+    let bomCorfio = 0;
+    let bomOutros = 0;
+    let regularCorfio = 0;
+    let regularOutros = 0;
+    let ruimCorfio = 0;
+    let ruimOutros = 0;
+
+    this.db.collection('Identificação (etiqueta) dos produtos em rolos', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
+    .valueChanges().subscribe(doc => otimoCorfio = doc.length );
+    this.db.collection('Identificação (etiqueta) dos produtos em rolos',ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
+    .valueChanges().subscribe(doc => otimoOutros = doc.length );
+
+    this.db.collection('Identificação (etiqueta) dos produtos em rolos', ref => ref.where( 'respostaCorfio', '==', 'bom' ))
+    .valueChanges().subscribe(doc => bomCorfio = doc.length);
+    this.db.collection('Identificação (etiqueta) dos produtos em rolos', ref => ref.where( 'respostaOutros', '==', 'bom' ))
+    .valueChanges().subscribe(doc => bomOutros = doc.length);
+
+    this.db.collection('Identificação (etiqueta) dos produtos em rolos', ref => ref.where( 'respostaCorfio', '==', 'regular' ))
+    .valueChanges().subscribe(doc => regularCorfio = doc.length);
+    this.db.collection('Identificação (etiqueta) dos produtos em rolos', ref => ref.where( 'respostaOutros', '==', 'regular' ))
+    .valueChanges().subscribe(doc => regularOutros = doc.length);
+
+    this.db.collection('Identificação (etiqueta) dos produtos em rolos', ref => ref.where( 'respostaCorfio', '==', 'ruim' ))
+    .valueChanges().subscribe(doc => ruimCorfio = doc.length);
+    this.db.collection('Identificação (etiqueta) dos produtos em rolos', ref => ref.where( 'respostaOutros', '==', 'ruim' ))
+    .valueChanges().subscribe(doc => ruimOutros = doc.length);
+
+    setTimeout(() => {
+      this.barChartIdentProdRolo = [
+        { data: [otimoCorfio, bomCorfio, regularCorfio, ruimCorfio], label: 'Resposta Corfio' },
+        { data: [otimoOutros, bomOutros, regularOutros, ruimOutros], label: 'Resposta Outros' }
+      ];
+    }, 6000);
+
+    this.db.collection('Identificação (etiqueta) dos produtos em rolos',
+    ref => ref.orderBy( 'respostaCorfio', 'asc' ))
+    .valueChanges().subscribe(doc => {
+      this.countRespostasProdRolo = doc.length;
+      console.log(this.countRespostasProdRolo);
+    } );
+
   }
 
   respostasDesemProd() {
@@ -150,7 +255,6 @@ export class RelatoriosComponent implements OnInit {
     this.db.collection('Uniformidades das características técnicas',
     ref => ref.orderBy( 'respostaCorfio', 'asc' ))
     .valueChanges().subscribe(doc => {
-      console.log(doc.length);
       this.countRespostasUnifTec = doc.length;
       console.log(this.countRespostasUnifTec);
     } );
@@ -243,25 +347,15 @@ export class RelatoriosComponent implements OnInit {
         { data: [otimoOutros, bomOutros, regularOutros, ruimOutros], label: 'Resposta Outros' }
       ];
     }, 6000);
-
+    this.db.collection('Funcionalidade da embalagem dos produtos em bobinas',
+    ref => ref.orderBy( 'respostaCorfio', 'asc' ))
+    .valueChanges().subscribe(doc => {
+      this.countRespostasFuncBobinas = doc.length;
+      console.log(this.countRespostasFuncBobinas);
+    } );
   }
 
-  contaRespostasPorPergunta() {
-    this.db.collection('Uniformidades das características técnicas')
-    .snapshotChanges()
-    .pipe(map(docArray => {
-      return docArray.map(doc => {
-        return {
-          id: doc.payload.doc.id
-        };
-      });
-    }))
-    .subscribe( from => {
-      console.log(from);
-      console.log(from.length);
-    });
-  }
-
+ 
 
 
 }

@@ -20,6 +20,7 @@
 <mat-card>
     <div>
         <p>Funcionalidade da embalagem dos produtos em bobinas</p>
+        <p>Total de respostas: {{ countRespostasFuncBobinas }} </p>
       <div>
           <div style="display: block">
             <canvas baseChart
@@ -58,6 +59,40 @@
           <div style="display: block">
             <canvas baseChart
               [datasets]="barChartDesemProd"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"                
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+            </canvas>
+          </div>
+      </div>
+    </div>  
+</mat-card>
+<mat-card>
+    <div>
+        <p> Identificação (etiqueta) dos produtos em rolos </p>
+        <p>Total de respostas: {{ countRespostasProdRolo }}</p>
+      <div>
+          <div style="display: block">
+            <canvas baseChart
+              [datasets]="barChartIdentProdRolo"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"                
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+            </canvas>
+          </div>
+      </div>
+    </div>  
+</mat-card>
+<mat-card>
+    <div>
+        <p> Identificação (etiqueta) dos produtos em bobinas </p>
+        <p>Total de respostas: {{ countRespostasProdBob }}</p>
+      <div>
+          <div style="display: block">
+            <canvas baseChart
+              [datasets]="barChartIdentProdRolo"
               [labels]="barChartLabels"
               [options]="barChartOptions"                
               [legend]="barChartLegend"
