@@ -31,6 +31,11 @@ export class RelatoriosComponent implements OnInit {
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
 
+  public barChartidGravProd: ChartDataSets[] = [
+    { data: [0, 0, 0, 0], label: 'Resposta Corfio' },
+    { data: [0, 0, 0, 0], label: 'Resposta Outros' }
+  ];
+
   public barChartFuncBob: ChartDataSets[] = [
     { data: [0, 0, 0, 0], label: 'Resposta Corfio' },
     { data: [0, 0, 0, 0], label: 'Resposta Outros' }
@@ -59,6 +64,7 @@ export class RelatoriosComponent implements OnInit {
     { data: [0, 0, 0, 0], label: 'Resposta Outros' }
   ];
 
+  countRespostasidGravProd: any;
   countRespostasUnifTec: any;
   countRespostasDesemProd: any;
   countRespostasFuncRolos: any;
@@ -70,6 +76,7 @@ export class RelatoriosComponent implements OnInit {
 
 
   ngOnInit() {
+    this.respostasIdGravProd();
     this.respostasFuncRolos();
     this.respostasUnifTec();
     this.respostasFuncBobinas();
@@ -77,6 +84,54 @@ export class RelatoriosComponent implements OnInit {
     this.respostasProdRolo();
     this.respostasProdBob();
   }
+
+
+  respostasIdGravProd() {
+    let otimoCorfio = 0;
+    let otimoOutros = 0;
+    let bomCorfio = 0;
+    let bomOutros = 0;
+    let regularCorfio = 0;
+    let regularOutros = 0;
+    let ruimCorfio = 0;
+    let ruimOutros = 0;
+
+    this.db.collection('Identificação (gravação) nos produtos', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
+    .valueChanges().subscribe(doc => otimoCorfio = doc.length );
+    this.db.collection('Identificação (gravação) nos produtos', ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
+    .valueChanges().subscribe(doc => otimoOutros = doc.length );
+
+    this.db.collection('Identificação (gravação) nos produtos', ref => ref.where( 'respostaCorfio', '==', 'bom' ))
+    .valueChanges().subscribe(doc => bomCorfio = doc.length);
+    this.db.collection('Identificação (gravação) nos produtos', ref => ref.where( 'respostaOutros', '==', 'bom' ))
+    .valueChanges().subscribe(doc => bomOutros = doc.length);
+
+    this.db.collection('Identificação (gravação) nos produtos', ref => ref.where( 'respostaCorfio', '==', 'regular' ))
+    .valueChanges().subscribe(doc => regularCorfio = doc.length);
+    this.db.collection('Identificação (gravação) nos produtos', ref => ref.where( 'respostaOutros', '==', 'regular' ))
+    .valueChanges().subscribe(doc => regularOutros = doc.length);
+
+    this.db.collection('Identificação (gravação) nos produtos', ref => ref.where( 'respostaCorfio', '==', 'ruim' ))
+    .valueChanges().subscribe(doc => ruimCorfio = doc.length);
+    this.db.collection('Identificação (gravação) nos produtos', ref => ref.where( 'respostaOutros', '==', 'ruim' ))
+    .valueChanges().subscribe(doc => ruimOutros = doc.length);
+
+    setTimeout(() => {
+      this.barChartidGravProd = [
+        { data: [otimoCorfio, bomCorfio, regularCorfio, ruimCorfio], label: 'Resposta Corfio' },
+        { data: [otimoOutros, bomOutros, regularOutros, ruimOutros], label: 'Resposta Outros' }
+      ];
+    }, 6000);
+
+    this.db.collection('Identificação (gravação) nos produtos',
+    ref => ref.orderBy( 'respostaCorfio', 'asc' ))
+    .valueChanges().subscribe(doc => {
+      this.countRespostasidGravProd = doc.length;
+      console.log(this.countRespostasidGravProd);
+    } );
+
+  }
+
 
   respostasProdBob() {
     let otimoCorfio = 0;
@@ -304,8 +359,19 @@ export class RelatoriosComponent implements OnInit {
     ref => ref.orderBy( 'respostaCorfio', 'asc' ))
     .valueChanges().subscribe(doc => {
       this.countRespostasFuncRolos = doc.length;
-      console.log(this.countRespostasFuncRolos);
+      console.log('contador:' + this.countRespostasFuncRolos);
     } );
+
+    this.db.collection('Funcionalidade da embalagem dos produtos em rolos')
+    .snapshotChanges()
+    .pipe(map(docArray => {
+      return docArray.map(doc => {
+        return {
+          id: doc.payload.doc.id
+        };
+      });
+    })).subscribe(retorno => console.log(retorno));
+
   }
 
   respostasFuncBobinas() {
@@ -351,12 +417,10 @@ export class RelatoriosComponent implements OnInit {
     ref => ref.orderBy( 'respostaCorfio', 'asc' ))
     .valueChanges().subscribe(doc => {
       this.countRespostasFuncBobinas = doc.length;
-      console.log(this.countRespostasFuncBobinas);
     } );
   }
 
- 
-
-
 }
+
+
 

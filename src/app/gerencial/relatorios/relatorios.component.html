@@ -102,6 +102,23 @@
       </div>
     </div>  
 </mat-card>
+<mat-card>
+  <div>
+      <p> Identificação (gravação) nos produtos </p>
+      <p>Total de respostas: {{ countRespostasidGravProd }}</p>
+    <div>
+        <div style="display: block">
+          <canvas baseChart
+            [datasets]="barChartidGravProd"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"                
+            [legend]="barChartLegend"
+            [chartType]="barChartType">
+          </canvas>
+        </div>
+    </div>
+  </div>  
+</mat-card>
 </div>  
 <br>
 <mat-divider></mat-divider>
