@@ -1,4 +1,19 @@
-<h3 class="categoria-title" >ASPÉCTOS TÉCNICOS</h3>
+
+<mat-accordion>
+
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        ASPÉCTOS TÉCNICOS
+      </mat-panel-title>
+      <mat-panel-description>
+        
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    
+
+    <h3 class="categoria-title" >ASPÉCTOS TÉCNICOS</h3>
 <div class="graficoBarra">  
 <mat-card>
     <div>
@@ -119,7 +134,29 @@
     </div>
   </div>  
 </mat-card>
+<mat-card>
+  <div>
+      <p> Assistência Técnica </p>
+      <p>Total de respostas: {{ countRespostasAstec }}</p>
+    <div>
+        <div style="display: block">
+          <canvas baseChart
+            [datasets]="barChartAstec"
+            [labels]="barChartLabelsAstec"
+            [options]="barChartOptions"                
+            [legend]="barChartLegend"
+            [chartType]="barChartType">
+          </canvas>
+        </div>
+    </div>
+  </div>  
+</mat-card>
 </div>  
 <br>
 <mat-divider></mat-divider>
+
+  </mat-expansion-panel>
+</mat-accordion>
+
+
 

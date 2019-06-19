@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule, MatFormFieldModule, MatInputModule, MatGridListModule,
          MatToolbarModule, MatSelectModule, MatSnackBarModule, MatIconModule, MatStepperModule, MatDividerModule,
          MatRadioModule, MatSidenavModule, MatListModule, MatAutocompleteModule, MatProgressBarModule, 
-         MatCardModule} from '@angular/material';
+         MatCardModule, MatExpansionModule} from '@angular/material';
 
 @NgModule({
   declarations: [],
@@ -28,7 +28,8 @@ import { MatProgressSpinnerModule, MatFormFieldModule, MatInputModule, MatGridLi
   MatListModule,
   MatAutocompleteModule,
   MatProgressBarModule,
-  MatCardModule
+  MatCardModule,
+  MatExpansionModule
   ],
   exports: [
   MatTableModule,
@@ -48,7 +49,8 @@ import { MatProgressSpinnerModule, MatFormFieldModule, MatInputModule, MatGridLi
   MatListModule,
   MatAutocompleteModule,
   MatProgressBarModule,
-  MatCardModule
+  MatCardModule,
+  MatExpansionModule
   ]
 })
 export class MaterialModule { }
