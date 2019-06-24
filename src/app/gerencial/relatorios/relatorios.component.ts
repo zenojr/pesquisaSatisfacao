@@ -1,8 +1,6 @@
-import { map, count } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { RespostaUser } from './resUser.model';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 
