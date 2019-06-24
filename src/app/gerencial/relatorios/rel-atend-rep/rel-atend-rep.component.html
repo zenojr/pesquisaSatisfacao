@@ -1,0 +1,92 @@
+
+<mat-accordion>
+<mat-expansion-panel (opened)="panelOpenState = true"
+                      (closed)="panelOpenState = false">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      ATENDIMENTO DO REPRESENTANTE
+    </mat-panel-title>
+    <mat-panel-description>
+      
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+    
+
+<h3 class="categoria-title" >ATENDIMENTO DO REPRESENTANTE</h3>
+<div class="graficoBarra">  
+<mat-card>
+    <div>
+        <p> Cordialidade (gentileza) apresentada pelo representante </p>
+        <p> Total de respostas: {{ countRespostasCordRep }} </p>
+      <div>
+          <div style="display: block">
+            <canvas baseChart
+              [datasets]="barChartCordRep"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"                
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+            </canvas>
+          </div>
+      </div>
+    </div>
+</mat-card>
+<mat-card>
+  <div>
+      <p> Eficiência em resolver problemas e atender solicitações </p>
+      <p> Total de respostas: {{ countRespostasEficRep }} </p>
+    <div>
+        <div style="display: block">
+          <canvas baseChart
+            [datasets]="barChartEficRep"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"                
+            [legend]="barChartLegend"
+            [chartType]="barChartType">
+          </canvas>
+        </div>
+    </div>
+  </div>
+</mat-card>
+<mat-card>
+  <div>
+      <p> Receptividade em situação de reclamações e sugestões </p>
+      <p> Total de respostas: {{ countRespostasRecepRep }} </p>
+    <div>
+        <div style="display: block">
+          <canvas baseChart
+            [datasets]="barChartRecepRep"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"                
+            [legend]="barChartLegend"
+            [chartType]="barChartType">
+          </canvas>
+        </div>
+    </div>
+  </div>
+</mat-card>
+<mat-card>
+  <div>
+      <p> Freqüência de visitas do representante atende a necessidade ? </p>
+      <p> Total de respostas: {{ countRespostasFreqRep }} </p>
+    <div>
+        <div style="display: block">
+          <canvas baseChart
+            [datasets]="barChartFreqRep"
+            [labels]="barChartLabelsFreqRep"
+            [options]="barChartOptions"                
+            [legend]="barChartLegend"
+            [chartType]="barChartType">
+          </canvas>
+        </div>
+    </div>
+  </div>
+</mat-card>
+
+</div>  
+<br>
+<mat-divider></mat-divider>
+
+</mat-expansion-panel>
+</mat-accordion>
+

@@ -20,6 +20,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { RelatoriosComponent } from './gerencial/relatorios/relatorios.component';
 import { ChartsModule } from 'ng2-charts';
+import { RelAtendRepComponent } from './gerencial/relatorios/rel-atend-rep/rel-atend-rep.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { ChartsModule } from 'ng2-charts';
     HeaderComponent,
     SidenavListComponent,
     PesquisaReactiveFormComponent,
-    RelatoriosComponent
+    RelatoriosComponent,
+    RelAtendRepComponent
   ],
   imports: [
     MaterialModule,
