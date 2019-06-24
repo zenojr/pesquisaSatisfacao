@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
@@ -57,6 +56,8 @@ export class RelAtendRepComponent implements OnInit {
   countRespostasRecepRep: any;
   countRespostasEficRep: any;
   countRespostasCordRep: any;
+  panelOpenState = false;
+
 
   constructor(private db: AngularFirestore) { }
 

@@ -74,6 +74,7 @@ export class RelAspecTecComponent implements OnInit {
   countRespostasFuncBobinas: any;
   countRespostasProdRolo: any;
   countRespostasProdBob: any;
+  panelOpenState = false;
 
   constructor( private db: AngularFirestore ) { }
 

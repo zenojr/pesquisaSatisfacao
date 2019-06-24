@@ -22,6 +22,7 @@ import { RelatoriosComponent } from './gerencial/relatorios/relatorios.component
 import { ChartsModule } from 'ng2-charts';
 import { RelAtendRepComponent } from './gerencial/relatorios/rel-atend-rep/rel-atend-rep.component';
 import { RelAspecTecComponent } from './gerencial/relatorios/rel-aspec-tec/rel-aspec-tec.component';
+import { RelImgProdComponent } from './gerencial/relatorios/rel-img-prod/rel-img-prod.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { RelAspecTecComponent } from './gerencial/relatorios/rel-aspec-tec/rel-a
     PesquisaReactiveFormComponent,
     RelatoriosComponent,
     RelAtendRepComponent,
-    RelAspecTecComponent
+    RelAspecTecComponent,
+    RelImgProdComponent
   ],
   imports: [
     MaterialModule,

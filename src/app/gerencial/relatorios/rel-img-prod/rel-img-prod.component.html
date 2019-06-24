@@ -1,0 +1,75 @@
+
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                        (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        IMAGEM DOS PRODUTOS
+      </mat-panel-title>
+      <mat-panel-description>
+        
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+      
+  
+  <h3 class="categoria-title" >IMAGEM DOS PRODUTOS</h3>
+  <div class="graficoBarra">  
+  <mat-card>
+      <div>
+          <p> Aceitação dos produtos no mercado </p>
+          <p> Total de respostas: {{ countRespostasAceitProd }} </p>
+        <div>
+            <div style="display: block">
+              <canvas baseChart
+                [datasets]="barChartAceitProd"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"                
+                [legend]="barChartLegend"
+                [chartType]="barChartType">
+              </canvas>
+            </div>
+        </div>
+      </div>
+  </mat-card>
+  <mat-card>
+    <div>
+        <p> Conceito do produto junto ao usuário </p>
+        <p> Total de respostas: {{ countRespostasConcProdUser }} </p>
+      <div>
+          <div style="display: block">
+            <canvas baseChart
+              [datasets]="barChartConcProdUser"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"                
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+            </canvas>
+          </div>
+      </div>
+    </div>
+</mat-card>
+<mat-card>
+  <div>
+      <p> Os produtos são conhecidos? </p>
+      <p> Total de respostas: {{ countRespostasProdCon }} </p>
+    <div>
+        <div style="display: block">
+          <canvas baseChart
+            [datasets]="barChartProdCon"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"                
+            [legend]="barChartLegend"
+            [chartType]="barChartType">
+          </canvas>
+        </div>
+    </div>
+  </div>
+</mat-card>
+  </div>  
+  <br>
+  <mat-divider></mat-divider>
+  
+  </mat-expansion-panel>
+  </mat-accordion>
+  
+  
