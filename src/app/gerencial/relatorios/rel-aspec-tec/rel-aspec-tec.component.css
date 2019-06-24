@@ -1,0 +1,23 @@
+.graficoBarra {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+ }
+ 
+ mat-card {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 320px;
+ }
+ 
+ mat-expansion-panel {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin: 10px 20px 10px 20px; 
+ }
+ 
+ .categoria-title {
+    text-align: center
+ }

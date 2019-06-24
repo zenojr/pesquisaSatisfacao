@@ -21,6 +21,7 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { RelatoriosComponent } from './gerencial/relatorios/relatorios.component';
 import { ChartsModule } from 'ng2-charts';
 import { RelAtendRepComponent } from './gerencial/relatorios/rel-atend-rep/rel-atend-rep.component';
+import { RelAspecTecComponent } from './gerencial/relatorios/rel-aspec-tec/rel-aspec-tec.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { RelAtendRepComponent } from './gerencial/relatorios/rel-atend-rep/rel-a
     SidenavListComponent,
     PesquisaReactiveFormComponent,
     RelatoriosComponent,
-    RelAtendRepComponent
+    RelAtendRepComponent,
+    RelAspecTecComponent
   ],
   imports: [
     MaterialModule,

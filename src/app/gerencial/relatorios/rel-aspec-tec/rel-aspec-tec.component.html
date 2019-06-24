@@ -1,0 +1,158 @@
+<mat-accordion>
+
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        ASPÉCTOS TÉCNICOS
+      </mat-panel-title>
+      <mat-panel-description>
+        
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    
+
+    <h3 class="categoria-title" >ASPÉCTOS TÉCNICOS</h3>
+<div class="graficoBarra">  
+<mat-card>
+    <div>
+        <p> Funcionalidade da embalagem dos produtos em rolos </p>
+        <p> Total de respostas: {{ countRespostasFuncRolos }} </p>
+      <div>
+          <div style="display: block">
+            <canvas baseChart
+              [datasets]="barChartFuncRolos"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"                
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+            </canvas>
+          </div>
+      </div>
+    </div>
+</mat-card>
+<mat-card>
+    <div>
+        <p>Funcionalidade da embalagem dos produtos em bobinas</p>
+        <p>Total de respostas: {{ countRespostasFuncBobinas }} </p>
+      <div>
+          <div style="display: block">
+            <canvas baseChart
+              [datasets]="barChartFuncBobinas"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"                
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+            </canvas>
+          </div>
+      </div>
+    </div>  
+</mat-card>
+<mat-card>
+    <div>
+        <p>Uniformidades das características técnicas</p>
+        <p>Total de respostas: {{ countRespostasUnifTec }}</p>
+      <div>
+          <div style="display: block">
+            <canvas baseChart
+              [datasets]="barChartUnifTec"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"                
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+            </canvas>
+          </div>
+      </div>
+    </div>  
+</mat-card>
+<mat-card>
+    <div>
+        <p>Desempenho do produto </p>
+        <p>Total de respostas: {{ countRespostasDesemProd }}</p>
+      <div>
+          <div style="display: block">
+            <canvas baseChart
+              [datasets]="barChartDesemProd"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"                
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+            </canvas>
+          </div>
+      </div>
+    </div>  
+</mat-card>
+<mat-card>
+    <div>
+        <p> Identificação (etiqueta) dos produtos em rolos </p>
+        <p>Total de respostas: {{ countRespostasProdRolo }}</p>
+      <div>
+          <div style="display: block">
+            <canvas baseChart
+              [datasets]="barChartIdentProdRolo"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"                
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+            </canvas>
+          </div>
+      </div>
+    </div>  
+</mat-card>
+<mat-card>
+    <div>
+        <p> Identificação (etiqueta) dos produtos em bobinas </p>
+        <p>Total de respostas: {{ countRespostasProdBob }}</p>
+      <div>
+          <div style="display: block">
+            <canvas baseChart
+              [datasets]="barChartIdentProdRolo"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"                
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+            </canvas>
+          </div>
+      </div>
+    </div>  
+</mat-card>
+<mat-card>
+  <div>
+      <p> Identificação (gravação) nos produtos </p>
+      <p>Total de respostas: {{ countRespostasidGravProd }}</p>
+    <div>
+        <div style="display: block">
+          <canvas baseChart
+            [datasets]="barChartidGravProd"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"                
+            [legend]="barChartLegend"
+            [chartType]="barChartType">
+          </canvas>
+        </div>
+    </div>
+  </div>  
+</mat-card>
+<mat-card>
+  <div>
+      <p> Assistência Técnica </p>
+      <p>Total de respostas: {{ countRespostasAstec }}</p>
+    <div>
+        <div style="display: block">
+          <canvas baseChart
+            [datasets]="barChartAstec"
+            [labels]="barChartLabelsAstec"
+            [options]="barChartOptions"                
+            [legend]="barChartLegend"
+            [chartType]="barChartType">
+          </canvas>
+        </div>
+    </div>
+  </div>  
+</mat-card>
+</div>  
+<br>
+<mat-divider></mat-divider>
+
+  </mat-expansion-panel>
+</mat-accordion>
