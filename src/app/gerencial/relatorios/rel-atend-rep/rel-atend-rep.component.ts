@@ -27,6 +27,11 @@ export class RelAtendRepComponent implements OnInit {
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
 
+  public barChartLocRep: ChartDataSets[] = [
+    { data: [0, 0, 0, 0], label: 'Resposta Corfio' },
+    { data: [0, 0, 0, 0], label: 'Resposta Outros' }
+  ];
+
   public barChartFreqRep: ChartDataSets[] = [
     { data: [0, 0, 0], label: 'Resposta Corfio' },
     { data: [0, 0, 0], label: 'Resposta Outros' }
@@ -47,6 +52,7 @@ export class RelAtendRepComponent implements OnInit {
     { data: [0, 0, 0, 0], label: 'Resposta Outros' }
   ];
 
+  countRespostasLocRep: any;
   countRespostasFreqRep: any;
   countRespostasRecepRep: any;
   countRespostasEficRep: any;
@@ -55,10 +61,55 @@ export class RelAtendRepComponent implements OnInit {
   constructor(private db: AngularFirestore) { }
 
   ngOnInit() {
+    this.respostasLocRep();
     this.respostasFreqRep();
     this.respostasRecepRep();
     this.respostasCordRep();
     this.respostasEficRep();
+  }
+
+  respostasLocRep() {
+    let otimoCorfio = 0;
+    let otimoOutros = 0;
+    let bomCorfio = 0;
+    let bomOutros = 0;
+    let regularCorfio = 0;
+    let regularOutros = 0;
+    let ruimCorfio = 0;
+    let ruimOutros = 0;
+
+    this.db.collection('Facilidade de localização do representante', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
+    .valueChanges().subscribe(doc => otimoCorfio = doc.length );
+    this.db.collection('Facilidade de localização do representante', ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
+    .valueChanges().subscribe(doc => otimoOutros = doc.length );
+
+    this.db.collection('Facilidade de localização do representante', ref => ref.where( 'respostaCorfio', '==', 'bom' ))
+    .valueChanges().subscribe(doc => bomCorfio = doc.length);
+    this.db.collection('Facilidade de localização do representante', ref => ref.where( 'respostaOutros', '==', 'bom' ))
+    .valueChanges().subscribe(doc => bomOutros = doc.length);
+
+    this.db.collection('Facilidade de localização do representante', ref => ref.where( 'respostaCorfio', '==', 'regular' ))
+    .valueChanges().subscribe(doc => regularCorfio = doc.length);
+    this.db.collection('Facilidade de localização do representante', ref => ref.where( 'respostaOutros', '==', 'regular' ))
+    .valueChanges().subscribe(doc => regularOutros = doc.length);
+
+    this.db.collection('Facilidade de localização do representante', ref => ref.where( 'respostaCorfio', '==', 'ruim' ))
+    .valueChanges().subscribe(doc => ruimCorfio = doc.length);
+    this.db.collection('Facilidade de localização do representante', ref => ref.where( 'respostaOutros', '==', 'ruim' ))
+    .valueChanges().subscribe(doc => ruimOutros = doc.length);
+
+    setTimeout(() => {
+      this.barChartLocRep = [
+        { data: [otimoCorfio, bomCorfio, regularCorfio, ruimCorfio], label: 'Resposta Corfio' },
+        { data: [otimoOutros, bomOutros, regularOutros, ruimOutros], label: 'Resposta Outros' }
+      ];
+    }, 6000);
+    this.db.collection('Facilidade de localização do representante',
+    ref => ref.orderBy( 'respostaCorfio', 'asc' ))
+    .valueChanges().subscribe(doc => {
+      this.countRespostasLocRep = doc.length;
+      console.log('contador:' + this.countRespostasLocRep);
+    } );
   }
 
   respostasFreqRep() {

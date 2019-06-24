@@ -82,6 +82,23 @@
     </div>
   </div>
 </mat-card>
+<mat-card>
+  <div>
+      <p> Facilidade de localização do representante </p>
+      <p> Total de respostas: {{ countRespostasLocRep }} </p>
+    <div>
+        <div style="display: block">
+          <canvas baseChart
+            [datasets]="barChartLocRep"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"                
+            [legend]="barChartLegend"
+            [chartType]="barChartType">
+          </canvas>
+        </div>
+    </div>
+  </div>
+</mat-card>
 
 </div>  
 <br>
