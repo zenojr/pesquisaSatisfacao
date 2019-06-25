@@ -23,6 +23,7 @@ import { ChartsModule } from 'ng2-charts';
 import { RelAtendRepComponent } from './gerencial/relatorios/rel-atend-rep/rel-atend-rep.component';
 import { RelAspecTecComponent } from './gerencial/relatorios/rel-aspec-tec/rel-aspec-tec.component';
 import { RelImgProdComponent } from './gerencial/relatorios/rel-img-prod/rel-img-prod.component';
+import { AtendComercComponent } from './gerencial/relatorios/atend-comerc/atend-comerc.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { RelImgProdComponent } from './gerencial/relatorios/rel-img-prod/rel-img
     RelatoriosComponent,
     RelAtendRepComponent,
     RelAspecTecComponent,
-    RelImgProdComponent
+    RelImgProdComponent,
+    AtendComercComponent
   ],
   imports: [
     MaterialModule,

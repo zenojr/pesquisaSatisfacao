@@ -79,6 +79,9 @@ export class RelAspecTecComponent implements OnInit {
   constructor( private db: AngularFirestore ) { }
 
   ngOnInit() {
+  }
+
+  loadAll() {
     this.respostasAstec();
     this.respostasIdGravProd();
     this.respostasFuncRolos();
@@ -420,15 +423,15 @@ export class RelAspecTecComponent implements OnInit {
       console.log('contador:' + this.countRespostasFuncRolos);
     } );
 
-    this.db.collection('Funcionalidade da embalagem dos produtos em rolos')
-    .snapshotChanges()
-    .pipe(map(docArray => {
-      return docArray.map(doc => {
-        return {
-          id: doc.payload.doc.id
-        };
-      });
-    })).subscribe(retorno => console.log(retorno));
+    // this.db.collection('Funcionalidade da embalagem dos produtos em rolos')
+    // .snapshotChanges()
+    // .pipe(map(docArray => {
+    //   return docArray.map(doc => {
+    //     return {
+    //       id: doc.payload.doc.id
+    //     };
+    //   });
+    // })).subscribe(retorno => console.log(retorno));
 
   }
 

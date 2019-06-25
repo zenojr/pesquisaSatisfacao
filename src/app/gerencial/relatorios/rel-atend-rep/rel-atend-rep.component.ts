@@ -62,6 +62,9 @@ export class RelAtendRepComponent implements OnInit {
   constructor(private db: AngularFirestore) { }
 
   ngOnInit() {
+  }
+
+  loadAll() {
     this.respostasLocRep();
     this.respostasFreqRep();
     this.respostasRecepRep();

@@ -1,0 +1,40 @@
+
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                        (closed)="panelOpenState = false"
+                        (click)=loadAll()>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        ATENDIMENTO COMERCIAL
+      </mat-panel-title>
+      <mat-panel-description>        
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+  <h3 class="categoria-title" >ATENDIMENTO COMERCIAL</h3>
+  <div class="graficoBarra">  
+  <mat-card>
+      <div>
+          <p> Atendimento do setor comercial na fábrica </p>
+          <p> Total de respostas: {{ countRespostasAtendComFab }} </p>
+        <div>
+            <div style="display: block">
+              <canvas baseChart
+                [datasets]="barChartAtendComFab"
+                [labels]="barChartLabelsFab"
+                [options]="barChartOptions"                
+                [legend]="barChartLegend"
+                [chartType]="barChartType"
+                (chartClick)="chartClicked($event)">
+              </canvas>
+            </div>
+        </div>
+      </div>
+  </mat-card>
+  </div>  
+  <br>
+  <mat-divider></mat-divider>
+  
+  </mat-expansion-panel>
+  </mat-accordion>
+  
+  

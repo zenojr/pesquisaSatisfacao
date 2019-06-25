@@ -49,6 +49,9 @@ export class RelImgProdComponent implements OnInit {
   constructor( private db: AngularFirestore ) { }
 
   ngOnInit() {
+  }
+
+  loadAll() {
     this.respostasProdCon();
     this.respostasConcProdUser();
     this.respostasAceitProd();
