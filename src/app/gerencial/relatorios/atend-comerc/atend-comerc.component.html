@@ -1,8 +1,7 @@
 
 <mat-accordion>
-  <mat-expansion-panel (opened)="panelOpenState = true"
-                        (closed)="panelOpenState = false"
-                        (click)=loadAll()>
+  <mat-expansion-panel (opened)= loadAll()
+                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
         ATENDIMENTO COMERCIAL
@@ -23,13 +22,98 @@
                 [labels]="barChartLabelsFab"
                 [options]="barChartOptions"                
                 [legend]="barChartLegend"
-                [chartType]="barChartType"
-                (chartClick)="chartClicked($event)">
+                [chartType]="barChartType">
               </canvas>
             </div>
         </div>
       </div>
   </mat-card>
+  <mat-card>
+    <div>
+        <p> Pontualidade no prazo de embarque ofertado (desde a liberação do crédito até a saída da fábrica) </p>
+        <p> Total de respostas: {{ countRespostasAtendComPont }} </p>
+      <div>
+          <div style="display: block">
+            <canvas baseChart
+              [datasets]="barChartAtendComPont"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"                
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+            </canvas>
+          </div>
+      </div>
+    </div>
+</mat-card>
+<mat-card>
+  <div>
+      <p> Pontualidade na entrega </p>
+      <p> Total de respostas: {{ countRespostasAtendComPontEnt }} </p>
+    <div>
+        <div style="display: block">
+          <canvas baseChart
+            [datasets]="barChartAtendComPontEnt"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"                
+            [legend]="barChartLegend"
+            [chartType]="barChartType">
+          </canvas>
+        </div>
+    </div>
+  </div>
+</mat-card>
+<mat-card>
+  <div>
+      <p> Quantidade recebida X quantidade pedida </p>
+      <p> Total de respostas: {{ countRespostasAtendComQtd }} </p>
+    <div>
+        <div style="display: block">
+          <canvas baseChart
+            [datasets]="barChartAtendComQtd"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"                
+            [legend]="barChartLegend"
+            [chartType]="barChartType">
+          </canvas>
+        </div>
+    </div>
+  </div>
+</mat-card>
+<mat-card>
+  <div>
+      <p> Você indicaria nossos produtos e(ou) serviços a outros profissionais? </p>
+      <p> Total de respostas: {{ countRespostasAtendComIndi }} </p>
+    <div>
+        <div style="display: block">
+          <canvas baseChart
+            [datasets]="barChartAtendComIndi"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"                
+            [legend]="barChartLegend"
+            [chartType]="barChartType">
+          </canvas>
+        </div>
+    </div>
+  </div>
+</mat-card>
+<mat-card>
+  <div>
+      <p> Você está satisfeito com a nossa disposição em ajudar? </p>
+      <p> Total de respostas: {{ countRespostasAtendComDispo }} </p>
+    <div>
+        <div style="display: block">
+          <canvas baseChart
+            [datasets]="barChartAtendComDispo"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"                
+            [legend]="barChartLegend"
+            [chartType]="barChartType">
+          </canvas>
+        </div>
+    </div>
+  </div>
+</mat-card>
+
   </div>  
   <br>
   <mat-divider></mat-divider>

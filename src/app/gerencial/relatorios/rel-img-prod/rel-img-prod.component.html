@@ -1,8 +1,8 @@
 
 <mat-accordion>
-  <mat-expansion-panel (opened)="panelOpenState = true"
+  <mat-expansion-panel (opened)=loadAll()
                         (closed)="panelOpenState = false"
-                        (click)=loadAll()>
+                        >
     <mat-expansion-panel-header>
       <mat-panel-title>
         IMAGEM DOS PRODUTOS
