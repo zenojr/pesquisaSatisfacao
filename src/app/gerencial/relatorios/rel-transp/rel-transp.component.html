@@ -1,0 +1,76 @@
+
+<mat-accordion>
+  <mat-expansion-panel (opened)=loadAll()
+                        (closed)="panelOpenState = false"
+                        >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        TRANSPORTE
+      </mat-panel-title>
+      <mat-panel-description>
+        
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+      
+  
+  <h3 class="categoria-title" >TRANSPORTE</h3>
+  <div class="graficoBarra">  
+  <mat-card>
+      <div>
+          <p> Atendimento das Transportadoras </p>
+          <p> Total de respostas: {{ countRespostasTransAtend }} </p>
+        <div>
+            <div style="display: block">
+              <canvas baseChart
+                [datasets]="barChartTransAtend"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"                
+                [legend]="barChartLegend"
+                [chartType]="barChartType">
+              </canvas>
+            </div>
+        </div>
+      </div>
+  </mat-card>
+  <mat-card>
+    <div>
+        <p> Preservação física dos produtos </p>
+        <p> Total de respostas: {{ countRespostasTransPres }} </p>
+      <div>
+          <div style="display: block">
+            <canvas baseChart
+              [datasets]="barChartTransPres"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"                
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+            </canvas>
+          </div>
+      </div>
+    </div>
+</mat-card>
+<mat-card>
+  <div>
+      <p> Preservação das embalagens dos produtos no recebimento (Carretéis, embalagens plásticas, sacarias e paletizações) </p>
+      <p> Total de respostas: {{ countRespostasTransPresEmb }} </p>
+    <div>
+        <div style="display: block">
+          <canvas baseChart
+            [datasets]="barChartTransPresEmb"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"                
+            [legend]="barChartLegend"
+            [chartType]="barChartType">
+          </canvas>
+        </div>
+    </div>
+  </div>
+</mat-card>
+  </div>  
+  <br>
+  <mat-divider></mat-divider>
+  
+  </mat-expansion-panel>
+  </mat-accordion>
+  
+  

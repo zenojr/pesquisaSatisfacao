@@ -24,6 +24,8 @@ import { RelAtendRepComponent } from './gerencial/relatorios/rel-atend-rep/rel-a
 import { RelAspecTecComponent } from './gerencial/relatorios/rel-aspec-tec/rel-aspec-tec.component';
 import { RelImgProdComponent } from './gerencial/relatorios/rel-img-prod/rel-img-prod.component';
 import { AtendComercComponent } from './gerencial/relatorios/atend-comerc/atend-comerc.component';
+import { RelTranspComponent } from './gerencial/relatorios/rel-transp/rel-transp.component';
+
 
 
 @NgModule({
@@ -37,7 +39,8 @@ import { AtendComercComponent } from './gerencial/relatorios/atend-comerc/atend-
     RelAtendRepComponent,
     RelAspecTecComponent,
     RelImgProdComponent,
-    AtendComercComponent
+    AtendComercComponent,
+    RelTranspComponent
   ],
   imports: [
     MaterialModule,
