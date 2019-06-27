@@ -25,6 +25,7 @@ import { RelAspecTecComponent } from './gerencial/relatorios/rel-aspec-tec/rel-a
 import { RelImgProdComponent } from './gerencial/relatorios/rel-img-prod/rel-img-prod.component';
 import { AtendComercComponent } from './gerencial/relatorios/atend-comerc/atend-comerc.component';
 import { RelTranspComponent } from './gerencial/relatorios/rel-transp/rel-transp.component';
+import { RelFinaisComponent } from './gerencial/relatorios/rel-finais/rel-finais.component';
 
 
 
@@ -40,7 +41,8 @@ import { RelTranspComponent } from './gerencial/relatorios/rel-transp/rel-transp
     RelAspecTecComponent,
     RelImgProdComponent,
     AtendComercComponent,
-    RelTranspComponent
+    RelTranspComponent,
+    RelFinaisComponent
   ],
   imports: [
     MaterialModule,

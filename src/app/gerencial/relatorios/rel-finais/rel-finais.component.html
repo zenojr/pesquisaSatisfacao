@@ -1,0 +1,50 @@
+
+<mat-accordion>
+  <mat-expansion-panel (opened)=loadAll()
+                        (closed)="panelOpenState = false"
+                        >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        CONSIDERAÇÕES FINAIS
+      </mat-panel-title>
+      <mat-panel-description>
+        
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+      
+  
+  <h3 class="categoria-title" >CONSIDERAÇÕES FINAIS</h3>
+  <div class="graficoBarra">  
+  <mat-card>
+      <div>
+          <p> Qual o principal motivo (o mais importante) que o leva a comprar de outro fabricante? </p>
+          <p> Total de respostas: {{ countRespostasFinais }} </p>
+        <div>
+            <div style="display: block">
+              <canvas baseChart
+                [datasets]="barChartFinais"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"                
+                [legend]="barChartLegend"
+                [chartType]="barChartType">
+              </canvas>
+            </div>
+        </div>
+      </div>
+  </mat-card>
+
+  <div>
+    <ul *ngFor="let item of respoObs">
+      <li>{{ item.id }}</li>
+      <li>{{ item.observacao }}</li>
+    </ul>
+  </div>
+  
+  </div>  
+  <br>
+  <mat-divider></mat-divider>
+  
+  </mat-expansion-panel>
+  </mat-accordion>
+  
+  
