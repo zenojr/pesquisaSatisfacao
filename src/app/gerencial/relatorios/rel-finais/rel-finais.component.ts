@@ -3,6 +3,12 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
+export interface ClienteResposta {
+  nomeFilter?: string;
+  idClient?: string;
+}
 
 @Component({
   selector: 'app-rel-finais',
@@ -33,11 +39,20 @@ export class RelFinaisComponent implements OnInit {
   countRespostasFinais: any;
   countRespostasObs: any;
   respoObs: any;
+  clienteResposta: Observable<ClienteResposta[]>;
+  nomeFilter: any;
+  idClient: any;
 
   constructor( private db: AngularFirestore ) { }
 
   ngOnInit() {
   }
+
+  // clienteNomeCnpj() {
+  //   this.db.doc( 'clientesCNPJv2' + '/' + this.user + '@corfio.com').valueChanges().subscribe(
+  //     doc => this.cliente = doc['nome']
+  //   );
+  // }
 
   loadAll() {
     this.respostasFinais();
@@ -56,15 +71,30 @@ export class RelFinaisComponent implements OnInit {
       return docArray.map(doc => {
         return {
           id: doc.payload.doc.id,
-          ...doc.payload.doc.data()
+          observacao: doc.payload.doc.data()['observacao'],
+          resposta: doc.payload.doc.data()['resposta']
         };
       });
-    }))
-    .subscribe( from => {
+    })).subscribe( from => {
       this.respoObs = from;
       this.countRespostasObs = from.length;
-      return this.respoObs;
+      from.forEach( doc => {
+        this.idClient = doc.id;
+        this.db.doc( 'clientesCNPJv2' + '/' + this.idClient + '@corfio.com' ).valueChanges().subscribe(
+          dadosCompletos => {
+            this.nomeFilter = dadosCompletos['nome'];
+            console.log(this.nomeFilter);
+          }
+        );
+      });
+
+
+
     });
+
+    // this.db.doc( 'clientesCNPJv2' + '/' + this.user + '@corfio.com').valueChanges().subscribe(
+    //   doc => this.cliente = doc['nome']
+    // );
 
   }
 
