@@ -41,11 +41,14 @@ export class RelFinaisComponent implements OnInit {
   respoObs: any;
   clienteResposta: Observable<ClienteResposta[]>;
   nomeFilter: any;
+  listaObservNome: string[] = [];
+  nomeQuery: any;
   idClient: any;
 
   constructor( private db: AngularFirestore ) { }
 
   ngOnInit() {
+    console.log(this.nomeQuery);
   }
 
   // clienteNomeCnpj() {
@@ -82,13 +85,16 @@ export class RelFinaisComponent implements OnInit {
         this.idClient = doc.id;
         this.db.doc( 'clientesCNPJv2' + '/' + this.idClient + '@corfio.com' ).valueChanges().subscribe(
           dadosCompletos => {
-            this.nomeFilter = dadosCompletos['nome'];
-            console.log(this.nomeFilter);
+            let arrayNom: string;
+            arrayNom = dadosCompletos['nome'];
+            this.listaObservNome.push(arrayNom);
+            console.log(this.listaObservNome);
           }
         );
       });
 
-
+      // this.db.collection('Cordialidade (gentileza) apresentada pelo representante', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
+      // .valueChanges().subscribe(doc => otimoCorfio = doc.length );
 
     });
 

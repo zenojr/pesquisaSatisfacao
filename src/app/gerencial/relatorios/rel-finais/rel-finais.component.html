@@ -1,8 +1,6 @@
 
 <mat-accordion>
-  <mat-expansion-panel (opened)=loadAll()
-                        
-                        >
+  <mat-expansion-panel (opened)=loadAll()>
     <mat-expansion-panel-header>
       <mat-panel-title>
         CONSIDERAÇÕES FINAIS
@@ -31,17 +29,14 @@
             </div>
         </div>
       </div>
-  </mat-card>
-
-  <div *ngFor="let item of respoObs">
-    <p *ngIf="item.observacao != ''" >{{ item.id }}</p>
-    <p *ngIf="item.observacao != ''" >{{ item.observacao }}</p>
-    <ul *ngIf="item.id == idClient">
-      <li *ngFor="let nome of nomeFilter" > {{ nome }} </li>
+  </mat-card>  
+  </div>  
+  <div>
+    <ul *ngFor="let item of respoObs">
+      <li *ngIf="item.observacao != ''">{{ item.id }}</li>
+      <li *ngIf="item.observacao != ''">{{ item.observacao }}</li>
     </ul>
   </div>
-  
-  </div>  
   <br>
   <mat-divider></mat-divider>
   
