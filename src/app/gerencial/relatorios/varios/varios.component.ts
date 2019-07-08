@@ -47,7 +47,7 @@ presEmb: any;
 presFisProd: any;
 prodEmpCom: any;
 motCompra: any;
-
+qtdRecPed: any;
 recepRecl: any;
 unifCarc: any;
 satAjud: any;
@@ -75,7 +75,7 @@ indProd: any;
     //   this.load4();
     // }, 200000);
 
-    this.especificos();
+    
 
   }
 
@@ -415,7 +415,7 @@ indProd: any;
       });
     }))
     .subscribe( from => {
-      this.qtdRecPed = from;
+      
     });
 
     this.db.collection('Qual o principal motivo (o mais importante) que o leva a comprar de outro fabricante?')

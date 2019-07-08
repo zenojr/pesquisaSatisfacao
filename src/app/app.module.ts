@@ -27,6 +27,7 @@ import { AtendComercComponent } from './gerencial/relatorios/atend-comerc/atend-
 import { RelTranspComponent } from './gerencial/relatorios/rel-transp/rel-transp.component';
 import { RelFinaisComponent } from './gerencial/relatorios/rel-finais/rel-finais.component';
 import { VariosComponent } from './gerencial/relatorios/varios/varios.component';
+import { UserRespostasComponent } from './gerencial/relatorios/user-respostas/user-respostas.component';
 
 
 
@@ -44,7 +45,8 @@ import { VariosComponent } from './gerencial/relatorios/varios/varios.component'
     AtendComercComponent,
     RelTranspComponent,
     RelFinaisComponent,
-    VariosComponent
+    VariosComponent,
+    UserRespostasComponent
   ],
   imports: [
     MaterialModule,
