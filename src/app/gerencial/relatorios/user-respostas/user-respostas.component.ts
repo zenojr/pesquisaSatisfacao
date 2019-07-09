@@ -7,8 +7,6 @@ import { map } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 
 
-
-
 @Component({
   selector: 'app-user-respostas',
   templateUrl: './user-respostas.component.html',
@@ -18,7 +16,6 @@ export class UserRespostasComponent implements OnInit {
 
 constructor( private db: AngularFirestore ) {
 }
-
 
   users = [
 '00103788000676',
@@ -186,7 +183,7 @@ constructor( private db: AngularFirestore ) {
 
     // });
 
-    this.db.doc( 'clientesCNPJv2' + '/' + '01339514000562' + '@corfio.com').valueChanges().subscribe(
+    this.db.doc( 'clientesCNPJv2' + '/' + '08139035000118' + '@corfio.com').valueChanges().subscribe(
       doc => {console.log(doc)}
     );
 
