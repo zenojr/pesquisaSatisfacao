@@ -40,7 +40,6 @@ usersCnpj = [
 
     this.consultateste();
 
-    
   }
 
 
@@ -117,28 +116,6 @@ usersCnpj = [
 
   }
 
-  consultaGravaRespostas() {
-    const user = '88644901000167';
-    this.db.collection(user)
-    .snapshotChanges()
-    .pipe(map(docArray => {
-      return docArray.map(doc => {
-        return {
-          id: doc.payload.doc.id,
-          ...doc.payload.doc.data()
-        };
-      });
-    }))
-    .subscribe( from => {
-      this.currentUser = user;
-      this.respostasUsers = from;
-      console.log( user );
-      console.log( from[0] );
-      this.db.collection('respostasgeral').doc(user).set( {from} );
-    });
-    // this.db.collection('respostasgeral').add(user);
-
-  }
 
   respostasGeral() {
     this.db.collection('respostasgeral')
