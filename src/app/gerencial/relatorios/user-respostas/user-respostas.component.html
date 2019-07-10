@@ -5,9 +5,14 @@
 </ul> -->
 
 
-<!-- <ul *ngFor="let data of respostasUsersGeral" >
-
-  
+<ul *ngFor="let data of respostasUsersGeral" >  
   <li> {{ data.id }} </li>
-  <li> {{ data.pergunta | json }} </li>
-</ul> -->
+  <li> {{ data.pergunta[0].id }} </li>
+  <li> {{ data.pergunta[0].respostas.respostaCorfio }} </li>
+  <li> {{ data.pergunta[0].respostas.respostaOutros }} </li>
+</ul>
+
+
+
+
+
