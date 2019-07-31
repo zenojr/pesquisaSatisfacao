@@ -15,7 +15,7 @@ export class AuthService {
 
   login(authData: AuthData) {
     authData.usuario = authData.usuario + '@corfio.com';
-    authData.senha = '1234567';
+    authData.senha = '123456';
     this.afAuth.auth.signInWithEmailAndPassword(
       authData.usuario,
       authData.senha
