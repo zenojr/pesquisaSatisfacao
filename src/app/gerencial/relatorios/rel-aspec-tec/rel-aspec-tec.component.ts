@@ -448,11 +448,12 @@ export class RelAspecTecComponent implements OnInit {
     let ruimCorfio = 0;
     let ruimOutros = 0;
 
-    const funcProdBobOtimo = this.db.collection('Funcionalidade da embalagem dos produtos em bobinas',
-                        ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
-    .valueChanges().subscribe(doc => otimoCorfio = doc.length );
-    this.db.collection('Funcionalidade da embalagem dos produtos em bobinas', ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
-    .valueChanges().subscribe(doc => otimoOutros = doc.length );
+    const otmCorfio = this.db.collection('Funcionalidade da embalagem dos produtos em bobinas',
+                             ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
+                            .valueChanges().subscribe(doc => otimoCorfio = doc.length );
+    const otmOutros = this.db.collection('Funcionalidade da embalagem dos produtos em bobinas', 
+                      ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
+                      .valueChanges().subscribe(doc => otimoOutros = doc.length );
 
     this.db.collection('Funcionalidade da embalagem dos produtos em bobinas', ref => ref.where( 'respostaCorfio', '==', 'bom' ))
     .valueChanges().subscribe(doc => bomCorfio = doc.length);
