@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { Component, OnInit                      } from '@angular/core';
+import { AngularFirestore                       } from '@angular/fire/firestore';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
-import { Label } from 'ng2-charts';
+import { Label                                  } from 'ng2-charts';
 
 @Component({
-  selector: 'app-rel-transp',
+     selector: 'app-rel-transp',
   templateUrl: './rel-transp.component.html',
-  styleUrls: ['./rel-transp.component.css']
+    styleUrls: ['./rel-transp.component.css']
 })
 export class RelTranspComponent implements OnInit {
 
@@ -41,8 +41,8 @@ export class RelTranspComponent implements OnInit {
   ];
 
   countRespostasTransPresEmb: any;
-  countRespostasTransPres: any;
-  countRespostasTransAtend: any;
+     countRespostasTransPres: any;
+    countRespostasTransAtend: any;
 
   constructor( private db: AngularFirestore ) { }
 

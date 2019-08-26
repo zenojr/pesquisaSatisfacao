@@ -3,6 +3,7 @@ import { map } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
+import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class RelAspecTecComponent implements OnInit {
   public barChartLabelsAstec: Label[] = ['Ótimo', 'Bom', 'Regular', 'Ruim', 'Não uso'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
+  public barChartPlugins = [pluginDataLabels];
 
   public barChartAstec: ChartDataSets[] = [
     { data: [0, 0, 0, 0, 0], label: 'Resposta Corfio' },
@@ -141,7 +143,7 @@ export class RelAspecTecComponent implements OnInit {
     .valueChanges().subscribe(doc => {
       this.countRespostasAstec = doc.length;
       console.log(this.countRespostasAstec);
-      
+
     } );
 
   }
@@ -206,7 +208,7 @@ export class RelAspecTecComponent implements OnInit {
 
     this.db.collection('Identificação (etiqueta) dos produtos em bobinas', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
     .valueChanges().subscribe(doc => otimoCorfio = doc.length );
-    this.db.collection('Identificação (etiqueta) dos produtos em bobinas',ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
+    this.db.collection('Identificação (etiqueta) dos produtos em bobinas', ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
     .valueChanges().subscribe(doc => otimoOutros = doc.length );
 
     this.db.collection('Identificação (etiqueta) dos produtos em bobinas', ref => ref.where( 'respostaCorfio', '==', 'bom' ))
@@ -252,7 +254,7 @@ export class RelAspecTecComponent implements OnInit {
 
     this.db.collection('Identificação (etiqueta) dos produtos em rolos', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
     .valueChanges().subscribe(doc => otimoCorfio = doc.length );
-    this.db.collection('Identificação (etiqueta) dos produtos em rolos',ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
+    this.db.collection('Identificação (etiqueta) dos produtos em rolos', ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
     .valueChanges().subscribe(doc => otimoOutros = doc.length );
 
     this.db.collection('Identificação (etiqueta) dos produtos em rolos', ref => ref.where( 'respostaCorfio', '==', 'bom' ))
@@ -298,7 +300,7 @@ export class RelAspecTecComponent implements OnInit {
 
     this.db.collection('Desempenho do produto', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
     .valueChanges().subscribe(doc => otimoCorfio = doc.length );
-    this.db.collection('Desempenho do produto',ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
+    this.db.collection('Desempenho do produto', ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
     .valueChanges().subscribe(doc => otimoOutros = doc.length );
 
     this.db.collection('Desempenho do produto', ref => ref.where( 'respostaCorfio', '==', 'bom' ))
@@ -344,7 +346,7 @@ export class RelAspecTecComponent implements OnInit {
 
     this.db.collection('Uniformidades das características técnicas', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
     .valueChanges().subscribe(doc => otimoCorfio = doc.length );
-    this.db.collection('Uniformidades das características técnicas',ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
+    this.db.collection('Uniformidades das características técnicas', ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
     .valueChanges().subscribe(doc => otimoOutros = doc.length );
 
     this.db.collection('Uniformidades das características técnicas', ref => ref.where( 'respostaCorfio', '==', 'bom' ))
@@ -390,7 +392,7 @@ export class RelAspecTecComponent implements OnInit {
 
     this.db.collection('Funcionalidade da embalagem dos produtos em rolos', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
     .valueChanges().subscribe(doc => otimoCorfio = doc.length );
-    this.db.collection('Funcionalidade da embalagem dos produtos em rolos',ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
+    this.db.collection('Funcionalidade da embalagem dos produtos em rolos', ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
     .valueChanges().subscribe(doc => otimoOutros = doc.length );
 
     this.db.collection('Funcionalidade da embalagem dos produtos em rolos', ref => ref.where( 'respostaCorfio', '==', 'bom' ))
@@ -446,9 +448,10 @@ export class RelAspecTecComponent implements OnInit {
     let ruimCorfio = 0;
     let ruimOutros = 0;
 
-    this.db.collection('Funcionalidade da embalagem dos produtos em bobinas', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
+    const funcProdBobOtimo = this.db.collection('Funcionalidade da embalagem dos produtos em bobinas',
+                        ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
     .valueChanges().subscribe(doc => otimoCorfio = doc.length );
-    this.db.collection('Funcionalidade da embalagem dos produtos em bobinas',ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
+    this.db.collection('Funcionalidade da embalagem dos produtos em bobinas', ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
     .valueChanges().subscribe(doc => otimoOutros = doc.length );
 
     this.db.collection('Funcionalidade da embalagem dos produtos em bobinas', ref => ref.where( 'respostaCorfio', '==', 'bom' ))
@@ -467,6 +470,8 @@ export class RelAspecTecComponent implements OnInit {
     .valueChanges().subscribe(doc => ruimOutros = doc.length);
     this.db.collection('Funcionalidade da embalagem dos produtos em bobinas', ref => ref.where( 'respostaOutros', '==', 'ruim' ))
     .valueChanges().subscribe(doc => ruimOutros = doc.length);
+
+    console.log( funcProdBobOtimo );
 
     setTimeout(() => {
       this.barChartFuncBobinas = [
