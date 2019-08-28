@@ -17,7 +17,9 @@ import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { PesquisaReactiveFormComponent } from './pesquisa-reactive-form/pesquisa-reactive-form.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+
 import { RelatoriosComponent } from './gerencial/relatorios/relatorios.component';
 import { ChartsModule } from 'ng2-charts';
 import { RelAtendRepComponent } from './gerencial/relatorios/rel-atend-rep/rel-atend-rep.component';
@@ -28,6 +30,7 @@ import { RelTranspComponent } from './gerencial/relatorios/rel-transp/rel-transp
 import { RelFinaisComponent } from './gerencial/relatorios/rel-finais/rel-finais.component';
 import { VariosComponent } from './gerencial/relatorios/varios/varios.component';
 import { UserRespostasComponent } from './gerencial/relatorios/user-respostas/user-respostas.component';
+import { RelatoriosGChartComponent } from './gerencial/relatorios-gchart/relatorios-gchart.component';
 
 
 
@@ -46,7 +49,8 @@ import { UserRespostasComponent } from './gerencial/relatorios/user-respostas/us
     RelTranspComponent,
     RelFinaisComponent,
     VariosComponent,
-    UserRespostasComponent
+    UserRespostasComponent,
+    RelatoriosGChartComponent
   ],
   imports: [
     MaterialModule,
@@ -61,7 +65,8 @@ import { UserRespostasComponent } from './gerencial/relatorios/user-respostas/us
     AngularFireAuthModule,
     FlexLayoutModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    ChartsModule
+    ChartsModule,
+    Ng2GoogleChartsModule
   ],
   providers: [ AuthService, { provide: FirestoreSettingsToken, useValue: {} } ],
   bootstrap: [AppComponent]

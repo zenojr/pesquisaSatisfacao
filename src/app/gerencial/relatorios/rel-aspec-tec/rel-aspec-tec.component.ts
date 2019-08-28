@@ -13,6 +13,8 @@ import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 })
 export class RelAspecTecComponent implements OnInit {
 
+  perc = 20;
+
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
@@ -106,7 +108,7 @@ export class RelAspecTecComponent implements OnInit {
     let naoUsoCorfio = 0;
     let naoUsoOutros = 0;
 
-    this.db.collection('Assistência Técnica', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
+    const astecCorfio = this.db.collection('Assistência Técnica', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
     .valueChanges().subscribe(doc => otimoCorfio = doc.length );
     this.db.collection('Assistência Técnica', ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
     .valueChanges().subscribe(doc => otimoOutros = doc.length );
@@ -126,10 +128,12 @@ export class RelAspecTecComponent implements OnInit {
     this.db.collection('Assistência Técnica', ref => ref.where( 'respostaOutros', '==', 'ruim' ))
     .valueChanges().subscribe(doc => ruimOutros = doc.length);
 
-    this.db.collection('Assistência Técnica', ref => ref.where( 'respostaCorfio', '==', 'não uso' ))
+    const assTecNaouso = this.db.collection('Assistência Técnica', ref => ref.where( 'respostaCorfio', '==', 'não uso' ))
     .valueChanges().subscribe(doc => naoUsoCorfio = doc.length);
     this.db.collection('Assistência Técnica', ref => ref.where( 'respostaOutros', '==', 'não uso' ))
     .valueChanges().subscribe(doc => {naoUsoOutros = doc.length;  });
+
+    
 
     setTimeout(() => {
       this.barChartAstec = [
@@ -472,7 +476,6 @@ export class RelAspecTecComponent implements OnInit {
     this.db.collection('Funcionalidade da embalagem dos produtos em bobinas', ref => ref.where( 'respostaOutros', '==', 'ruim' ))
     .valueChanges().subscribe(doc => ruimOutros = doc.length);
 
-    console.log( funcProdBobOtimo );
 
     setTimeout(() => {
       this.barChartFuncBobinas = [

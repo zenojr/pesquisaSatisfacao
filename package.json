@@ -25,6 +25,7 @@
     "@angular/pwa": "^0.13.8",
     "@angular/router": "^7.2.14",
     "@angular/service-worker": "^7.2.14",
+    "angular-google-charts": "^0.1.6",
     "angularfire": "^2.3.0",
     "angularfire2": "^5.1.2",
     "chart.js": "^2.8.0",
