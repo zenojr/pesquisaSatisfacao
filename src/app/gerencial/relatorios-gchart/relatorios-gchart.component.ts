@@ -27,7 +27,6 @@ export class RelatoriosGChartComponent implements OnInit {
   respostasCollection: AngularFirestoreCollection<RespostasNovo> ;
   respostasObservable: Observable<RespostasNovo[]>;
 
-  please: Observable<any>;
 
   respostas: GoogleChartInterface;
 
@@ -57,10 +56,7 @@ export class RelatoriosGChartComponent implements OnInit {
 
 
   respostasAstec() {
-    // let otimoCorfio: Observable<RespostasNovo>;
-
-    
-
+    let otimoCorfio = 0;
     let otimoOutros = 0;
     let bomCorfio = 0;
     let bomOutros = 0;
@@ -72,7 +68,7 @@ export class RelatoriosGChartComponent implements OnInit {
     let naoUsoOutros = 0;
 
     const astecCorfio = this.db.collection('Assistência Técnica', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
-    .valueChanges().subscribe(doc => otimoCorfio['corfio'] = doc.length );
+    .valueChanges().subscribe( doc => otimoCorfio = doc.length );
     this.db.collection('Assistência Técnica', ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
     .valueChanges().subscribe(doc => otimoOutros = doc.length );
 
@@ -97,23 +93,26 @@ export class RelatoriosGChartComponent implements OnInit {
     .valueChanges().subscribe(doc => {naoUsoOutros = doc.length;  });
 
 
-    let percent = otimoCorfio;
 
     setTimeout(() => {
+
+      const totalizadorCorfio = otimoCorfio + bomCorfio + regularCorfio + ruimCorfio;
+      console.log(totalizadorCorfio);
+
       this.respostas = {
         chartType: 'ColumnChart',
         dataTable: [
-          ['Task', 'Assistência Técnica', {role: 'annotation'}],
-          ['Work',     otimoCorfio , 'dataPercent'],
-          ['Eat',      2 , '20%'],
-          ['Commute',  2, '20%'],
-          ['Watch TV', 2, '20%'],
-          ['Sleep',    7, '20%']
+                   ['opcao',   'Corfio', {role: 'annotation'}, 'Outros', {role: 'annotation'}],
+                   ['Ótimo',      2,              '20%',          3,              '20%'],
+                   ['Bom',        2,              '20%',          3,              '20%'],
+                   ['Regular',    2,              '20%',          3,              '20%'],
+                   ['Ruim',       2,              '20%',          3,              '20%'],
+                   ['Não Uso',    2,              '20%',          3,              '20%']
         ],
         // opt_firstRowIsData: true,
         options: {'title': 'Assistência Técnica'},
       };
-    }, 3000);
+    }, 2000);
 
     
 
