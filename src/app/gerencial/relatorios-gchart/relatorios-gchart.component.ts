@@ -18,6 +18,7 @@ export class RelatoriosGChartComponent implements OnInit {
   graphDesempProd:   GoogleChartInterface;
   graphIdProdRolo:   GoogleChartInterface;
   graphIdProdBob:    GoogleChartInterface;
+  graphProdCompra:   GoogleChartInterface;
 
   constructor( private db: AngularFirestore, private relService: RelgchartService ) {}
 
@@ -29,8 +30,41 @@ export class RelatoriosGChartComponent implements OnInit {
     this.respDesempProd();
     this.respIdProdRolo();
     this.respIdProdBob();
+    this.respProdCompra();
   }
+  
 
+  respProdCompra() {
+    let fiosCabos     = 0;
+    let aluminio      = 0;
+    let todos         = 0;
+    
+    const pergunta    = 'Quais produtos que sua empresa nos compra:';
+
+    this.db.collection(pergunta, ref => ref
+                                     .where( 'respostaCorfio', '==', 'Fios e Cabos elétricos de cobre' ))
+                                     .valueChanges()
+                                     .subscribe( doc => fiosCabos = doc.length );
+
+    this.db.collection(pergunta, ref => ref
+                                     .where( 'respostaCorfio', '==', 'Cabos de Alumínio' ))
+                                     .valueChanges()
+                                     .subscribe(doc => aluminio = doc.length);
+
+    this.db.collection(pergunta, ref => ref
+                                     .where( 'respostaCorfio', '==', 'Todos' ))
+                                     .valueChanges()
+                                     .subscribe(doc => todos = doc.length);
+
+    setTimeout(() => {
+      this.graphIdProdBob = this.relService.buildGraphColumnCustom(
+        fiosCabos,
+        aluminio,
+        todos,
+        this.graphIdProdBob,
+        pergunta);
+    }, 3000);
+  }
 
   respIdProdBob() {
     let otimoCorfio   = 0;

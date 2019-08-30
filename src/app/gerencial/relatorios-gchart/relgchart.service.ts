@@ -71,5 +71,46 @@ export class RelgchartService {
             return grafico;
   }
 
+  buildGraphColumnCustom( fiosCabos,
+                          aluminio,
+                          todos,
+                          graph,
+                          pergunta) {
+
+let grafico = graph;
+
+const totalizador = 100 / (fiosCabos + aluminio + todos);
+const percFiosCabos    = (totalizador * fiosCabos  ).toFixed(0);
+const percAluminio     = (totalizador * aluminio    ).toFixed(0);
+const percTodos        = (totalizador * todos).toFixed(0);
+
+const numbFiosCabos = parseInt( percFiosCabos ,  10 );
+const numbAluminio  = parseInt( percAluminio   ,  10 );
+const numbTodos     = parseInt( percTodos, 10 );
+
+grafico = {
+ chartType: 'ColumnChart',
+ dataTable:  [
+ ['opcao',    'Corfio',             {role: 'annotation'},     'Outros',          {role: 'annotation'}   ],
+ ['Ótimo',    numbOtimoCorfio,      percOtimoCorfio   + '%',  numbOtimoOutros,   percOtimoOutros   + '%'],
+ ['Bom',      numbBomCorfio,        percBomCorfio     + '%',  numbBomOutros,     percBomOutros     + '%'],
+ ['Regular',  numbRegularCorfio,    percRegularCorfio + '%',  numbRegularOutros, percRegularOutros + '%'],
+ ['Ruim',     numbRuimCorfio,       percRuimCorfio    + '%',  numbRuimOutros,    percRuimOutros    + '%'],
+ ['Não Uso',  numbNaoUsoCorfio,     percNaoUsoCorfio  + '%',  numbNaoUsoOutros,  percNaoUsoOutros  + '%']
+ ],
+ // opt_firstRowIsData: true,
+ options: {
+   title: title,
+   animation: {
+     duration: 1000,
+     easing: 'out',
+     startup: true
+   }
+ },
+};
+
+return grafico;
+}
+
 
 }
