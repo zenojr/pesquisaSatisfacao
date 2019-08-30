@@ -133,7 +133,6 @@ export class RelAspecTecComponent implements OnInit {
     this.db.collection('Assistência Técnica', ref => ref.where( 'respostaOutros', '==', 'não uso' ))
     .valueChanges().subscribe(doc => {naoUsoOutros = doc.length;  });
 
-    
 
     setTimeout(() => {
       this.barChartAstec = [
