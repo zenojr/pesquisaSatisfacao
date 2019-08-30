@@ -43,17 +43,17 @@ export class RelatoriosGChartComponent implements OnInit {
 
 
   respostasAstec() {
-    let otimoCorfio = 0;
-    let otimoOutros = 0;
-    let bomCorfio = 0;
-    let bomOutros = 0;
+    let otimoCorfio   = 0;
+    let otimoOutros   = 0;
+    let bomCorfio     = 0;
+    let bomOutros     = 0;
     let regularCorfio = 0;
     let regularOutros = 0;
-    let ruimCorfio = 0;
-    let ruimOutros = 0;
-    let naoUsoCorfio = 0;
-    let naoUsoOutros = 0;
-    const title = 'Assistência Técnica';
+    let ruimCorfio    = 0;
+    let ruimOutros    = 0;
+    let naoUsoCorfio  = 0;
+    let naoUsoOutros  = 0;
+    const       title = 'Assistência Técnica';
 
     const astecCorfio = this.db.collection('Assistência Técnica', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
     .valueChanges().subscribe( doc => otimoCorfio = doc.length );

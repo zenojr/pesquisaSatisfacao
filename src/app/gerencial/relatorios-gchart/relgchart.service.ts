@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class RelgchartService {
 
-  constructor( private db: AngularFirestore ) { }
+  constructor( ) { }
 
 
   buildGraphColumn(otimoCorfio,
@@ -22,21 +21,22 @@ export class RelgchartService {
                    naoUsoOutros,
                    graph,
                    title ) {
-            let grafico = graph;
+
+              let grafico = graph;
 
               const totalizadorCorfio = (otimoCorfio + bomCorfio + regularCorfio + ruimCorfio + naoUsoCorfio) / 100;
-              const percOtimoCorfio = totalizadorCorfio * otimoCorfio;
-              const percBomCorfio = totalizadorCorfio * bomCorfio;
-              const percRegularCorfio = totalizadorCorfio * regularCorfio;
-              const percRuimCorfio = totalizadorCorfio * ruimCorfio;
-              const percNaoUsoCorfio = totalizadorCorfio * naoUsoCorfio;
+              const percOtimoCorfio   = (totalizadorCorfio * otimoCorfio  ).toFixed(2);
+              const percBomCorfio     = (totalizadorCorfio * bomCorfio    ).toFixed(2);
+              const percRegularCorfio = (totalizadorCorfio * regularCorfio).toFixed(2);
+              const percRuimCorfio    = (totalizadorCorfio * ruimCorfio   ).toFixed(2);
+              const percNaoUsoCorfio  = (totalizadorCorfio * naoUsoCorfio ).toFixed(2);
 
               const totalizadorOutros = (otimoOutros + bomOutros + regularOutros + ruimOutros + naoUsoOutros) / 100;
-              const percOtimoOutros = totalizadorOutros * otimoOutros;
-              const percBomOutros = totalizadorOutros * bomOutros;
-              const percRegularOutros = totalizadorOutros * regularOutros;
-              const percRuimOutros = totalizadorOutros * ruimOutros;
-              const percNaoUsoOutros = totalizadorOutros * naoUsoOutros;
+              const percOtimoOutros   = (totalizadorOutros * otimoOutros  ).toFixed(2);
+              const percBomOutros     = (totalizadorOutros * bomOutros    ).toFixed(2);
+              const percRegularOutros = (totalizadorOutros * regularOutros).toFixed(2);
+              const percRuimOutros    = (totalizadorOutros * ruimOutros   ).toFixed(2);
+              const percNaoUsoOutros  = (totalizadorOutros * naoUsoOutros ).toFixed(2);
 
               console.log(totalizadorCorfio);
               grafico = {
