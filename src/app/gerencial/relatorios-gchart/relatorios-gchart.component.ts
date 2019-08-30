@@ -1,15 +1,7 @@
 import { RelgchartService } from './relgchart.service';
 import { Component, OnInit } from '@angular/core';
 import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Observable, BehaviorSubject, of } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { RespostasChart } from './../../shared/contaResp.model';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/observable/combineLatest';
-import * as firebase from 'firebase';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/observable/from';
+import { AngularFirestore} from '@angular/fire/firestore';
 
 
 export interface RespostasNovo {
@@ -24,11 +16,7 @@ export interface RespostasNovo {
 })
 export class RelatoriosGChartComponent implements OnInit {
 
-  respostasCollection: AngularFirestoreCollection<RespostasNovo> ;
-  respostasObservable: Observable<RespostasNovo[]>;
-
-
-  respostas: GoogleChartInterface;
+  graphAspecTec: GoogleChartInterface;
 
   constructor( private db: AngularFirestore, private relService: RelgchartService ) {
 
@@ -50,7 +38,6 @@ export class RelatoriosGChartComponent implements OnInit {
     // };
 
   ngOnInit() {
-    this.consultaAspecTec();
     this.respostasAstec();
   }
 
@@ -66,6 +53,7 @@ export class RelatoriosGChartComponent implements OnInit {
     let ruimOutros = 0;
     let naoUsoCorfio = 0;
     let naoUsoOutros = 0;
+    const title = 'Assistência Técnica';
 
     const astecCorfio = this.db.collection('Assistência Técnica', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
     .valueChanges().subscribe( doc => otimoCorfio = doc.length );
@@ -92,93 +80,50 @@ export class RelatoriosGChartComponent implements OnInit {
     this.db.collection('Assistência Técnica', ref => ref.where( 'respostaOutros', '==', 'não uso' ))
     .valueChanges().subscribe(doc => {naoUsoOutros = doc.length;  });
 
-
-
     setTimeout(() => {
-
-      const totalizadorCorfio = otimoCorfio + bomCorfio + regularCorfio + ruimCorfio;
-      console.log(totalizadorCorfio);
-
-      this.respostas = {
-        chartType: 'ColumnChart',
-        dataTable: [
-                   ['opcao',   'Corfio', {role: 'annotation'}, 'Outros', {role: 'annotation'}],
-                   ['Ótimo',      2,              '20%',          3,              '20%'],
-                   ['Bom',        2,              '20%',          3,              '20%'],
-                   ['Regular',    2,              '20%',          3,              '20%'],
-                   ['Ruim',       2,              '20%',          3,              '20%'],
-                   ['Não Uso',    2,              '20%',          3,              '20%']
-        ],
-        // opt_firstRowIsData: true,
-        options: {'title': 'Assistência Técnica'},
-      };
-    }, 2000);
-
-    
-
-    // this.barChart = [
-    //   { dataTable: [otimoCorfio, bomCorfio, regularCorfio, ruimCorfio, naoUsoCorfio], label: 'Resposta Corfio' },
-    //   { dataTable: [otimoOutros, bomOutros, regularOutros, ruimOutros, naoUsoOutros], label: 'Resposta Outros' }
-    // ];
-
-
-    // this.db.collection('Assistência Técnica',
-    // ref => ref.orderBy( 'respostaCorfio', 'asc' ))
-    // .valueChanges().subscribe(doc => {
-    //   this.countRespostasAstec = doc.length;
-    //   console.log(this.countRespostasAstec);
-
-    // } );
-
-  }
-
-
-  consultaAspecTec() {
-    const astecCorfioOtimo = this.db.collection('Assistência Técnica',
-    ref => ref.where( 'respostaCorfio', '==', 'ótimo' )).snapshotChanges();
-    const astecCorfioBom   = this.db.collection('Assistência Técnica', ref => ref.where( 'respostaCorfio', '==', 'bom' )).valueChanges();
-
-    let saida = astecCorfioBom.subscribe( doc => {
-      console.log(doc.length);
-      const tamanho = doc.length;
-      return tamanho;
-    });
-
-    astecCorfioBom.subscribe({
-        next(response) { this.wow = response.length; console.log(this.wow)
-          return this.wow; },
-        error(err) { console.log('Error: ' + err); },
-        complete() { console.log('End'); }
-    });
-
-    console.log(saida);
+      this.graphAspecTec = this.relService.buildGraphColumn( otimoCorfio,
+        otimoOutros,
+        bomCorfio,
+        bomOutros,
+        regularCorfio,
+        regularOutros,
+        ruimCorfio,
+        ruimOutros,
+        naoUsoCorfio,
+        naoUsoOutros,
+        this.graphAspecTec,
+        title);
+    }, 3000);
 
 
 
-    // let dados = this.db.collection('Assistência Técnica', ref => ref.where( 'respostaCorfio', '==', 'bom' ));
-    // dados.get().toPromise().then( snap => this.dataqualquer =  snap.size  );
-    // console.log(this.dataqualquer);
+    // setTimeout(() => {
 
-    this.respostasCollection = this.db.collection('Assistência Técnica');
-    this.respostasObservable = this.respostasCollection.valueChanges();
+    //   const totalizadorCorfio = otimoCorfio + bomCorfio + regularCorfio + ruimCorfio;
+    //   console.log(totalizadorCorfio);
 
-    console.log('aqui: ' + this.respostasObservable);
-
-    const respostas = this.db.collection('Assistência Técnica', ref => ref.orderBy('respostaCorfio', 'desc'));
-
-
-    // this.contaOtimo = this.db.collection('Assistência Técnica', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
-    //                   .valueChanges().subscribe(doc => console.log(doc.length));
-
-    // astecCorfioOtimo.subscribe({
-    //   next(response) { console.log(response.length); contaOtimo = response.length; },
-    //   error(err) { console.log('Error: ' + err); },
-    //   complete() { console.log('End'); }
-    // });
-    // console.log(contaOtimo);
-
+    //   this.graphAspecTec = {
+    //     chartType: 'ColumnChart',
+    //     dataTable: [
+    //                ['opcao',   'Corfio',       {role: 'annotation'}, 'Outros', {role: 'annotation'}],
+    //                ['Ótimo',    otimoCorfio,              '20%',          3,              '20%'],
+    //                ['Bom',      bomCorfio,              '20%',          3,              '20%'],
+    //                ['Regular',  regularCorfio,              '20%',          3,              '20%'],
+    //                ['Ruim',     ruimCorfio,              '20%',          3,              '20%'],
+    //                ['Não Uso',  naoUsoCorfio,              '20%',          3,              '20%']
+    //     ],
+    //     // opt_firstRowIsData: true,
+    //     options: {
+    //       title: 'Assistência Técnica',
+    //       animation: {
+    //         duration: 1000,
+    //         easing: 'out',
+    //         startup: true
+    //       }
+    //     },
+    //   };
+    // }, 3000);
 
   }
-
 
 }
