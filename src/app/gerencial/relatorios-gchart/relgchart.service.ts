@@ -1,12 +1,22 @@
 import { Injectable } from '@angular/core';
-
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RelgchartService {
 
-  constructor( ) { }
+  constructor( private db: AngularFirestore ) { }
+
+  queryQuestion( pergunta, empresa, opcao, variavel ) {
+    variavel = this.db.collection( pergunta, ref => ref.where( empresa, '==', opcao ))
+           .valueChanges().subscribe( doc =>  {
+             let saida = 0;
+             saida = doc.length;
+             return saida;
+            } );
+    return variavel;
+  }
 
 
   buildGraphColumn(otimoCorfio,
@@ -24,30 +34,39 @@ export class RelgchartService {
 
               let grafico = graph;
 
-              const totalizadorCorfio = (otimoCorfio + bomCorfio + regularCorfio + ruimCorfio + naoUsoCorfio) / 100;
-              const percOtimoCorfio   = (totalizadorCorfio * otimoCorfio  ).toFixed(2);
-              const percBomCorfio     = (totalizadorCorfio * bomCorfio    ).toFixed(2);
-              const percRegularCorfio = (totalizadorCorfio * regularCorfio).toFixed(2);
-              const percRuimCorfio    = (totalizadorCorfio * ruimCorfio   ).toFixed(2);
-              const percNaoUsoCorfio  = (totalizadorCorfio * naoUsoCorfio ).toFixed(2);
+              const totalizadorCorfio = 100 / (otimoCorfio + bomCorfio + regularCorfio + ruimCorfio + naoUsoCorfio);
+              const percOtimoCorfio   = (totalizadorCorfio * otimoCorfio  ).toFixed(0);
+              const percBomCorfio     = (totalizadorCorfio * bomCorfio    ).toFixed(0);
+              const percRegularCorfio = (totalizadorCorfio * regularCorfio).toFixed(0);
+              const percRuimCorfio    = (totalizadorCorfio * ruimCorfio   ).toFixed(0);
+              const percNaoUsoCorfio  = (totalizadorCorfio * naoUsoCorfio ).toFixed(0);
+              const numbOtimoCorfio   = parseInt(percOtimoCorfio,   10);
+              const numbBomCorfio     = parseInt(percBomCorfio,     10 );
+              const numbRegularCorfio = parseInt(percRegularCorfio, 10);
+              const numbRuimCorfio    = parseInt(percRuimCorfio  ,  10 );
+              const numbNaoUsoCorfio  = parseInt(percNaoUsoCorfio,  10 );
 
-              const totalizadorOutros = (otimoOutros + bomOutros + regularOutros + ruimOutros + naoUsoOutros) / 100;
-              const percOtimoOutros   = (totalizadorOutros * otimoOutros  ).toFixed(2);
-              const percBomOutros     = (totalizadorOutros * bomOutros    ).toFixed(2);
-              const percRegularOutros = (totalizadorOutros * regularOutros).toFixed(2);
-              const percRuimOutros    = (totalizadorOutros * ruimOutros   ).toFixed(2);
-              const percNaoUsoOutros  = (totalizadorOutros * naoUsoOutros ).toFixed(2);
+              const totalizadorOutros = 100 / (otimoOutros + bomOutros + regularOutros + ruimOutros + naoUsoOutros);
+              const percOtimoOutros   = (totalizadorOutros * otimoOutros  ).toFixed(0);
+              const percBomOutros     = (totalizadorOutros * bomOutros    ).toFixed(0);
+              const percRegularOutros = (totalizadorOutros * regularOutros).toFixed(0);
+              const percRuimOutros    = (totalizadorOutros * ruimOutros   ).toFixed(0);
+              const percNaoUsoOutros  = (totalizadorOutros * naoUsoOutros ).toFixed(0);
+              const numbOtimoOutros   = parseInt( percOtimoOutros ,  10 );
+              const numbBomOutros     = parseInt( percBomOutros   ,  10 );
+              const numbRegularOutros = parseInt( percRegularOutros, 10 );
+              const numbRuimOutros    = parseInt( percRuimOutros  ,  10 );
+              const numbNaoUsoOutros  = parseInt( percNaoUsoOutros,  10 );
 
-              console.log(totalizadorCorfio);
               grafico = {
                 chartType: 'ColumnChart',
                 dataTable:  [
                             ['opcao',    'Corfio',         {role: 'annotation'},     'Outros',      {role: 'annotation'}   ],
-                            ['Ótimo',    otimoCorfio,      percOtimoCorfio   + '%',  otimoOutros,   percOtimoOutros   + '%'],
-                            ['Bom',      bomCorfio,        percBomCorfio     + '%',  bomOutros,     percBomOutros     + '%'],
-                            ['Regular',  regularCorfio,    percRegularCorfio + '%',  regularOutros, percRegularOutros + '%'],
-                            ['Ruim',     ruimCorfio,       percRuimCorfio    + '%',  ruimOutros,    percRuimOutros    + '%'],
-                            ['Não Uso',  naoUsoCorfio,     percNaoUsoCorfio  + '%',  naoUsoOutros,  percNaoUsoOutros  + '%']
+                            ['Ótimo',    numbOtimoCorfio,      percOtimoCorfio   + '%',  numbOtimoOutros,   percOtimoOutros   + '%'],
+                            ['Bom',      numbBomCorfio,        percBomCorfio     + '%',  numbBomOutros,     percBomOutros     + '%'],
+                            ['Regular',  numbRegularCorfio,    percRegularCorfio + '%',  numbRegularOutros, percRegularOutros + '%'],
+                            ['Ruim',     numbRuimCorfio,       percRuimCorfio    + '%',  numbRuimOutros,    percRuimOutros    + '%'],
+                            ['Não Uso',  numbNaoUsoCorfio,     percNaoUsoCorfio  + '%',  numbNaoUsoOutros,  percNaoUsoOutros  + '%']
                 ],
                 // opt_firstRowIsData: true,
                 options: {

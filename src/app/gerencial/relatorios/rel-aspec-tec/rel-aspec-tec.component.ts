@@ -110,6 +110,7 @@ export class RelAspecTecComponent implements OnInit {
 
     const astecCorfio = this.db.collection('Assistência Técnica', ref => ref.where( 'respostaCorfio', '==', 'ótimo' ))
     .valueChanges().subscribe(doc => otimoCorfio = doc.length );
+
     this.db.collection('Assistência Técnica', ref => ref.where( 'respostaOutros', '==', 'ótimo' ))
     .valueChanges().subscribe(doc => otimoOutros = doc.length );
 
@@ -141,8 +142,7 @@ export class RelAspecTecComponent implements OnInit {
       ];
     }, 6000);
 
-    this.db.collection('Assistência Técnica',
-    ref => ref.orderBy( 'respostaCorfio', 'asc' ))
+    this.db.collection( 'Assistência Técnica', ref => ref.orderBy( 'respostaCorfio', 'asc' ))
     .valueChanges().subscribe(doc => {
       this.countRespostasAstec = doc.length;
       console.log(this.countRespostasAstec);
