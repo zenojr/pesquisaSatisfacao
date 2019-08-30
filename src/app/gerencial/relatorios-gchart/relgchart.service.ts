@@ -24,17 +24,30 @@ export class RelgchartService {
                    title ) {
             let grafico = graph;
 
-              const totalizadorCorfio = otimoCorfio + bomCorfio + regularCorfio + ruimCorfio + naoUsoCorfio;
+              const totalizadorCorfio = (otimoCorfio + bomCorfio + regularCorfio + ruimCorfio + naoUsoCorfio) / 100;
+              const percOtimoCorfio = totalizadorCorfio * otimoCorfio;
+              const percBomCorfio = totalizadorCorfio * bomCorfio;
+              const percRegularCorfio = totalizadorCorfio * regularCorfio;
+              const percRuimCorfio = totalizadorCorfio * ruimCorfio;
+              const percNaoUsoCorfio = totalizadorCorfio * naoUsoCorfio;
+
+              const totalizadorOutros = (otimoOutros + bomOutros + regularOutros + ruimOutros + naoUsoOutros) / 100;
+              const percOtimoOutros = totalizadorOutros * otimoOutros;
+              const percBomOutros = totalizadorOutros * bomOutros;
+              const percRegularOutros = totalizadorOutros * regularOutros;
+              const percRuimOutros = totalizadorOutros * ruimOutros;
+              const percNaoUsoOutros = totalizadorOutros * naoUsoOutros;
+
               console.log(totalizadorCorfio);
               grafico = {
                 chartType: 'ColumnChart',
-                dataTable: [
-                            ['opcao',   'Corfio',       {role: 'annotation'}, 'Outros', {role: 'annotation'}],
-                            ['Ótimo',    otimoCorfio,              '20%',          3,              '20%'],
-                            ['Bom',      bomCorfio,              '20%',          3,              '20%'],
-                            ['Regular',  regularCorfio,              '20%',          3,              '20%'],
-                            ['Ruim',     ruimCorfio,              '20%',          3,              '20%'],
-                            ['Não Uso',  naoUsoCorfio,              '20%',          3,              '20%']
+                dataTable:  [
+                            ['opcao',    'Corfio',         {role: 'annotation'},     'Outros',      {role: 'annotation'}   ],
+                            ['Ótimo',    otimoCorfio,      percOtimoCorfio   + '%',  otimoOutros,   percOtimoOutros   + '%'],
+                            ['Bom',      bomCorfio,        percBomCorfio     + '%',  bomOutros,     percBomOutros     + '%'],
+                            ['Regular',  regularCorfio,    percRegularCorfio + '%',  regularOutros, percRegularOutros + '%'],
+                            ['Ruim',     ruimCorfio,       percRuimCorfio    + '%',  ruimOutros,    percRuimOutros    + '%'],
+                            ['Não Uso',  naoUsoCorfio,     percNaoUsoCorfio  + '%',  naoUsoOutros,  percNaoUsoOutros  + '%']
                 ],
                 // opt_firstRowIsData: true,
                 options: {
