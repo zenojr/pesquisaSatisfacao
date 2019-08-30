@@ -8,17 +8,6 @@ export class RelgchartService {
 
   constructor( private db: AngularFirestore ) { }
 
-  queryQuestion( pergunta, empresa, opcao, variavel ) {
-    variavel = this.db.collection( pergunta, ref => ref.where( empresa, '==', opcao ))
-           .valueChanges().subscribe( doc =>  {
-             let saida = 0;
-             saida = doc.length;
-             return saida;
-            } );
-    return variavel;
-  }
-
-
   buildGraphColumn(otimoCorfio,
                    otimoOutros,
                    bomCorfio,
@@ -61,12 +50,12 @@ export class RelgchartService {
               grafico = {
                 chartType: 'ColumnChart',
                 dataTable:  [
-                            ['opcao',    'Corfio',         {role: 'annotation'},     'Outros',      {role: 'annotation'}   ],
-                            ['Ótimo',    numbOtimoCorfio,      percOtimoCorfio   + '%',  numbOtimoOutros,   percOtimoOutros   + '%'],
-                            ['Bom',      numbBomCorfio,        percBomCorfio     + '%',  numbBomOutros,     percBomOutros     + '%'],
-                            ['Regular',  numbRegularCorfio,    percRegularCorfio + '%',  numbRegularOutros, percRegularOutros + '%'],
-                            ['Ruim',     numbRuimCorfio,       percRuimCorfio    + '%',  numbRuimOutros,    percRuimOutros    + '%'],
-                            ['Não Uso',  numbNaoUsoCorfio,     percNaoUsoCorfio  + '%',  numbNaoUsoOutros,  percNaoUsoOutros  + '%']
+                ['opcao',    'Corfio',             {role: 'annotation'},     'Outros',          {role: 'annotation'}   ],
+                ['Ótimo',    numbOtimoCorfio,      percOtimoCorfio   + '%',  numbOtimoOutros,   percOtimoOutros   + '%'],
+                ['Bom',      numbBomCorfio,        percBomCorfio     + '%',  numbBomOutros,     percBomOutros     + '%'],
+                ['Regular',  numbRegularCorfio,    percRegularCorfio + '%',  numbRegularOutros, percRegularOutros + '%'],
+                ['Ruim',     numbRuimCorfio,       percRuimCorfio    + '%',  numbRuimOutros,    percRuimOutros    + '%'],
+                ['Não Uso',  numbNaoUsoCorfio,     percNaoUsoCorfio  + '%',  numbNaoUsoOutros,  percNaoUsoOutros  + '%']
                 ],
                 // opt_firstRowIsData: true,
                 options: {
