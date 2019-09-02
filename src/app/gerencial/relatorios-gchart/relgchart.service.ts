@@ -26,7 +26,6 @@ export class RelgchartService {
           let grafico = graph;
 
           if (  custom != null ) {
-            alert('pergunta customizada');
             const totalizadorCorfio = 100 / (otimoCorfio + bomCorfio + regularCorfio + ruimCorfio + naoUsoCorfio);
             const percOtimoCorfio   = (totalizadorCorfio * otimoCorfio  ).toFixed(0);
             const percBomCorfio     = (totalizadorCorfio * bomCorfio    ).toFixed(0);
@@ -59,7 +58,7 @@ export class RelgchartService {
             ['Bom',      numbBomCorfio,        percBomCorfio     + '%',  numbBomOutros,     percBomOutros     + '%'],
             ['Regular',  numbRegularCorfio,    percRegularCorfio + '%',  numbRegularOutros, percRegularOutros + '%'],
             ['Ruim',     numbRuimCorfio,       percRuimCorfio    + '%',  numbRuimOutros,    percRuimOutros    + '%'],
-            ['Não Uso',  numbNaoUsoCorfio,     percNaoUsoCorfio  + '%',  numbNaoUsoOutros,  percNaoUsoOutros  + '%']
+            ['Não Necessita',  numbNaoUsoCorfio,     percNaoUsoCorfio  + '%',  numbNaoUsoOutros,  percNaoUsoOutros  + '%']
             ],
             // opt_firstRowIsData: true,
             options: {
@@ -78,9 +77,9 @@ export class RelgchartService {
           const percRegularCorfio = (totalizadorCorfio * regularCorfio).toFixed(0);
           const percRuimCorfio    = (totalizadorCorfio * ruimCorfio   ).toFixed(0);
           const percNaoUsoCorfio  = (totalizadorCorfio * naoUsoCorfio ).toFixed(0);
-          const numbOtimoCorfio   = parseInt(percOtimoCorfio,   10);
+          const numbOtimoCorfio   = parseInt(percOtimoCorfio,   10 );
           const numbBomCorfio     = parseInt(percBomCorfio,     10 );
-          const numbRegularCorfio = parseInt(percRegularCorfio, 10);
+          const numbRegularCorfio = parseInt(percRegularCorfio, 10 );
           const numbRuimCorfio    = parseInt(percRuimCorfio  ,  10 );
           const numbNaoUsoCorfio  = parseInt(percNaoUsoCorfio,  10 );
 
