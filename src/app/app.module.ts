@@ -32,6 +32,7 @@ import { VariosComponent } from './gerencial/relatorios/varios/varios.component'
 import { UserRespostasComponent } from './gerencial/relatorios/user-respostas/user-respostas.component';
 import { RelatoriosGChartComponent } from './gerencial/relatorios-gchart/relatorios-gchart.component';
 import { RelatoriosAtendRepComponent } from './gerencial/relatorios-gchart/relatorios-atend-rep/relatorios-atend-rep.component';
+import { RelatoriosImgProdComponent } from './gerencial/relatorios-gchart/relatorios-img-prod/relatorios-img-prod.component';
 
 
 
@@ -52,7 +53,8 @@ import { RelatoriosAtendRepComponent } from './gerencial/relatorios-gchart/relat
     VariosComponent,
     UserRespostasComponent,
     RelatoriosGChartComponent,
-    RelatoriosAtendRepComponent
+    RelatoriosAtendRepComponent,
+    RelatoriosImgProdComponent
   ],
   imports: [
     MaterialModule,

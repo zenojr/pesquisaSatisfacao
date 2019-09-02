@@ -1,0 +1,16 @@
+<mat-accordion>
+  <mat-expansion-panel (opened)="loadRespImgProd()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Imagem dos Produtos
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-progress-bar mode="buffer" *ngIf="showProg"></mat-progress-bar>
+
+
+    <google-chart [data]="graphAceitProd"></google-chart>
+    
+  </mat-expansion-panel>
+  
+</mat-accordion>
