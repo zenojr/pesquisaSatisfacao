@@ -21,7 +21,8 @@ export class RelatoriosGChartComponent implements OnInit {
   graphProdCompra:   GoogleChartInterface;
   graphIdGravProd:   GoogleChartInterface;
 
-  showProg = true;
+  showProg    = true;
+  alreadyLoad = false;
 
   constructor( private db: AngularFirestore, private relService: RelgchartService ) {}
 
@@ -30,20 +31,23 @@ export class RelatoriosGChartComponent implements OnInit {
   }
 
   loadRespAspecTec() {
-
+    this.showProg = true;
     setTimeout(() => { this.showProg = false; }, 3000 );
 
-    this.respAstec();
-    this.respFuncProdRolo();
-    this.respFuncProdBob();
-    this.respUnifCarTec();
-    this.respDesempProd();
-    this.respIdProdRolo();
-    this.respIdProdBob();
-    this.respProdCompra();
-    this.respIdGravProd();
-  }
+    if (!this.alreadyLoad) {
+      this.respAstec();
+      this.respFuncProdRolo();
+      this.respFuncProdBob();
+      this.respUnifCarTec();
+      this.respDesempProd();
+      this.respIdProdRolo();
+      this.respIdProdBob();
+      this.respProdCompra();
+      this.respIdGravProd();
 
+      this.alreadyLoad = true;
+    }
+  }
 
   respIdGravProd() {
     let otimoCorfio   = 0;
@@ -118,7 +122,6 @@ export class RelatoriosGChartComponent implements OnInit {
         pergunta);
     }, 3000);
   }
-
 
   respProdCompra() {
     let fiosCabos     = 0;
@@ -523,7 +526,6 @@ export class RelatoriosGChartComponent implements OnInit {
 
   }
 
-
   respFuncProdRolo() {
     let otimoCorfio   = 0;
     let otimoOutros   = 0;
@@ -599,7 +601,6 @@ export class RelatoriosGChartComponent implements OnInit {
 
   }
 
-
   respAstec() {
     let otimoCorfio   = 0;
     let otimoOutros   = 0;
@@ -611,6 +612,7 @@ export class RelatoriosGChartComponent implements OnInit {
     let ruimOutros    = 0;
     let naoUsoCorfio  = 0;
     let naoUsoOutros  = 0;
+    const customQuest = 'não uso';
     const pergunta    = 'Assistência Técnica';
 
     this.db.collection(pergunta, ref => ref
@@ -649,11 +651,11 @@ export class RelatoriosGChartComponent implements OnInit {
                                      .valueChanges()
                                      .subscribe(doc => ruimOutros = doc.length);
     this.db.collection(pergunta, ref => ref
-                                     .where( 'respostaCorfio', '==', 'não uso' ))
+                                     .where( 'respostaCorfio', '==', customQuest ))
                                      .valueChanges()
                                      .subscribe(doc => naoUsoCorfio = doc.length);
     this.db.collection(pergunta, ref => ref
-                                     .where( 'respostaOutros', '==', 'não uso' ))
+                                     .where( 'respostaOutros', '==', customQuest ))
                                      .valueChanges()
                                      .subscribe(doc => {naoUsoOutros = doc.length;  });
 
@@ -670,7 +672,8 @@ export class RelatoriosGChartComponent implements OnInit {
         naoUsoCorfio,
         naoUsoOutros,
         this.graphAspecTec,
-        pergunta);
+        pergunta,
+        customQuest);
     }, 3000);
 
   }

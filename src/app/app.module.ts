@@ -31,6 +31,7 @@ import { RelFinaisComponent } from './gerencial/relatorios/rel-finais/rel-finais
 import { VariosComponent } from './gerencial/relatorios/varios/varios.component';
 import { UserRespostasComponent } from './gerencial/relatorios/user-respostas/user-respostas.component';
 import { RelatoriosGChartComponent } from './gerencial/relatorios-gchart/relatorios-gchart.component';
+import { RelatoriosAtendRepComponent } from './gerencial/relatorios-gchart/relatorios-atend-rep/relatorios-atend-rep.component';
 
 
 
@@ -50,7 +51,8 @@ import { RelatoriosGChartComponent } from './gerencial/relatorios-gchart/relator
     RelFinaisComponent,
     VariosComponent,
     UserRespostasComponent,
-    RelatoriosGChartComponent
+    RelatoriosGChartComponent,
+    RelatoriosAtendRepComponent
   ],
   imports: [
     MaterialModule,
