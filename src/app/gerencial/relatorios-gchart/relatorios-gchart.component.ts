@@ -19,10 +19,20 @@ export class RelatoriosGChartComponent implements OnInit {
   graphIdProdRolo:   GoogleChartInterface;
   graphIdProdBob:    GoogleChartInterface;
   graphProdCompra:   GoogleChartInterface;
+  graphIdGravProd:   GoogleChartInterface;
+
+  showProg = true;
 
   constructor( private db: AngularFirestore, private relService: RelgchartService ) {}
 
   ngOnInit() {
+
+  }
+
+  loadRespAspecTec() {
+
+    setTimeout(() => { this.showProg = false; }, 3000 );
+
     this.respAstec();
     this.respFuncProdRolo();
     this.respFuncProdBob();
@@ -31,14 +41,90 @@ export class RelatoriosGChartComponent implements OnInit {
     this.respIdProdRolo();
     this.respIdProdBob();
     this.respProdCompra();
+    this.respIdGravProd();
   }
-  
+
+
+  respIdGravProd() {
+    let otimoCorfio   = 0;
+    let otimoOutros   = 0;
+    let bomCorfio     = 0;
+    let bomOutros     = 0;
+    let regularCorfio = 0;
+    let regularOutros = 0;
+    let ruimCorfio    = 0;
+    let ruimOutros    = 0;
+    let naoUsoCorfio  = 0;
+    let naoUsoOutros  = 0;
+    const pergunta    = 'Identificação (gravação) nos produtos';
+
+    this.db.collection(pergunta, ref => ref
+                                     .where( 'respostaCorfio', '==', 'ótimo' ))
+                                     .valueChanges()
+                                     .subscribe( doc => otimoCorfio = doc.length );
+    this.db.collection(pergunta, ref => ref
+                                     .where( 'respostaOutros', '==', 'ótimo' ))
+                                     .valueChanges()
+                                     .subscribe(doc => otimoOutros = doc.length );
+
+    this.db.collection(pergunta, ref => ref
+                                     .where( 'respostaCorfio', '==', 'bom' ))
+                                     .valueChanges()
+                                     .subscribe(doc => bomCorfio = doc.length);
+    this.db.collection(pergunta, ref => ref
+                                     .where( 'respostaOutros', '==', 'bom' ))
+                                     .valueChanges()
+                                     .subscribe(doc => bomOutros = doc.length);
+
+    this.db.collection(pergunta, ref => ref
+                                     .where( 'respostaCorfio', '==', 'regular' ))
+                                     .valueChanges()
+                                     .subscribe(doc => regularCorfio = doc.length);
+    this.db.collection(pergunta, ref => ref
+                                     .where( 'respostaOutros', '==', 'regular' ))
+                                     .valueChanges()
+                                     .subscribe(doc => regularOutros = doc.length);
+
+    this.db.collection(pergunta, ref => ref
+                                     .where( 'respostaCorfio', '==', 'ruim' ))
+                                     .valueChanges()
+                                     .subscribe(doc => ruimCorfio = doc.length);
+    this.db.collection(pergunta, ref => ref
+                                     .where( 'respostaOutros', '==', 'ruim' ))
+                                     .valueChanges()
+                                     .subscribe(doc => ruimOutros = doc.length);
+    this.db.collection(pergunta, ref => ref
+                                     .where( 'respostaCorfio', '==', 'não uso' ))
+                                     .valueChanges()
+                                     .subscribe(doc => naoUsoCorfio = doc.length);
+    this.db.collection(pergunta, ref => ref
+                                     .where( 'respostaOutros', '==', 'não uso' ))
+                                     .valueChanges()
+                                     .subscribe(doc => {naoUsoOutros = doc.length;  });
+
+    setTimeout(() => {
+      this.graphIdGravProd = this.relService.buildGraphColumn(
+        otimoCorfio,
+        otimoOutros,
+        bomCorfio,
+        bomOutros,
+        regularCorfio,
+        regularOutros,
+        ruimCorfio,
+        ruimOutros,
+        naoUsoCorfio,
+        naoUsoOutros,
+        this.graphIdGravProd,
+        pergunta);
+    }, 3000);
+  }
+
 
   respProdCompra() {
     let fiosCabos     = 0;
     let aluminio      = 0;
     let todos         = 0;
-    
+
     const pergunta    = 'Quais produtos que sua empresa nos compra:';
 
     this.db.collection(pergunta, ref => ref
@@ -57,11 +143,11 @@ export class RelatoriosGChartComponent implements OnInit {
                                      .subscribe(doc => todos = doc.length);
 
     setTimeout(() => {
-      this.graphIdProdBob = this.relService.buildGraphColumnCustom(
+      this.graphProdCompra = this.relService.buildGraphColumnCustom(
         fiosCabos,
         aluminio,
         todos,
-        this.graphIdProdBob,
+        this.graphProdCompra,
         pergunta);
     }, 3000);
   }
