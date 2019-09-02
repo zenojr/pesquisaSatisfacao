@@ -91,16 +91,14 @@ const numbTodos     = parseInt( percTodos, 10 );
 grafico = {
  chartType: 'ColumnChart',
  dataTable:  [
- ['opcao',    'Corfio',             {role: 'annotation'},     'Outros',          {role: 'annotation'}   ],
- ['Ótimo',    numbOtimoCorfio,      percOtimoCorfio   + '%',  numbOtimoOutros,   percOtimoOutros   + '%'],
- ['Bom',      numbBomCorfio,        percBomCorfio     + '%',  numbBomOutros,     percBomOutros     + '%'],
- ['Regular',  numbRegularCorfio,    percRegularCorfio + '%',  numbRegularOutros, percRegularOutros + '%'],
- ['Ruim',     numbRuimCorfio,       percRuimCorfio    + '%',  numbRuimOutros,    percRuimOutros    + '%'],
- ['Não Uso',  numbNaoUsoCorfio,     percNaoUsoCorfio  + '%',  numbNaoUsoOutros,  percNaoUsoOutros  + '%']
+ ['opcao',         'Produto',          {role: 'annotation'} ],
+ ['Fios e Cabos',   numbFiosCabos,     percFiosCabos   + '%'],
+ ['Alumínio',       numbAluminio,      percAluminio    + '%'],
+ ['Todos',          numbTodos,         percTodos       + '%']
  ],
  // opt_firstRowIsData: true,
  options: {
-   title: title,
+   title: pergunta,
    animation: {
      duration: 1000,
      easing: 'out',
