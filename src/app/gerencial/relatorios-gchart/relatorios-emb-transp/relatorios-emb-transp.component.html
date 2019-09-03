@@ -1,0 +1,17 @@
+<mat-accordion>
+  <mat-expansion-panel (opened)="loadRespEmbTransp()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Embalagem e Transporte
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-progress-bar mode="buffer" *ngIf="showProg"></mat-progress-bar>
+
+    <google-chart [data]="graphAtendTransp"> </google-chart>
+    <google-chart [data]="graphPresFis"> </google-chart>
+    <google-chart [data]="graphPresEmbProd"> </google-chart>
+    
+  </mat-expansion-panel>
+  
+</mat-accordion>

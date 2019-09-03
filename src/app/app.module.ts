@@ -33,6 +33,10 @@ import { UserRespostasComponent } from './gerencial/relatorios/user-respostas/us
 import { RelatoriosGChartComponent } from './gerencial/relatorios-gchart/relatorios-gchart.component';
 import { RelatoriosAtendRepComponent } from './gerencial/relatorios-gchart/relatorios-atend-rep/relatorios-atend-rep.component';
 import { RelatoriosImgProdComponent } from './gerencial/relatorios-gchart/relatorios-img-prod/relatorios-img-prod.component';
+import { RelatoriosAtendComComponent } from './gerencial/relatorios-gchart/relatorios-atend-com/relatorios-atend-com.component';
+import { RelatoriosEmbTranspComponent } from './gerencial/relatorios-gchart/relatorios-emb-transp/relatorios-emb-transp.component';
+import { RelatoriosConsidFinaisComponent } from './gerencial/relatorios-gchart/relatorios-consid-finais/relatorios-consid-finais.component';
+
 
 
 
@@ -54,7 +58,10 @@ import { RelatoriosImgProdComponent } from './gerencial/relatorios-gchart/relato
     UserRespostasComponent,
     RelatoriosGChartComponent,
     RelatoriosAtendRepComponent,
-    RelatoriosImgProdComponent
+    RelatoriosImgProdComponent,
+    RelatoriosAtendComComponent,
+    RelatoriosEmbTranspComponent,
+    RelatoriosConsidFinaisComponent
   ],
   imports: [
     MaterialModule,

@@ -1,0 +1,16 @@
+<mat-accordion>
+  <mat-expansion-panel (opened)="loadRespConsidFinais()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Considerações Finais
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-progress-bar mode="buffer" *ngIf="showProg"></mat-progress-bar>
+
+    <google-chart [data]="graphCompraFab"> </google-chart>
+    
+    
+  </mat-expansion-panel>
+  
+</mat-accordion>
