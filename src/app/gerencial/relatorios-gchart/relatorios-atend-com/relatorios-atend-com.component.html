@@ -1,0 +1,20 @@
+<mat-accordion>
+  <mat-expansion-panel (opened)="loadRespAtendCom()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Atendimento Comercial e Marketing
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-progress-bar mode="buffer" *ngIf="showProg"></mat-progress-bar>
+
+    <google-chart [data]="graphAtendComFab"> </google-chart>
+    <google-chart [data]="graphPontEmbarque"></google-chart>
+    <google-chart [data]="graphPontEntr">    </google-chart>
+    <google-chart [data]="graphQtdRec">      </google-chart>
+    <google-chart [data]="graphIndica">      </google-chart>
+    <google-chart [data]="graphSatAjuda">    </google-chart>
+    
+  </mat-expansion-panel>
+  
+</mat-accordion>
