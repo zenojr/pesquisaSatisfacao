@@ -8,9 +8,10 @@
 
     <mat-progress-bar mode="buffer" *ngIf="showProg"></mat-progress-bar>
 
+    <google-chart [data]="graphAceitProd">  </google-chart>
+    <google-chart [data]="graphConceitProd"></google-chart>
+    <google-chart [data]="graphProdConhec"> </google-chart>
 
-    <google-chart [data]="graphAceitProd"></google-chart>
-    
   </mat-expansion-panel>
   
 </mat-accordion>
