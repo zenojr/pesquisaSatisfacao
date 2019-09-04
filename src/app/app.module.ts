@@ -37,6 +37,7 @@ import { RelatoriosAtendComComponent } from './gerencial/relatorios-gchart/relat
 import { RelatoriosEmbTranspComponent } from './gerencial/relatorios-gchart/relatorios-emb-transp/relatorios-emb-transp.component';
 import { RelatoriosConsidFinaisComponent } from './gerencial/relatorios-gchart/relatorios-consid-finais/relatorios-consid-finais.component';
 import { RelatoriosAspecTecComponent } from './gerencial/relatorios-gchart/relatorios-aspec-tec/relatorios-aspec-tec.component';
+import { ComparacaoGeralComponent } from './gerencial/relatorios-gchart/comparacao-geral/comparacao-geral.component';
 
 
 
@@ -63,7 +64,8 @@ import { RelatoriosAspecTecComponent } from './gerencial/relatorios-gchart/relat
     RelatoriosAtendComComponent,
     RelatoriosEmbTranspComponent,
     RelatoriosConsidFinaisComponent,
-    RelatoriosAspecTecComponent
+    RelatoriosAspecTecComponent,
+    ComparacaoGeralComponent
   ],
   imports: [
     MaterialModule,

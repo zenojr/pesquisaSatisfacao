@@ -18,6 +18,7 @@ export interface Clientes {
   estado: string;
 }
 
+
 @Component({
      selector:  'app-relatorios-consid-finais',
   templateUrl:  './relatorios-consid-finais.component.html',
@@ -27,17 +28,15 @@ export class RelatoriosConsidFinaisComponent implements OnInit {
 
   graphCompraFab: GoogleChartInterface;
 
-          obsCol:  AngularFirestoreCollection<Observacao>;
-   obsObservable:  Observable<Observacao[]>;
-         obsSubs:  Subscription;
-
+          obsCol: AngularFirestoreCollection<Observacao>;
+   obsObservable: Observable<Observacao[]>;
+         obsSubs: Subscription;
         recebeId: any;
 
-     showProg = true;
-  alreadyLoad = false;
-  constructor(private db: AngularFirestore,
+       showProg = true;
+    alreadyLoad = false;
+  constructor(private         db: AngularFirestore,
               private relService: RelgchartService) { }
-
   ngOnInit() {
 
   }
@@ -46,9 +45,9 @@ export class RelatoriosConsidFinaisComponent implements OnInit {
     this.showProg = true;
     setTimeout(() => { this.showProg = false; }, 3000 );
     if (!this.alreadyLoad) {
-      this.respPresEmbProd();
-      this.respObs();
-      this.alreadyLoad = true;
+         this.respPresEmbProd();
+         this.respObs();
+         this.alreadyLoad = true;
     }
   }
 
@@ -70,8 +69,6 @@ export class RelatoriosConsidFinaisComponent implements OnInit {
     this.obsSubs = this.obsObservable.subscribe( obs => {
       return obs;
     });
-
-
     // const combineLatest =  combineLatest<any[]>()
   }
 

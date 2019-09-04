@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { RelgchartService } from '../relgchart.service';
+import { Component, OnInit    } from '@angular/core';
+import { RelgchartService     } from '../relgchart.service';
 import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces';
-import { AngularFirestore} from '@angular/fire/firestore';
-
+import { AngularFirestore     } from '@angular/fire/firestore';
 
 @Component({
-     selector: 'app-relatorios-aspec-tec',
-  templateUrl: './relatorios-aspec-tec.component.html',
+     selector:  'app-relatorios-aspec-tec',
+  templateUrl:  './relatorios-aspec-tec.component.html',
     styleUrls: ['./relatorios-aspec-tec.component.css']
 })
 export class RelatoriosAspecTecComponent implements OnInit {
