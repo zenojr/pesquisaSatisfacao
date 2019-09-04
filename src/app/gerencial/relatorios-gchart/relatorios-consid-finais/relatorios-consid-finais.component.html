@@ -10,6 +10,9 @@
 
     <google-chart [data]="graphCompraFab"> </google-chart>
     
+    <ul *ngFor="let obs of obsObservable | async" >
+      <li *ngIf="obs.observacao != ''" (recebeId)=obs.id> {{ obs.id }}: {{ obs.observacao }} </li>
+    </ul>
     
   </mat-expansion-panel>
   

@@ -1,22 +1,45 @@
-import { Component, OnInit    } from '@angular/core';
-import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces';
-import { RelgchartService     } from '../relgchart.service';
-import { AngularFirestore     } from '@angular/fire/firestore';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { GoogleChartInterface         } from 'ng2-google-charts/google-charts-interfaces';
+import { RelgchartService             } from '../relgchart.service';
+import { AngularFirestore,
+         AngularFirestoreCollection   } from '@angular/fire/firestore';
+import { map                          } from 'rxjs/operators';
+import { Observable, combineLatest,
+         Subscription                 } from 'rxjs';
+
+export interface Observacao {
+          id: string;
+  observacao: string;
+}
+
+export interface Clientes {
+    cnpj: string;
+   email: string;
+  estado: string;
+}
 
 @Component({
-  selector:    'app-relatorios-consid-finais',
-  templateUrl: './relatorios-consid-finais.component.html',
-  styleUrls:  ['./relatorios-consid-finais.component.css']
+     selector:  'app-relatorios-consid-finais',
+  templateUrl:  './relatorios-consid-finais.component.html',
+    styleUrls: ['./relatorios-consid-finais.component.css']
 })
 export class RelatoriosConsidFinaisComponent implements OnInit {
 
   graphCompraFab: GoogleChartInterface;
 
-  showProg    = true;
+          obsCol:  AngularFirestoreCollection<Observacao>;
+   obsObservable:  Observable<Observacao[]>;
+         obsSubs:  Subscription;
+
+        recebeId: any;
+
+     showProg = true;
   alreadyLoad = false;
-  constructor(private db: AngularFirestore, private relService: RelgchartService) { }
+  constructor(private db: AngularFirestore,
+              private relService: RelgchartService) { }
 
   ngOnInit() {
+
   }
 
   loadRespConsidFinais() {
@@ -24,9 +47,32 @@ export class RelatoriosConsidFinaisComponent implements OnInit {
     setTimeout(() => { this.showProg = false; }, 3000 );
     if (!this.alreadyLoad) {
       this.respPresEmbProd();
-
+      this.respObs();
       this.alreadyLoad = true;
     }
+  }
+
+  respObs() {
+    const pergunta = 'Qual o principal motivo (o mais importante) que o leva a comprar de outro fabricante?';
+
+    this.obsCol        = this.db.collection(pergunta);
+    this.obsObservable = this.obsCol.snapshotChanges().pipe(
+      map(array => {
+        return array.map( snap => {
+          return {
+                  data: snap.payload.doc.data(),
+                    id: snap.payload.doc.id,
+            observacao: snap.payload.doc.data()['observacao']
+          };
+        });
+      }));
+
+    this.obsSubs = this.obsObservable.subscribe( obs => {
+      return obs;
+    });
+
+
+    // const combineLatest =  combineLatest<any[]>()
   }
 
   respPresEmbProd() {
@@ -36,7 +82,6 @@ export class RelatoriosConsidFinaisComponent implements OnInit {
     let prazoEnt      = 0;
     let preco         = 0;
     let atendFab      = 0;
-
     const customQuest = null;
     const pergunta    = 'Qual o principal motivo (o mais importante) que o leva a comprar de outro fabricante?';
 
@@ -107,5 +152,10 @@ export class RelatoriosConsidFinaisComponent implements OnInit {
     }, 3000);
   }
 
+  OnDestroy(): void {
+    // Called once, before the instance is destroyed.
+    // Add 'implements OnDestroy' to the class.
+    this.obsSubs.unsubscribe();
+  }
 
 }
