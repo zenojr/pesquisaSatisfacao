@@ -1,11 +1,25 @@
-import { NgModule } from '@angular/core';
+import { NgModule     } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
-import { MatButtonModule } from '@angular/material/button';
-import { MatProgressSpinnerModule, MatFormFieldModule, MatInputModule, MatGridListModule,
-         MatToolbarModule, MatSelectModule, MatSnackBarModule, MatIconModule, MatStepperModule, MatDividerModule,
-         MatRadioModule, MatSidenavModule, MatListModule, MatAutocompleteModule, MatProgressBarModule, 
-         MatCardModule, MatExpansionModule} from '@angular/material';
+import { MatProgressSpinnerModule,
+         MatFormFieldModule,
+         MatInputModule,
+         MatGridListModule,
+         MatToolbarModule,
+         MatSelectModule,
+         MatSnackBarModule,
+         MatIconModule,
+         MatStepperModule,
+         MatDividerModule,
+         MatRadioModule,
+         MatSidenavModule,
+         MatListModule,
+         MatAutocompleteModule,
+         MatProgressBarModule,
+         MatCardModule,
+         MatExpansionModule,
+         MatButtonModule,
+         MatTableModule,
+         MatTabsModule} from '@angular/material';
 
 @NgModule({
   declarations: [],
@@ -29,7 +43,8 @@ import { MatProgressSpinnerModule, MatFormFieldModule, MatInputModule, MatGridLi
   MatAutocompleteModule,
   MatProgressBarModule,
   MatCardModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatTabsModule
   ],
   exports: [
   MatTableModule,
@@ -50,7 +65,8 @@ import { MatProgressSpinnerModule, MatFormFieldModule, MatInputModule, MatGridLi
   MatAutocompleteModule,
   MatProgressBarModule,
   MatCardModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatTabsModule
   ]
 })
 export class MaterialModule { }
