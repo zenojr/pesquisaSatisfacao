@@ -24,10 +24,14 @@ export class ComparacaoGeralComponent implements OnInit {
 
    respostaColection: AngularFirestoreCollection<RespostasQuery>;
   respostaObservable: Observable<RespostasQuery[]>;
-             obsSubs: Subscription;
+            respSubs: Subscription;
 
            showProg = true;
         alreadyLoad = false;
+
+          perguntas = ['Funcionalidade da embalagem dos produtos em rolos',
+                       'Funcionalidade da embalagem dos produtos em bobinas',
+                       'Uniformidades das características técnicas'];
 
   constructor( private db: AngularFirestore, private relService: RelgchartService ) {}
 
@@ -39,16 +43,23 @@ export class ComparacaoGeralComponent implements OnInit {
     setTimeout(() => { this.showProg = false; }, 3000 );
 
     if (!this.alreadyLoad) {
-
+      this.loadGeral(this.perguntas);
       this.alreadyLoad = true;
     }
   }
 
-  compGeral() {
-    const pergunta = 'Qual o principal motivo (o mais importante) que o leva a comprar de outro fabricante?';
+  loadGeral(perguntas) {
 
-    this.respostaColection  = this.db.collection(pergunta);
-    this.respostaObservable = this.respostaColection.snapshotChanges().pipe(
+    let contaOtimo = 0;
+
+    perguntas.forEach(element => {
+      const pergunta = element;
+      this.respostaColection  = this.db.collection(pergunta, ref => ref
+                                      .where('respostaCorfio', '==', 'ótimo'));
+
+
+
+      this.respostaObservable = this.respostaColection.snapshotChanges().pipe(
       map(array => {
         return array.map( snap => {
           return {
@@ -60,6 +71,18 @@ export class ComparacaoGeralComponent implements OnInit {
         });
       }));
 
-  }
+      const myObserver = {
+            next: x => console.log( 'Observer got value:' + x ),
+           error: err => console.log( 'Observer got an error ' + err ),
+        complete: () => console.log( 'Observer got a complete notification' )
+      };
 
-}
+      this.respostaObservable.subscribe(myObserver);
+
+    });
+
+
+
+
+    }
+  }

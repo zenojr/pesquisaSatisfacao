@@ -11,6 +11,10 @@
 
     <google-chart [data]="graphProdCompra">   </google-chart>
 
+    <ul *ngFor='let data of respostaObservable | async'>
+      <li> {{ data.respostaCorfio }} </li>
+    </ul>
+
   </mat-expansion-panel>
   
 </mat-accordion>  

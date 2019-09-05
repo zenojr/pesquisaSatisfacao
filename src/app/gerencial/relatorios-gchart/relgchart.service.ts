@@ -32,9 +32,9 @@ export class RelgchartService {
             const percRegularCorfio = (totalizadorCorfio * regularCorfio).toFixed(0);
             const percRuimCorfio    = (totalizadorCorfio * ruimCorfio   ).toFixed(0);
             const percNaoUsoCorfio  = (totalizadorCorfio * naoUsoCorfio ).toFixed(0);
-            const numbOtimoCorfio   = parseInt(percOtimoCorfio,   10);
+            const numbOtimoCorfio   = parseInt(percOtimoCorfio,   10 );
             const numbBomCorfio     = parseInt(percBomCorfio,     10 );
-            const numbRegularCorfio = parseInt(percRegularCorfio, 10);
+            const numbRegularCorfio = parseInt(percRegularCorfio, 10 );
             const numbRuimCorfio    = parseInt(percRuimCorfio  ,  10 );
             const numbNaoUsoCorfio  = parseInt(percNaoUsoCorfio,  10 );
 
