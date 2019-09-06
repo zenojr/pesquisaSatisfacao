@@ -48,6 +48,8 @@ export class ComparacaoGeralComponent implements OnInit {
     }
   }
 
+
+
   loadGeral(perguntas) {
 
     let contaOtimo = 0;
@@ -57,19 +59,44 @@ export class ComparacaoGeralComponent implements OnInit {
       this.respostaColection  = this.db.collection(pergunta, ref => ref
                                       .where('respostaCorfio', '==', 'ótimo'));
 
+      this.db.collection(pergunta, ref => ref
+                                        .where( 'respostaCorfio', '==', 'ótimo' ))
+                                        .valueChanges()
+                                        .subscribe( doc => contaOtimo = doc.length );
+
+      setTimeout(() => {
+        console.log(contaOtimo);
+      }, 3000 );
+
+
+
+      // this.respostaObservable = this.respostaColection.snapshotChanges().pipe(
+      // map(array => {
+      //   return array.map( snap => {
+      //     return {
+      //                 data: snap.payload.doc.data(),
+      //                   id: snap.payload.doc.id,
+      //       respostaCorfio: snap.payload.doc.data()['respostaCorfio'],
+      //       respostaOutros: snap.payload.doc.data()['respostaOutros']
+      //     };
+      //   });
+      // }));
 
 
       this.respostaObservable = this.respostaColection.snapshotChanges().pipe(
-      map(array => {
-        return array.map( snap => {
-          return {
-                      data: snap.payload.doc.data(),
-                        id: snap.payload.doc.id,
-            respostaCorfio: snap.payload.doc.data()['respostaCorfio'],
-            respostaOutros: snap.payload.doc.data()['respostaOutros']
-          };
-        });
-      }));
+        map(array => array.map( ref => {
+          const data = ref.payload.doc.data() as RespostasQuery;
+          const id = ref.payload.doc.id;
+          return { id, ...data };
+        }))
+      );
+
+      // this.shirtCollection.snapshotChanges().pipe(
+      //   map(actions => actions.map(a => {
+      //     const data = a.payload.doc.data() as Shirt;
+      //     const id = a.payload.doc.id;
+      //     return { id, ...data };
+      //   }))
 
       const myObserver = {
             next: x => console.log( 'Observer got value:' + x ),
@@ -77,12 +104,8 @@ export class ComparacaoGeralComponent implements OnInit {
         complete: () => console.log( 'Observer got a complete notification' )
       };
 
-      this.respostaObservable.subscribe(myObserver);
+      // this.respostaObservable.subscribe(myObserver);
 
     });
-
-
-
-
     }
   }

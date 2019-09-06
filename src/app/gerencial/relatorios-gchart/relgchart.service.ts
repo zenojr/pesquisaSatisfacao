@@ -8,6 +8,7 @@ export class RelgchartService {
 
   constructor( private db: AngularFirestore ) { }
 
+
   buildGraphColumn(otimoCorfio,
                    otimoOutros,
                    bomCorfio,
