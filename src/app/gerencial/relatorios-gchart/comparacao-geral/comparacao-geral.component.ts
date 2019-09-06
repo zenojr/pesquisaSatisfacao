@@ -31,7 +31,30 @@ export class ComparacaoGeralComponent implements OnInit {
 
           perguntas = ['Funcionalidade da embalagem dos produtos em rolos',
                        'Funcionalidade da embalagem dos produtos em bobinas',
-                       'Uniformidades das características técnicas'];
+                       'Uniformidades das características técnicas',
+                       'Desempenho do produto',
+                       'Identificação (etiqueta) dos produtos em rolos',
+                       'Identificação (etiqueta) dos produtos em bobinas',
+                       'Assistência Técnica',
+                       'Identificação (gravação) nos produtos',
+                       'Cordialidade (gentileza) apresentada pelo representante',
+                       'Eficiência em resolver problemas e atender solicitações',
+                       'Receptividade em situação de reclamações e sugestões',
+                       'Freqüência de visitas do representante atende a necessidade ?',
+                       'Facilidade de localização do representante',
+                       'Aceitação dos produtos no mercado',
+                       'Conceito do produto junto ao usuário',
+                       'Os produtos são conhecidos?',
+                       'Atendimento do setor comercial na fábrica',
+                       'Pontualidade no prazo de embarque ofertado (desde a liberação do crédito até a saída da fábrica)',
+                       'Pontualidade na entrega',
+                       'Quantidade recebida X quantidade pedida',
+                       'Você indicaria nossos produtos e(ou) serviços a outros profissionais?',
+                       'Você está satisfeito com a nossa disposição em ajudar?',
+                       'Atendimento das transportadoras',
+                       'Preservação física dos produtos',
+                       'Preservação das embalagens dos produtos no recebimento (Carretéis, embalagens plásticas, sacarias e paletizações)'
+                        ];
 
   constructor( private db: AngularFirestore, private relService: RelgchartService ) {}
 
@@ -43,12 +66,53 @@ export class ComparacaoGeralComponent implements OnInit {
     setTimeout(() => { this.showProg = false; }, 3000 );
 
     if (!this.alreadyLoad) {
-      this.loadGeral(this.perguntas);
+      // this.loadGeral(this.perguntas);
+      this.loadRespostas(this.perguntas);
       this.alreadyLoad = true;
     }
   }
 
+  loadRespostas(perguntas) {
+    let contaOtimo   = 0;
+    let contaBom     = 0;
+    let contaRegular = 0;
+    let contaRuim    = 0;
 
+    perguntas.forEach(ref => {
+      const question = ref;
+
+
+      this.db.collection(question, data => data.where('respostaCorfio', '==', 'ótimo'))
+                                                .valueChanges()
+                                                .subscribe(doc => contaOtimo = doc.length);
+
+      this.db.collection(question, data => data.where('respostaCorfio', '==', 'bom'))
+                                                .valueChanges()
+                                                .subscribe(doc => contaBom = doc.length);
+
+      this.db.collection(question, data => data.where('respostaCorfio', '==', 'regular'))
+                                                .valueChanges()
+                                                .subscribe(doc => contaRegular = doc.length);
+
+      this.db.collection(question, data => data.where('respostaCorfio', '==', 'ruim'))
+                                                .valueChanges()
+                                                .subscribe(doc => contaRuim = doc.length);
+
+      setTimeout(() => {
+        this.relService.buildGraphGeral(
+                        contaOtimo,
+                        contaBom,
+                        contaRegular,
+                        contaRuim,
+                        this.graphCompGeral
+        );
+
+      }, 2000);
+
+
+    });
+
+  }
 
   loadGeral(perguntas) {
 
