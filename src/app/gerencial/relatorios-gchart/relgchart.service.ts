@@ -16,33 +16,30 @@ export class RelgchartService {
 
                   let grafico = graph;
 
-                  // const otimo = contaOtimo;
-                  // console.log(contaOtimo);
-                  // const totalizador = contaOtimo + contaBom + contaRegular + contaRuim;
-                  // console.log('tot' + totalizador);
-                  // const percOtimo   = (totalizador * contaOtimo  ).toFixed(0);
-                  // const percBom     = (totalizador * contaBom    ).toFixed(0);
-                  // const percRegular = (totalizador * contaRegular).toFixed(0);
-                  // const percRuim    = (totalizador * contaRuim   ).toFixed(0);
+                  const totalizador = 100 / (contaOtimo + contaBom + contaRegular + contaRuim);
+                  const percOtimo   = (totalizador * contaOtimo  ).toFixed(0);
+                  const percBom     = (totalizador * contaBom    ).toFixed(0);
+                  const percRegular = (totalizador * contaRegular).toFixed(0);
+                  const percRuim    = (totalizador * contaRuim   ).toFixed(0);
 
-                  // const numbOtimo   = percOtimo;
-                  // const numbBom     = parseInt(percBom,     10 );
-                  // const numbRegular = parseInt(percRegular, 10 );
-                  // const numbRuim    = parseInt(percRuim,    10 );
+                  const numbOtimo   = parseInt( percOtimo ,  10 );
+                  const numbBom     = parseInt( percBom   ,  10 );
+                  const numbRegular = parseInt( percRegular, 10 );
+                  const numbRuim    = parseInt( percRuim  ,  10 );
 
 
                   grafico = {
                     chartType: 'ColumnChart',
                     dataTable:  [
-                    ['opcao',    'Corfio',             {role: 'annotation'},     'Outros',          {role: 'annotation'}   ],
-                    ['Ótimo',    2,     'percOtimoCorfio  ' + '%',  2,  'percOtimoOutros  ' + '%'],
-                    ['Bom',      2,     'percBomCorfio    ' + '%',  2,  'percBomOutros    ' + '%'],
-                    ['Regular',  2,    'percRegularCorfio' + '%',  2, 'percRegularOutros' + '%'],
-                    ['Ruim',     2,     'percRuimCorfio   ' + '%',  2, 'percRuimOutros   ' + '%']
+                    ['opcao',    'Ótimo',             {role: 'annotation'},     'Bom',              {role: 'annotation'}   ],
+                    ['Ótimo',    numbOtimo,             percOtimo   + '%',    numbOtimo,   percOtimo   + '%'],
+                    ['Bom',      numbBom,               percBom     + '%',    numbBom,     percBom     + '%'],
+                    ['Regular',  numbRegular,           percRegular + '%',    numbRegular, percRegular + '%'],
+                    ['Ruim',     numbRuim,              percRuim    + '%',    numbRuim,    percRuim    + '%']
                     ],
                     // opt_firstRowIsData: true,
                     options: {
-                      title: 'title',
+                      title: 'Comp geral',
                       animation: {
                         duration: 1000,
                         easing: 'out',
@@ -50,6 +47,7 @@ export class RelgchartService {
                       }
                     },
                   };
+
 
   return grafico;
 

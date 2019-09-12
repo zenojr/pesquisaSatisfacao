@@ -77,9 +77,9 @@ export class ComparacaoGeralComponent implements OnInit {
 
   loadRespostas(perguntas) {
     const contaOtimo   = [];
-    let contaBom     = 0;
-    let contaRegular = 0;
-    let contaRuim    = 0;
+    const contaBom     = [];
+    const contaRegular = [];
+    const contaRuim    = [];
 
     perguntas.forEach(ref => {
       const question = ref;
@@ -89,23 +89,57 @@ export class ComparacaoGeralComponent implements OnInit {
                                                 .valueChanges()
                                                 .subscribe(doc => {contaOtimo.push(doc.length); });
 
-
-
       this.db.collection(question, data => data.where('respostaCorfio', '==', 'bom'))
                                                 .valueChanges()
-                                                .subscribe(doc => contaBom = doc.length);
+                                                .subscribe(doc => {contaBom.push(doc.length); });
 
       this.db.collection(question, data => data.where('respostaCorfio', '==', 'regular'))
                                                 .valueChanges()
-                                                .subscribe(doc => contaRegular = doc.length);
+                                                .subscribe(doc => {contaRegular.push(doc.length); });
 
       this.db.collection(question, data => data.where('respostaCorfio', '==', 'ruim'))
                                                 .valueChanges()
-                                                .subscribe(doc => contaRuim = doc.length);
+                                                .subscribe(doc => {contaRuim.push(doc.length); });
 
       setTimeout(() => {
         const reducer = (acc, current) => acc + current;
-        console.log( contaOtimo.reduce(reducer) );
+        const somaOtimo = contaOtimo.reduce(reducer);
+        const somaBom = contaBom.reduce(reducer);
+        const somaRegular = contaRegular.reduce(reducer);
+        const somaRuim = contaRuim.reduce(reducer);
+
+        console.log(somaOtimo, somaBom, somaRegular, somaRuim);
+        const totalizador = 100 / (somaOtimo + somaBom + somaRegular + somaRuim);
+
+        const percOtimo = (totalizador * somaOtimo).toFixed(0);
+        const percBom = (totalizador * somaBom).toFixed(0);
+        const percRegular = (totalizador * somaRegular).toFixed(0);
+        const percRuim = (totalizador * somaRuim).toFixed(0);
+
+        const numbOtimo = parseInt( percOtimo, 10 );
+        const numbBom = parseInt( percBom, 10 );
+        const numbRegular = parseInt( percRegular, 10 );
+        const numbRuim = parseInt( percRuim, 10 );
+
+        this.graphCompGeral = {
+          chartType: 'ColumnChart',
+          dataTable:  [
+          // tslint:disable-next-line:max-line-length
+          ['opcao', 'Ótimo',  {role: 'annotation'}, 'Bom', {role: 'annotation'}, 'Regular', {role: 'annotation'}, 'Ruim', {role: 'annotation'} ],
+          // tslint:disable-next-line:max-line-length
+          ['2019',  numbOtimo,  percOtimo  + '%',  numbBom,    percBom + '%',   numbRegular,  percRegular + '%', numbRuim,   percRuim + '%'  ]
+          ],
+          // opt_firstRowIsData: true,
+          options: {
+            title: 'Comparação Geral',
+            animation: {
+              duration: 1000,
+              easing: 'out',
+              startup: true
+            }
+          },
+        };
+
       }, 3000);
 
 
