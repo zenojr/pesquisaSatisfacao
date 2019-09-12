@@ -8,6 +8,7 @@ import { Observable, combineLatest,
          Subscription                 } from 'rxjs';
 
 
+
 export interface RespostasQuery {
   respostaCorfio: string;
   respostaOutros: string;
@@ -59,7 +60,9 @@ export class ComparacaoGeralComponent implements OnInit {
   constructor( private db: AngularFirestore, private relService: RelgchartService ) {}
 
   ngOnInit() {
+
   }
+
 
   loadCompGeral() {
     this.showProg = true;
@@ -73,7 +76,7 @@ export class ComparacaoGeralComponent implements OnInit {
   }
 
   loadRespostas(perguntas) {
-    let contaOtimo   = 0;
+    const contaOtimo   = [];
     let contaBom     = 0;
     let contaRegular = 0;
     let contaRuim    = 0;
@@ -84,7 +87,9 @@ export class ComparacaoGeralComponent implements OnInit {
 
       this.db.collection(question, data => data.where('respostaCorfio', '==', 'ótimo'))
                                                 .valueChanges()
-                                                .subscribe(doc => contaOtimo = doc.length);
+                                                .subscribe(doc => {contaOtimo.push(doc.length); });
+
+
 
       this.db.collection(question, data => data.where('respostaCorfio', '==', 'bom'))
                                                 .valueChanges()
@@ -99,15 +104,9 @@ export class ComparacaoGeralComponent implements OnInit {
                                                 .subscribe(doc => contaRuim = doc.length);
 
       setTimeout(() => {
-        this.relService.buildGraphGeral(
-                        contaOtimo,
-                        contaBom,
-                        contaRegular,
-                        contaRuim,
-                        this.graphCompGeral
-        );
-
-      }, 2000);
+        const reducer = (acc, current) => acc + current;
+        console.log( contaOtimo.reduce(reducer) );
+      }, 3000);
 
 
     });
