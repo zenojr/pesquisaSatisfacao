@@ -26,6 +26,7 @@ export class ComparacaoGeralComponent implements OnInit {
             graphRep: GoogleChartInterface;
            graphProd: GoogleChartInterface;
        graphAtendCom: GoogleChartInterface;
+       graphEmbTrans: GoogleChartInterface;
 
            showProg = true;
         alreadyLoad = false;
@@ -56,6 +57,10 @@ export class ComparacaoGeralComponent implements OnInit {
                        'Preservação física dos produtos',
                        'Preservação das embalagens dos produtos no recebimento (Carretéis, embalagens plásticas, sacarias e paletizações)'
                         ];
+
+  perguntasEmbTrans = ['Atendimento das transportadoras',
+                       'Preservação física dos produtos',
+                       'Preservação das embalagens dos produtos no recebimento (Carretéis, embalagens plásticas, sacarias e paletizações)'];
 
   perguntasAtendCom = ['Atendimento do setor comercial na fábrica',
                        'Pontualidade no prazo de embarque ofertado (desde a liberação do crédito até a saída da fábrica)',
@@ -100,8 +105,73 @@ export class ComparacaoGeralComponent implements OnInit {
       this.loadRep(this.perguntasRep);
       this.loadProd(this.perguntasProd);
       this.loadAtendCom(this.perguntasAtendCom);
+      this.loadEmbTrans(this.perguntasEmbTrans);
       this.alreadyLoad = true;
     }
+  }
+
+  loadEmbTrans(perguntasEmbTrans) {
+    const contaOtimo   = [];
+    const contaBom     = [];
+    const contaRegular = [];
+    const contaRuim    = [];
+
+    perguntasEmbTrans.forEach(ref => {
+      const question = ref;
+      this.db.collection(question, data => data.where('respostaCorfio', '==', 'ótimo'))
+                                                .valueChanges()
+                                                .subscribe(doc => {contaOtimo.push(doc.length); });
+
+      this.db.collection(question, data => data.where('respostaCorfio', '==', 'bom'))
+                                                .valueChanges()
+                                                .subscribe(doc => {contaBom.push(doc.length); });
+
+      this.db.collection(question, data => data.where('respostaCorfio', '==', 'regular'))
+                                                .valueChanges()
+                                                .subscribe(doc => {contaRegular.push(doc.length); });
+
+      this.db.collection(question, data => data.where('respostaCorfio', '==', 'ruim'))
+                                                .valueChanges()
+                                                .subscribe(doc => {contaRuim.push(doc.length); });
+
+      setTimeout(() => {
+
+        const reducer     = (acc, current) => acc + current;
+        const somaOtimo   = contaOtimo.reduce(reducer);
+        const somaBom     = contaBom.reduce(reducer);
+        const somaRegular = contaRegular.reduce(reducer);
+        const somaRuim    = contaRuim.reduce(reducer);
+
+        const totRep    = 100 / (somaOtimo + somaBom + somaRegular + somaRuim);
+        const otmBom = ((somaOtimo + somaBom) * totRep).toFixed(0);
+
+        this.graphAtendCom = {
+          chartType: 'LineChart',
+          dataTable:  [
+          ['opcao',        'Ótimo/Bom',    {role: 'annotation'},  'Meta',    {role: 'annoaMetan'}  ],
+          ['2012',            84,            84  + '%',        85,            85  + '%'],
+          ['2013',            78,            78  + '%',        85,            85  + '%'],
+          ['2014',            83,            83  + '%',        85,            85  + '%'],
+          ['2015',            84,            84  + '%',        85,            85  + '%'],
+          ['2016',            94,            94  + '%',        85,            85  + '%'],
+          ['2017',            94,            94  + '%',        85,            85  + '%'],
+          ['2018',            85,            85  + '%',        85,            85  + '%'],
+          ['2019',          otmBom,      otmBom  + '%',        85,            85  + '%']
+          ],
+          // opt_firstRowIsData: true,
+          options: {
+            title: 'Embalagem e Transporte - Bom e Ótimo',
+          animation: {
+            duration: 1000,
+              easing: 'in',
+             startup: true
+          }
+          },
+        };
+
+      }, 3000);
+
+    });
   }
 
   loadAtendCom(perguntasAtendCom) {
@@ -415,7 +485,33 @@ export class ComparacaoGeralComponent implements OnInit {
           // tslint:disable-next-line:max-line-length
           ['opcao', 'Ótimo',  {role: 'annotation'}, 'Bom', {role: 'annotation'}, 'Regular', {role: 'annotation'}, 'Ruim', {role: 'annotation'} ],
           // tslint:disable-next-line:max-line-length
-          ['2019',  numbOtimo,  percOtimo  + '%',  numbBom,    percBom + '%',   numbRegular,  percRegular + '%', numbRuim,   percRuim + '%'  ]
+          ['2005',     35,           35    + '%',    45  ,        45   + '%',       15 ,              15  + '%',    5  ,          5   + '%'  ],
+          // tslint:disable-next-line:max-line-length
+          ['2006',     49,           49    + '%',    42  ,        42   + '%',       7  ,              7   + '%',    1  ,          1   + '%'  ],
+          // tslint:disable-next-line:max-line-length
+          ['2008',     44,           44    + '%',    43  ,        43   + '%',       10 ,              10  + '%',    3  ,          3   + '%'  ],
+          // tslint:disable-next-line:max-line-length
+          ['2010',     45,           45    + '%',    45  ,        45   + '%',       8  ,              8   + '%',    2  ,          2   + '%'  ],
+          // tslint:disable-next-line:max-line-length
+          ['2011',     47,           47    + '%',    46  ,        46   + '%',       7  ,              7   + '%',    0  ,          0   + '%'  ],
+          // tslint:disable-next-line:max-line-length
+          ['2012',     47,           47    + '%',    44  ,        44   + '%',       8  ,              8   + '%',    2  ,          2   + '%'  ],
+          // tslint:disable-next-line:max-line-length
+          ['2013',     44,           44    + '%',    45  ,        45   + '%',       9  ,              9   + '%',    2  ,          2   + '%'  ],
+          // tslint:disable-next-line:max-line-length
+          ['2013',     44,           44    + '%',    45  ,        45   + '%',       9  ,              9   + '%',    2  ,          2   + '%'  ],
+          // tslint:disable-next-line:max-line-length
+          ['2014',     49,           49    + '%',    42  ,        42   + '%',       7  ,              7   + '%',    2  ,          2   + '%'  ],
+          // tslint:disable-next-line:max-line-length
+          ['2015',     51.2,         51.2  + '%',    40.8,        40.8 + '%',       6.9,              6.9 + '%',    1.1,          1.1 + '%'  ],
+          // tslint:disable-next-line:max-line-length
+          ['2016',     55.4,         55.4  + '%',    39.9,        39.9 + '%',       3.8,              3.8 + '%',    0.9,          0.9 + '%'  ],
+          // tslint:disable-next-line:max-line-length
+          ['2017',     52.6,         52.6  + '%',    42.8,        42.8 + '%',       3.6,              3.6 + '%',    1.1,          1.1 + '%'  ],
+          // tslint:disable-next-line:max-line-length
+          ['2018',     45.1,         45.1  + '%',    45.4,        45.4 + '%',       7.0,              7.0 + '%',    2.4,          2.4 + '%'  ],
+          // tslint:disable-next-line:max-line-length
+          ['2019',  numbOtimo,  percOtimo  + '%',  numbBom,    percBom + '%',   numbRegular,  percRegular + '%', numbRuim,   percRuim + '%'  ],
           ],
           // opt_firstRowIsData: true,
           options: {
@@ -633,11 +729,7 @@ export class ComparacaoGeralComponent implements OnInit {
 
       }, 3000);
 
-
-
-
     });
-
   }
 
   }
