@@ -38,6 +38,7 @@ import { RelatoriosEmbTranspComponent } from './gerencial/relatorios-gchart/rela
 import { RelatoriosConsidFinaisComponent } from './gerencial/relatorios-gchart/relatorios-consid-finais/relatorios-consid-finais.component';
 import { RelatoriosAspecTecComponent } from './gerencial/relatorios-gchart/relatorios-aspec-tec/relatorios-aspec-tec.component';
 import { ComparacaoGeralComponent } from './gerencial/relatorios-gchart/comparacao-geral/comparacao-geral.component';
+import { SatsClienteComponent } from './gerencial/relatorios-gchart/sats-cliente/sats-cliente.component';
 
 
 
@@ -65,7 +66,8 @@ import { ComparacaoGeralComponent } from './gerencial/relatorios-gchart/comparac
     RelatoriosEmbTranspComponent,
     RelatoriosConsidFinaisComponent,
     RelatoriosAspecTecComponent,
-    ComparacaoGeralComponent
+    ComparacaoGeralComponent,
+    SatsClienteComponent
   ],
   imports: [
     MaterialModule,
