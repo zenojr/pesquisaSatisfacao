@@ -10,12 +10,20 @@
     <mat-progress-bar mode="buffer" *ngIf="showProg"></mat-progress-bar>
 
     <google-chart [data]="graphCompGeral">   </google-chart>
-
-
-    
-
-
-
+    <google-chart [data]="graphDevXEntregue"></google-chart>
+    <google-chart [data]="graphDevolv">      </google-chart>
+    <mat-grid-list cols="2" rowHeight="4:1">
+      
+        <google-chart [data]="graphGerTendOtimo">  </google-chart>
+        <google-chart [data]="graphGerTendBom">    </google-chart>            
+        <google-chart [data]="graphGerTendRegular"></google-chart>      
+        <google-chart [data]="graphGerTendRuim">   </google-chart>
+        <google-chart [data]="graphAspTec">        </google-chart>
+        <google-chart [data]="graphRep">           </google-chart>
+        <google-chart [data]="graphProd">          </google-chart>
+        <google-chart [data]="graphAtendCom">      </google-chart>
+      
+    </mat-grid-list>
   </mat-expansion-panel>
   
 </mat-accordion>  

@@ -26,7 +26,7 @@ export interface Clientes {
 })
 export class RelatoriosConsidFinaisComponent implements OnInit {
 
-  graphCompraFab: GoogleChartInterface;
+   graphCompraFab: GoogleChartInterface;
 
           obsCol: AngularFirestoreCollection<Observacao>;
    obsObservable: Observable<Observacao[]>;
@@ -128,7 +128,7 @@ export class RelatoriosConsidFinaisComponent implements OnInit {
       this.graphCompraFab = {
         chartType: 'ColumnChart',
         dataTable:  [
-        ['opcao',                         'Corfio',     {role: 'annotation'} ],
+        ['opcao',                       'Corfio',    {role: 'annotation'} ],
         ['Atendimento Representante', numbAtendRep,  percAtendRep  + '%'  ],
         ['Qualidade Técnica',         numbQualTec,   percQualTec   + '%'  ],
         ['Aceitação do Produto',      numbAceitProd, percAceitProd + '%'  ],
