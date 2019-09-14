@@ -32,9 +32,40 @@ export class SatsClienteComponent implements OnInit {
       //                                      .valueChanges()
       //                                      .subscribe(doc => {contaOtimo.push(doc.length); });
       this.db.collection('clientesCNPJv2', data => data.where( 'cnpj',  '==', cnpj ))
-                                                       .valueChanges().subscribe( doc => console.log(doc) );
-    });
+                                                       .valueChanges()
+                                                       .subscribe( doc => console.log(doc) );
 
+      this.db.collection('clientesCNPJv2', data => data.where( 'cnpj',  '==', cnpj ))
+                                                       .snapshotChanges()
+                                                       .pipe(map( arr => {
+                                                         return arr.map( snap => {
+                                                           {
+                                                             let id = snap.payload.doc.id;
+
+                                                           }
+                                                         });
+                                                       }))
+                                                       .subscribe()
+    });
   }
+
+  // respObs() {
+  //   const pergunta = 'Qual o principal motivo (o mais importante) que o leva a comprar de outro fabricante?';
+
+  //   this.obsCol        = this.db.collection(pergunta);
+  //   this.obsObservable = this.obsCol.snapshotChanges().pipe(
+  //     map(array => {
+  //       return array.map( snap => {
+  //         return {
+  //                 data: snap.payload.doc.data(),
+  //                   id: snap.payload.doc.id,
+  //           observacao: snap.payload.doc.data()['observacao']
+  //         };
+  //       });
+  //     }));
+
+  //   this.obsSubs = this.obsObservable.subscribe( obs => {
+  //     return obs;
+  //   });
 
 }
