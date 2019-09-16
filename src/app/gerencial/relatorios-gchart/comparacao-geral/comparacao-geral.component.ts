@@ -94,10 +94,9 @@ export class ComparacaoGeralComponent implements OnInit {
 
   }
 
-
   loadCompGeral() {
     this.showProg = true;
-    setTimeout(() => { this.showProg = false; }, 3000 );
+    setTimeout(() => { this.showProg = false; }, 8000 );
 
     if (!this.alreadyLoad) {
       this.loadRespostas(this.perguntas);
@@ -169,7 +168,7 @@ export class ComparacaoGeralComponent implements OnInit {
           },
         };
 
-      }, 3000);
+      }, 8000);
 
     });
   }
@@ -233,7 +232,7 @@ export class ComparacaoGeralComponent implements OnInit {
           },
         };
 
-      }, 3000);
+      }, 8000);
 
     });
   }
@@ -297,7 +296,7 @@ export class ComparacaoGeralComponent implements OnInit {
           },
         };
 
-      }, 3000);
+      }, 8000);
 
     });
   }
@@ -362,7 +361,7 @@ export class ComparacaoGeralComponent implements OnInit {
           },
         };
 
-      }, 3000);
+      }, 8000);
 
     });
   }
@@ -429,7 +428,7 @@ export class ComparacaoGeralComponent implements OnInit {
           },
         };
 
-      }, 3000);
+      }, 8000);
 
     });
   }
@@ -727,7 +726,7 @@ export class ComparacaoGeralComponent implements OnInit {
         };
 
 
-      }, 3000);
+      }, 8000);
 
     });
   }
