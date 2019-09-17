@@ -29,6 +29,8 @@ export class SatsClienteComponent implements OnInit {
     graphAspTecUF: GoogleChartInterface;
   graphAtendRepUF: GoogleChartInterface;
    graphImgProdUF: GoogleChartInterface;
+  graphAtendComUF: GoogleChartInterface;
+    graphTranspUF: GoogleChartInterface;
 
            showProg = true;
         alreadyLoad = false;
@@ -282,6 +284,62 @@ export class SatsClienteComponent implements OnInit {
       // opt_firstRowIsData: true,
       options: {
         title: 'Imagem dos Produtos',
+      animation: {
+        duration: 1000,
+          easing: 'in',
+         startup: true
+      }
+      },
+    };
+
+    this.graphAtendComUF = {
+      chartType: 'ColumnChart',
+      dataTable:  [
+      ['opcao',        'Ótimo/Bom',    {role: 'annotation'}],
+      ['ES',             100,           100  + '%'],
+      ['GO',              81,            81  + '%'],
+      ['MG',              87,            87  + '%'],
+      ['MS',              97,            97  + '%'],
+      ['MT',              96,            96  + '%'],
+      ['PR',              93,            93  + '%'],
+      ['RJ',             100,           100  + '%'],
+      ['RO',              75,            75  + '%'],
+      ['RS',             100,           100  + '%'],
+      ['SC',              92,            92  + '%'],
+      ['SP',              94,            94  + '%'],
+      ['TO',             100,           100  + '%']
+      ],
+      // opt_firstRowIsData: true,
+      options: {
+        title: 'Atendimento Comercial',
+      animation: {
+        duration: 1000,
+          easing: 'in',
+         startup: true
+      }
+      },
+    };
+
+    this.graphTranspUF = {
+      chartType: 'ColumnChart',
+      dataTable:  [
+      ['opcao',        'Ótimo/Bom',    {role: 'annotation'}],
+      ['ES',             100,           100  + '%'],
+      ['GO',             100,           100  + '%'],
+      ['MG',              94,            94  + '%'],
+      ['MS',              94,            94  + '%'],
+      ['MT',              93,            93  + '%'],
+      ['PR',              88,            88  + '%'],
+      ['RJ',             100,           100  + '%'],
+      ['RO',             100,           100  + '%'],
+      ['RS',              97,            97  + '%'],
+      ['SC',              95,            95  + '%'],
+      ['SP',              86,            86  + '%'],
+      ['TO',              33,            33  + '%']
+      ],
+      // opt_firstRowIsData: true,
+      options: {
+        title: 'Embalagem e Transporte',
       animation: {
         duration: 1000,
           easing: 'in',
