@@ -31,6 +31,7 @@ export class SatsClienteComponent implements OnInit {
    graphImgProdUF: GoogleChartInterface;
   graphAtendComUF: GoogleChartInterface;
     graphTranspUF: GoogleChartInterface;
+         graphRep: GoogleChartInterface;
 
            showProg = true;
         alreadyLoad = false;
@@ -340,6 +341,50 @@ export class SatsClienteComponent implements OnInit {
       // opt_firstRowIsData: true,
       options: {
         title: 'Embalagem e Transporte',
+      animation: {
+        duration: 1000,
+          easing: 'in',
+         startup: true
+      }
+      },
+    };
+
+    this.graphRep = {
+      chartType: 'ColumnChart',
+      dataTable:  [
+      ['opcao',        'Ótimo/Bom',    {role: 'annotation'}],
+      ['A & R - SP',           100,          100  + '%'],
+      ['C.N.V - SC',            88,           88  + '%'],
+      ['CLARA LUX - SP',       100,          100  + '%'],
+      ['COSTA - PR',           100,          100  + '%'],
+      ['D.V - RS',             100,          100  + '%'],
+      ['ELETROCAL - SC',       100,          100  + '%'],
+      ['ELVIS - PR',            75,           75  + '%'],
+      ['FAAL - GO',             73,           73  + '%'],
+      ['G.F.W - SP',           100,          100  + '%'],
+      ['GF PREST - SP',         97,           97  + '%'],
+      ['GUALTER - RO',         100,          100  + '%'],
+      ['IMPERIAL - MG',        100,          100  + '%'],
+      ['J.FLECK - RS',         100,          100  + '%'],
+      ['JULIANO - SP',         100,          100  + '%'],
+      ['LACAVA - RS',          100,          100  + '%'],
+      ['LAMIR - SC',            95,           95  + '%'],
+      ['M.E LTDA - RJ',        100,          100  + '%'],
+      ['MATALU - SP',          100,          100  + '%'],
+      ['MEG - RS',             100,          100  + '%'],
+      ['MERP - ES',             95,           95  + '%'],
+      ['MUZZI - MG',            83,           83  + '%'],
+      ['PEREGRINELLO - PR',    100,          100  + '%'],
+      ['PVE - MS',              92,           92  + '%'],
+      ['PVEBR - MT',           100,          100  + '%'],
+      ['RIZZON - PR',          100,          100  + '%'],
+      ['SRGIO - RS',          100,          100  + '%'],
+      ['SCHEIBLER - RS',       100,          100  + '%'],
+      ['ZIMMER - SC',           95,            95  + '%'],
+      ],
+      // opt_firstRowIsData: true,
+      options: {
+        title: 'Satisfação com representantes',
       animation: {
         duration: 1000,
           easing: 'in',
