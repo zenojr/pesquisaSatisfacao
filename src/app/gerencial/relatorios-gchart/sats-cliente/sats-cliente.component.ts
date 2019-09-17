@@ -26,17 +26,164 @@ export class SatsClienteComponent implements OnInit {
 
   dataclient = [];
 
-  graphAtendCom: GoogleChartInterface;
-       graphEmbTrans: GoogleChartInterface;
+    graphAspTecUF: GoogleChartInterface;
+  graphAtendRepUF: GoogleChartInterface;
+   graphImgProdUF: GoogleChartInterface;
 
            showProg = true;
         alreadyLoad = false;
 
   cliente: Observable<DataClient[]>;
 
-  cnpjRespostas = [ '00103788000676',
+  // cnpjRespostas = [ '00495593000104',
+  //                    '00212675000366',
+  //                    '48539548000726',
+  //                    '01816875000129'];
+
+  cnpjRespostas = [ '00495593000104',
+                    '00212675000366',
+                    '48539548000726',
+                    '01816875000129',
+                    '21803974000183',
+                    '75862961000295',
+                    '16823179000117',
+                    '08139035000118',
+                    '00528952000182',
+                    '76576198000118',
+                    '82767831000158',
+                    '87791992000109',
+                    '01576708000158',
+                    '20214195000180',
+                    '22802967000120',
+                    '17452769000143',
+                    '85007326000101',
+                    '83086603000185',
+                    '11002659000101',
+                    '23630623000143',
+                    '09452299000190',
+                    '01906851000160',
+                    '11967105000130',
+                    '01722901000150',
+                    '78718673000179',
+                    '00589066000169',
+                    '00876873000162',
+                    '79965331000116',
+                    '03261204000336',
+                    '04598063000142',
+                    '07811984000130',
+                    '08999064000230',
+                    '71856447000105',
+                    '02559947000162',
+                    '20619518000115',
+                    '51379576000142',
+                    '73846560000135',
+                    '27434911000183',
+                    '00841350000180',
+                    '00842602000196',
+                    '11997015000192',
+                    '04286673000100',
+                    '75923243000109',
+                    '24845459000154',
+                    '47674429000390',
+                    '85146868000157',
+                    '08832547000165',
+                    '15984883000199',
+                    '85294031000155',
+                    '15525934000114',
+                    '80963598000153',
+                    '09008659000169',
+                    '79400065000184',
+                    '80223324000128',
+                    '00354022000150',
+                    '83164806000142',
+                    '73329286000127',
+                    '02181482000159',
+                    '11807582000139',
+                    '80408248000125',
+                    '21770011000120',
+                    '28416105000145',
+                    '85014793000150',
+                    '02554116000106',
+                    '19490367000169',
+                    '95447330000136',
+                    '09469493000188',
+                    '01784320000142',
+                    '12595954000173',
+                    '63755664000180',
+                    '04791310000122',
+                    '00940878000107',
+                    '25375597000180',
+                    '02042020000150',
+                    '06115132000145',
+                    '01256464000126',
+                    '10297492000182',
+                    '49986037000120',
+                    '11807156000103',
+                    '08957686000115',
+                    '27260519000165',
+                    '18578828000359',
+                    '01339514000562',
+                    '21272121000162',
+                    '80655053000260',
+                    '76323518000128',
+                    '24186294000156',
+                    '75289157000188',
+                    '79941902000182',
+                    '00172143000180',
+                    '01559046005762',
+                    '82322082000155',
+                    '16820777000132',
+                    '81601353000149',
+                    '06352100000163',
+                    '83092213000118',
+                    '19622616000122',
+                    '13231670000160',
+                    '97404842000140',
+                    '17155342000345',
+                    '83240333000115',
+                    '13466189000154',
+                    '02725006000151',
+                    '02516659000120',
+                    '07406982000165',
+                    '06819531000197',
+                    '88644901000167',
+                    '20195021000117',
+                    '43214055000107',
+                    '96404942000104',
+                    '70357959000164',
+                    '09912137000197',
+                    '76735356000135',
+                    '02724345000113',
+                    '23478130000130',
+                    '97495550000160',
+                    '46044053002906',
+                    '78663267000156',
+                    '02226707000146',
+                    '00725876000103',
+                    '07802253000128',
                     '00138093000115',
-                    '00172143000180'];
+                    '04797412000155',
+                    '08640180000188',
+                    '01754239001000',
+                    '05360952000130',
+                    '08287673000186',
+                    '00103788000676',
+                    '12562938000184',
+                    '17359233000188',
+                    '87341186000120',
+                    '07456717000191',
+                    '78527082000114',
+                    '90555202000192',
+                    '02697297000111',
+                    '12324723000125',
+                    '81554933000122',
+                    '02302466000177',
+                    '07120505000139',
+                    '14621282000159',
+                    '21794561000180',
+                    '02382238000154',
+                    '89462071000110',
+                    ];
 
   perguntasAspecTec = ['Funcionalidade da embalagem dos produtos em rolos',
                       'Funcionalidade da embalagem dos produtos em bobinas',
@@ -50,41 +197,6 @@ export class SatsClienteComponent implements OnInit {
   constructor( private db: AngularFirestore ) { }
 
   ngOnInit() {
-    // this.consultaClienteRep(this.cnpjRespostas, this.perguntasAspecTec);
-    this.newQuery(this.cnpjRespostas, this.perguntasAspecTec)
-  }
-
-
-  newQuery(listaCnpj, perguntas) {
-
-
-    listaCnpj.forEach(cnpj => {
-
-    this.db.collection(cnpj).valueChanges().subscribe(
-      doc => console.log(doc)
-    );
-
-    this.db.collection(cnpj, data => data.where( 'respostaCorfio',  '==', 'ótimo' ))
-                                         .snapshotChanges()
-                                         .pipe(map( arr => {
-                                         return arr.map( snap => {
-                                         return {
-                                          id: snap.payload.doc.id,
-                                          cnpj: snap.payload.doc.data()['cnpj'],
-                                          email: snap.payload.doc.data()['email'],
-                                          estado: snap.payload.doc.data()['estado'],
-                                          nome: snap.payload.doc.data()['nome'],
-                                          representante: snap.payload.doc.data()['representante']
-                                         };
-                                         });
-                                         })).subscribe( doc => console.log(doc) );
-
-
-    });
-
-    setTimeout(() => {
-      console.log(this.dataclient);
-    }, 3000);
 
   }
 
@@ -92,97 +204,93 @@ export class SatsClienteComponent implements OnInit {
   loadCompGeral() {
     this.showProg = true;
     setTimeout(() => { this.showProg = false; }, 8000 );
-
+    this.loadGraph();
     if (!this.alreadyLoad) {
       this.alreadyLoad = true;
     }
   }
 
-  consultaClienteRep( cnpjLista, perguntasAspecTec ) {
-    // const cliente = [];
-    let otimo = [];
-    cnpjLista.forEach( cnpj => {
-      // this.db.collection(cnpj, data => data.where('respostaCorfio', '==', 'ótimo'))
-      //                                      .valueChanges()
-      //                                      .subscribe(doc => {contaOtimo.push(doc.length); });
-      // this.db.collection('clientesCNPJv2', data => data.where( 'cnpj',  '==', cnpj ))
-      //                                                  .valueChanges()
-      //                                                  .subscribe( doc => this.dataclient.push(doc));
+  loadGraph() {
+    this.graphAspTecUF = {
+      chartType: 'ColumnChart',
+      dataTable:  [
+      ['opcao',        'Ótimo/Bom',    {role: 'annotation'}],
+      ['ES',             100,           100  + '%'],
+      ['MG',              96,            96  + '%'],
+      ['MS',              88,            88  + '%'],
+      ['MT',             100,           100  + '%'],
+      ['PR',              97,            97  + '%'],
+      ['RS',              97,            97  + '%'],
+      ['SC',              93,            93  + '%'],
+      ['SP',              90,            90  + '%']
+      ],
+      // opt_firstRowIsData: true,
+      options: {
+        title: 'Aspectos Técnicos',
+      animation: {
+        duration: 1000,
+          easing: 'in',
+         startup: true
+      }
+      },
+    };
 
+    this.graphAtendRepUF = {
+      chartType: 'ColumnChart',
+      dataTable:  [
+      ['opcao',        'Ótimo/Bom',    {role: 'annotation'}],
+      ['BA',              92,            92  + '%'],
+      ['ES',              95,            95  + '%'],
+      ['GO',              95,            95  + '%'],
+      ['MG',              92,            92  + '%'],
+      ['MS',              92,            92  + '%'],
+      ['MT',             100,           100  + '%'],
+      ['PR',              96,            96  + '%'],
+      ['RO',             100,           100  + '%'],
+      ['RS',             100,           100  + '%'],
+      ['SC',              95,            95  + '%'],
+      ['SP',             100,           100  + '%']
+      ],
+      // opt_firstRowIsData: true,
+      options: {
+        title: 'Atendimento do Representante',
+      animation: {
+        duration: 1000,
+          easing: 'in',
+         startup: true
+      }
+      },
+    };
 
-      this.cliente = this.db.collection('clientesCNPJv2', data => data.where( 'cnpj',  '==', cnpj ))
-                                                       .snapshotChanges()
-                                                       .pipe(map( arr => {
-                                                        return arr.map( snap => {
-                                                        return {
-                                                          id: snap.payload.doc.id,
-                                                          cnpj: snap.payload.doc.data()['cnpj'],
-                                                          email: snap.payload.doc.data()['email'],
-                                                          estado: snap.payload.doc.data()['estado'],
-                                                          nome: snap.payload.doc.data()['nome'],
-                                                          representante: snap.payload.doc.data()['representante']
-                                                        };
-                                                        });
-                                                       }));
+    this.graphImgProdUF = {
+      chartType: 'ColumnChart',
+      dataTable:  [
+      ['opcao',        'Ótimo/Bom',    {role: 'annotation'}],
+      ['ES',             100,           100  + '%'],
+      ['GO',             100,           100  + '%'],
+      ['MG',             100,           100  + '%'],
+      ['MS',             100,           100  + '%'],
+      ['MT',             100,           100  + '%'],
+      ['PR',              97,            97  + '%'],
+      ['RJ',             100,           100  + '%'],
+      ['RO',             100,           100  + '%'],
+      ['RS',             100,           100  + '%'],
+      ['SC',             100,           100  + '%'],
+      ['SP',              94,            94  + '%'],
+      ['TO',             100,           100  + '%']
+      ],
+      // opt_firstRowIsData: true,
+      options: {
+        title: 'Imagem dos Produtos',
+      animation: {
+        duration: 1000,
+          easing: 'in',
+         startup: true
+      }
+      },
+    };
 
-
-
-    });
-
-
-    console.log(this.cliente);
-
-    perguntasAspecTec.forEach( pergunta => {
-      this.db.collection( pergunta, data => data.where( 'respostaCorfio', '==', 'ótimo'))
-                                                .valueChanges()
-                                                .subscribe(doc =>  otimo.push(doc));
-    }
-
-    );
   }
 
-
-  loadAspecTec(perguntasAspec) {
-    const contaOtimo   = [];
-    const contaBom     = [];
-    const contaRegular = [];
-    const contaRuim    = [];
-
-    perguntasAspec.forEach(ref => {
-      const question = ref;
-      this.db.collection(question, data => data.where('respostaCorfio', '==', 'ótimo'))
-                                                .valueChanges()
-                                                .subscribe(doc => {contaOtimo.push(doc.length); });
-
-      this.db.collection(question, data => data.where('respostaCorfio', '==', 'bom'))
-                                                .valueChanges()
-                                                .subscribe(doc => {contaBom.push(doc.length); });
-
-      this.db.collection(question, data => data.where('respostaCorfio', '==', 'regular'))
-                                                .valueChanges()
-                                                .subscribe(doc => {contaRegular.push(doc.length); });
-
-      this.db.collection(question, data => data.where('respostaCorfio', '==', 'ruim'))
-                                                .valueChanges()
-                                                .subscribe(doc => {contaRuim.push(doc.length); });
-
-
-
-      setTimeout(() => {
-
-        const reducer     = (acc, current) => acc + current;
-        const somaOtimo   = contaOtimo.reduce(reducer);
-        const somaBom     = contaBom.reduce(reducer);
-        const somaRegular = contaRegular.reduce(reducer);
-        const somaRuim    = contaRuim.reduce(reducer);
-
-        const totAsp    = 100 / (somaOtimo + somaBom + somaRegular + somaRuim);
-        const otmBom = ((somaOtimo + somaBom) * totAsp).toFixed(0);
-
-
-      }, 8000);
-
-    });
-  }
 
 }
