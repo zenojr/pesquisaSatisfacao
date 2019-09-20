@@ -240,7 +240,8 @@ export class SatsClienteComponent implements OnInit {
         viewWindow: {
           min: 0,
           max: 100
-        }
+        },
+        ticks: [0, 25, 50, 75, 100]
       },
       },
     };
@@ -425,7 +426,7 @@ export class SatsClienteComponent implements OnInit {
         viewWindow: {
           min: 0,
           max: 100
-        }
+        },
       },
       },
     };
