@@ -519,7 +519,19 @@ export class ComparacaoGeralComponent implements OnInit {
               duration: 1000,
               easing: 'out',
               startup: true
-            }
+            },
+            vAxis: {
+              viewWindow: {
+                min: 0,
+                max: 100
+              }
+            },
+            hAxis: {
+              viewWindow: {
+                min: 0,
+                max: 14
+              }
+            },
           },
         };
 
@@ -545,7 +557,7 @@ export class ComparacaoGeralComponent implements OnInit {
         // graph devolv x meta
         const totEnv = 1000;
         const fatConv = totEnv / 100;
-        const totRec = 143;
+        const totRec = 145;
         const meta   = 200;
         const percMeta = meta  / fatConv;
         const percRec = totRec /  fatConv;
@@ -564,7 +576,19 @@ export class ComparacaoGeralComponent implements OnInit {
             duration: 1000,
               easing: 'in',
              startup: true
-          }
+          },
+          vAxis: {
+            viewWindow: {
+              min: 0,
+              max: 100
+            }
+          },
+          hAxis: {
+            viewWindow: {
+              min: 0,
+              max: 50
+            }
+          },
           },
         };
 

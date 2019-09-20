@@ -228,13 +228,20 @@ export class SatsClienteComponent implements OnInit {
       ['SP',              90,            90  + '%']
       ],
       // opt_firstRowIsData: true,
+
       options: {
         title: 'Aspectos Técnicos',
       animation: {
         duration: 1000,
           easing: 'in',
          startup: true
-      }
+      },
+      vAxis: {
+        viewWindow: {
+          min: 0,
+          max: 100
+        }
+      },
       },
     };
 
@@ -261,7 +268,13 @@ export class SatsClienteComponent implements OnInit {
         duration: 1000,
           easing: 'in',
          startup: true
-      }
+      },
+      vAxis: {
+        viewWindow: {
+          min: 0,
+          max: 100
+        }
+      },
       },
     };
 
@@ -289,7 +302,13 @@ export class SatsClienteComponent implements OnInit {
         duration: 1000,
           easing: 'in',
          startup: true
-      }
+      },
+      vAxis: {
+        viewWindow: {
+          min: 0,
+          max: 100
+        }
+      },
       },
     };
 
@@ -317,7 +336,13 @@ export class SatsClienteComponent implements OnInit {
         duration: 1000,
           easing: 'in',
          startup: true
-      }
+      },
+      vAxis: {
+        viewWindow: {
+          min: 0,
+          max: 100
+        }
+      },
       },
     };
 
@@ -345,7 +370,13 @@ export class SatsClienteComponent implements OnInit {
         duration: 1000,
           easing: 'in',
          startup: true
-      }
+      },
+      vAxis: {
+        viewWindow: {
+          min: 0,
+          max: 100
+        }
+      },
       },
     };
 
@@ -389,7 +420,13 @@ export class SatsClienteComponent implements OnInit {
         duration: 1000,
           easing: 'in',
          startup: true
-      }
+      },
+      vAxis: {
+        viewWindow: {
+          min: 0,
+          max: 100
+        }
+      },
       },
     };
 
