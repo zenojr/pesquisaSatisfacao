@@ -67,7 +67,7 @@ export class ComparacaoGeralComponent implements OnInit {
                        'Pontualidade na entrega',
                        'Quantidade recebida X quantidade pedida',
                        'Você indicaria nossos produtos e(ou) serviços a outros profissionais?',
-                       'Você está satisfeito com a nossa disposição em ajudar?',];
+                       'Você está satisfeito com a nossa disposição em ajudar?' ];
 
       perguntasProd = ['Aceitação dos produtos no mercado',
                        'Conceito do produto junto ao usuário',
@@ -557,7 +557,7 @@ export class ComparacaoGeralComponent implements OnInit {
         // graph devolv x meta
         const totEnv = 1000;
         const fatConv = totEnv / 100;
-        const totRec = 145;
+        const totRec = 150;
         const meta   = 200;
         const percMeta = meta  / fatConv;
         const percRec = totRec /  fatConv;
