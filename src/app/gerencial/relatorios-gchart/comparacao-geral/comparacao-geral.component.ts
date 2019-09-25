@@ -144,7 +144,7 @@ export class ComparacaoGeralComponent implements OnInit {
         const totRep    = 100 / (somaOtimo + somaBom + somaRegular + somaRuim);
         const otmBom = ((somaOtimo + somaBom) * totRep).toFixed(0);
 
-        this.graphAtendCom = {
+        this.graphEmbTrans = {
           chartType: 'LineChart',
           dataTable:  [
           ['opcao',        'Ótimo/Bom',    {role: 'annotation'},  'Meta',    {role: 'annoaMetan'}  ],
