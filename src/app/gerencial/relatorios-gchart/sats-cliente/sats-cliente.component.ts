@@ -32,6 +32,7 @@ export class SatsClienteComponent implements OnInit {
   graphAtendComUF: GoogleChartInterface;
     graphTranspUF: GoogleChartInterface;
          graphRep: GoogleChartInterface;
+      newGraphRep: GoogleChartInterface;
 
            showProg = true;
         alreadyLoad = false;
@@ -381,10 +382,37 @@ export class SatsClienteComponent implements OnInit {
       },
     };
 
+    this.newGraphRep = {
+      chartType: 'ColumnChart',
+      dataTable: [
+        ['Move', 'Percentage'],
+          ["King's pawn (e4)", 44],
+          ["Queen's pawn (d4)", 31],
+          ["Knight to King 3 (Nf3)", 12],
+          ["Queen's bishop pawn (c4)", 10],
+          ['Other', 3]
+      ],
+      
+      options: {
+        width: 800,
+          legend: {
+            position: 'none'
+          },
+          chart: {
+            title: 'Chess opening moves',
+            subtitle: 'popularity by percentage'
+          },
+          bar: {
+            groupWidth: "90%"
+          }
+      }
+
+    };
+
     this.graphRep = {
       chartType: 'ColumnChart',
       dataTable:  [
-      ['opcao',        'Ótimo/Bom',    {role: 'annotation'}],
+      ['opcao',               'Ótimo/Bom',    {role: 'annotation'}],
       ['A & R - SP',           100,          100  + '%'],
       ['C.N.V - SC',            88,           88  + '%'],
       ['CLARA LUX - SP',       100,          100  + '%'],
@@ -412,22 +440,24 @@ export class SatsClienteComponent implements OnInit {
       ['RIZZON - PR',          100,          100  + '%'],
       ['SRGIO - RS',          100,          100  + '%'],
       ['SCHEIBLER - RS',       100,          100  + '%'],
-      ['ZIMMER - SC',           95,            95  + '%'],
+      ['ZIMMER - SC',           95,           95  + '%'],
       ],
       // opt_firstRowIsData: true,
       options: {
         title: 'Satisfação com representantes',
-      animation: {
-        duration: 1000,
-          easing: 'in',
-         startup: true
-      },
-      vAxis: {
-        viewWindow: {
-          min: 0,
-          max: 100
+
+        animation: {
+          duration: 1000,
+            easing: 'in',
+          startup: true
         },
-      },
+
+        vAxis: {
+          viewWindow: {
+            min: 0,
+            max: 100
+          },
+        },
       },
     };
 
