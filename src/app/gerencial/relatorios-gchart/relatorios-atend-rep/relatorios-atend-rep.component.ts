@@ -110,82 +110,56 @@ export class RelatoriosAtendRepComponent implements OnInit {
   }
 
   respFreq() {
-    let otimoCorfio   = 0;
-    let otimoOutros   = 0;
-    let bomCorfio     = 0;
-    let bomOutros     = 0;
-    let regularCorfio = 0;
-    let regularOutros = 0;
-    let ruimCorfio    = 0;
-    let ruimOutros    = 0;
-    let naoUsoCorfio  = 0;
-    let naoUsoOutros  = 0;
-    const customQuest = 'não necessita';
-    const pergunta    = 'Freqüência de visitas do representante atende a necessidade ´?';
+    let simCorfio     = 0;
+    let simOutros     = 0;
+    let naoCorfio     = 0;
+    let naoOutros     = 0;
+    let naoNescCorfio = 0;
+    let naoNescOutros = 0;
 
-
+    const pergunta    = 'Freqüência de visitas do representante atende a necessidade ?';
 
     this.db.collection(pergunta, ref => ref
-                                     .where( 'respostaCorfio', '==', 'ótimo' ))
+                                     .where( 'respostaCorfio', '==', 'sim' ))
                                      .valueChanges()
-                                     .subscribe( doc => {otimoCorfio = doc.length;
+                                     .subscribe( doc => {simCorfio = doc.length;
                                                           console.log(doc.length);
                                                         } );
     this.db.collection(pergunta, ref => ref
-                                     .where( 'respostaOutros', '==', 'ótimo' ))
+                                     .where( 'respostaOutros', '==', 'sim' ))
                                      .valueChanges()
-                                     .subscribe(doc => otimoOutros = doc.length );
+                                     .subscribe(doc => simOutros = doc.length );
 
     this.db.collection(pergunta, ref => ref
-                                     .where( 'respostaCorfio', '==', 'bom' ))
+                                     .where( 'respostaCorfio', '==', 'nao' ))
                                      .valueChanges()
-                                     .subscribe(doc => bomCorfio = doc.length);
+                                     .subscribe(doc => naoCorfio = doc.length);
     this.db.collection(pergunta, ref => ref
-                                     .where( 'respostaOutros', '==', 'bom' ))
+                                     .where( 'respostaOutros', '==', 'nao' ))
                                      .valueChanges()
-                                     .subscribe(doc => bomOutros = doc.length);
+                                     .subscribe(doc => naoOutros = doc.length);
 
     this.db.collection(pergunta, ref => ref
-                                     .where( 'respostaCorfio', '==', 'regular' ))
+                                     .where( 'respostaCorfio', '==', 'não necessita' ))
                                      .valueChanges()
-                                     .subscribe(doc => regularCorfio = doc.length);
+                                     .subscribe(doc => naoNescCorfio = doc.length);
     this.db.collection(pergunta, ref => ref
-                                     .where( 'respostaOutros', '==', 'regular' ))
+                                     .where( 'respostaOutros', '==', 'não necessita' ))
                                      .valueChanges()
-                                     .subscribe(doc => regularOutros = doc.length);
+                                     .subscribe(doc => naoNescOutros = doc.length);
 
-    this.db.collection(pergunta, ref => ref
-                                     .where( 'respostaCorfio', '==', 'ruim' ))
-                                     .valueChanges()
-                                     .subscribe(doc => ruimCorfio = doc.length);
-    this.db.collection(pergunta, ref => ref
-                                     .where( 'respostaOutros', '==', 'ruim' ))
-                                     .valueChanges()
-                                     .subscribe(doc => ruimOutros = doc.length);
-    this.db.collection(pergunta, ref => ref
-                                     .where( 'respostaCorfio', '==', customQuest ))
-                                     .valueChanges()
-                                     .subscribe(doc => naoUsoCorfio = doc.length);
-    this.db.collection(pergunta, ref => ref
-                                     .where( 'respostaOutros', '==', customQuest ))
-                                     .valueChanges()
-                                     .subscribe(doc => {naoUsoOutros = doc.length;  });
 
     setTimeout(() => {
-      this.graphFreq = this.relService.buildGraphColumn(
-        otimoCorfio,
-        otimoOutros,
-        bomCorfio,
-        bomOutros,
-        regularCorfio,
-        regularOutros,
-        ruimCorfio,
-        ruimOutros,
-        naoUsoCorfio,
-        naoUsoOutros,
-        this.graphFreq,
+      this.graphFreq = this.relService.buildGraphVisitRep(
+        simCorfio,
+        simOutros,
+        naoCorfio,
+        naoOutros,
+        naoNescCorfio,
+        naoNescOutros,
         pergunta,
-        customQuest);
+        this.graphFreq
+        );
     }, 8000);
   }
 

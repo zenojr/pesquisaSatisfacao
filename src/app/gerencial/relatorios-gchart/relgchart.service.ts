@@ -6,7 +6,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class RelgchartService {
 
-  constructor( private db: AngularFirestore ) { }
+  constructor( ) { }
 
   buildGraphGeral(contaOtimo,
                   contaBom,
@@ -203,7 +203,54 @@ grafico = {
 };
 
 return grafico;
-}
+  }
 
+  buildGraphVisitRep(
+        simCorfio,
+        simOutros,
+        naoCorfio,
+        naoOutros,
+        naoNescCorfio,
+        naoNescOutros,
+        pergunta,
+        graph) {
+
+let grafico = graph;
+
+const totalizador       = 100 / (simCorfio + simOutros + naoCorfio + naoOutros + naoNescCorfio + naoNescOutros);
+const percSimCorfio     = (totalizador * simCorfio).toFixed(0);
+const percSimOutros     = (totalizador * simOutros).toFixed(0);
+const percNaoCorfio     = (totalizador * naoCorfio).toFixed(0);
+const percNaoOutros     = (totalizador * naoOutros).toFixed(0);
+const percNaoNescCorfio = (totalizador * naoNescCorfio).toFixed(0);
+const percNaoNescOutros = (totalizador * naoNescOutros).toFixed(0);
+
+const numbSimCorfio  = parseInt( percSimCorfio , 10 );
+const numbSimOutros  = parseInt( percSimOutros , 10 );
+const numbNaoCorfio  = parseInt( percNaoCorfio , 10 );
+const numbNaoOutros  = parseInt( percNaoOutros , 10 );
+const numbNaoNescCorfio  = parseInt( percNaoNescCorfio , 10 );
+const numbNaoNescOutros  = parseInt( percNaoNescOutros , 10 );
+
+grafico = {
+chartType: 'ColumnChart',
+dataTable:  [
+['opcao',     'SIM',      {role: 'annotation'},    'NÃO',      {role: 'annotation'}, 'NÃO NECESSITA',   {role: 'annotation'} ],
+['Corfio', numbSimCorfio, percSimCorfio + '%',  numbNaoCorfio, percNaoCorfio + '%',  numbNaoNescCorfio,  percNaoNescCorfio + '%'],
+['Outros', numbSimOutros, percSimOutros + '%',  numbNaoOutros, percNaoOutros + '%',  numbNaoNescOutros,  percNaoNescOutros + '%']
+],
+// opt_firstRowIsData: true,
+options: {
+title: pergunta,
+animation: {
+duration: 1000,
+easing: 'out',
+startup: true
+}
+},
+};
+
+return grafico;
+  }
 
 }
