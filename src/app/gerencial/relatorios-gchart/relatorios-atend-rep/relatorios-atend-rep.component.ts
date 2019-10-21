@@ -120,13 +120,17 @@ export class RelatoriosAtendRepComponent implements OnInit {
     let ruimOutros    = 0;
     let naoUsoCorfio  = 0;
     let naoUsoOutros  = 0;
-    const customQuest   = 'não necessita';
-    const pergunta    = 'Freqüência de visitas do representante atende a necessidade ?';
+    const customQuest = 'não necessita';
+    const pergunta    = 'Freqüência de visitas do representante atende a necessidade ´?';
+
+
 
     this.db.collection(pergunta, ref => ref
                                      .where( 'respostaCorfio', '==', 'ótimo' ))
                                      .valueChanges()
-                                     .subscribe( doc => otimoCorfio = doc.length );
+                                     .subscribe( doc => {otimoCorfio = doc.length;
+                                                          console.log(doc.length);
+                                                        } );
     this.db.collection(pergunta, ref => ref
                                      .where( 'respostaOutros', '==', 'ótimo' ))
                                      .valueChanges()
@@ -182,7 +186,7 @@ export class RelatoriosAtendRepComponent implements OnInit {
         this.graphFreq,
         pergunta,
         customQuest);
-    }, 3000);
+    }, 8000);
   }
 
   respRecept() {
