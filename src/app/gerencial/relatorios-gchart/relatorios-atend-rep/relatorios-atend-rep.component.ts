@@ -160,7 +160,7 @@ export class RelatoriosAtendRepComponent implements OnInit {
         pergunta,
         this.graphFreq
         );
-    }, 8000);
+    }, 5000);
   }
 
   respRecept() {
