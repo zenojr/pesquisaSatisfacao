@@ -14,7 +14,7 @@ export class AuthService {
   constructor( private router: Router, private afAuth: AngularFireAuth, private snackBar: MatSnackBar, private db: AngularFirestore) {}
 
   login(authData: AuthData) {
-    authData.usuario = authData.usuario + '@corfio.com';
+    authData.usuario = authData.usuario + '2020' + '@corfio.com';
     authData.senha = '123456';
     this.afAuth.auth.signInWithEmailAndPassword(
       authData.usuario,

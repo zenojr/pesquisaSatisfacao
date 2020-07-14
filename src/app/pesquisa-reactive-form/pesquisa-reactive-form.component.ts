@@ -36,6 +36,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
   fim = false;
   isLinear = false;
 
+
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
@@ -268,6 +269,7 @@ export class PesquisaReactiveFormComponent implements OnInit {
   }
 
   getRespostas() {
+    alert(this.user);
     this.db.collection(this.user)
     .snapshotChanges()
     .pipe(map(docArray => {

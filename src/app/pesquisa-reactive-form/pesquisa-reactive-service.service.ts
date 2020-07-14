@@ -13,8 +13,8 @@ import { RespostasFinais } from '../pesquisa/respostasFinais.model';
   providedIn: 'root'
 })
 export class PesquisaReactiveServiceService {
-  readonly user = this.getUser();
-  readonly pathUser = this.user;
+  user = this.getUser();
+  pathUser = this.user;
 
   constructor( private db: AngularFirestore,
                private snackBar: MatSnackBar ) { }
@@ -27,8 +27,9 @@ export class PesquisaReactiveServiceService {
   }
 
   addRespAspTec(pergunta: string, data: RespAspecTec): Promise<void> {
+    alert(this.user);
     this.db.collection<RespAspecTec>(pergunta).doc(this.user).set(data);
-    return this.db.collection<RespAspecTec>(this.pathUser).doc(pergunta).set(data);
+    return this.db.collection<RespAspecTec>(this.user).doc(pergunta).set(data);
   }
 
   addRespRep(pergunta: string, data: RespRep): Promise<void> {
